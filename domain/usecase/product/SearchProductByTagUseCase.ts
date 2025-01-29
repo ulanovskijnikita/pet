@@ -1,5 +1,5 @@
-import { IProduct, ProductTag } from "../model/IProduct";
-import { ProductRepository, ProductsGotByTag } from "../repository/ProductRepository";
+import { Product, ProductTag } from "../../model/Product";
+import { ProductRepository, ProductsGotByTag } from "../../repository/ProductRepository";
 
 export type SearchProductByTagParam = {
     productTag: ProductTag

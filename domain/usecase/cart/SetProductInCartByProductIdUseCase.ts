@@ -1,5 +1,5 @@
-import { ProductId } from "../model/IProduct";
-import { CartRepository } from "../repository/CartRepository";
+import { ProductId } from "../../model/Product";
+import { CartRepository } from "../../repository/CartRepository";
 
 export type SetProductInCartByProductIdParam = {
     productId: ProductId

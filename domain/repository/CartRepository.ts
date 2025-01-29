@@ -1,10 +1,10 @@
-import { ICart } from "../model/ICart";
-import { ProductId } from "../model/IProduct";
-import { UserId } from "../model/IUser";
+import { Cart } from "../model/Cart";
+import { ProductId } from "../model/Product";
+import { UserId } from "../model/User";
 
 export interface CartRepository {
 
-    getByUserId(userId: UserId): ICart
+    getByUserId(userId: UserId): Cart
 
     setProductInCartByProductId(productId: ProductId): boolean
     

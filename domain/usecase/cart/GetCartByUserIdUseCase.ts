@@ -1,6 +1,6 @@
-import { ICart } from "../model/ICart"
-import { UserId } from "../model/IUser"
-import { CartRepository } from '../repository/CartRepository';
+import { Cart } from "../../model/Cart"
+import { UserId } from "../../model/User"
+import { CartRepository } from '../../repository/CartRepository';
 
 export type GetCartByUserIdParam = {
     userId: UserId
@@ -10,7 +10,7 @@ export class GetCartByUserIdUseCase {
 
     constructor (private cartRepository: CartRepository) {}
 
-    execute(param: GetCartByUserIdParam): ICart {
+    execute(param: GetCartByUserIdParam): Cart {
         return this.cartRepository.getByUserId(param.userId)
     }
 }

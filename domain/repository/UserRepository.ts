@@ -1,8 +1,8 @@
-import { IUser, UserId } from "../model/IUser";
+import { User, UserId } from "../model/User";
 
 export interface UserRepository {
-    
-    getById(userId: UserId): IUser
 
-    set(user: IUser): boolean
+    getById(userId: UserId): User
+
+    set(user: User): boolean
 }

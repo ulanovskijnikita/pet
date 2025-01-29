@@ -1,5 +1,5 @@
-import { UserId } from "../model/IUser";
-import { ProductRepository, ProductsGotByUserFavourites } from "../repository/ProductRepository";
+import { UserId } from "../../model/User";
+import { ProductRepository, ProductsGotByUserFavourites } from "../../repository/ProductRepository";
 
 export type GetProductsByUserFavouritesParam = {
     userId: UserId

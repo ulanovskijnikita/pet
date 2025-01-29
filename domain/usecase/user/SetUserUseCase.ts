@@ -1,8 +1,8 @@
-import { IUser } from "../model/IUser";
-import { UserRepository } from "../repository/UserRepository";
+import { User } from "../../model/User";
+import { UserRepository } from "../../repository/UserRepository";
 
 export type SetUserParam = {
-    user: IUser
+    user: User
 }
 
 export class SetUserUseCase {

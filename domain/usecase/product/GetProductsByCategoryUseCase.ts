@@ -1,8 +1,8 @@
-import { ICategory } from "../model/ICategory";
-import { ProductRepository, ProductsGotByCategory } from "../repository/ProductRepository";
+import { Category } from "../../model/Category";
+import { ProductRepository, ProductsGotByCategory } from "../../repository/ProductRepository";
 
 export type GetProductsByCategoryParam = {
-    productCategory: ICategory,
+    productCategory: Category,
     count?: number
 }
 

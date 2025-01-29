@@ -1,5 +1,5 @@
-import { IProduct, ProductId } from '../model/IProduct';
-import { ProductRepository } from './../repository/ProductRepository';
+import { Product, ProductId } from '../../model/Product';
+import { ProductRepository } from '../../repository/ProductRepository';
 
 export type GetProductByIdParam = {
     productId: ProductId
@@ -9,7 +9,7 @@ export class GetProductByIdUseCase {
 
     constructor(private productRepository: ProductRepository) {}
 
-    execute(param: GetProductByIdParam): IProduct {
+    execute(param: GetProductByIdParam): Product {
         return this.productRepository.getById(param.productId)
     }
 }
