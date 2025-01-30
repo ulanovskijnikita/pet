@@ -1,6 +1,5 @@
-import { Cart } from "../model/Cart";
-import { ProductId } from "../model/Product";
-import { UserId } from "../model/User";
+import { ProductId } from "../model/Product"
+import { Cart, UserId } from "../model/User"
 
 export interface CartRepository {
 
