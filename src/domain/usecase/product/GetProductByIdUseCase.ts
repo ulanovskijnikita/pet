@@ -9,7 +9,7 @@ export class GetProductByIdUseCase {
 
     constructor(private productRepository: ProductRepository) {}
 
-    execute(param: GetProductByIdParam): Product {
+    execute(param: GetProductByIdParam): Promise<Product> {
         return this.productRepository.getById(param.productId)
     }
 }

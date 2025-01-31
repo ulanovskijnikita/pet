@@ -1,10 +1,10 @@
-import { Category } from "../../src/model/Category";
-import { Product, ProductId, ProductsGotByCategory, ProductsGotByTag, ProductsGotByUserFavourites, ProductTag } from "../../src/model/Product";
-import { UserId } from "../../src/model/User";
+import { Category } from "../model/Category"
+import { Product, ProductId, ProductsGotByCategory, ProductsGotByTag, ProductsGotByUserFavourites, ProductTag } from "../model/Product"
+import { UserId } from "../model/User"
 
 export interface ProductRepository {
 
-    getById(productId: ProductId): Product
+    getById(productId: ProductId): Promise<Product>
 
     searchByTag(productTag: ProductTag): ProductsGotByTag
 

@@ -1,11 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { GetProductByIdUseCase } from './domain/usecase/product/GetProductByIdUseCase'
+import { ProductRepositoryImpl } from './data/repository/product/ProductRepositoryImpl'
+import { SupabaseProductStorage } from './data/storage/product/SupabaseProductStorage'
 
 function App() {
   const [count, setCount] = useState(0)
-console.log(import.meta.env.VITE_SUPABASE_URL)
+  console.log(import.meta.env.VITE_SUPABASE_URL)
+  const supabaseProductStorage = new SupabaseProductStorage()
+  const productRepositoryImpl = new ProductRepositoryImpl(supabaseProductStorage)
+  const getProductByIdUseCase = new GetProductByIdUseCase(productRepositoryImpl)
+
+  useEffect(
+    () => {
+      getProductByIdUseCase.execute({productId: 1}).then(console.log)
+    }
+  )
   return (
     <>
       <div>
