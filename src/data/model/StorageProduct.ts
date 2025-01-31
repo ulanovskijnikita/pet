@@ -29,5 +29,5 @@ export interface StorageProduct {
     product_desc: StorageProductDesc;
     product_img: StorageProductImg;
     product_statuses: StorageProductStatuses[];
-    category_path: StorageProductCategoryPath[]
+    category_path: StorageProductCategoryPath[];
 }
