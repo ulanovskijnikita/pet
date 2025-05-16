@@ -1,14 +1,14 @@
-import { Category } from "../model/Category"
-import { Product, ProductId, ProductsGotByCategory, ProductsGotByTag, ProductsGotByUserFavourites, ProductTag } from "../model/Product"
-import { UserId } from "../model/User"
+import Product from "../model/product/Product.ts";
+import ProductCategoryParam from "../model/product/ProductCategoryParam.ts";
+import SearchProductParam from "../model/product/SearchProductParam.ts";
 
-export interface ProductRepository {
+export default interface ProductRepository {
 
-    getById(productId: ProductId): Promise<Product>
+    searchByTag(param: SearchProductParam): Promise<Product[]>
 
-    searchByTag(productTag: ProductTag): ProductsGotByTag
+    getByCategory(param: ProductCategoryParam): Promise<Product[]>
 
-    getByCategory(productCategory: Category, count?: number): ProductsGotByCategory
-
-    getByUserFavourites(userId: UserId): ProductsGotByUserFavourites
+    // getByUserFavourites(userId: UserId): Promise<ProductDetails[]>
+    //
+    // getByUserCart(userId: UserId): Promise<ProductDetails[]>
 }

@@ -1,4 +1,4 @@
-import { User, UserId } from "../../model/User";
+import { User, UserId } from "../../model/user/User.ts";
 import { UserRepository } from "../../repository/UserRepository";
 
 export type GetUserDataByIdParam = {

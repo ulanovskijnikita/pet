@@ -1,0 +1,5 @@
+export const DEFAULT_LIMIT_OVERVIEW = 4
+
+export const DEFAULT_LIMIT_OVERVIEW_DOUBLE = 8
+
+export const DEFAULT_LIMIT = 50

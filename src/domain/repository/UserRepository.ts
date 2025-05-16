@@ -1,8 +1,25 @@
-import { User, UserId } from "../model/User";
+import { ProductIsFavorites } from "../model/product/Product.ts";
+import RegisterUserParam from "../model/user/RegisterUserParam.ts";
+import ToggleUserFavouriteParam from "../model/user/ToggleUserFafouriteParam.ts";
+import User, { UserEmail, UserId } from "../model/user/User.ts";
+import { UserCartLength } from "../model/user/UserCart.ts";
+import UserSignInResponse from "../model/user/UserSignInResponse.ts";
+import ValidateUserParam from "../model/user/ValidateUserParam.ts";
+import ValidateUserRes from "../model/user/ValidateUserRes.ts";
 
 export interface UserRepository {
 
-    getById(userId: UserId): User
+    getSignInResponse(userEmail: UserEmail): Promise<UserSignInResponse>
 
-    set(user: User): boolean
+    getUserById(id: UserId): Promise<User>
+
+    get(): User | null
+
+    toggleFavourite(param: ToggleUserFavouriteParam): Promise<ProductIsFavorites>
+
+    getCartLength(id: UserId): Promise<UserCartLength>
+
+    validateUser(param: ValidateUserParam): Promise<ValidateUserRes>
+    
+    register(param: RegisterUserParam): Promise<void>
 }
