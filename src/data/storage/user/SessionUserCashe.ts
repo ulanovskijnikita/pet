@@ -1,16 +1,22 @@
-import sessionUserConst from "../consts/SessionUserConst";
-import SessionUser, { SessionUserEmail, SessionUserId, SessionUserName, SessionUserStatus } from "../model/user/SessionUser";
+import sessionUserConst from "../consts/sessionUserConst";
+import SessionUser, { SessionUserCartId, SessionUserCartLength, SessionUserEmail, SessionUserId, SessionUserName, SessionUserStatus } from "../model/user/SessionUser";
 import UserCashe from "./UserCashe";
 
 export default class SessionUserCashe implements UserCashe {
+
+    addToCart(length: SessionUserCartLength): void {
+
+        sessionStorage.setItem(sessionUserConst.cartLength, length)
+    }
 
     setUser(user: SessionUser): void {
 
         sessionStorage.setItem(sessionUserConst.id, user.id)
         sessionStorage.setItem(sessionUserConst.email, user.email)
         sessionStorage.setItem(sessionUserConst.name, user.name)
-
         sessionStorage.setItem(sessionUserConst.status, user.status)
+        sessionStorage.setItem(sessionUserConst.cartId, user.cartId)
+        sessionStorage.setItem(sessionUserConst.cartLength, user.cartLength)
     }
 
     getUser(): SessionUser | null {
@@ -19,15 +25,19 @@ export default class SessionUserCashe implements UserCashe {
         const email: SessionUserEmail | null = sessionStorage.getItem(sessionUserConst.email)
         const name: SessionUserName | null = sessionStorage.getItem(sessionUserConst.name)
         const status: SessionUserStatus | null = sessionStorage.getItem(sessionUserConst.status)
+        const cartId: SessionUserCartId | null = sessionStorage.getItem(sessionUserConst.cartId)
+        const cartLength: SessionUserCartLength | null = sessionStorage.getItem(sessionUserConst.cartLength)
 
-        if (id && email && name && status) {
+        if (id && email && name && status && cartId && cartLength) {
 
             return {
 
                 id: id,
                 email: email,
                 name: name,
-                status: status
+                status: status,
+                cartId: cartId,
+                cartLength: cartLength
             }
         } else {
 

@@ -3,9 +3,9 @@ import User, { UserId } from "../domain/model/user/User";
 import GetUserUseCase from "../domain/usecase/GetUserUseCase";
 import ToggleUserFavouriteUseCase from "../domain/usecase/ToggleUserFavouriteUseCase";
 import Product, { ProductId } from "../domain/model/product/Product";
-import GetUserCartLengthUseCase from "../domain/usecase/GetUserCartLengthUseCase";
 import AddToUserCartUseCase from "../domain/usecase/AddToUserCartUseCase";
 import AddToUserCartParam from "../domain/model/user/AddToUserCartParam";
+import { UserCartLength } from "../domain/model/user/UserCart";
 
 export type ToggleFavouriteProductParam = {
 
@@ -20,7 +20,6 @@ export default class AppViewModel {
 
         private getUserUseCase: GetUserUseCase,
         private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
-        private getUserCartLengthUseCase: GetUserCartLengthUseCase,
         private addToUserCartUseCase: AddToUserCartUseCase,
     ) {
 
@@ -31,26 +30,9 @@ export default class AppViewModel {
 
     private user: User | null = null
 
-    private cartLength: number = 0
+    set setCartLength(length: UserCartLength) {
 
-    get getCartLength() {
-
-        return this.cartLength
-    }
-
-    set setCartLength(id: UserId) {
-
-        this.getUserCartLengthUseCase
-            .execute(id)
-            .then(
-
-                (length) =>
-                    runInAction(
-
-                        () =>
-                            this.cartLength = length
-                    )
-            )
+        this.user!.cartLength = length
     }
 
     get getUser() {
@@ -65,8 +47,6 @@ export default class AppViewModel {
             () => {
 
                 this.user = this.getUserUseCase.execute()
-                
-                this.setCartLength = this.user?.id ?? 0
             }
         )
     }
@@ -77,13 +57,13 @@ export default class AppViewModel {
             .execute(param)
             .then(
 
-                () => {
+                (length) => {
 
                     runInAction(
 
                         () => {
 
-                            this.setCartLength = param.userId
+                            this.setCartLength = length
                         }
                     )
                 }

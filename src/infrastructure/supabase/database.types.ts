@@ -352,7 +352,9 @@ export type Database = {
     Functions: {
       add_to_user_cart: {
         Args: { u_id: number; p_id: number; q: number }
-        Returns: undefined
+        Returns: {
+          cart_length: number
+        }[]
       }
       get_products: {
         Args: { user_id: number }
@@ -413,12 +415,13 @@ export type Database = {
           id: number
           name: string
           email: string
-          password: string
           status: Database["public"]["Enums"]["user_status"]
+          cart_id: number
+          cart_length: number
         }[]
       }
       get_user_cart_length: {
-        Args: { u_id: number }
+        Args: { u_id: number } | { u_id: number }
         Returns: number
       }
       register_user: {

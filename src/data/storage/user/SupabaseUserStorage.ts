@@ -7,7 +7,7 @@ import SupabaseToggleUserFavouriteParam from "../model/user/SupabaseToggleUserFa
 import SupabaseValidateUserParam from "../model/user/SupabaseValidateUserParam";
 import SupabaseValidateUserRes from "../model/user/SupabaseValidateUserRes";
 import { Database } from "../../../infrastructure/supabase/database.types";
-import { SupabaseUserCartLength } from "../model/user/UserCart";
+import { SupabaseUserCartLength } from "../model/user/SupabaseUserCart";
 import SupabaseRegisterUserParam from "../model/user/SupabaseRegisterUserParam";
 import AddToSupabaseUserCartParam from "../model/user/AddToUserCartParam";
 
@@ -18,13 +18,15 @@ export default class SupabaseUserStorage implements UserStorage {
         private readonly supabaseClient: SupabaseClient<Database>
     ) {}
 
-    async addToCart(param: AddToSupabaseUserCartParam): Promise<void> {
+    async addToCart(param: AddToSupabaseUserCartParam): Promise<SupabaseUserCartLength> {
         
-        await this.supabaseClient.rpc("add_to_user_cart", {
+        const {data} = await this.supabaseClient.rpc("add_to_user_cart", {
             p_id: param.productId,
             q: param.quantity,
             u_id: param.userId
         })
+
+        return data![0].cart_length
     }
 
     async register(param: SupabaseRegisterUserParam): Promise<void> {
@@ -45,18 +47,9 @@ export default class SupabaseUserStorage implements UserStorage {
         return data![0]
     }
 
-    async getCartLength(id: SupabaseUserId): Promise<SupabaseUserCartLength> {
-        
-        const {data} = await this.supabaseClient.rpc("get_user_cart_length", {
-            u_id: id
-        })
-        
-        return data!
-    }
-
     async toggleFavourite(param: SupabaseToggleUserFavouriteParam): Promise<SupabaseProductIsFavorites> {
         
-        const {data} : { data: SupabaseProductIsFavorites | null } = await this.supabaseClient.rpc("toggle_user_favourite", {
+        const {data} = await this.supabaseClient.rpc("toggle_user_favourite", {
             u_id: param.userId,
             p_id: param.productId,
         })
@@ -66,7 +59,7 @@ export default class SupabaseUserStorage implements UserStorage {
 
     async getById(id: SupabaseUserId): Promise<SupabaseUser> {
         
-        const {data} : { data: SupabaseUser[] | null } = await this.supabaseClient.rpc("get_user_by_id", {
+        const {data} = await this.supabaseClient.rpc("get_user_by_id", {
             u_id: id
         })
         
@@ -75,7 +68,7 @@ export default class SupabaseUserStorage implements UserStorage {
 
     async getSignInResponse(userEmail: SupabaseUserEmail): Promise<SupabaseUserSignInResponse> {
 
-        const {data} : { data: SupabaseUserSignInResponse[] | null } = await this.supabaseClient.rpc("get_sign_in_response", {
+        const {data} = await this.supabaseClient.rpc("get_sign_in_response", {
             u_email: userEmail,
         })
         

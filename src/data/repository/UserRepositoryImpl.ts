@@ -3,6 +3,7 @@ import AddToUserCartParam from "../../domain/model/user/AddToUserCartParam";
 import RegisterUserParam from "../../domain/model/user/RegisterUserParam";
 import ToggleUserFavouriteParam from "../../domain/model/user/ToggleUserFafouriteParam";
 import User, { UserEmail, UserId } from "../../domain/model/user/User";
+import { UserCartLength } from "../../domain/model/user/UserCart";
 import UserSignInResponse from "../../domain/model/user/UserSignInResponse";
 import ValidateUserParam from "../../domain/model/user/ValidateUserParam";
 import ValidateUserRes from "../../domain/model/user/ValidateUserRes";
@@ -23,9 +24,13 @@ export default class UserRepositoryImpl implements UserRepository {
         private userCashe: UserCashe,
     ) {}
 
-    async addToCart(param: AddToUserCartParam): Promise<void> {
+    async addToCart(param: AddToUserCartParam): Promise<UserCartLength> {
+
+        const userCartLength = await this.userStorage.addToCart(param)
+
+        this.userCashe.addToCart( userCartLength.toString() )
         
-        return await this.userStorage.addToCart(param)
+        return userCartLength
     }
 
     async register(param: RegisterUserParam): Promise<void> {
@@ -36,11 +41,6 @@ export default class UserRepositoryImpl implements UserRepository {
     async validateUser(param: ValidateUserParam): Promise<ValidateUserRes> {
         
         return this.mapSupabaseValidateUserResToValidateUserRes( await this.userStorage.validateUser(param) )
-    }
-
-    async getCartLength(id: UserId): Promise<number> {
-        
-        return this.userStorage.getCartLength(id)
     }
 
     async toggleFavourite(param: ToggleUserFavouriteParam): Promise<ProductIsFavorites> {
@@ -63,8 +63,8 @@ export default class UserRepositoryImpl implements UserRepository {
 
         if(this.userCashe.getUser() == null || this.userCashe.getUser()?.id != supabaseUser.id.toString()) this.userCashe.setUser( this.mapSupabaseUserToSessionUser(supabaseUser) )
 
-        return supabaseUser        
-    }    
+        return this.mapSupabaseUserToUser( supabaseUser )  
+    }
 
     async getSignInResponse(userEmail: UserEmail): Promise<UserSignInResponse> {
         
@@ -88,7 +88,22 @@ export default class UserRepositoryImpl implements UserRepository {
             email: supabaseUser.email,
             id: supabaseUser.id.toString(),
             name: supabaseUser.name,
-            status: supabaseUser.status
+            status: supabaseUser.status,
+            cartId: supabaseUser.cart_id.toString(),
+            cartLength: supabaseUser.cart_length.toString(),
+        }
+    }
+
+    private mapSupabaseUserToUser(supabaseUser: SupabaseUser): User {
+
+        return {
+
+            email: supabaseUser.email,
+            id: supabaseUser.id,
+            name: supabaseUser.name,
+            status: supabaseUser.status,
+            cartId: supabaseUser.cart_id,
+            cartLength: supabaseUser.cart_length,
         }
     }
 
@@ -99,7 +114,9 @@ export default class UserRepositoryImpl implements UserRepository {
             email: sessionUser.email,
             id: +sessionUser.id,
             name: sessionUser.name,            
-            status: sessionUser.status
+            status: sessionUser.status,
+            cartId: +sessionUser.cartId,
+            cartLength: +sessionUser.cartLength,
         }
     }
 
@@ -109,7 +126,7 @@ export default class UserRepositoryImpl implements UserRepository {
 
             email: supabaseUserSignInResponse.user_email,
             id: supabaseUserSignInResponse.user_id,
-            password: supabaseUserSignInResponse.user_password            
+            password: supabaseUserSignInResponse.user_password,          
         } : null
     }
 }

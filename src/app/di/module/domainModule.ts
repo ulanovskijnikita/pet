@@ -9,7 +9,6 @@ import UserRepositoryImpl from "../../../data/repository/UserRepositoryImpl.ts";
 import GetUserByIdUseCase from "../../../domain/usecase/GetUserByIdUseCase.ts";
 import GetUserUseCase from "../../../domain/usecase/GetUserUseCase.ts";
 import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase.ts";
-import GetUserCartLengthUseCase from "../../../domain/usecase/GetUserCartLengthUseCase.ts";
 import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
 import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
 
@@ -77,15 +76,6 @@ const domainModule = new ContainerModule(
 
                 context =>
                     new ToggleUserFavouriteUseCase( context.get(UserRepositoryImpl) )
-            )
-            .inTransientScope()
-
-        options
-            .bind<GetUserCartLengthUseCase>(GetUserCartLengthUseCase)
-            .toDynamicValue(
-
-                context =>
-                    new GetUserCartLengthUseCase( context.get(UserRepositoryImpl) )
             )
             .inTransientScope()
 

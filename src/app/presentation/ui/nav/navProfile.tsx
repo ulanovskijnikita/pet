@@ -111,23 +111,30 @@ const navProfile: NavProfile[] = [
                         <circle cx="21.1764" cy="10.8235" r="9.70588" fill="#DEAD6F" stroke="white" strokeWidth="1.76471" />
                         <text x="21.1764" y="10.8235" textAnchor="middle" dominantBaseline="middle" fill="white" className="font-functional text-[10px]">
                             {
-                                appVm.getCartLength >= 10 
+                                appVm.getUser
 
-                                ? 
+                                ?
+                                    appVm.getUser.cartLength >= 10 
 
-                                    appVm.getCartLength >= 100
-                                    
-                                    ?
+                                    ? 
 
-                                    99
+                                        appVm.getUser.cartLength >= 100
+                                        
+                                        ?
 
-                                    :
+                                        99
 
-                                    appVm.getCartLength
+                                        :
 
-                                : 
+                                        appVm.getUser.cartLength
 
-                                `0${appVm.getCartLength}`
+                                    : 
+
+                                    `0${appVm.getUser.cartLength}`
+                                
+                                :
+
+                                '00'
                             }
                         </text>
                     </svg>

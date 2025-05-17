@@ -18,11 +18,9 @@ export interface UserRepository {
 
     toggleFavourite(param: ToggleUserFavouriteParam): Promise<ProductIsFavorites>
 
-    getCartLength(id: UserId): Promise<UserCartLength>
-
     validateUser(param: ValidateUserParam): Promise<ValidateUserRes>
     
     register(param: RegisterUserParam): Promise<void>
 
-    addToCart(param: AddToUserCartParam): Promise<void>
+    addToCart(param: AddToUserCartParam): Promise<UserCartLength>
 }
