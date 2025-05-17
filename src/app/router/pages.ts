@@ -20,6 +20,7 @@ const pages = {
     cart: '/cart',
     signIn: 'sign-in',
     register: 'register',
+    product: 'product',
 }
 
 export default pages

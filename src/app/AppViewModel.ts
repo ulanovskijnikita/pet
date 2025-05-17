@@ -3,7 +3,9 @@ import User, { UserId } from "../domain/model/user/User";
 import GetUserUseCase from "../domain/usecase/GetUserUseCase";
 import ToggleUserFavouriteUseCase from "../domain/usecase/ToggleUserFavouriteUseCase";
 import Product, { ProductId } from "../domain/model/product/Product";
-import GetUserCartLength from "../domain/usecase/GetUserCartLength";
+import GetUserCartLengthUseCase from "../domain/usecase/GetUserCartLengthUseCase";
+import AddToUserCartUseCase from "../domain/usecase/AddToUserCartUseCase";
+import AddToUserCartParam from "../domain/model/user/AddToUserCartParam";
 
 export type ToggleFavouriteProductParam = {
 
@@ -18,10 +20,12 @@ export default class AppViewModel {
 
         private getUserUseCase: GetUserUseCase,
         private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
-        private getUserCartLength: GetUserCartLength,
+        private getUserCartLengthUseCase: GetUserCartLengthUseCase,
+        private addToUserCartUseCase: AddToUserCartUseCase,
     ) {
 
         makeAutoObservable(this)
+
         this.setUser()
     }
 
@@ -36,7 +40,7 @@ export default class AppViewModel {
 
     set setCartLength(id: UserId) {
 
-        this.getUserCartLength
+        this.getUserCartLengthUseCase
             .execute(id)
             .then(
 
@@ -64,6 +68,25 @@ export default class AppViewModel {
                 
                 this.setCartLength = this.user?.id ?? 0
             }
+        )
+    }
+
+    addToCart(param: AddToUserCartParam) {
+
+        this.addToUserCartUseCase
+            .execute(param)
+            .then(
+
+                () => {
+
+                    runInAction(
+
+                        () => {
+
+                            this.setCartLength = param.userId
+                        }
+                    )
+                }
         )
     }
 

@@ -7,6 +7,7 @@ import container from "../../di/container"
 import RegisterViewModel from "../viewmodel/RegisterViewModel"
 import { observer } from "mobx-react-lite"
 import { useEffect, useRef } from "react"
+import FormButton from "../ui/FormButton"
 
 const Register = observer(() => {
 
@@ -61,7 +62,6 @@ const Register = observer(() => {
                         }
                     }
                 }
-                textSubmit="sign up account"
             >
 
                 <FormInput inputRef={nameInput} inputPlaceholder="your full name" inputType="text" />
@@ -71,6 +71,8 @@ const Register = observer(() => {
                 <FormInput inputRef={passInput} inputPlaceholder="password" inputType="password" />
 
                 <FormInput inputRef={passAgainInput} inputPlaceholder="password again" inputType="password" />
+
+                <FormButton>sign up account</FormButton>
             </Form>
 
             <div className="flex gap-[5px] self-end">

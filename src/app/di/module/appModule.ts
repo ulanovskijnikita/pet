@@ -8,9 +8,10 @@ import GetUserUseCase from "../../../domain/usecase/GetUserUseCase.ts";
 import ProfileViewModel from "../../presentation/viewmodel/ProfileViewModel.ts";
 import GetUserByIdUseCase from "../../../domain/usecase/GetUserByIdUseCase.ts";
 import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase.ts";
-import GetUserCartLength from "../../../domain/usecase/GetUserCartLength.ts";
+import GetUserCartLengthUseCase from "../../../domain/usecase/GetUserCartLengthUseCase.ts";
 import RegisterViewModel from "../../presentation/viewmodel/RegisterViewModel.ts";
 import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
+import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
 
 const appModule = new ContainerModule(
 
@@ -49,7 +50,8 @@ const appModule = new ContainerModule(
 
                         context.get(GetUserUseCase),
                         context.get(ToggleUserFavouriteUseCase),
-                        context.get(GetUserCartLength),
+                        context.get(GetUserCartLengthUseCase),
+                        context.get(AddToUserCartUseCase),
                     )
             )
             .inSingletonScope()

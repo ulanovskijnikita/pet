@@ -9,6 +9,7 @@ import SupabaseValidateUserRes from "../model/user/SupabaseValidateUserRes";
 import { Database } from "../../../infrastructure/supabase/database.types";
 import { SupabaseUserCartLength } from "../model/user/UserCart";
 import SupabaseRegisterUserParam from "../model/user/SupabaseRegisterUserParam";
+import AddToSupabaseUserCartParam from "../model/user/AddToUserCartParam";
 
 export default class SupabaseUserStorage implements UserStorage {
 
@@ -16,6 +17,15 @@ export default class SupabaseUserStorage implements UserStorage {
     
         private readonly supabaseClient: SupabaseClient<Database>
     ) {}
+
+    async addToCart(param: AddToSupabaseUserCartParam): Promise<void> {
+        
+        await this.supabaseClient.rpc("add_to_user_cart", {
+            p_id: param.productId,
+            q: param.quantity,
+            u_id: param.userId
+        })
+    }
 
     async register(param: SupabaseRegisterUserParam): Promise<void> {
         

@@ -1,4 +1,5 @@
 import { ProductIsFavorites } from "../../domain/model/product/Product";
+import AddToUserCartParam from "../../domain/model/user/AddToUserCartParam";
 import RegisterUserParam from "../../domain/model/user/RegisterUserParam";
 import ToggleUserFavouriteParam from "../../domain/model/user/ToggleUserFafouriteParam";
 import User, { UserEmail, UserId } from "../../domain/model/user/User";
@@ -21,6 +22,11 @@ export default class UserRepositoryImpl implements UserRepository {
 
         private userCashe: UserCashe,
     ) {}
+
+    async addToCart(param: AddToUserCartParam): Promise<void> {
+        
+        return await this.userStorage.addToCart(param)
+    }
 
     async register(param: RegisterUserParam): Promise<void> {
         

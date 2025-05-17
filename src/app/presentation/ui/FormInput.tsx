@@ -16,7 +16,7 @@ const FormInput = (props: FormInputProps) => {
             ref={props.inputRef}
             placeholder={props.inputPlaceholder}
             type={props.inputType}
-            className="py-[16px] pl-[20px] bg-bg text-sub-title outline-1 focus:outline-[2px] outline-main-light text-label font-functional rounded-btn w-full"
+            className="py-[16px] pl-[20px] bg-bg text-main outline-1 focus:outline-[2px] outline-main-light text-label font-functional rounded-btn w-full"
         />
     )
 }

@@ -18,7 +18,7 @@ const FavouriteButton = observer((props: FavouriteButtonProps) => {
 
         <button
             title="to-favourite"
-            className="p-[16px] tablet:p-[18px] rounded-btn outline-[1px] outline-[rgba(65,64,62,20)] grid items-center justify-center cursor-pointer"
+            className="p-[16px] tablet:p-[18px] rounded-btn outline-[1px] active:outline-2 outline-[rgba(65,64,62,20)] grid items-center justify-center cursor-pointer"
             onClick={
                 () => {
 
@@ -26,6 +26,7 @@ const FavouriteButton = observer((props: FavouriteButtonProps) => {
                         
                         props.toggleFavourite(props.toggleParam)
                     } else {
+
                         navigate(pages.profile + '/' + pages.signIn)
                     }                    
                 }

@@ -1,4 +1,5 @@
 import { SupabaseProductIsFavorites } from "../model/product/SupabaseProduct";
+import AddToSupabaseUserCartParam from "../model/user/AddToUserCartParam";
 import SupabaseRegisterUserParam from "../model/user/SupabaseRegisterUserParam";
 import SupabaseToggleUserFavouriteParam from "../model/user/SupabaseToggleUserFafouriteParam";
 import SupabaseUser, { SupabaseUserEmail, SupabaseUserId } from "../model/user/SupabaseUser";
@@ -20,4 +21,6 @@ export default interface UserStorage {
     getCartLength(id: SupabaseUserId): Promise<SupabaseUserCartLength>
 
     register(param: SupabaseRegisterUserParam): Promise<void>
+
+    addToCart(param: AddToSupabaseUserCartParam): Promise<void>
 }

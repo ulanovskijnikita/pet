@@ -119,7 +119,7 @@ const navProfile: NavProfile[] = [
                                     
                                     ?
 
-                                    '99+'
+                                    99
 
                                     :
 

@@ -12,19 +12,16 @@ export type Database = {
       cart_items: {
         Row: {
           cart_id: number
-          items_id: number
           items_quantity: number
           product_id: number
         }
         Insert: {
           cart_id: number
-          items_id?: number
           items_quantity: number
           product_id: number
         }
         Update: {
           cart_id?: number
-          items_id?: number
           items_quantity?: number
           product_id?: number
         }
@@ -353,6 +350,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_to_user_cart: {
+        Args: { u_id: number; p_id: number; q: number }
+        Returns: undefined
+      }
       get_products: {
         Args: { user_id: number }
         Returns: {

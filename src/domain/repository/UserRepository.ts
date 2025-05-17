@@ -1,4 +1,5 @@
 import { ProductIsFavorites } from "../model/product/Product.ts";
+import AddToUserCartParam from "../model/user/AddToUserCartParam.ts";
 import RegisterUserParam from "../model/user/RegisterUserParam.ts";
 import ToggleUserFavouriteParam from "../model/user/ToggleUserFafouriteParam.ts";
 import User, { UserEmail, UserId } from "../model/user/User.ts";
@@ -22,4 +23,6 @@ export interface UserRepository {
     validateUser(param: ValidateUserParam): Promise<ValidateUserRes>
     
     register(param: RegisterUserParam): Promise<void>
+
+    addToCart(param: AddToUserCartParam): Promise<void>
 }

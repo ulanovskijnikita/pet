@@ -1,13 +1,10 @@
 import { ReactNode } from "react"
-import FormButton from "./FormButton"
 import { observer } from "mobx-react-lite"
 
 type FormProps = {
 
-    textSubmit: string
     handleSubmit: () => void
     children: ReactNode
-
 }
 
 const Form = observer((props: FormProps) => {
@@ -32,8 +29,6 @@ const Form = observer((props: FormProps) => {
             {
                 props.children
             }
-
-            <FormButton>{props.textSubmit}</FormButton>
         </form>
     )
 })

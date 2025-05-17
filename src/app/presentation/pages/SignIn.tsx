@@ -7,6 +7,7 @@ import { observer } from "mobx-react-lite"
 import { Link, useNavigate } from "react-router"
 import pages from "../../router/pages"
 import { useEffect, useRef } from "react"
+import FormButton from "../ui/FormButton"
 
 const SignIn = observer(() => {
 
@@ -55,12 +56,13 @@ const SignIn = observer(() => {
                         } 
                     }
                 }
-                textSubmit="sign in account"
             >
 
                 <FormInput inputRef={emailInput} inputPlaceholder="your email address" inputType="email" />
 
                 <FormInput inputRef={passInput} inputPlaceholder="your password" inputType="password" />
+
+                <FormButton>sign in account</FormButton>
             </Form>
 
             <div className="flex gap-[5px] self-end">

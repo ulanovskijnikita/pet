@@ -8,6 +8,7 @@ import Cart from "../presentation/pages/Cart";
 import pages from "./pages";
 import Register from "../presentation/pages/Register";
 import SignIn from "../presentation/pages/SignIn";
+import Product from "../presentation/pages/Product";
 
 export default function Router() {
 
@@ -33,6 +34,8 @@ export default function Router() {
                 <Route path={pages.favourite + '/:userId'} element={<Favourite />} />
 
                 <Route path={pages.cart + '/:userId'} element={<Cart />} />
+
+                <Route path={pages.product + '/:productId'} element={<Product />} />
             </Routes>
         </BrowserRouter>
     )
