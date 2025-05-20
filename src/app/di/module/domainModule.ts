@@ -39,7 +39,11 @@ const domainModule = new ContainerModule(
             .toDynamicValue(
 
                 context =>
-                    new GetSecondUseCase( context.get(EmailServiceImpl) )
+                    new GetSecondUseCase(
+
+                        context.get(EmailServiceImpl),
+                        context.get(UserRepositoryImpl)
+                    )
             )
             .inTransientScope()
         
@@ -84,7 +88,11 @@ const domainModule = new ContainerModule(
             .toDynamicValue(
 
                 context =>
-                    new RegisterUserUseCase( context.get(UserRepositoryImpl) )
+                    new RegisterUserUseCase(
+
+                        context.get(UserRepositoryImpl),
+                        context.get(EmailServiceImpl),
+                    )
             )
             .inTransientScope()
 

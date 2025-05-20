@@ -1,4 +1,4 @@
-import SessionUser, { SessionUserCartLength } from "../model/user/SessionUser";
+import SessionUser, { SessionUserCartLength, SessionUserStatus } from "../model/user/SessionUser";
 
 export default interface UserCashe {
 
@@ -7,4 +7,6 @@ export default interface UserCashe {
     setUser(user: SessionUser): void
 
     addToCart(length: SessionUserCartLength): void
+
+    setStatus(status: SessionUserStatus): void
 }

@@ -1,3 +1,6 @@
+Need to install the following packages:
+supabase@2.23.4
+Ok to proceed? (y) 
 export type Json =
   | string
   | number
@@ -298,6 +301,29 @@ export type Database = {
           },
         ]
       }
+      user_rate: {
+        Row: {
+          message: string
+          user_id: number
+        }
+        Insert: {
+          message: string
+          user_id?: number
+        }
+        Update: {
+          message?: string
+          user_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_rate_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       user_statuses: {
         Row: {
           user_status_id: number
@@ -444,6 +470,12 @@ export type Database = {
           img: string
           statuses: Database["public"]["Enums"]["product_status"][]
           is_favorites: boolean
+        }[]
+      }
+      send_user_message: {
+        Args: { u_id: number; u_message: string }
+        Returns: {
+          user_status: Database["public"]["Enums"]["user_status"]
         }[]
       }
       set_product_rating: {

@@ -52,7 +52,6 @@ const ProductMenu = observer((props: ProductMenuProps) => {
             <div className="tablet:justify-self-end">
                 <LinkButton linkTo={pages.shop} linkText="shop all" />
             </div>
-            
         </menu>
     )
 })

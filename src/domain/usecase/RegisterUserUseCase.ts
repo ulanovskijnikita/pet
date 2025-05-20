@@ -1,25 +1,30 @@
 import RegisterUserUseCaseParam from "../model/user/RegisterUserUseCaseParam";
-import ValidateUserResult from "../model/user/ValidateUserResult";
+import RegisterUserUseCaseResult from "../model/user/RegisterUserUseCaseResult";
 import { UserRepository } from "../repository/UserRepository";
+import EmailService from "../service/EmailService";
 
 export default class RegisterUserUseCase {
 
     constructor(
 
-        private userReposiory: UserRepository
+        private userReposiory: UserRepository,
+        private emailService: EmailService,
     ) {}
 
-    async execute(param: RegisterUserUseCaseParam): Promise<ValidateUserResult> {
+    async execute(param: RegisterUserUseCaseParam): Promise<RegisterUserUseCaseResult> {
 
-        const validateRes = await this.userReposiory.validateUser( {...param} )
+        const verifyEmail = await this.emailService.verifyEmail(param.email)
+
+        const validateEmail = await this.userReposiory.validateUser( {email: param.email} )
+
+        const matchPass = param.pass == param.passAgain
 
         const resultObj = {
 
-            pass: param.pass == param.passAgain,
-
-            ...validateRes
+            verifyEmail: verifyEmail.isVerify,
+            validateEmail: validateEmail.isUnique,
+            matchPass: matchPass,
         }
-
 
         const result = Object.values(resultObj).every(value => value === true)
 
@@ -27,7 +32,12 @@ export default class RegisterUserUseCase {
     
         return {
 
-            ...resultObj,
+            email: {
+
+                isUnique: resultObj.validateEmail,
+                isVerify: resultObj.verifyEmail,
+            },
+            pass: resultObj.matchPass,
             result: result
         }
     }

@@ -11,6 +11,9 @@ import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavour
 import RegisterViewModel from "../../presentation/viewmodel/RegisterViewModel.ts";
 import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
 import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
+import FoodiesViewModel from "../../presentation/viewmodel/FoodiesViewModel.ts";
+import HomeViewModel from "../../presentation/viewmodel/HomeViewModel.ts";
+import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase.ts";
 
 const appModule = new ContainerModule(
 
@@ -75,6 +78,31 @@ const appModule = new ContainerModule(
                     new RegisterViewModel(
 
                         context.get(RegisterUserUseCase),
+                    )
+            )
+            .inSingletonScope()
+
+        options
+            .bind<FoodiesViewModel>(FoodiesViewModel)
+            .toDynamicValue(
+
+                context =>
+                    new FoodiesViewModel(
+
+                        context.get(GetProductByCategoryUseCase),
+                    )
+            )
+            .inSingletonScope()
+
+        options
+            .bind<HomeViewModel>(HomeViewModel)
+            .toDynamicValue(
+
+                context =>
+                    new HomeViewModel(
+
+                        context.get(GetSecondUseCase),
+                        context.get(AppViewModel),
                     )
             )
             .inSingletonScope()

@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import User, { UserId } from "../domain/model/user/User";
+import User, { UserId, UserStatus } from "../domain/model/user/User";
 import GetUserUseCase from "../domain/usecase/GetUserUseCase";
 import ToggleUserFavouriteUseCase from "../domain/usecase/ToggleUserFavouriteUseCase";
 import Product, { ProductId } from "../domain/model/product/Product";
@@ -84,5 +84,10 @@ export default class AppViewModel {
                             param.list[param.productId - 1].isFavorites = isFavourite
                     )
             )
+    }
+
+    set setUserStatus(status: UserStatus) {
+
+        this.user!.status = status
     }
 }

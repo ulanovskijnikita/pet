@@ -35,9 +35,9 @@ const Carts = observer((props: CartsProps) => {
 
                                 <Link to={pages.product + '/' + product.id} className="grid gap-[20px]">
 
-                                    <div className="w-[310px] h-[283px] pt-[15px] bg-bg-cart grid justify-center rounded-cart relative">
+                                    <div className="w-[310px] h-[283px] items-center justify-center bg-bg-cart grid rounded-cart relative">
 
-                                        <img className="w-[240px]" src={product.img} alt="product-img" />
+                                        <img className="max-w-[240px] min-w-[150px] max-h-[268px]" src={product.img} alt="product-img" />
 
                                         <div className="flex flex-wrap gap-[10px] absolute z-10 top-0 left-0 mx-[15px] mt-[15px]">
                                             
@@ -80,7 +80,7 @@ const Carts = observer((props: CartsProps) => {
                                             <span className="text-label text-sub-title font-functional">{product.rating.toFixed(1)}</span>
                                         </div>
 
-                                        <h4 className="text-accent font-functional">{product.priceCurrency + product.priceCount.toFixed(2)}</h4>
+                                        <h4 className="text-accent font-functional font-light">{product.priceCurrency + product.priceCount.toFixed(2)}</h4>
                                     </div>
                                 </Link>                               
 

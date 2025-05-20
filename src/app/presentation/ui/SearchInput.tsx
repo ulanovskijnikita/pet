@@ -1,4 +1,6 @@
-export default function SearchInput() {
+import { observer } from "mobx-react-lite"
+
+const SearchInput = observer(() => {
 
     return (
 
@@ -9,4 +11,6 @@ export default function SearchInput() {
             <img className="w-[22px]" src="/icons/search.svg" alt="icon-search" />
         </div>        
     )
-}
+})
+
+export default SearchInput

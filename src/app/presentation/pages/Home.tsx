@@ -3,6 +3,10 @@ import Categories from "../sections/categories/Categories";
 import Clothing from "../sections/clothing/Clothing";
 import Header from "../sections/header/Header";
 import { useEffect } from "react";
+import Foodies from "../sections/foodies/Foodies";
+import Banner from "../ui/Banner";
+import Quotes from "../sections/quotes/Quotes";
+import Second from "../sections/Second";
 
 export default function Home() {
 
@@ -30,6 +34,14 @@ export default function Home() {
         <Categories />
 
         <Clothing />
+
+        <Foodies />
+
+        <Banner subtitle="Upto 40% off" title="Clearance sale !!!" img="/decorative/banner/banner-img-1.png" />
+
+        <Quotes />
+
+        <Second />
       </main>
     </>
   )

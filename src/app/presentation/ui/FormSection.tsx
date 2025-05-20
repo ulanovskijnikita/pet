@@ -9,7 +9,7 @@ const FormSection = (props: FormSectionProps) => {
 
     return (
 
-        <section className="relative px-[calc(50vw-150px)] laptop:px-[calc(50vw-255px)] py-[50px] flex flex-col text-center gap-[15px] items-center overflow-clip">
+        <section className="relative px-[calc(50vw-150px)] laptop:px-[calc(50vw-255px)] py-[70px] tablet:py-[100px] laptop:py-[150px] flex flex-col text-center gap-[15px] tablet:gap-[30px] items-center overflow-clip">
 
             <div className="absolute inset-0 -z-20 bg-section"></div>
 

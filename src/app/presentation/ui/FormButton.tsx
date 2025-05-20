@@ -1,8 +1,9 @@
 import { observer } from "mobx-react-lite"
+import { ReactNode } from "react"
 
 type FormButtonProps = {
 
-    children: string
+    children: ReactNode
 }
 
 const FormButton = observer((props: FormButtonProps) => {

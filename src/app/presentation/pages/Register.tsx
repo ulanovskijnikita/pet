@@ -82,10 +82,14 @@ const Register = observer(() => {
                 <Link to={`${pages.profile}/${pages.signIn}`} className="capitalize underline duration-300 hover:text-accent active:text-main">Sign In Now</Link>
             </div>
 
-            <div className="text-center">
+            <div className="text-center absolute bottom-[15px] tablet:bottom-[30px] laptop:bottom-[50px]">
 
                 {
-                    vm.getResult?.email == false && <p>This email is already registered</p>
+                    vm.getResult?.email.isUnique == false && <p>This email is already registered</p>
+                }
+
+                {
+                    vm.getResult?.email.isVerify == false && <p>This is a non-existent email</p>
                 }
 
                 {

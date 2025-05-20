@@ -1,4 +1,7 @@
 import RegisterUserParam from "./RegisterUserParam";
-import ValidateUserParam from "./ValidateUserParam";
+import { UserPassword } from "./UserDetails";
 
-export default interface RegisterUserUseCaseParam extends ValidateUserParam, RegisterUserParam  {}
+export default interface RegisterUserUseCaseParam extends RegisterUserParam {
+
+    passAgain: UserPassword
+}

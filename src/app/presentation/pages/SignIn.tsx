@@ -72,7 +72,7 @@ const SignIn = observer(() => {
                 <Link to={`${pages.profile}/${pages.register}`} className="capitalize underline duration-300 hover:text-accent active:text-main">Sign Up Now</Link>
             </div>
 
-            <div className="text-center">
+            <div className="text-center absolute bottom-[15px] tablet:bottom-[30px] laptop:bottom-[50px]">
 
                 {
                     vm.getResult?.result == "nobody" && <p>It's unregistered email</p>

@@ -20,6 +20,6 @@ export const CLOTHING: ProductCategory = {
 
 export const FOODIES: ProductCategory = {
 
-    id: 2,
+    id: 3,
     value: "foodies",
 }

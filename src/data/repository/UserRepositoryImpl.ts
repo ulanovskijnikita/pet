@@ -1,8 +1,9 @@
 import { ProductIsFavorites } from "../../domain/model/product/Product";
 import AddToUserCartParam from "../../domain/model/user/AddToUserCartParam";
 import RegisterUserParam from "../../domain/model/user/RegisterUserParam";
+import SendMessageParam from "../../domain/model/user/SendMessageParam";
 import ToggleUserFavouriteParam from "../../domain/model/user/ToggleUserFafouriteParam";
-import User, { UserEmail, UserId } from "../../domain/model/user/User";
+import User, { UserEmail, UserId, UserStatus } from "../../domain/model/user/User";
 import { UserCartLength } from "../../domain/model/user/UserCart";
 import UserSignInResponse from "../../domain/model/user/UserSignInResponse";
 import ValidateUserParam from "../../domain/model/user/ValidateUserParam";
@@ -23,6 +24,15 @@ export default class UserRepositoryImpl implements UserRepository {
 
         private userCashe: UserCashe,
     ) {}
+
+    async sendMessage(param: SendMessageParam): Promise<UserStatus> {
+        
+        const status = await this.userStorage.sendMessage(param)
+
+        this.userCashe.setStatus(status)
+
+        return status
+    }
 
     async addToCart(param: AddToUserCartParam): Promise<UserCartLength> {
 
@@ -77,7 +87,7 @@ export default class UserRepositoryImpl implements UserRepository {
 
         return {
 
-            email: supabaseValidateUserRes.email_res
+            isUnique: supabaseValidateUserRes.email_res
         }
     }
 

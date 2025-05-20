@@ -1,6 +1,6 @@
-export type ValidateEmail = boolean
+export type ValidateIsUnique = boolean
 
 export default interface ValidateUserRes {
 
-    email: ValidateEmail
+    isUnique: ValidateIsUnique
 }

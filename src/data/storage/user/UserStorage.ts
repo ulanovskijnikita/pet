@@ -2,11 +2,12 @@ import { SupabaseProductIsFavorites } from "../model/product/SupabaseProduct";
 import AddToSupabaseUserCartParam from "../model/user/AddToUserCartParam";
 import SupabaseRegisterUserParam from "../model/user/SupabaseRegisterUserParam";
 import SupabaseToggleUserFavouriteParam from "../model/user/SupabaseToggleUserFafouriteParam";
-import SupabaseUser, { SupabaseUserEmail, SupabaseUserId } from "../model/user/SupabaseUser";
+import SupabaseUser, { SupabaseUserEmail, SupabaseUserId, SupabaseUserStatus } from "../model/user/SupabaseUser";
 import SupabaseUserSignInResponse from "../model/user/SupabaseUserSignInResponse";
 import SupabaseValidateUserParam from "../model/user/SupabaseValidateUserParam";
 import SupabaseValidateUserRes from "../model/user/SupabaseValidateUserRes";
 import { SupabaseUserCartLength } from "../model/user/SupabaseUserCart";
+import SendSupabaseMessageParam from "../model/user/SendSupabaseMessageParam";
 
 export default interface UserStorage {
 
@@ -14,11 +15,13 @@ export default interface UserStorage {
     
     getSignInResponse(userEmail: SupabaseUserEmail): Promise<SupabaseUserSignInResponse>
 
-    getById(id: SupabaseUserId):  Promise<SupabaseUser>
+    getById(id: SupabaseUserId): Promise<SupabaseUser>
 
     toggleFavourite(param: SupabaseToggleUserFavouriteParam): Promise<SupabaseProductIsFavorites>
 
     register(param: SupabaseRegisterUserParam): Promise<void>
 
     addToCart(param: AddToSupabaseUserCartParam): Promise<SupabaseUserCartLength>
+
+    sendMessage(param: SendSupabaseMessageParam): Promise<SupabaseUserStatus>
 }

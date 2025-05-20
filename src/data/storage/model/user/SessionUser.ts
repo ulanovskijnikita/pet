@@ -1,7 +1,7 @@
 export type SessionUserId = string
 export type SessionUserName = string
 export type SessionUserEmail = string
-export type SessionUserStatus = string
+export type SessionUserStatus = "new" | "old"
 export type SessionUserCartId = string
 export type SessionUserCartLength = string
 

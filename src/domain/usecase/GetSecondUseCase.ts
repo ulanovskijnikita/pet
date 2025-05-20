@@ -1,22 +1,49 @@
 import EmailService from "../service/EmailService.ts";
-import EmailRes from "../model/email/EmailRes.ts";
-import SecondEmailParam from "../model/email/SecondEmailParam.ts";
+import GetSecondUseCaseParam from "../model/email/GetSecondUseCaseParam.ts";
+import GetSecondUseCaseRes from "../model/email/GetSecondUseCaseRes.ts";
+import { UserRepository } from "../repository/UserRepository.ts";
 
 export default class GetSecondUseCase {
+
     constructor(
+
         private readonly emailService: EmailService,
+        private readonly userRepository: UserRepository,
     ) {}
 
-    async execute(param: SecondEmailParam): Promise<EmailRes> {
+    async execute(param: GetSecondUseCaseParam): Promise<GetSecondUseCaseRes> {
 
-        if (param.userStatus == "old") return {
-            status: -1,
-            text: "Вы уже получили свою скидку"
+        if (param.status == "old") return {
+
+            status: "old",
+            action: false
         }
 
-        return await this.emailService.sendEmail({
+        const actionObj = await this.emailService.getSecond({
+            
             address: param.address,
             name: param.name,
+            id: param.id
         })
+
+        if (actionObj.action) {
+
+            return {
+
+                action: actionObj.action,
+                status: await this.userRepository.sendMessage({
+
+                    id: param.id,
+                    message: param.message
+                })
+            }
+        } else {
+
+            return {
+
+                action: false,
+                status: param.status
+            }
+        }
     }
 }

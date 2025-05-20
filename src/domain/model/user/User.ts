@@ -4,7 +4,7 @@ export type UserId = number
 export type UserName = string
 export type UserEmail = string
 
-export type UserStatus = string
+export type UserStatus = "new" | "old"
 
 export default interface User extends UserCart {
 

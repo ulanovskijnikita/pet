@@ -1,5 +1,5 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import SupabaseUser, { SupabaseUserEmail, SupabaseUserId } from "../model/user/SupabaseUser";
+import SupabaseUser, { SupabaseUserEmail, SupabaseUserId, SupabaseUserStatus } from "../model/user/SupabaseUser";
 import SupabaseUserSignInResponse from "../model/user/SupabaseUserSignInResponse";
 import UserStorage from "./UserStorage";
 import { SupabaseProductIsFavorites } from "../model/product/SupabaseProduct";
@@ -10,6 +10,7 @@ import { Database } from "../../../infrastructure/supabase/database.types";
 import { SupabaseUserCartLength } from "../model/user/SupabaseUserCart";
 import SupabaseRegisterUserParam from "../model/user/SupabaseRegisterUserParam";
 import AddToSupabaseUserCartParam from "../model/user/AddToUserCartParam";
+import SendSupabaseMessageParam from "../model/user/SendSupabaseMessageParam";
 
 export default class SupabaseUserStorage implements UserStorage {
 
@@ -17,6 +18,16 @@ export default class SupabaseUserStorage implements UserStorage {
     
         private readonly supabaseClient: SupabaseClient<Database>
     ) {}
+
+    async sendMessage(param: SendSupabaseMessageParam): Promise<SupabaseUserStatus> {
+        
+        const {data} = await this.supabaseClient.rpc("send_user_message", {
+            u_id: param.id,
+            u_message: param.message
+        })
+
+        return data![0].user_status
+    }
 
     async addToCart(param: AddToSupabaseUserCartParam): Promise<SupabaseUserCartLength> {
         
@@ -62,6 +73,8 @@ export default class SupabaseUserStorage implements UserStorage {
         const {data} = await this.supabaseClient.rpc("get_user_by_id", {
             u_id: id
         })
+
+        console.log(data)
         
         return data![0]
     }

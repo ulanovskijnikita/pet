@@ -1,8 +1,9 @@
 import { ProductIsFavorites } from "../model/product/Product.ts";
 import AddToUserCartParam from "../model/user/AddToUserCartParam.ts";
 import RegisterUserParam from "../model/user/RegisterUserParam.ts";
+import SendMessageParam from "../model/user/SendMessageParam.ts";
 import ToggleUserFavouriteParam from "../model/user/ToggleUserFafouriteParam.ts";
-import User, { UserEmail, UserId } from "../model/user/User.ts";
+import User, { UserEmail, UserId, UserStatus } from "../model/user/User.ts";
 import { UserCartLength } from "../model/user/UserCart.ts";
 import UserSignInResponse from "../model/user/UserSignInResponse.ts";
 import ValidateUserParam from "../model/user/ValidateUserParam.ts";
@@ -23,4 +24,6 @@ export interface UserRepository {
     register(param: RegisterUserParam): Promise<void>
 
     addToCart(param: AddToUserCartParam): Promise<UserCartLength>
+
+    sendMessage(param: SendMessageParam): Promise<UserStatus>
 }
