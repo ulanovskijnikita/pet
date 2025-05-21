@@ -7,6 +7,8 @@ import Foodies from "../sections/foodies/Foodies";
 import Banner from "../ui/Banner";
 import Quotes from "../sections/quotes/Quotes";
 import Second from "../sections/Second";
+import Photo from "../sections/photo/Photo";
+import Footer from "../ui/footer/Footer";
 
 export default function Home() {
 
@@ -29,7 +31,7 @@ export default function Home() {
 
       <Header />
 
-      <main className="grid mt-[50px] tablet:mt-[115px] laptop:mt-[115px] gap-[50px] tablet:gap-[115px] laptop:gap-[125px]">
+      <main className="grid my-[50px] tablet:my-[115px] laptop:my-[115px] gap-[50px] tablet:gap-[115px] laptop:gap-[125px]">
 
         <Categories />
 
@@ -42,7 +44,11 @@ export default function Home() {
         <Quotes />
 
         <Second />
+
+        <Photo />
       </main>
+
+      <Footer />
     </>
   )
 }
