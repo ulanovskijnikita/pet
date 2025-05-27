@@ -1,33 +1,19 @@
-import { useLocation } from "react-router";
 import Categories from "../sections/categories/Categories";
 import Clothing from "../sections/clothing/Clothing";
 import Header from "../sections/header/Header";
-import { useEffect } from "react";
 import Foodies from "../sections/foodies/Foodies";
 import Banner from "../ui/Banner";
 import Quotes from "../sections/quotes/Quotes";
 import Second from "../sections/Second";
 import Photo from "../sections/photo/Photo";
 import Footer from "../ui/footer/Footer";
+import Location from "../../router/Location";
 
 export default function Home() {
 
-  const location = useLocation()
-
-  useEffect(() => {
-
-    const hash = location.hash
-
-    if (hash) {
-        const element = document.querySelector(hash);
-        if (element) element.scrollIntoView({block: "center"});
-    }
-  },
-  [location])
-
   return (
 
-    <>
+    <Location>
 
       <Header />
 
@@ -49,6 +35,6 @@ export default function Home() {
       </main>
 
       <Footer />
-    </>
+    </Location>
   )
 }

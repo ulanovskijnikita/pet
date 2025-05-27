@@ -18,7 +18,7 @@ const Nav = observer(() => {
 
     return (
 
-        <div className="desktop:sticky desktop:top-0 z-10 bg-bg">
+        <div className="desktop:sticky desktop:top-0 z-10 bg-bg" id={pages.contact.substring(1)}>
 
             <nav className="p-container laptop:px-0 laptop:mx-auto laptop:w-[clamp(71.071rem,46.173rem+34.04vw,92.857rem)] desktop:w-[1300px] gap-[15px] flex flex-col items-center tablet:flex-row tablet:justify-between w-full laptop:items-center">
 
@@ -75,7 +75,7 @@ const Nav = observer(() => {
                             value =>
                                 (
 
-                                    <li className="text-btn" key={value.id}>
+                                    <li className="text-btn capitalize" key={value.id}>
 
                                         <NavLink
 

@@ -7,6 +7,8 @@ import ProfileViewModel from "../viewmodel/ProfileViewModel"
 import FormSection from "../ui/FormSection"
 import Form from "../ui/Form"
 import FormInput from "../ui/FormInput"
+import Footer from "../ui/footer/Footer"
+import Location from "../../router/Location"
 
 const Profile = observer(() => {
 
@@ -34,56 +36,58 @@ const Profile = observer(() => {
     )
 
     return (
-        <div>
+        <Location>
 
-        <header>
+            <header>
 
-            <Nav />
-        </header>
+                <Nav />
+            </header>
 
-        <main>
-            {
-                userId
+            <main className="mb-[25px] tablet:mb-[50px]">
+                {
+                    userId
 
-                    ?
-                
-                <FormSection>
+                        ?
+                    
+                    <FormSection>
 
-                    <h3 className="capitalize w-full">
-                        
-                        <span className="text-accent">your account</span>
-                    </h3>
+                        <h3 className="capitalize w-full">
+                            
+                            <span className="text-accent">your account</span>
+                        </h3>
 
-                    <Form 
-                        handleSubmit={
+                        <Form 
+                            handleSubmit={
 
-                            () => {}
-                        }
-                    >
+                                () => {}
+                            }
+                        >
 
-                        <label>
+                            <label>
 
-                            <p className="text-sub-title text-label text-start">Name</p>
+                                <p className="text-sub-title text-label text-start">Name</p>
 
-                            <FormInput inputRef={nameInput} inputPlaceholder="your full name" inputType="text" />
-                        </label>
-                        
+                                <FormInput inputRef={nameInput} inputPlaceholder="your full name" inputType="text" />
+                            </label>
+                            
 
-                        <label>
+                            <label>
 
-                            <p className="text-sub-title text-label text-start">Email</p>
+                                <p className="text-sub-title text-label text-start">Email</p>
 
-                            <FormInput inputRef={emailInput} inputPlaceholder="your email address" inputType="email" />
-                        </label>
-                    </Form>           
-                </FormSection>
+                                <FormInput inputRef={emailInput} inputPlaceholder="your email address" inputType="email" />
+                            </label>
+                        </Form>           
+                    </FormSection>
 
-                    :
-                
-                <Outlet />
-            }
-        </main>            
-        </div>
+                        :
+                    
+                    <Outlet />
+                }
+            </main>
+
+            <Footer />     
+        </Location>
     )
 })
 

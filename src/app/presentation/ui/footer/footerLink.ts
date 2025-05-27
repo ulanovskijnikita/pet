@@ -25,9 +25,9 @@ const footerLink: FooterLink[] = [
 
     {
         id: 3,
-        link: pages.contact.path,
+        link: '',
         title: "Contact",
-        hash: pages.contact.hash
+        hash: pages.contact
     },
 
     {

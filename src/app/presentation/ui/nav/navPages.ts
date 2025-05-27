@@ -25,9 +25,9 @@ const navPages: NavPages[] = [
 
     {
         id: 3,
-        link: pages.contact.path,
-        title: "Contact",
-        hash: pages.contact.hash
+        link: '',
+        title: "About us",
+        hash: pages.aboutUs,
     },
 
     {
