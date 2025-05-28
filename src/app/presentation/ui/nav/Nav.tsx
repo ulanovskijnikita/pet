@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import Logo from "../Logo";
 import SearchInput from "../SearchInput";
 import navPages from "./navPages";
@@ -75,22 +75,12 @@ const Nav = observer(() => {
                             value =>
                                 (
 
-                                    <li className="text-btn capitalize" key={value.id}>
+                                    <li className="text-btn capitalize text-main duration-300 hover:text-accent active:text-main" key={value.id}>
 
-                                        <NavLink
+                                        {
 
-                                            className={
-                                                ( {isActive} : {isActive: boolean} ) => {
-                                                    return (isActive && !value.hash) ? "text-accent" : "text-main duration-300 hover:text-accent active:text-main"
-                                                }
-                                            }                                            
-                                            
-                                            to={value.hash ? value.link + value.hash : value.link}
-                                        >
-
-                                            {value.title}
-                                        </NavLink>
-                                        
+                                            <value.page />
+                                        }
                                     </li>
                                 )
                         )

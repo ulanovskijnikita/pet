@@ -2,18 +2,17 @@ import { Pagination } from "swiper/modules";
 import Nav from "../../ui/nav/Nav";
 import {Swiper, SwiperSlide} from "swiper/react";
 import headerSlider from "./headerSlider";
-import LinkButton from "../../ui/LinkButton";
 
 export default function Header() {
 
     return (
         
-        <header>
+        <header className="overflow-hidden">
             
             <Nav />
 
             <Swiper
-                className="bg-section tablet:gap-[180px]"
+                className="bg-section tablet:gap-[180px] w-screen!"
                 modules={[Pagination]}
                 pagination={{
                     
@@ -38,7 +37,7 @@ export default function Header() {
 
                                     <h1 className="capitalize leading-[5rem] w-[max(80%,360px)] tablet:w-[410px] laptop:w-[650px] desktop:w-[700px]" dangerouslySetInnerHTML={{__html: value.title}}/>
 
-                                    <LinkButton linkTo={value.link} linkText={value.linkText}/>
+                                    <value.link />
                                 </SwiperSlide>
                             )
                     )

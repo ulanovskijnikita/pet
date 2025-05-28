@@ -4,6 +4,13 @@ import {Database} from "../../../infrastructure/supabase/database.types.ts";
 import SupabaseProduct from "../model/product/SupabaseProduct.ts";
 import SupabaseProductCategoryParam from "../model/product/SupabaseProductCategoryParam.ts";
 import SupabaseSearchProductParam from "../model/product/SupabaseSearchProductParam.ts";
+import GetSupabaseProductByFilterParam from "../model/product/GetSupabaseProductByFilterParam.ts";
+
+type FilterAction = {
+
+    col: keyof Database['public']['Functions']['get_products_by_category']['Returns'][0]
+    ascending: boolean
+}
 
 export default class SupabaseProductStorage implements ProductStorage {
 
@@ -12,10 +19,34 @@ export default class SupabaseProductStorage implements ProductStorage {
         private readonly supabaseClient: SupabaseClient<Database>
     ) {}
 
+    async getByFilter(param: GetSupabaseProductByFilterParam): Promise<SupabaseProduct[]> {
+
+        const { data } = await this.supabaseClient
+            .rpc("get_products_by_category", {
+
+                category_id: param.categoryId,
+                lim: param.limit,
+                off_set: param.offset,
+                subcategory_id: param.subcategoryId,
+                user_auth_id: param.userId
+            })
+            .filter(
+
+                'tag', 'ilike', `%${ param.tag }%`
+            )
+            .order(
+
+                this.filterAction[param.order].col, {ascending: this.filterAction[param.order].ascending}
+            )
+
+        return data ? data : []
+    }
+
     async getByCategory(param: SupabaseProductCategoryParam): Promise<SupabaseProduct[]> {
 
-        const { data } : { data: SupabaseProduct[] | null } = await this.supabaseClient
+        const { data } = await this.supabaseClient
             .rpc('get_products_by_category', {
+
                 category_id: param.categoryId,
                 lim: param.limit,
                 off_set: param.offset,
@@ -23,18 +54,59 @@ export default class SupabaseProductStorage implements ProductStorage {
                 user_auth_id: param.userId
             })
 
-        return (data) ? data : []
+        return data ? data : []
     }
 
     async searchByTag(param: SupabaseSearchProductParam): Promise<SupabaseProduct[]> {
-        const { data } : { data: SupabaseProduct[] | null } = await this.supabaseClient
+
+        const { data } = await this.supabaseClient
             .rpc('search_products_by_tag', {
+
                 search_tag: param.tag,
                 lim: param.limit,
                 off_set: param.offset,
                 user_auth_id: param.userId
             })
 
-        return (data) ? data : []
+        return data ? data : []
     }
+
+    private filterAction: FilterAction[] = [
+
+        {
+
+            col: "price_count",
+            ascending: false,
+        },
+
+        {
+
+            col: "price_count",
+            ascending: true,
+        },
+        
+        {
+
+            col: "rating",
+            ascending: false,
+        },
+        
+        {
+
+            col: "rating",
+            ascending: true,
+        },
+
+        {
+
+            col: "tag",
+            ascending: false,
+        },
+        
+        {
+
+            col: "tag",
+            ascending: true,
+        },
+    ]
 }

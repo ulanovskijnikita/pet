@@ -400,7 +400,7 @@ export type Database = {
           user_auth_id: number
           category_id: number
           subcategory_id: number
-          off_set: number
+          off_set: number | null
           lim: number
         }
         Returns: {
@@ -458,7 +458,7 @@ export type Database = {
         Args: {
           user_auth_id: number
           search_tag: string
-          off_set: number
+          off_set: number | null
           lim: number
         }
         Returns: {

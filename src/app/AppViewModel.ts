@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import User, { UserId, UserStatus } from "../domain/model/user/User";
 import GetUserUseCase from "../domain/usecase/GetUserUseCase";
 import ToggleUserFavouriteUseCase from "../domain/usecase/ToggleUserFavouriteUseCase";
-import Product, { ProductId } from "../domain/model/product/Product";
+import Product, { ProductId, ProductTag } from "../domain/model/product/Product";
 import AddToUserCartUseCase from "../domain/usecase/AddToUserCartUseCase";
 import AddToUserCartParam from "../domain/model/user/AddToUserCartParam";
 import { UserCartLength } from "../domain/model/user/UserCart";
@@ -29,6 +29,18 @@ export default class AppViewModel {
     }
 
     private user: User | null = null
+
+    private searchTag: ProductTag = ''
+
+    get getSearchTag() {
+
+        return this.searchTag
+    }
+
+    set setSearchTag(tag: ProductTag) {
+
+        this.searchTag = tag
+    }
 
     set setCartLength(length: UserCartLength) {
 
@@ -69,7 +81,6 @@ export default class AppViewModel {
                 }
         )
     }
-
     
     set toggleFavouriteProduct(param: ToggleFavouriteProductParam) {
 

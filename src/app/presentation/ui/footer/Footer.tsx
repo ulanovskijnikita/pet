@@ -1,4 +1,3 @@
-import { NavLink } from "react-router"
 import Logo from "../Logo"
 import footerLink from "./footerLink"
 import footerSocial from "./footerSocial"
@@ -55,22 +54,12 @@ const Footer = () => {
 
                                     return (
 
-                                        <li className="text-btn" key={link.id}>
+                                        <li className="text-btn capitalize text-main duration-300 hover:text-accent active:text-main" key={link.id}>
 
-                                            <NavLink
+                                            {
 
-                                                className={
-                                                    ( {isActive} : {isActive: boolean} ) => {
-                                                        return (isActive && !link.hash) ? "text-accent" : "text-main duration-300 hover:text-accent active:text-main"
-                                                    }
-                                                }                                            
-                                                
-                                                to={link.hash ? link.link + link.hash : link.link}
-                                            >
-
-                                                {link.title}
-                                            </NavLink>
-                                            
+                                                <link.page />
+                                            }                                            
                                         </li>
                                     )
                                 }

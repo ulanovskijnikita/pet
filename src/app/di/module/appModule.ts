@@ -14,6 +14,8 @@ import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.t
 import FoodiesViewModel from "../../presentation/viewmodel/FoodiesViewModel.ts";
 import HomeViewModel from "../../presentation/viewmodel/HomeViewModel.ts";
 import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase.ts";
+import ShopViewModel from "../../presentation/viewmodel/ShopViewModel.ts";
+import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
 
 const appModule = new ContainerModule(
 
@@ -103,6 +105,18 @@ const appModule = new ContainerModule(
 
                         context.get(GetSecondUseCase),
                         context.get(AppViewModel),
+                    )
+            )
+            .inSingletonScope()
+
+        options
+            .bind<ShopViewModel>(ShopViewModel)
+            .toDynamicValue(
+
+                context =>
+                    new ShopViewModel(
+
+                        context.get(GetProductByFilterUseCase),
                     )
             )
             .inSingletonScope()

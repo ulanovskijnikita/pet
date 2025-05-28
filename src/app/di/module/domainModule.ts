@@ -11,6 +11,7 @@ import GetUserUseCase from "../../../domain/usecase/GetUserUseCase.ts";
 import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase.ts";
 import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
 import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
+import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
 
 const domainModule = new ContainerModule(
 
@@ -102,6 +103,15 @@ const domainModule = new ContainerModule(
 
                 context =>
                     new AddToUserCartUseCase( context.get(UserRepositoryImpl) )
+            )
+            .inTransientScope()
+        
+        options
+            .bind<GetProductByFilterUseCase>(GetProductByFilterUseCase)
+            .toDynamicValue(
+
+                context =>
+                    new GetProductByFilterUseCase( context.get(ProductRepositoryImpl) )
             )
             .inTransientScope()
     }
