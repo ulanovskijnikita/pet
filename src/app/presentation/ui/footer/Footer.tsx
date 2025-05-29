@@ -9,7 +9,7 @@ const Footer = () => {
 
     return (
 
-        <footer className="grid gap-[25px] px-container laptop:px-container-1024" id={pages.aboutUs.substring(1)}>
+        <footer className="grid gap-[25px] px-container laptop:px-container-1024" id={pages.aboutUs.hash.substring(1)}>
 
             <div className="grid gap-[25px] tablet:grid-cols-2 laptop:grid-cols-3">
 

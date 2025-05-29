@@ -3,8 +3,12 @@ import Location from "../../router/Location";
 import Footer from "../ui/footer/Footer";
 import Nav from "../ui/nav/Nav";
 import Shopping from "../sections/shopping/Shopping";
+import container from "../../di/container";
+import ShopViewModel from "../viewmodel/ShopViewModel";
 
 const Shop = observer(() => {
+
+    const vm = container.get(ShopViewModel)
 
     return (
 
@@ -20,7 +24,10 @@ const Shop = observer(() => {
                 <Shopping />
             </main>
 
-            <Footer />
+            {
+                
+                !vm.getHasMoreProduct && <Footer />
+            }
         </Location>
     )
 })

@@ -60,7 +60,7 @@ const navPages: NavPages[] = [
 
                 <Link                                        
                     
-                    to={pages.aboutUs}
+                    to={pages.aboutUs.path + pages.aboutUs.hash}
                 >
                     About us
                 </Link>

@@ -31,7 +31,7 @@ const Carts = observer((props: CartsProps) => {
                     props.products.map(
 
                         product =>
-                            <div aria-id={product.id} key={product.id} className="even:justify-self-end desktop:even:justify-self-auto grid gap-[20px] w-fit">
+                            <div key={product.id} className="even:justify-self-end desktop:even:justify-self-auto grid gap-[20px] w-fit">
 
                                 <Link to={pages.product + '/' + product.id} className="grid gap-[20px]">
 
