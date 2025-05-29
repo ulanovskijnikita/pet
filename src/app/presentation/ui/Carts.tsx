@@ -30,7 +30,7 @@ const Carts = observer((props: CartsProps) => {
 
                     props.products.map(
 
-                        product =>
+                        (product, index) =>
                             <div key={product.id} className="even:justify-self-end desktop:even:justify-self-auto grid gap-[20px] w-fit">
 
                                 <Link to={pages.product + '/' + product.id} className="grid gap-[20px]">
@@ -108,6 +108,7 @@ const Carts = observer((props: CartsProps) => {
 
                                         toggleParam={{
 
+                                            productIndex: index,
                                             productId: product.id,
                                             userId: appVm.getUser?.id ?? DEFAULT_USER_ID,
                                             list: props.products

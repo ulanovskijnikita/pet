@@ -11,6 +11,7 @@ export type ToggleFavouriteProductParam = {
 
     userId: UserId
     productId: ProductId
+    productIndex: number
     list: Product[]
 }
 
@@ -89,17 +90,12 @@ export default class AppViewModel {
             .then(
 
                 isFavourite => {
-
-                    const favouriteElem = param.list.findIndex(value => {
-
-                        return value.id == param.productId
-                    })
                 
                     runInAction(
 
                         () => {
                             
-                            param.list[favouriteElem].isFavorites = isFavourite
+                            param.list[param.productIndex].isFavorites = isFavourite
                         }
                     )
                 }
