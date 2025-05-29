@@ -88,12 +88,21 @@ export default class AppViewModel {
             .execute(param)
             .then(
 
-                isFavourite => 
+                isFavourite => {
+
+                    const favouriteElem = param.list.findIndex(value => {
+
+                        return value.id == param.productId
+                    })
+                
                     runInAction(
 
-                        () => 
-                            param.list[param.productId - 1].isFavorites = isFavourite
+                        () => {
+                            
+                            param.list[favouriteElem].isFavorites = isFavourite
+                        }
                     )
+                }
             )
     }
 
