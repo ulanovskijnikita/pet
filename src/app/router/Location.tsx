@@ -20,7 +20,7 @@ const Location = (props: LocationProps) => {
 
                 const element = document.querySelector(hash)
 
-                if (element) element.scrollIntoView({block: "center"})
+                if (element) setTimeout(() => element.scrollIntoView({block: "center"}), 0)
             }
         }, [location]
     )

@@ -12,6 +12,10 @@ import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavour
 import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
 import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
+import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUserCase.ts";
+import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase.ts";
+import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase.ts";
+import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase.ts";
 
 const domainModule = new ContainerModule(
 
@@ -112,6 +116,42 @@ const domainModule = new ContainerModule(
 
                 context =>
                     new GetProductByFilterUseCase( context.get(ProductRepositoryImpl) )
+            )
+            .inTransientScope()
+
+        options
+            .bind<GetUserCartUseCase>(GetUserCartUseCase)
+            .toDynamicValue(
+
+                context =>
+                    new GetUserCartUseCase( context.get(UserRepositoryImpl) )
+            )
+            .inTransientScope()
+
+        options
+            .bind<SetQuantityCartProductUseCase>(SetQuantityCartProductUseCase)
+            .toDynamicValue(
+
+                context =>
+                    new SetQuantityCartProductUseCase( context.get(UserRepositoryImpl) )
+            )
+            .inTransientScope()
+
+        options
+            .bind<ChangeQuantityCartProductUseCase>(ChangeQuantityCartProductUseCase)
+            .toDynamicValue(
+
+                context =>
+                    new ChangeQuantityCartProductUseCase( context.get(UserRepositoryImpl) )
+            )
+            .inTransientScope()
+
+        options
+            .bind<GetAnOrderUseCase>(GetAnOrderUseCase)
+            .toDynamicValue(
+
+                context =>
+                    new GetAnOrderUseCase( context.get(UserRepositoryImpl) )
             )
             .inTransientScope()
     }

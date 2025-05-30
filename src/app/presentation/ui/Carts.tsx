@@ -21,7 +21,7 @@ const Carts = observer((props: CartsProps) => {
 
     return (
 
-        <div className="w-full grid gap-[30px] tablet:gap-[32px] tablet:grid-cols-2 laptop:grid-cols-3 tablet:justify-self-center tablet:w-fit desktop:grid-cols-4 desktop:gap-[45px]">
+        <ul className="w-full grid gap-[30px] tablet:gap-[32px] tablet:grid-cols-2 laptop:grid-cols-3 tablet:justify-self-center tablet:w-fit desktop:grid-cols-4 desktop:gap-[45px]">
 
             {
                 (props.products.length)
@@ -31,9 +31,9 @@ const Carts = observer((props: CartsProps) => {
                     props.products.map(
 
                         (product, index) =>
-                            <div key={product.id} className="even:justify-self-end desktop:even:justify-self-auto grid gap-[20px] w-fit">
+                            <li key={product.id} className="even:justify-self-end desktop:even:justify-self-auto grid gap-[20px] w-fit">
 
-                                <Link to={pages.product + '/' + product.id} className="grid gap-[20px]">
+                                <Link to={'/' + pages.product + '/' + product.id} className="grid gap-[20px]">
 
                                     <div className="w-[310px] h-[283px] items-center justify-center bg-bg-cart grid rounded-cart relative">
 
@@ -60,7 +60,7 @@ const Carts = observer((props: CartsProps) => {
 
                                         <div className="mt-[4px] mb-[7px] flex gap-[6px] items-center">
                                             
-                                            <div className="flex gap-[4px]">
+                                            <div className="flex gap-[4px] items-center">
 
                                                 {
                                                     Array(5).fill(0).map(
@@ -117,17 +117,17 @@ const Carts = observer((props: CartsProps) => {
                                         toggleFavourite={props.toggleFavourite}
                                     />
                                 </menu>
-                            </div>                        
+                            </li>                        
                     )
 
                     :
 
-                <div className="justify-self-start tablet:col-span-2 laptop:col-span-3 desktop:col-span-4 laptop:text-center">
+                <li className="justify-self-start tablet:col-span-2 laptop:col-span-3 desktop:col-span-4 laptop:text-center">
 
                     <h4>No products found with these parameters</h4>
-                </div>
+                </li>
             }
-        </div>
+        </ul>
     )
 })
 

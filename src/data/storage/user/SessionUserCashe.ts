@@ -1,8 +1,15 @@
 import sessionUserConst from "../consts/sessionUserConst";
 import SessionUser, { SessionUserCartId, SessionUserCartLength, SessionUserEmail, SessionUserId, SessionUserName, SessionUserStatus } from "../model/user/SessionUser";
+import SessionUserCartPreview from "../model/user/SessionUserCartPreview";
 import UserCashe from "./UserCashe";
 
 export default class SessionUserCashe implements UserCashe {
+
+    setCartPreview(param: SessionUserCartPreview): void {
+       
+        sessionStorage.setItem(sessionUserConst.cartId, param.id)
+        sessionStorage.setItem(sessionUserConst.cartLength, param.length)
+    }
 
     setStatus(status: SessionUserStatus): void {
         

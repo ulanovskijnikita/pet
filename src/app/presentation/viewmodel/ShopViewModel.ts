@@ -70,8 +70,6 @@ export default class ShopViewModel {
     }
 
     set setProduct(param: GetProductByFilterParam) {
-        
-        if ( JSON.stringify( this.getProductByFilterParam ) == JSON.stringify( param ) ) return
 
         this.getProductByFilterUseCase
             .execute(param)

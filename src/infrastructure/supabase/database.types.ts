@@ -1,6 +1,3 @@
-Need to install the following packages:
-supabase@2.23.4
-Ok to proceed? (y) 
 export type Json =
   | string
   | number
@@ -382,6 +379,20 @@ export type Database = {
           cart_length: number
         }[]
       }
+      change_quantity_cart_product: {
+        Args: { u_id: number; p_id: number; q: number }
+        Returns: {
+          quantity: number
+          length: number
+        }[]
+      }
+      get_an_order: {
+        Args: { u_id: number }
+        Returns: {
+          cart_id: number
+          cart_length: number
+        }[]
+      }
       get_products: {
         Args: { user_id: number }
         Returns: {
@@ -400,7 +411,7 @@ export type Database = {
           user_auth_id: number
           category_id: number
           subcategory_id: number
-          off_set: number | null
+          off_set: number
           lim: number
         }
         Returns: {
@@ -446,8 +457,22 @@ export type Database = {
           cart_length: number
         }[]
       }
+      get_user_cart: {
+        Args: { u_id: number }
+        Returns: {
+          id: number
+          price_currency: Database["public"]["Enums"]["currencies"]
+          price_count: number
+          rating: number
+          tag: string
+          img: string
+          statuses: Database["public"]["Enums"]["product_status"][]
+          is_favorites: boolean
+          quantity: number
+        }[]
+      }
       get_user_cart_length: {
-        Args: { u_id: number } | { u_id: number }
+        Args: { u_id: number }
         Returns: number
       }
       register_user: {
@@ -458,7 +483,7 @@ export type Database = {
         Args: {
           user_auth_id: number
           search_tag: string
-          off_set: number | null
+          off_set: number
           lim: number
         }
         Returns: {
@@ -481,6 +506,13 @@ export type Database = {
       set_product_rating: {
         Args: { u_id: number; p_id: number; p_rating: number }
         Returns: number
+      }
+      set_quantity_cart_product: {
+        Args: { u_id: number; p_id: number; q: number }
+        Returns: {
+          quantity: number
+          length: number
+        }[]
       }
       toggle_user_favourite: {
         Args: { u_id: number; p_id: number }

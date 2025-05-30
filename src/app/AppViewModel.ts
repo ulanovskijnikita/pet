@@ -5,7 +5,7 @@ import ToggleUserFavouriteUseCase from "../domain/usecase/ToggleUserFavouriteUse
 import Product, { ProductId, ProductTag } from "../domain/model/product/Product";
 import AddToUserCartUseCase from "../domain/usecase/AddToUserCartUseCase";
 import AddToUserCartParam from "../domain/model/user/AddToUserCartParam";
-import { UserCartLength } from "../domain/model/user/UserCart";
+import { UserCartLength, UserProgressCartId } from "../domain/model/user/UserCartPreview";
 
 export type ToggleFavouriteProductParam = {
 
@@ -46,6 +46,11 @@ export default class AppViewModel {
     set setCartLength(length: UserCartLength) {
 
         this.user!.cartLength = length
+    }
+
+    set setCartId(id: UserProgressCartId) {
+
+        this.user!.cartId = id
     }
 
     get getUser() {

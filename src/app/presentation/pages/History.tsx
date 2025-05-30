@@ -1,7 +1,16 @@
+import Location from "../../router/Location";
+import Nav from "../ui/nav/Nav";
+
 export default function History() {
 
     return (
 
-        <h2>I am History</h2>
+        <Location>
+
+            <header>
+
+                <Nav />
+            </header>
+        </Location>
     )
 }

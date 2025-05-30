@@ -1,8 +1,8 @@
-export type UserProgressCartId = number
-export type UserCartLength = number
+import Product from "../product/Product";
 
-export default interface UserCart {
+export type UserCartQuantity = number
 
-    cartId: UserProgressCartId
-    cartLength: UserCartLength
+export default interface UserCart extends Product {
+
+    quantity: UserCartQuantity
 }

@@ -1,8 +1,8 @@
-export type SupabaseUserActiveCartId = number
-export type SupabaseUserCartLength = number
+import SupabaseProduct from "../product/SupabaseProduct"
 
-export default interface SupabaseUserCart {
+export type SupabaseUserCartQuantity = number
 
-    cart_id: SupabaseUserActiveCartId
-    cart_length: SupabaseUserCartLength
+export default interface SupabaseUserCart extends SupabaseProduct {
+
+    quantity: SupabaseUserCartQuantity
 }

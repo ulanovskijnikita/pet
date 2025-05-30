@@ -16,6 +16,11 @@ import HomeViewModel from "../../presentation/viewmodel/HomeViewModel.ts";
 import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase.ts";
 import ShopViewModel from "../../presentation/viewmodel/ShopViewModel.ts";
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
+import CartViewModel from "../../presentation/viewmodel/CartViewModel.ts";
+import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUserCase.ts";
+import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase.ts";
+import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase.ts";
+import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase.ts";
 
 const appModule = new ContainerModule(
 
@@ -117,6 +122,22 @@ const appModule = new ContainerModule(
                     new ShopViewModel(
 
                         context.get(GetProductByFilterUseCase),
+                    )
+            )
+            .inSingletonScope()
+
+        options
+            .bind<CartViewModel>(CartViewModel)
+            .toDynamicValue(
+
+                context =>
+                    new CartViewModel(
+
+                        context.get(GetUserCartUseCase),
+                        context.get(SetQuantityCartProductUseCase),
+                        context.get(ChangeQuantityCartProductUseCase),
+                        context.get(AppViewModel),
+                        context.get(GetAnOrderUseCase),
                     )
             )
             .inSingletonScope()

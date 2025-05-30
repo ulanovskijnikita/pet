@@ -1,5 +1,5 @@
 import { Enums } from "../../../../infrastructure/supabase/database.types"
-import SupabaseUserCart from "./SupabaseUserCart"
+import SupabaseUserCartPreview from "./SupabaseUserCartPreview"
 
 export type SupabaseUserId = number
 export type SupabaseUserName = string
@@ -8,7 +8,7 @@ export type SupabaseUserPassword = string
 
 export type SupabaseUserStatus = Enums<"user_status">
 
-export default interface SupabaseUser extends SupabaseUserCart {
+export default interface SupabaseUser extends SupabaseUserCartPreview {
 
     id: SupabaseUserId
     name: SupabaseUserName

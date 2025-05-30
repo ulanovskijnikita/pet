@@ -6,8 +6,10 @@ import SupabaseUser, { SupabaseUserEmail, SupabaseUserId, SupabaseUserStatus } f
 import SupabaseUserSignInResponse from "../model/user/SupabaseUserSignInResponse";
 import SupabaseValidateUserParam from "../model/user/SupabaseValidateUserParam";
 import SupabaseValidateUserRes from "../model/user/SupabaseValidateUserRes";
-import { SupabaseUserCartLength } from "../model/user/SupabaseUserCart";
+import SupabaseUserCartPreview, { SupabaseUserCartLength } from "../model/user/SupabaseUserCartPreview";
 import SendSupabaseMessageParam from "../model/user/SendSupabaseMessageParam";
+import SupabaseUserCart from "../model/user/SupabaseUserCart";
+import QuantitySupabaseProductRes from "../model/user/QuantitySupabaseProductRes";
 
 export default interface UserStorage {
 
@@ -24,4 +26,12 @@ export default interface UserStorage {
     addToCart(param: AddToSupabaseUserCartParam): Promise<SupabaseUserCartLength>
 
     sendMessage(param: SendSupabaseMessageParam): Promise<SupabaseUserStatus>
+
+    getCart(id: SupabaseUserId): Promise<SupabaseUserCart[]>
+
+    setQuantityCartSupabaseProduct(param: AddToSupabaseUserCartParam): Promise<QuantitySupabaseProductRes>
+
+    changeQuantityCartSupabaseProduct(param: AddToSupabaseUserCartParam): Promise<QuantitySupabaseProductRes>
+
+    getAnOrder(id: SupabaseUserId): Promise<SupabaseUserCartPreview>
 }
