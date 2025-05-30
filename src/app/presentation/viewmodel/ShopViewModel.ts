@@ -19,8 +19,6 @@ export default class ShopViewModel {
 
     private product: Product[] | null = null
 
-    private getProductByFilterParam: GetProductByFilterParam | null = null
-
     private hasMoreProduct = true
 
     private category: ProductCategoryId = 1
@@ -80,8 +78,6 @@ export default class ShopViewModel {
                     runInAction(
 
                         () => {
-
-                            this.getProductByFilterParam = param
 
                             this.hasMoreProduct = product.length < param.limit ? false : true
 
