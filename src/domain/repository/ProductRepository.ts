@@ -1,3 +1,4 @@
+import GetProductByFavouriteParam from "../model/product/GetProductByFavouriteParam.ts";
 import GetProductByFilterParam from "../model/product/GetProductByFilterParam.ts";
 import Product from "../model/product/Product.ts";
 import ProductCategoryParam from "../model/product/ProductCategoryParam.ts";
@@ -10,4 +11,6 @@ export default interface ProductRepository {
     getByCategory(param: ProductCategoryParam): Promise<Product[]>
 
     getByFilter(param: GetProductByFilterParam): Promise<Product[]>
+
+    getByFavourite(param: GetProductByFavouriteParam): Promise<Product[]>
 }

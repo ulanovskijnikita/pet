@@ -5,6 +5,7 @@ import SupabaseProduct from "../storage/model/product/SupabaseProduct.ts";
 import ProductCategoryParam from "../../domain/model/product/ProductCategoryParam.ts";
 import SearchProductParam from "../../domain/model/product/SearchProductParam.ts";
 import GetProductByFilterParam from "../../domain/model/product/GetProductByFilterParam.ts";
+import GetProductByFavouriteParam from "../../domain/model/product/GetProductByFavouriteParam.ts";
 
 export default class ProductRepositoryImpl implements ProductRepository {
 
@@ -12,6 +13,13 @@ export default class ProductRepositoryImpl implements ProductRepository {
 
         private readonly supabaseProductStorage: ProductStorage,
     ) {}
+
+    async getByFavourite(param: GetProductByFavouriteParam): Promise<Product[]> {
+        
+        const supabaseProduct = await this.supabaseProductStorage.getByFavourite(param)
+
+        return this.mapToDomain( supabaseProduct )
+    }
 
     async getByFilter(param: GetProductByFilterParam): Promise<Product[]> {
         
@@ -33,7 +41,7 @@ export default class ProductRepositoryImpl implements ProductRepository {
         return this.mapToDomain(supabaseProduct)
     }
 
-    private mapToDomain(supabaseProducts: SupabaseProduct[]) {
+    private mapToDomain(supabaseProducts: SupabaseProduct[]): Product[] {
 
         return supabaseProducts.map(it => {
 

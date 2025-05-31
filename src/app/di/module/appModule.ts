@@ -21,6 +21,8 @@ import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUserCase.ts";
 import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase.ts";
 import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase.ts";
 import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase.ts";
+import FavouriteViewModel from "../../presentation/viewmodel/FavouriteViewModel.ts";
+import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase.ts";
 
 const appModule = new ContainerModule(
 
@@ -138,6 +140,19 @@ const appModule = new ContainerModule(
                         context.get(ChangeQuantityCartProductUseCase),
                         context.get(AppViewModel),
                         context.get(GetAnOrderUseCase),
+                    )
+            )
+            .inSingletonScope()
+
+        options
+            .bind<FavouriteViewModel>(FavouriteViewModel)
+            .toDynamicValue(
+
+                context =>
+                    new FavouriteViewModel(
+
+                        context.get(GetProductByFavouriteUseCase),
+                        context.get(ToggleUserFavouriteUseCase)
                     )
             )
             .inSingletonScope()

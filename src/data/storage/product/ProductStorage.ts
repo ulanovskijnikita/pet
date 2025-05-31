@@ -2,6 +2,7 @@ import GetSupabaseProductByFilterParam from "../model/product/GetSupabaseProduct
 import SupabaseProduct from "../model/product/SupabaseProduct.ts";
 import SupabaseProductCategoryParam from "../model/product/SupabaseProductCategoryParam.ts";
 import SupabaseSearchProductParam from "../model/product/SupabaseSearchProductParam.ts";
+import GetSupabaseProductByFavouriteParam from "./GetSupabaseProductByFavouriteParam.ts";
 
 export default interface ProductStorage {
 
@@ -10,4 +11,6 @@ export default interface ProductStorage {
     getByCategory(param: SupabaseProductCategoryParam): Promise<SupabaseProduct[]>
 
     getByFilter(param: GetSupabaseProductByFilterParam): Promise<SupabaseProduct[]>
+
+    getByFavourite(param: GetSupabaseProductByFavouriteParam): Promise<SupabaseProduct[]>
 }
