@@ -393,17 +393,20 @@ export type Database = {
           cart_length: number
         }[]
       }
-      get_products: {
-        Args: { user_id: number }
+      get_product_by_id: {
+        Args: { u_id: number; p_id: number }
         Returns: {
           id: number
-          pricecurrency: Database["public"]["Enums"]["currencies"]
-          pricecount: number
+          price_currency: Database["public"]["Enums"]["currencies"]
+          price_count: number
           rating: number
           tag: string
           img: string
           statuses: Database["public"]["Enums"]["product_status"][]
-          isfavorites: boolean
+          is_favorites: boolean
+          product_desc: string
+          category: Database["public"]["Enums"]["categories"]
+          subcategory: Database["public"]["Enums"]["subcategories"]
         }[]
       }
       get_products_by_category: {

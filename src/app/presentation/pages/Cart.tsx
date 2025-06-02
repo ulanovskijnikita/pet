@@ -11,6 +11,7 @@ import { DEFAULT_USER_ID } from "../../../domain/model/user/User"
 import FuncButton from "../ui/FuncButton"
 import { useNavigate } from "react-router"
 import pages from "../../router/pages"
+import { runInAction } from "mobx"
 
 const Cart = observer(() => {
 
@@ -59,9 +60,15 @@ const Cart = observer(() => {
 
                                     () => {
 
-                                        vm.setAnOrder = appVm.getUser?.id ?? DEFAULT_USER_ID
+                                        runInAction(
 
-                                        vm.setUserCart = appVm.getUser?.id ?? DEFAULT_USER_ID
+                                            () => {
+
+                                                vm.setAnOrder = appVm.getUser?.id ?? DEFAULT_USER_ID
+
+                                                vm.setUserCart = appVm.getUser?.id ?? DEFAULT_USER_ID
+                                            }
+                                        )
 
                                         navigate(pages.history)
                                     }

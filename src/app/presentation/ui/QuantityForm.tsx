@@ -17,7 +17,7 @@ const QuantityForm = observer((props: QuantityFormProps) => {
         () => {
 
             if( quantityInput.current ) quantityInput.current.value = props.quantityParam.quantity.toString()
-        }, [quantityInput, props]
+        }, [quantityInput, props, props.quantityParam.quantity]
     )
 
     return (
@@ -44,7 +44,7 @@ const QuantityForm = observer((props: QuantityFormProps) => {
 
             <input
 
-                className="w-[32px] aspect-square p-[9px] focus:outline-none text-center"
+                className="w-[40px] aspect-square p-[9px] focus:outline-none text-center"
                 ref={quantityInput}
                 type="number"
                 placeholder={props.quantityParam.quantity.toString()}

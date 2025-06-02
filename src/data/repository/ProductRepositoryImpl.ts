@@ -6,6 +6,9 @@ import ProductCategoryParam from "../../domain/model/product/ProductCategoryPara
 import SearchProductParam from "../../domain/model/product/SearchProductParam.ts";
 import GetProductByFilterParam from "../../domain/model/product/GetProductByFilterParam.ts";
 import GetProductByFavouriteParam from "../../domain/model/product/GetProductByFavouriteParam.ts";
+import GetProductByIdParam from "../../domain/model/product/GetProductByIdParam.ts";
+import ProductDetails from "../../domain/model/product/ProductDetails.ts";
+import SupabaseProductDetails from "../storage/model/product/SupabaseProductDetails.ts";
 
 export default class ProductRepositoryImpl implements ProductRepository {
 
@@ -14,34 +17,57 @@ export default class ProductRepositoryImpl implements ProductRepository {
         private readonly supabaseProductStorage: ProductStorage,
     ) {}
 
+    async getById(param: GetProductByIdParam): Promise<ProductDetails> {
+        
+        return this.mapSupabaseProductDetailsToProductDetails( await this.supabaseProductStorage.getById(param) )
+    }
+
     async getByFavourite(param: GetProductByFavouriteParam): Promise<Product[]> {
         
         const supabaseProduct = await this.supabaseProductStorage.getByFavourite(param)
 
-        return this.mapToDomain( supabaseProduct )
+        return this.mapSupabaseProductToProduct( supabaseProduct )
     }
 
     async getByFilter(param: GetProductByFilterParam): Promise<Product[]> {
         
         const supabaseProduct = await this.supabaseProductStorage.getByFilter(param)
 
-        return this.mapToDomain( supabaseProduct )
+        return this.mapSupabaseProductToProduct( supabaseProduct )
     }
 
     async getByCategory(param: ProductCategoryParam): Promise<Product[]> {
         const supabaseProduct = await this.supabaseProductStorage.getByCategory(param)
 
-        return this.mapToDomain(supabaseProduct)
+        return this.mapSupabaseProductToProduct(supabaseProduct)
     }
 
     async searchByTag(param: SearchProductParam): Promise<Product[]> {
 
         const supabaseProduct = await this.supabaseProductStorage.searchByTag(param)
 
-        return this.mapToDomain(supabaseProduct)
+        return this.mapSupabaseProductToProduct(supabaseProduct)
     }
 
-    private mapToDomain(supabaseProducts: SupabaseProduct[]): Product[] {
+    private mapSupabaseProductDetailsToProductDetails(supabaseProductDetails: SupabaseProductDetails): ProductDetails {
+
+        return {
+
+            category: supabaseProductDetails.category,
+            desc: supabaseProductDetails.product_desc,
+            id: supabaseProductDetails.id,
+            img: supabaseProductDetails.img,
+            isFavorites: supabaseProductDetails.is_favorites,
+            priceCount: supabaseProductDetails.price_count,
+            priceCurrency: supabaseProductDetails.price_currency,
+            rating: supabaseProductDetails.rating,
+            statuses: supabaseProductDetails.statuses,
+            subcategory: supabaseProductDetails.subcategory,
+            tag: supabaseProductDetails.tag
+        }
+    }
+
+    private mapSupabaseProductToProduct(supabaseProducts: SupabaseProduct[]): Product[] {
 
         return supabaseProducts.map(it => {
 

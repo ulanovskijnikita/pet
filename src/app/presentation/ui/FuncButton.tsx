@@ -6,7 +6,7 @@ import pages from "../../router/pages"
 
 type FuncButtonProps = {
 
-    children: string
+    children: JSX.Element
     handleClick: () => void
 }
 

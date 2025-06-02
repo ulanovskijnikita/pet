@@ -17,6 +17,10 @@ const Cookie = () => {
             alignItems: "center",
             background: "#41403E"
             }}
+            contentStyle={{
+
+                flex: "1 0 200px"
+            }}
             buttonText={
 
             <svg className="w-[20px] aspect-square fill-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -27,7 +31,7 @@ const Cookie = () => {
             }
         >
             
-            This website uses cookies to enhance the user experience.
+            <span className="text-btn">This website uses cookies to enhance the user experience.</span>
         </CookieConsent>
     )
 }

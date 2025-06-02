@@ -12,7 +12,7 @@ const QuantityButton = observer((props: QuantityButtonProps) => {
     return (
 
         <button
-            title="to-favourite"
+            title="add quantity"
             className="p-[8px] h-fit rounded-btn outline-[1px] active:outline-2 outline-[rgba(65,64,62,20)] grid items-center justify-center cursor-pointer"
             onClick={
                 () => {

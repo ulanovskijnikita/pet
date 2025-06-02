@@ -6,6 +6,8 @@ import SupabaseProductCategoryParam from "../model/product/SupabaseProductCatego
 import SupabaseSearchProductParam from "../model/product/SupabaseSearchProductParam.ts";
 import GetSupabaseProductByFilterParam from "../model/product/GetSupabaseProductByFilterParam.ts";
 import GetSupabaseProductByFavouriteParam from "./GetSupabaseProductByFavouriteParam.ts";
+import GetSupabaseProductByIdParam from "../model/product/GetSupabaseProductByIdParam.ts";
+import SupabaseProductDetails from "../model/product/SupabaseProductDetails.ts";
 
 type FilterAction = {
 
@@ -19,6 +21,17 @@ export default class SupabaseProductStorage implements ProductStorage {
 
         private readonly supabaseClient: SupabaseClient<Database>
     ) {}
+
+    async getById(param: GetSupabaseProductByIdParam): Promise<SupabaseProductDetails> {
+        
+        const {data} = await this.supabaseClient.rpc("get_product_by_id", {
+
+            p_id: param.productId,
+            u_id: param.userId
+        })
+
+        return data![0]
+    }
 
     async getByFavourite(param: GetSupabaseProductByFavouriteParam): Promise<SupabaseProduct[]> {
         

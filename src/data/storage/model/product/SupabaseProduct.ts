@@ -2,7 +2,7 @@ import {Enums} from "../../../../infrastructure/supabase/database.types.ts";
 
 export type SupabaseProductId = number
 
-export type SupabaseProductPriceCurrency = string
+export type SupabaseProductPriceCurrency = Enums<"currencies">
 export type SupabaseProductPriceCount = number
 
 export type SupabaseProductRating = number

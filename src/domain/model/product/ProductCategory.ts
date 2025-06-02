@@ -1,5 +1,5 @@
 export type ProductCategoryId = number
-export type ProductCategoryValue = string
+export type ProductCategoryValue = "accessories" | "clothing" | "foodies"
 
 export default interface ProductCategory {
     id: ProductCategoryId
