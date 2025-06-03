@@ -40,7 +40,7 @@ const History = observer(() => {
                         id={appVm.getUser?.id ?? DEFAULT_USER_ID}
                     />
                         :
-                    <HistoryCurrent />                    
+                    <HistoryCurrent />
                 }
             </main>
 

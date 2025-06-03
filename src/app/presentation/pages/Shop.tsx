@@ -1,3 +1,4 @@
+
 import { observer } from "mobx-react-lite";
 import Location from "../../router/Location";
 import Footer from "../ui/footer/Footer";

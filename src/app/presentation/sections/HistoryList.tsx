@@ -23,7 +23,7 @@ const HistoryList = observer((props: HistoryListProps) => {
 
     return (
 
-        <section className="grid gap-[30px]">
+        <section className="grid gap-[40px]">
 
             {
 
@@ -34,57 +34,60 @@ const HistoryList = observer((props: HistoryListProps) => {
                     (historyItem) => {
 
                         return (
-                            
-                            <Link
+                            <div className="grid gap-[40px]" key={`cart-${historyItem.id}`}>
 
-                                key={`cart-${historyItem.id}`}
-                                to={historyItem.id.toString()}
-                                className="grid grid-cols-3 justify-start last:justify-end"
-                            >
+                                <Link
 
-                                <div>
+                                    to={historyItem.id.toString()}
+                                    className="flex gap-[15px] h-[70px]"
+                                >
 
-                                    <h3>{historyItem.status}</h3>
-                                </div>
+                                    <div className="w-[90px] tablet:w-[150px] flex items-center">
 
-                                <ul>
-                            
-                                    {
+                                        <h4>{historyItem.status}</h4>
+                                    </div>
 
-                                        historyItem.productList.slice(0,2).map(
+                                    <ul className="flex flex-col gap-[10px] grow justify-center">
+                                
+                                        {
 
-                                            (product) => {
+                                            historyItem.productList.slice(0,2).map(
 
-                                                return (
+                                                (product) => {
 
-                                                    <li key={`cart-${historyItem.id}-product-${product.id}`} className="flex justify-between">
+                                                    return (
 
-                                                        <span>{product.tag}</span>
+                                                        <li key={`cart-${historyItem.id}-product-${product.id}`} className="flex items-center">
 
-                                                        <span>✖</span>
+                                                            <div className="grow h-[12px]">{product.tag}</div>
 
-                                                        <span>{product.q}</span>
-                                                    </li>
-                                                )
-                                            }
-                                        )
-                                    }
+                                                            <div className="w-[20px] h-[13px] tablet:h-[13px] laptop:h-[18px] flex place-content-center">✖</div>
 
-                                    {
+                                                            <div className="font-functional w-[20px] tablet:w-[40px] laptop:w-[80px] text-end">{product.q}</div>
+                                                        </li>
+                                                    )
+                                                }
+                                            )
+                                        }
 
-                                        historyItem.productList.length > 2
-                                            ?
-                                        <li>...</li>
-                                            :
-                                        <></>
-                                    }
-                                </ul>
+                                        {
 
-                                <div>
+                                            historyItem.productList.length > 2
+                                                ?
+                                            <li>...</li>
+                                                :
+                                            <></>
+                                        }
+                                    </ul>
 
-                                    <h4>{historyItem.price.toFixed(2)}</h4>
-                                </div>
-                            </Link>
+                                    <div className="w-[90px] laptop:w-[150px] flex items-center justify-end">
+
+                                        <h4 className="text-end text-accent font-light font-functional">${historyItem.price.toFixed(2)}</h4>
+                                    </div>
+                                </Link>
+
+                                <div className="w-full h-[1px] mx-auto laptop:mx-0 bg-[#D9D9D8]"></div>
+                            </div>
                         )
                     }
                 )

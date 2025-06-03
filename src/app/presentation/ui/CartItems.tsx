@@ -36,14 +36,13 @@ const CartItems = observer((props: CartItemsProps) => {
 
                                 <div className="w-[110px] aspect-square laptop:w-[150px] items-center justify-center bg-bg-cart grid rounded-cart">
 
-                                    <img className="w-[90px] aspect-square laptop:w-[130px] text-center" src={product.img} alt="product-img" />
+                                    <img className=" laptop:w-[130px] text-center" src={product.img} alt="product-img" />
                                 </div>
 
                                 <div className="flex flex-col justify-between">
 
                                     <h4 className="capitalize max-w-[95px] laptop:max-w-[120px] desktop:max-w-[140px] min-h-[55px]">{product.tag}</h4>
 
-                                                
                                     <div className="mt-[4px] mb-[7px] flex items-center gap-[4px]">
 
                                         {
