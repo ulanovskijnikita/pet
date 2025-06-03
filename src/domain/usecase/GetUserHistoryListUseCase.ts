@@ -1,7 +1,7 @@
 import { UserId } from "../model/user/User";
 import UserRepository from "../repository/UserRepository";
 
-export default class GetAnOrderUseCase {
+export default class GetUserHistoryListUseCase {
 
     constructor(
 
@@ -10,6 +10,6 @@ export default class GetAnOrderUseCase {
 
     async execute(id: UserId) {
 
-        return this.userRepository.getAnOrder(id)
+        return this.userRepository.getHistoryList(id)
     }
 }

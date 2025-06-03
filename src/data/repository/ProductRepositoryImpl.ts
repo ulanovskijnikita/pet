@@ -17,7 +17,7 @@ export default class ProductRepositoryImpl implements ProductRepository {
         private readonly supabaseProductStorage: ProductStorage,
     ) {}
 
-    async getById(param: GetProductByIdParam): Promise<ProductDetails> {
+    async getById(param: GetProductByIdParam): Promise<ProductDetails | null> {
         
         return this.mapSupabaseProductDetailsToProductDetails( await this.supabaseProductStorage.getById(param) )
     }
@@ -49,21 +49,26 @@ export default class ProductRepositoryImpl implements ProductRepository {
         return this.mapSupabaseProductToProduct(supabaseProduct)
     }
 
-    private mapSupabaseProductDetailsToProductDetails(supabaseProductDetails: SupabaseProductDetails): ProductDetails {
+    private mapSupabaseProductDetailsToProductDetails(supabaseProductDetails: SupabaseProductDetails | null): ProductDetails | null {
 
-        return {
+        if (supabaseProductDetails) {
+            return {
 
-            category: supabaseProductDetails.category,
-            desc: supabaseProductDetails.product_desc,
-            id: supabaseProductDetails.id,
-            img: supabaseProductDetails.img,
-            isFavorites: supabaseProductDetails.is_favorites,
-            priceCount: supabaseProductDetails.price_count,
-            priceCurrency: supabaseProductDetails.price_currency,
-            rating: supabaseProductDetails.rating,
-            statuses: supabaseProductDetails.statuses,
-            subcategory: supabaseProductDetails.subcategory,
-            tag: supabaseProductDetails.tag
+                category: supabaseProductDetails.category,
+                desc: supabaseProductDetails.product_desc,
+                id: supabaseProductDetails.id,
+                img: supabaseProductDetails.img,
+                isFavorites: supabaseProductDetails.is_favorites,
+                priceCount: supabaseProductDetails.price_count,
+                priceCurrency: supabaseProductDetails.price_currency,
+                rating: supabaseProductDetails.rating,
+                statuses: supabaseProductDetails.statuses,
+                subcategory: supabaseProductDetails.subcategory,
+                tag: supabaseProductDetails.tag
+            }
+        } else {
+
+            return supabaseProductDetails
         }
     }
 

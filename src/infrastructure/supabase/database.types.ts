@@ -1,3 +1,6 @@
+Need to install the following packages:
+supabase@2.24.3
+Ok to proceed? (y) 
 export type Json =
   | string
   | number
@@ -391,6 +394,15 @@ export type Database = {
         Returns: {
           cart_id: number
           cart_length: number
+        }[]
+      }
+      get_history_list: {
+        Args: { u_id: number }
+        Returns: {
+          cart_id: number
+          cart_status: Database["public"]["Enums"]["cart_status"]
+          cart_price: number
+          cart_products: Json
         }[]
       }
       get_product_by_id: {

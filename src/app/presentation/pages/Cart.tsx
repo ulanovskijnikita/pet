@@ -74,7 +74,7 @@ const Cart = observer(() => {
                                     }
                                 }>
 
-                                    get an order
+                                    <span>get an order</span>
                             </FuncButton>
 
                             <h4 className="text-accent font-functional font-light">

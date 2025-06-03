@@ -22,7 +22,7 @@ export default function Router() {
 
                 <Route path={pages.shop + '/:productTag?'} element={<Shop />} />
 
-                <Route path={pages.history} element={<History />} />
+                <Route path={pages.history + '/:cartId?'} element={<History />} />
 
                 <Route path={pages.profile + '/:userId?'} element={<Profile />} >
 

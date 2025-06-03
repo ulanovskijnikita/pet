@@ -1,5 +1,5 @@
 import User from "../model/user/User";
-import { UserRepository } from "../repository/UserRepository";
+import UserRepository from "../repository/UserRepository";
 
 export default class GetUserUseCase {
 

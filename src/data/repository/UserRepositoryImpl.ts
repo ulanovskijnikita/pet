@@ -7,15 +7,17 @@ import ToggleUserFavouriteParam from "../../domain/model/user/ToggleUserFafourit
 import User, { UserEmail, UserId, UserStatus } from "../../domain/model/user/User";
 import UserCart from "../../domain/model/user/UserCart";
 import UserCartPreview, { UserCartLength } from "../../domain/model/user/UserCartPreview";
+import UserHistory, { CartProduct } from "../../domain/model/user/UserHistory";
 import UserSignInResponse from "../../domain/model/user/UserSignInResponse";
 import ValidateUserParam from "../../domain/model/user/ValidateUserParam";
 import ValidateUserRes from "../../domain/model/user/ValidateUserRes";
-import { UserRepository } from "../../domain/repository/UserRepository";
+import UserRepository from "../../domain/repository/UserRepository";
 import SessionUser from "../storage/model/user/SessionUser";
 import SessionUserCartPreview from "../storage/model/user/SessionUserCartPreview";
 import SupabaseUser from "../storage/model/user/SupabaseUser";
 import SupabaseUserCart from "../storage/model/user/SupabaseUserCart";
 import SupabaseUserCartPreview from "../storage/model/user/SupabaseUserCartPreview";
+import SupabaseUserHistory from "../storage/model/user/SupabaseUserHistory";
 import SupabaseUserSignInResponse from "../storage/model/user/SupabaseUserSignInResponse";
 import SupabaseValidateUserRes from "../storage/model/user/SupabaseValidateUserRes";
 import UserCashe from "../storage/user/UserCashe";
@@ -28,6 +30,13 @@ export default class UserRepositoryImpl implements UserRepository {
         private userStorage: UserStorage,
         private userCashe: UserCashe,
     ) {}
+
+    async getHistoryList(id: UserId): Promise<UserHistory[]> {
+        
+        const supabaseUserHistory = await this.userStorage.getHistoryList(id)
+
+        return this.mapSupabaseUserHistoryToUserHistory(supabaseUserHistory)
+    }
 
     async getAnOrder(id: UserId): Promise<UserCartPreview> {
 
@@ -127,6 +136,33 @@ export default class UserRepositoryImpl implements UserRepository {
             cartId: supabaseUserCartPreview.cart_id,
             cartLength: supabaseUserCartPreview.cart_length,
         }
+    }
+
+    private mapSupabaseUserHistoryToUserHistory(supabaseUserHistory: SupabaseUserHistory[]): UserHistory[] {
+
+        return supabaseUserHistory.map(
+
+            value => {
+
+                return {
+
+                    id: value.cart_id,
+                    price: value.cart_price,
+                    status: value.cart_status,
+                    productList: value.cart_products.map<CartProduct>(
+                        (product) => {
+
+                            return {
+                                
+                                id: product.product_id,
+                                q: product.product_quantity,
+                                tag: product.product_tag
+                            }
+                        }
+                    )
+                }
+            }
+        )
     }
 
     private mapSupabaseUserCartToUserCart(supabaseUserCart: SupabaseUserCart[]): UserCart[] {

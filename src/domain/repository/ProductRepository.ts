@@ -16,5 +16,5 @@ export default interface ProductRepository {
 
     getByFavourite(param: GetProductByFavouriteParam): Promise<Product[]>
 
-    getById(param: GetProductByIdParam): Promise<ProductDetails>
+    getById(param: GetProductByIdParam): Promise<ProductDetails | null>
 }

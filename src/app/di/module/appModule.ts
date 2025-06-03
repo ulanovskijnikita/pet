@@ -25,6 +25,8 @@ import FavouriteViewModel from "../../presentation/viewmodel/FavouriteViewModel.
 import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase.ts";
 import ProductViewModel from "../../presentation/viewmodel/ProductViewModel.ts";
 import GetProductByIdUseCase from "../../../domain/usecase/GetProductByIdUseCase.ts";
+import HistoryViewModel from "../../presentation/viewmodel/HistoryViewModel.ts";
+import GetUserHistoryListUseCase from "../../../domain/usecase/GetUserHistoryListUseCase.ts";
 
 const appModule = new ContainerModule(
 
@@ -167,6 +169,18 @@ const appModule = new ContainerModule(
                     new ProductViewModel(
 
                         context.get(GetProductByIdUseCase),
+                    )
+            )
+            .inSingletonScope()
+
+        options
+            .bind<HistoryViewModel>(HistoryViewModel)
+            .toDynamicValue(
+
+                context =>
+                    new HistoryViewModel(
+
+                        context.get(GetUserHistoryListUseCase),
                     )
             )
             .inSingletonScope()

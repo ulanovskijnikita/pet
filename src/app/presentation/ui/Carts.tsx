@@ -101,7 +101,7 @@ const Carts = observer((props: CartsProps) => {
                                         }
                                     >
                                         
-                                        add to cart
+                                        <span>add to cart</span>
                                     </FuncButton>
 
                                     <FavouriteButton

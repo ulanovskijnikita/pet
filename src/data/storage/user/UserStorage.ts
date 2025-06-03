@@ -10,6 +10,7 @@ import SupabaseUserCartPreview, { SupabaseUserCartLength } from "../model/user/S
 import SendSupabaseMessageParam from "../model/user/SendSupabaseMessageParam";
 import SupabaseUserCart from "../model/user/SupabaseUserCart";
 import QuantitySupabaseProductRes from "../model/user/QuantitySupabaseProductRes";
+import SupabaseUserHistory from "../model/user/SupabaseUserHistory";
 
 export default interface UserStorage {
 
@@ -34,4 +35,6 @@ export default interface UserStorage {
     changeQuantityCartSupabaseProduct(param: AddToSupabaseUserCartParam): Promise<QuantitySupabaseProductRes>
 
     getAnOrder(id: SupabaseUserId): Promise<SupabaseUserCartPreview>
+
+    getHistoryList(id: SupabaseUserId): Promise<SupabaseUserHistory[]>
 }

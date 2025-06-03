@@ -1,5 +1,5 @@
 import AddToUserCartParam from "../model/user/AddToUserCartParam";
-import { UserRepository } from "../repository/UserRepository";
+import UserRepository from "../repository/UserRepository";
 
 export default class SetQuantityCartProductUseCase {
 

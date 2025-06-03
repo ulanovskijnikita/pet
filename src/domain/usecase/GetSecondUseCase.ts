@@ -1,7 +1,7 @@
 import EmailService from "../service/EmailService.ts";
 import GetSecondUseCaseParam from "../model/email/GetSecondUseCaseParam.ts";
 import GetSecondUseCaseRes from "../model/email/GetSecondUseCaseRes.ts";
-import { UserRepository } from "../repository/UserRepository.ts";
+import UserRepository from "../repository/UserRepository.ts";
 
 export default class GetSecondUseCase {
 

@@ -1,6 +1,6 @@
 import { ProductIsFavorites } from "../model/product/Product";
 import ToggleUserFavouriteParam from "../model/user/ToggleUserFafouriteParam";
-import { UserRepository } from "../repository/UserRepository";
+import UserRepository from "../repository/UserRepository";
 
 export default class ToggleUserFavouriteUseCase {
 

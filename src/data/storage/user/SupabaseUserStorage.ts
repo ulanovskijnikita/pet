@@ -13,6 +13,7 @@ import AddToSupabaseUserCartParam from "../model/user/AddToUserCartParam";
 import SendSupabaseMessageParam from "../model/user/SendSupabaseMessageParam";
 import SupabaseUserCart from "../model/user/SupabaseUserCart";
 import QuantitySupabaseProductRes from "../model/user/QuantitySupabaseProductRes";
+import SupabaseUserHistory from "../model/user/SupabaseUserHistory";
 
 export default class SupabaseUserStorage implements UserStorage {
 
@@ -20,6 +21,16 @@ export default class SupabaseUserStorage implements UserStorage {
     
         private readonly supabaseClient: SupabaseClient<Database>
     ) {}
+
+    async getHistoryList(id: SupabaseUserId): Promise<SupabaseUserHistory[]> {
+        
+        const {data} = await this.supabaseClient.rpc("get_history_list", {
+
+            u_id: id
+        })
+
+        return data as SupabaseUserHistory[] ?? []
+    }
 
     async getAnOrder(id: SupabaseUserId): Promise<SupabaseUserCartPreview> {
         

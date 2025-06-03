@@ -16,5 +16,5 @@ export default interface ProductStorage {
 
     getByFavourite(param: GetSupabaseProductByFavouriteParam): Promise<SupabaseProduct[]>
 
-    getById(param: GetSupabaseProductByIdParam): Promise<SupabaseProductDetails>
+    getById(param: GetSupabaseProductByIdParam): Promise<SupabaseProductDetails | null>
 }

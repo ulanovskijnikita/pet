@@ -1,7 +1,7 @@
 import { DEFAULT_USER_ID } from "../model/user/User";
 import UserIdParam from "../model/user/UserIdParam";
 import UserSignInResult from "../model/user/UserSignInResult";
-import { UserRepository } from "../repository/UserRepository";
+import UserRepository from "../repository/UserRepository";
 
 export default class SignInUserUseCase {
 

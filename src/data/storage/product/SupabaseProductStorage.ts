@@ -22,7 +22,7 @@ export default class SupabaseProductStorage implements ProductStorage {
         private readonly supabaseClient: SupabaseClient<Database>
     ) {}
 
-    async getById(param: GetSupabaseProductByIdParam): Promise<SupabaseProductDetails> {
+    async getById(param: GetSupabaseProductByIdParam): Promise<SupabaseProductDetails | null> {
         
         const {data} = await this.supabaseClient.rpc("get_product_by_id", {
 
@@ -30,7 +30,13 @@ export default class SupabaseProductStorage implements ProductStorage {
             u_id: param.userId
         })
 
-        return data![0]
+        if (data?.length) {
+
+            return data[0]
+        } else {
+
+            return null
+        }
     }
 
     async getByFavourite(param: GetSupabaseProductByFavouriteParam): Promise<SupabaseProduct[]> {

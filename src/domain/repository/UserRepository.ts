@@ -7,11 +7,12 @@ import ToggleUserFavouriteParam from "../model/user/ToggleUserFafouriteParam.ts"
 import User, { UserEmail, UserId, UserStatus } from "../model/user/User.ts";
 import UserCart from "../model/user/UserCart.ts";
 import UserCartPreview, { UserCartLength } from "../model/user/UserCartPreview.ts";
+import UserHistory from "../model/user/UserHistory.ts";
 import UserSignInResponse from "../model/user/UserSignInResponse.ts";
 import ValidateUserParam from "../model/user/ValidateUserParam.ts";
 import ValidateUserRes from "../model/user/ValidateUserRes.ts";
 
-export interface UserRepository {
+export default interface UserRepository {
 
     getSignInResponse(userEmail: UserEmail): Promise<UserSignInResponse>
 
@@ -36,4 +37,6 @@ export interface UserRepository {
     changeQuantityCartProduct(param: AddToUserCartParam): Promise<QuantityProductRes>
 
     getAnOrder(id: UserId): Promise<UserCartPreview>
+
+    getHistoryList(id: UserId): Promise<UserHistory[]>
 }

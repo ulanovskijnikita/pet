@@ -1,6 +1,6 @@
 import RegisterUserUseCaseParam from "../model/user/RegisterUserUseCaseParam";
 import RegisterUserUseCaseResult from "../model/user/RegisterUserUseCaseResult";
-import { UserRepository } from "../repository/UserRepository";
+import UserRepository from "../repository/UserRepository";
 import EmailService from "../service/EmailService";
 
 export default class RegisterUserUseCase {

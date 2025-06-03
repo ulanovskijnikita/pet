@@ -63,7 +63,11 @@ const Product = observer(() => {
             <main className="grow px-container laptop:px-container-1024 my-[50px] laptop:my-[100px]">
 
                 {
-                    vm.getProductDetails && <section className="grid gap-[15px] w-fit">
+                    vm.getProductDetails
+
+                        ?
+
+                    <section className="grid gap-[15px] w-fit">
 
                         <h4 className="flex gap-[10px] capitalize">
 
@@ -242,6 +246,13 @@ const Product = observer(() => {
                                 <span>add to cart</span>
                             </FuncButton>
                         </div>
+                    </section>
+
+                    :
+
+                    <section>
+
+                        <h4>We have no products with this id</h4>
                     </section>
                 }
             </main>

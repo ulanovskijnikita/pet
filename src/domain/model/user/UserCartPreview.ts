@@ -1,8 +1,8 @@
-export type UserProgressCartId = number
+export type UserCartId = number
 export type UserCartLength = number
 
 export default interface UserCartPreview {
 
-    cartId: UserProgressCartId
+    cartId: UserCartId
     cartLength: UserCartLength
 }
