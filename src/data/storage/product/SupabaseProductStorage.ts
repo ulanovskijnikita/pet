@@ -8,6 +8,10 @@ import GetSupabaseProductByFilterParam from "../model/product/GetSupabaseProduct
 import GetSupabaseProductByFavouriteParam from "./GetSupabaseProductByFavouriteParam.ts";
 import GetSupabaseProductByIdParam from "../model/product/GetSupabaseProductByIdParam.ts";
 import SupabaseProductDetails from "../model/product/SupabaseProductDetails.ts";
+import GetSupabaseProductsByCartParam from "../model/product/GetSupabaseProductsByCartParam.ts";
+import GetSupabaseProductsByCartRes from "../model/product/GetSupabaseProductsByCartRes.ts";
+import SetSupabaseProductRatingParam from "../model/product/SetSupabaseProductRatingParam.ts";
+import SetSupabaseProductRatingRes from "../model/product/SetSupabaseProductRatingRes.ts";
 
 type FilterAction = {
 
@@ -21,6 +25,29 @@ export default class SupabaseProductStorage implements ProductStorage {
 
         private readonly supabaseClient: SupabaseClient<Database>
     ) {}
+
+    async getRating(param: SetSupabaseProductRatingParam): Promise<SetSupabaseProductRatingRes> {
+        
+        const {data} = await this.supabaseClient.rpc("set_product_rating", {
+
+            p_id: param.productId,
+            p_r: param.rating,
+            u_id: param.userId
+        })
+
+        return data![0]
+    }
+
+    async getByCart(param: GetSupabaseProductsByCartParam): Promise<GetSupabaseProductsByCartRes[]> {
+        
+        const {data} = await this.supabaseClient.rpc("get_products_by_cart", {
+
+            c_id: param.cartId,
+            u_id: param.userId
+        })
+
+        return data!
+    }
 
     async getById(param: GetSupabaseProductByIdParam): Promise<SupabaseProductDetails | null> {
         

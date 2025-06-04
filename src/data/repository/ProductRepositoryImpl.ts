@@ -9,6 +9,12 @@ import GetProductByFavouriteParam from "../../domain/model/product/GetProductByF
 import GetProductByIdParam from "../../domain/model/product/GetProductByIdParam.ts";
 import ProductDetails from "../../domain/model/product/ProductDetails.ts";
 import SupabaseProductDetails from "../storage/model/product/SupabaseProductDetails.ts";
+import GetProductsByCartParam from "../../domain/model/product/GetProductsByCartParam.ts";
+import GetProductsByCartRes from "../../domain/model/product/GetProductsByCartRes.ts";
+import GetSupabaseProductsByCartRes from "../storage/model/product/GetSupabaseProductsByCartRes.ts";
+import SetProductRatingUseCaseParam from "../../domain/model/product/SetProductRatingUseCaseParam.ts";
+import SetProductRatingUseCaseRes from "../../domain/model/product/SetProductRatingUseCaseRes.ts";
+import SetSupabaseProductRatingRes from "../storage/model/product/SetSupabaseProductRatingRes.ts";
 
 export default class ProductRepositoryImpl implements ProductRepository {
 
@@ -16,6 +22,20 @@ export default class ProductRepositoryImpl implements ProductRepository {
 
         private readonly supabaseProductStorage: ProductStorage,
     ) {}
+
+    async setRating(param: SetProductRatingUseCaseParam): Promise<SetProductRatingUseCaseRes> {
+        
+        const setSupabaseProductRatingRes = await this.supabaseProductStorage.getRating(param)
+
+        return this.mapSetSupabaseProductRatingResToSetProductRatingRes( setSupabaseProductRatingRes )
+    }
+
+    async getByCart(param: GetProductsByCartParam): Promise<GetProductsByCartRes[]> {
+        
+        const getSupabaseProductByCartRes = await this.supabaseProductStorage.getByCart(param)
+
+        return this.mapGetSupabaseProductByCartResToGetProductByCartRes( getSupabaseProductByCartRes )
+    }
 
     async getById(param: GetProductByIdParam): Promise<ProductDetails | null> {
         
@@ -47,6 +67,37 @@ export default class ProductRepositoryImpl implements ProductRepository {
         const supabaseProduct = await this.supabaseProductStorage.searchByTag(param)
 
         return this.mapSupabaseProductToProduct(supabaseProduct)
+    }
+
+    private mapSetSupabaseProductRatingResToSetProductRatingRes(setSupabaseProductRatingRes: SetSupabaseProductRatingRes): SetProductRatingUseCaseRes {
+
+        return {
+
+            prodyctRating: setSupabaseProductRatingRes.product_rating,
+            userRating: setSupabaseProductRatingRes.user_rating
+        }
+    }
+
+    private mapGetSupabaseProductByCartResToGetProductByCartRes(getSupabaseProductByCartRes: GetSupabaseProductsByCartRes[]): GetProductsByCartRes[] {
+
+        return getSupabaseProductByCartRes.map(
+
+            (supabaseRes) => {
+
+                return {
+
+                    id: supabaseRes.id,
+                    img: supabaseRes.img,
+                    isFavorites: supabaseRes.is_favorites,
+                    priceCount: supabaseRes.price_count,
+                    priceCurrency: supabaseRes.price_currency,
+                    rating: supabaseRes.rating,
+                    statuses: supabaseRes.statuses,
+                    tag: supabaseRes.tag,
+                    userRating: supabaseRes.user_rating
+                }
+            }
+        )
     }
 
     private mapSupabaseProductDetailsToProductDetails(supabaseProductDetails: SupabaseProductDetails | null): ProductDetails | null {

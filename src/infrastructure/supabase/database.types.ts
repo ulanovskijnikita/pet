@@ -1,6 +1,3 @@
-Need to install the following packages:
-supabase@2.24.3
-Ok to proceed? (y) 
 export type Json =
   | string
   | number
@@ -421,6 +418,20 @@ export type Database = {
           subcategory: Database["public"]["Enums"]["subcategories"]
         }[]
       }
+      get_products_by_cart: {
+        Args: { u_id: number; c_id: number }
+        Returns: {
+          id: number
+          price_currency: Database["public"]["Enums"]["currencies"]
+          price_count: number
+          rating: number
+          tag: string
+          img: string
+          statuses: Database["public"]["Enums"]["product_status"][]
+          is_favorites: boolean
+          user_rating: number
+        }[]
+      }
       get_products_by_category: {
         Args: {
           user_auth_id: number
@@ -519,8 +530,11 @@ export type Database = {
         }[]
       }
       set_product_rating: {
-        Args: { u_id: number; p_id: number; p_rating: number }
-        Returns: number
+        Args: { u_id: number; p_id: number; p_r: number }
+        Returns: {
+          user_rating: number
+          product_rating: number
+        }[]
       }
       set_quantity_cart_product: {
         Args: { u_id: number; p_id: number; q: number }

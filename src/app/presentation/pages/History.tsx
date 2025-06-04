@@ -9,6 +9,7 @@ import container from "../../di/container";
 import AppViewModel from "../../AppViewModel";
 import HistoryViewModel from "../viewmodel/HistoryViewModel";
 import { DEFAULT_USER_ID } from "../../../domain/model/user/User";
+import { useLayoutEffect } from "react";
 
 const History = observer(() => {
 
@@ -17,6 +18,14 @@ const History = observer(() => {
     const appVm = container.get(AppViewModel)
 
     const vm = container.get(HistoryViewModel)
+
+    useLayoutEffect(
+
+        () => {
+
+            vm.setProductsHistory = null
+        }, [cartId, appVm, vm]
+    )
 
     return (
 
@@ -40,7 +49,13 @@ const History = observer(() => {
                         id={appVm.getUser?.id ?? DEFAULT_USER_ID}
                     />
                         :
-                    <HistoryCurrent />
+                    <HistoryCurrent
+                    
+                        list={() => vm.getProductsHistory}
+                        getList={(param) => vm.setProductsHistory = param}
+                        cartId={+cartId}
+                        setRating={(param) => vm.setProductRating = param}
+                    />
                 }
             </main>
 

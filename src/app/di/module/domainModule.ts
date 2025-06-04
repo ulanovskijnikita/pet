@@ -19,6 +19,8 @@ import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase.ts";
 import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase.ts";
 import GetProductByIdUseCase from "../../../domain/usecase/GetProductByIdUseCase.ts";
 import GetUserHistoryListUseCase from "../../../domain/usecase/GetUserHistoryListUseCase.ts";
+import GetProductsByCartUseCase from "../../../domain/usecase/GetProductsByCartUseCase.ts";
+import SetProductRatingUseCase from "../../../domain/usecase/SetProductRatingUseCase.ts";
 
 const domainModule = new ContainerModule(
 
@@ -182,6 +184,24 @@ const domainModule = new ContainerModule(
 
                 context =>
                     new GetUserHistoryListUseCase( context.get(UserRepositoryImpl) )
+            )
+            .inTransientScope()
+        
+        options
+            .bind<GetProductsByCartUseCase>(GetProductsByCartUseCase)
+            .toDynamicValue(
+
+                context =>
+                    new GetProductsByCartUseCase( context.get(ProductRepositoryImpl) )
+            )
+            .inTransientScope()
+
+        options
+            .bind<SetProductRatingUseCase>(SetProductRatingUseCase)
+            .toDynamicValue(
+
+                context =>
+                    new SetProductRatingUseCase( context.get(ProductRepositoryImpl) )
             )
             .inTransientScope()
     }

@@ -27,6 +27,8 @@ import ProductViewModel from "../../presentation/viewmodel/ProductViewModel.ts";
 import GetProductByIdUseCase from "../../../domain/usecase/GetProductByIdUseCase.ts";
 import HistoryViewModel from "../../presentation/viewmodel/HistoryViewModel.ts";
 import GetUserHistoryListUseCase from "../../../domain/usecase/GetUserHistoryListUseCase.ts";
+import GetProductsByCartUseCase from "../../../domain/usecase/GetProductsByCartUseCase.ts";
+import SetProductRatingUseCase from "../../../domain/usecase/SetProductRatingUseCase.ts";
 
 const appModule = new ContainerModule(
 
@@ -181,6 +183,8 @@ const appModule = new ContainerModule(
                     new HistoryViewModel(
 
                         context.get(GetUserHistoryListUseCase),
+                        context.get(GetProductsByCartUseCase),
+                        context.get(SetProductRatingUseCase),
                     )
             )
             .inSingletonScope()
