@@ -437,7 +437,7 @@ export type Database = {
           user_auth_id: number
           category_id: number
           subcategory_id: number
-          off_set: number
+          off_set: number | null
           lim: number
         }
         Returns: {
@@ -452,7 +452,7 @@ export type Database = {
         }[]
       }
       get_products_by_favourite: {
-        Args: { user_auth_id: number; off_set: number; lim: number }
+        Args: { user_auth_id: number; off_set: number | null; lim: number }
         Returns: {
           id: number
           price_currency: Database["public"]["Enums"]["currencies"]
@@ -509,7 +509,7 @@ export type Database = {
         Args: {
           user_auth_id: number
           search_tag: string
-          off_set: number
+          off_set: number | null
           lim: number
         }
         Returns: {

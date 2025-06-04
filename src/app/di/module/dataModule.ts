@@ -4,7 +4,7 @@ import ProductRepositoryImpl from "../../../data/repository/ProductRepositoryImp
 import SupabaseProductStorage from "../../../data/storage/product/SupabaseProductStorage.ts";
 import ProductStorage from "../../../data/storage/product/ProductStorage.ts";
 import supabaseClient from "../../../infrastructure/supabase/supabaseClient.ts";
-import { UserRepository } from "../../../domain/repository/UserRepository.ts";
+import UserRepository from "../../../domain/repository/UserRepository.ts";
 import UserRepositoryImpl from "../../../data/repository/UserRepositoryImpl.ts";
 import SupabaseUserStorage from "../../../data/storage/user/SupabaseUserStorage.ts";
 import UserStorage from "../../../data/storage/user/UserStorage.ts";

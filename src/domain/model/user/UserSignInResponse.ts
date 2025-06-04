@@ -1,4 +1,5 @@
-import { UserEmail, UserId, UserPassword } from "./User"
+import { UserEmail, UserId } from "./User"
+import { UserPassword } from "./UserDetails"
 
 type UserSignInResponse = {
 
