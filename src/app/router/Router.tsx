@@ -14,7 +14,7 @@ export default function Router() {
 
     return (
 
-        <BrowserRouter>
+        <BrowserRouter basename="/pet">
 
             <Routes>
 
