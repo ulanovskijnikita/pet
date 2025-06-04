@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <title>Redirecting...</title>
     <script>
-      const path = window.location.pathname;
-      window.location.href = path.startsWith('/репозиторий') 
-        ? path 
-        : '/репозиторий' + path;
+      const segment = 1;
+      const path = window.location.pathname.split('/').slice(segment + 1).join('/');
+      window.location.href = '/' + path + window.location.search + window.location.hash;
     </script>
   </head>
   <body>
