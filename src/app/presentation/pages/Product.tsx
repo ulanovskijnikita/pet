@@ -87,12 +87,12 @@ const Product = observer(() => {
 
                             <div className="w-full h-[283px] items-center justify-center bg-bg-cart grid rounded-cart relative">
 
-                                <img className="max-w-[240px] min-w-[150px] max-h-[268px] text-center" src={vm.getProductDetails?.img} alt="product-img" />
+                                <img className="max-w-[240px] min-w-[150px] max-h-[268px] text-center" src={new URL(import.meta.env.BASE_URL.slice(0, -1) + vm.getProductDetails.img, import.meta.url).href} alt="product-img" />
 
                                 <div className="flex flex-wrap gap-[10px] absolute z-10 top-0 left-0 mx-[15px] mt-[15px]">
                                     
                                     {
-                                        vm.getProductDetails?.statuses?.map(
+                                        vm.getProductDetails.statuses?.map(
 
                                             (status, index) =>
                                                 <span key={index} className="font-functional text-label rounded-[6px] py-[8px] px-[12px] border-[1px] border-[rgba(65,64,62,30)] capitalize">
@@ -102,27 +102,23 @@ const Product = observer(() => {
                                         )
                                     }
                                 </div>
+                                    
 
-                                {
+                                    <div className="absolute z-10 top-0 right-0 mx-[15px] mt-[15px] *:p-[8px] tablet:*:p-[8px]">
+                                        
+                                        <FavouriteButton
 
-                                    vm.getProductDetails &&
+                                            isFavourite={vm.getProductDetails.isFavorites}
+                                            toggleFavourite={param => appVm.toggleFavouriteProduct = param}
+                                            toggleParam={{
 
-                                        <div className="absolute z-10 top-0 right-0 mx-[15px] mt-[15px] *:p-[8px] tablet:*:p-[8px]">
-                                            
-                                            <FavouriteButton
-
-                                                isFavourite={vm.getProductDetails.isFavorites}
-                                                toggleFavourite={param => appVm.toggleFavouriteProduct = param}
-                                                toggleParam={{
-
-                                                    list: [vm.getProductDetails],
-                                                    productId: vm.getProductDetails.id,
-                                                    productIndex: 0,
-                                                    userId: appVm.getUser?.id ?? DEFAULT_USER_ID
-                                                }}
-                                            />
-                                        </div>
-                                }                               
+                                                list: [vm.getProductDetails],
+                                                productId: vm.getProductDetails.id,
+                                                productIndex: 0,
+                                                userId: appVm.getUser?.id ?? DEFAULT_USER_ID
+                                            }}
+                                        />
+                                    </div>                           
                             </div>
 
                             <div>
@@ -149,7 +145,7 @@ const Product = observer(() => {
                                         }
                                     </div>
                                     
-                                    <span className="text-label text-sub-title font-functional">{vm.getProductDetails?.rating.toFixed(1)}</span>
+                                    <span className="text-label text-sub-title font-functional">{vm.getProductDetails.rating.toFixed(1)}</span>
                                 </div>
                             </div>
 
@@ -213,7 +209,7 @@ const Product = observer(() => {
 
                                         {
 
-                                            vm.getProductDetails && vm.getProductDetails?.priceCurrency + (vm.getProductDetails?.priceCount * vm.getProductQuantity).toFixed(2)
+                                            vm.getProductDetails.priceCurrency + (vm.getProductDetails.priceCount * vm.getProductQuantity).toFixed(2)
                                         }
                                     </h4>
                                 </div>
