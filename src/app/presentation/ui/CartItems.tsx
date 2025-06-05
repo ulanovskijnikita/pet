@@ -36,7 +36,7 @@ const CartItems = observer((props: CartItemsProps) => {
 
                                 <div className="w-[110px] aspect-square laptop:w-[150px] items-center justify-center bg-bg-cart grid rounded-cart">
 
-                                    <img className=" laptop:w-[130px] text-center" src={new URL(import.meta.env.BASE_URL + product.img, import.meta.url).href} alt="product-img" />
+                                    <img className=" laptop:w-[130px] text-center" src={new URL(import.meta.env.BASE_URL.slice(0, -1) + product.img, import.meta.url).href} alt="product-img" />
                                 </div>
 
                                 <div className="flex flex-col justify-between">

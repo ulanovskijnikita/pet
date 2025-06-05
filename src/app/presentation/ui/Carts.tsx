@@ -40,7 +40,7 @@ const Carts = observer((props: CartsProps) => {
                                         <img
                                         
                                             className="max-w-[240px] min-w-[150px] max-h-[268px] text-center"
-                                            src={new URL(import.meta.env.BASE_URL + product.img, import.meta.url).href}
+                                            src={new URL(import.meta.env.BASE_URL.slice(0, -1) + product.img, import.meta.url).href}
                                             alt="product-img"
                                         />
 
