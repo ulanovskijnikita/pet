@@ -2,6 +2,7 @@ import Logo from "../Logo"
 import footerLink from "./footerLink"
 import footerSocial from "./footerSocial"
 import pages from "../../../router/pages"
+import support from "/icons/support.svg"
 
 const Footer = () => {
 
@@ -81,7 +82,7 @@ const Footer = () => {
 
                         <a href="mailto:ulanovskijnikita@gmail.com">
 
-                            <img src="/icons/support.svg" alt="support-link" />
+                            <img src={support} alt="support-link" />
                         </a>
                     </div>
                 </div>

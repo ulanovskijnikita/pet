@@ -1,3 +1,9 @@
+import telegram from '/icons/social/telegram.svg'
+import vk from '/icons/social/vk.svg'
+import pinterest from '/icons/social/pinterest.svg'
+import github from '/icons/social/github.svg'
+import youtude from '/icons/social/youtude.svg'
+
 type FooterSocial = {
 
     id: number
@@ -8,27 +14,27 @@ const footerSocial: FooterSocial[] = [
 
     {
         id: 1,
-        item: '/icons/social/telegram.svg',
+        item: telegram,
     },
 
     {
         id: 2,
-        item: '/icons/social/vk.svg',
+        item: vk,
     },
 
     {
         id: 3,
-        item: '/icons/social/pinterest.svg',
+        item: pinterest,
     },
 
     {
         id: 4,
-        item: '/icons/social/github.svg',
+        item: github,
     },
 
     {
         id: 5,
-        item: '/icons/social/youtude.svg',
+        item: youtude,
     },
 ]
 

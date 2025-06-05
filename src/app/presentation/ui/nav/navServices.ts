@@ -1,3 +1,6 @@
+import phoneService from '/icons/phone.svg'
+import gmailService from '/icons/gmail.svg'
+
 type NavService = {
 
     id: number
@@ -14,7 +17,7 @@ const navServices: NavService[] = [
         service: 'Phone',
         serviceTitle: '+7 (912)-227-88-26',
         serviceLink: 'tel:+79122278826',
-        setviceImg: '/icons/phone.svg'
+        setviceImg: phoneService,
     },
 
     {
@@ -22,7 +25,7 @@ const navServices: NavService[] = [
         service: 'Email',
         serviceTitle: 'waggy@gmail.com',
         serviceLink: 'mailto:ulanovskijnikita@gmail.com',
-        setviceImg: '/icons/gmail.svg'
+        setviceImg: gmailService,
     },
 ]
 

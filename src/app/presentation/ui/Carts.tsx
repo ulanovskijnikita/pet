@@ -37,7 +37,12 @@ const Carts = observer((props: CartsProps) => {
 
                                     <div className="w-[310px] h-[283px] items-center justify-center bg-bg-cart grid rounded-cart relative">
 
-                                        <img className="max-w-[240px] min-w-[150px] max-h-[268px] text-center" src={product.img} alt="product-img" />
+                                        <img
+                                        
+                                            className="max-w-[240px] min-w-[150px] max-h-[268px] text-center"
+                                            src={new URL(import.meta.env.BASE_URL + product.img, import.meta.url).href}
+                                            alt="product-img"
+                                        />
 
                                         <div className="flex flex-wrap gap-[10px] absolute z-10 top-0 left-0 mx-[15px] mt-[15px]">
                                             

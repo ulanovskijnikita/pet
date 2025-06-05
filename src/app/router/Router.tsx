@@ -14,7 +14,7 @@ export default function Router() {
 
     return (
 
-        <BrowserRouter basename="/pet">
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
 
             <Routes>
 

@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import decorativeBg from "/icons/decorative-bg.svg"
 
 type FormSectionProps = {
 
@@ -13,9 +14,9 @@ const FormSection = (props: FormSectionProps) => {
 
             <div className="absolute inset-0 -z-20 bg-section"></div>
 
-            <img className="absolute -top-[15px] -z-10 -left-[15px] tablet:top-[45px] tablet:left-[45px] laptop:left-container-1024" src="/icons/decorative-bg.svg" alt="decorative-bg" />
+            <img className="absolute -top-[15px] -z-10 -left-[15px] tablet:top-[45px] tablet:left-[45px] laptop:left-container-1024" src={decorativeBg} alt="decorative-bg" />
 
-            <img className="absolute -bottom-[15px] tablet:bottom-[45px] tablet:right-[45px] laptop:right-container-1024 -z-10 -right-[15px] overflow-hidden" src="/icons/decorative-bg.svg" alt="decorative-bg" />
+            <img className="absolute -bottom-[15px] tablet:bottom-[45px] tablet:right-[45px] laptop:right-container-1024 -z-10 -right-[15px] overflow-hidden" src={decorativeBg} alt="decorative-bg" />
 
             {props.children}
         </section>

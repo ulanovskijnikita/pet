@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import quotesSlider from "./quotesSlider";
+import quoteSVG from "/icons/quote.svg";
 
 const Quotes = observer(() => {
 
@@ -29,7 +30,7 @@ const Quotes = observer(() => {
                                 
                                 <SwiperSlide key={quote.id} className="flex! items-start gap-[10px] tablet:gap-[40px] tablet:pr-[60px] px-container laptop:px-container-1024">
 
-                                    <img className="min-w-[70px] tablet:min-w-[140px]" src="icons/quote.svg" alt="quote-decorative" />
+                                    <img className="min-w-[70px] tablet:min-w-[140px]" src={quoteSVG} alt="quote-decorative" />
 
                                     <div className="grid gap-[20px]">
 

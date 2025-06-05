@@ -13,4 +13,6 @@ interface ImportMetaEnv {
     readonly VITE_EMAIL_TEMPLATE_ID: string
 
     readonly VITE_ABSTRACT_KEY: string
+
+    readonly VITE_BASE_URL: string
 }

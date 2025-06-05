@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import pages from "../../router/pages";
+import logo from "/icons/logo.svg"
 
 export default function Logo() {
 
@@ -16,7 +17,7 @@ export default function Logo() {
             className="flex items-center gap-[8px] tablet:gap-[4px]"
         >
 
-            <img className="w-[58px] tablet:w-[57px]" src="/icons/logo.svg" alt="logo" />
+            <img className="w-[58px] tablet:w-[57px]" src={logo} alt="logo" />
 
             <div>
 

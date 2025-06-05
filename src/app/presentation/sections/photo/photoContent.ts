@@ -1,3 +1,12 @@
+import photo1 from '/decorative/photo/decorative-photo-1.webp'
+import photo2 from '/decorative/photo/decorative-photo-2.webp'
+import photo3 from '/decorative/photo/decorative-photo-3.webp'
+import photo4 from '/decorative/photo/decorative-photo-4.webp'
+import photo5 from '/decorative/photo/decorative-photo-5.webp'
+import photo6 from '/decorative/photo/decorative-photo-6.webp'
+import photo7 from '/decorative/photo/decorative-photo-7.webp'
+import photo8 from '/decorative/photo/decorative-photo-8.webp'
+
 type PhotoContent = {
 
     id: number
@@ -9,49 +18,49 @@ const photoContent: PhotoContent[] = [
     {
 
         id: 1,
-        src: '/decorative/photo/decorative-photo-1.webp',
+        src: photo1,
     },
 
     {
 
         id: 2,
-        src: '/decorative/photo/decorative-photo-2.webp',
+        src: photo2,
     },
     
     {
 
         id: 3,
-        src: '/decorative/photo/decorative-photo-3.webp',
+        src: photo3,
     },
     
     {
 
         id: 4,
-        src: '/decorative/photo/decorative-photo-4.webp',
+        src: photo4,
     },
     
     {
 
         id: 5,
-        src: '/decorative/photo/decorative-photo-5.webp',
+        src: photo5,
     },
     
     {
 
         id: 6,
-        src: '/decorative/photo/decorative-photo-6.webp',
+        src: photo6,
     },
     
     {
 
         id: 7,
-        src: '/decorative/photo/decorative-photo-7.webp',
+        src: photo7,
     },
     
     {
 
         id: 8,
-        src: '/decorative/photo/decorative-photo-8.webp',
+        src: photo8,
     },
 ]
 

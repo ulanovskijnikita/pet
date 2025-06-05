@@ -3,6 +3,9 @@ import AppViewModel from "../../../AppViewModel"
 import container from "../../../di/container"
 import pages from "../../../router/pages"
 import LinkButton from "../../ui/LinkButton"
+import decorativeHeaderSlider1 from '/decorative/decorative-header-slider-1.png'
+import decorativeHeaderSlider2 from '/decorative/decorative-header-slider-2.png'
+import decorativeHeaderSlider3 from '/decorative/decorative-header-slider-3.png'
 
 type HeaderSlider = {
 
@@ -18,7 +21,7 @@ const headerSlider: HeaderSlider[] = [
     {
 
         id: 1,
-        img: '/decorative/decorative-header-slider-1.png',
+        img: decorativeHeaderSlider1,
         link: observer(() => {
 
             const appVm = container.get(AppViewModel)
@@ -35,7 +38,7 @@ const headerSlider: HeaderSlider[] = [
     {
 
         id: 2,
-        img: '/decorative/decorative-header-slider-2.png',
+        img: decorativeHeaderSlider2,
         link: observer(() => {
 
             const appVm = container.get(AppViewModel)
@@ -52,7 +55,7 @@ const headerSlider: HeaderSlider[] = [
     {
 
         id: 3,
-        img: '/decorative/decorative-header-slider-3.png',
+        img: decorativeHeaderSlider3,
         link: observer(() => {
 
             const appVm = container.get(AppViewModel)

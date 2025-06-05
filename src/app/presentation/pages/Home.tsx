@@ -8,6 +8,7 @@ import Second from "../sections/Second";
 import Photo from "../sections/photo/Photo";
 import Footer from "../ui/footer/Footer";
 import Location from "../../router/Location";
+import bannerImg1 from "/decorative/banner/banner-img-1.png"
 
 export default function Home() {
 
@@ -25,7 +26,7 @@ export default function Home() {
 
         <Foodies />
 
-        <Banner subtitle="Upto 40% off" title="Clearance sale !!!" img="/decorative/banner/banner-img-1.png" />
+        <Banner subtitle="Upto 40% off" title="Clearance sale !!!" img={bannerImg1} />
 
         <Quotes />
 

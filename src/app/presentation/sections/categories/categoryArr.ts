@@ -1,3 +1,9 @@
+import accessory from "/icons/categories/accessory.svg"
+import bird from "/icons/categories/bird.svg"
+import dog from "/icons/categories/dog.svg"
+import fish from "/icons/categories/fish.svg"
+import cat from "/icons/categories/cat.svg"
+
 type CategoryArr = {
 
     id: number
@@ -9,31 +15,31 @@ const categoryArr: CategoryArr[] = [
 
     {
         id: 1,
-        icon: "/icons/categories/accessory.svg",
+        icon: accessory,
         title: "Accessories"
     },
 
     {
         id: 2,
-        icon: "/icons/categories/bird.svg",
+        icon: bird,
         title: "Bird shop"
     },
 
     {
         id: 3,
-        icon: "/icons/categories/dog.svg",
+        icon: dog,
         title: "Dog shop"
     },
 
     {
         id: 4,
-        icon: "/icons/categories/fish.svg",
+        icon: fish,
         title: "Fish shop"
     },
 
     {
         id: 5,
-        icon: "/icons/categories/cat.svg",
+        icon: cat,
         title: "Cat shop"
     },
 ]

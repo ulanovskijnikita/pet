@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import btnDecorative from "/icons/btn-decorative.svg"
 
 type LinkButtonParam = {
 
@@ -14,7 +15,7 @@ export default function LinkButton({ linkText, linkTo }: LinkButtonParam) {
 
             <span className="uppercase">{linkText}</span>
 
-            <img className="laptop:mt-[1px] desktop:mt-[3px]" src="/icons/btn-decorative.svg" alt="btn-decorative" />
+            <img className="laptop:mt-[1px] desktop:mt-[3px]" src={btnDecorative} alt="btn-decorative" />
         </Link>
     )
 }
