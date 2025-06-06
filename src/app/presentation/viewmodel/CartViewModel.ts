@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUserCase";
+import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUseCase";
 import UserCart from "../../../domain/model/user/UserCart";
 import { UserId } from "../../../domain/model/user/User";
 import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase";

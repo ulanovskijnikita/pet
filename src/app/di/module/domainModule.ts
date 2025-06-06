@@ -12,7 +12,7 @@ import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavour
 import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
 import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
-import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUserCase.ts";
+import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUseCase.ts";
 import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase.ts";
 import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase.ts";
 import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase.ts";

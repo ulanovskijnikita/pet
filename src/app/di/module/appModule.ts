@@ -17,7 +17,7 @@ import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase.ts";
 import ShopViewModel from "../../presentation/viewmodel/ShopViewModel.ts";
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
 import CartViewModel from "../../presentation/viewmodel/CartViewModel.ts";
-import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUserCase.ts";
+import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUseCase.ts";
 import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase.ts";
 import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase.ts";
 import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase.ts";
