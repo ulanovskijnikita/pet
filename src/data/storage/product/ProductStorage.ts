@@ -1,3 +1,4 @@
+import GetSupabaseProductByFavouriteParam from "../model/product/GetSupabaseProductByFavouriteParam.ts";
 import GetSupabaseProductByFilterParam from "../model/product/GetSupabaseProductByFilterParam.ts";
 import GetSupabaseProductByIdParam from "../model/product/GetSupabaseProductByIdParam.ts";
 import GetSupabaseProductsByCartParam from "../model/product/GetSupabaseProductsByCartParam.ts";
@@ -8,7 +9,6 @@ import SupabaseProduct from "../model/product/SupabaseProduct.ts";
 import SupabaseProductCategoryParam from "../model/product/SupabaseProductCategoryParam.ts";
 import SupabaseProductDetails from "../model/product/SupabaseProductDetails.ts";
 import SupabaseSearchProductParam from "../model/product/SupabaseSearchProductParam.ts";
-import GetSupabaseProductByFavouriteParam from "./GetSupabaseProductByFavouriteParam.ts";
 
 export default interface ProductStorage {
 
