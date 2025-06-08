@@ -3,7 +3,6 @@ import ProductRepository from "../../domain/repository/ProductRepository.ts";
 import ProductStorage from "../storage/product/ProductStorage.ts";
 import SupabaseProduct from "../storage/model/product/SupabaseProduct.ts";
 import ProductCategoryParam from "../../domain/model/product/ProductCategoryParam.ts";
-import SearchProductParam from "../../domain/model/product/SearchProductParam.ts";
 import GetProductByFilterParam from "../../domain/model/product/GetProductByFilterParam.ts";
 import GetProductByFavouriteParam from "../../domain/model/product/GetProductByFavouriteParam.ts";
 import GetProductByIdParam from "../../domain/model/product/GetProductByIdParam.ts";
@@ -58,13 +57,6 @@ export default class ProductRepositoryImpl implements ProductRepository {
 
     async getByCategory(param: ProductCategoryParam): Promise<Product[]> {
         const supabaseProduct = await this.supabaseProductStorage.getByCategory(param)
-
-        return this.mapSupabaseProductToProduct(supabaseProduct)
-    }
-
-    async searchByTag(param: SearchProductParam): Promise<Product[]> {
-
-        const supabaseProduct = await this.supabaseProductStorage.searchByTag(param)
 
         return this.mapSupabaseProductToProduct(supabaseProduct)
     }

@@ -3,7 +3,6 @@ import {SupabaseClient} from "@supabase/supabase-js";
 import {Database} from "../../../infrastructure/supabase/database.types.ts";
 import SupabaseProduct from "../model/product/SupabaseProduct.ts";
 import SupabaseProductCategoryParam from "../model/product/SupabaseProductCategoryParam.ts";
-import SupabaseSearchProductParam from "../model/product/SupabaseSearchProductParam.ts";
 import GetSupabaseProductByFilterParam from "../model/product/GetSupabaseProductByFilterParam.ts";
 import GetSupabaseProductByIdParam from "../model/product/GetSupabaseProductByIdParam.ts";
 import SupabaseProductDetails from "../model/product/SupabaseProductDetails.ts";
@@ -110,20 +109,6 @@ export default class SupabaseProductStorage implements ProductStorage {
                 lim: param.limit,
                 off_set: param.offset,
                 subcategory_id: param.subcategoryId,
-                user_auth_id: param.userId
-            })
-
-        return data ? data : []
-    }
-
-    async searchByTag(param: SupabaseSearchProductParam): Promise<SupabaseProduct[]> {
-
-        const { data } = await this.supabaseClient
-            .rpc('search_products_by_tag', {
-
-                search_tag: param.tag,
-                lim: param.limit,
-                off_set: param.offset,
                 user_auth_id: param.userId
             })
 

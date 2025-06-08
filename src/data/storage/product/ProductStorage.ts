@@ -8,11 +8,8 @@ import SetSupabaseProductRatingRes from "../model/product/SetSupabaseProductRati
 import SupabaseProduct from "../model/product/SupabaseProduct.ts";
 import SupabaseProductCategoryParam from "../model/product/SupabaseProductCategoryParam.ts";
 import SupabaseProductDetails from "../model/product/SupabaseProductDetails.ts";
-import SupabaseSearchProductParam from "../model/product/SupabaseSearchProductParam.ts";
 
 export default interface ProductStorage {
-
-    searchByTag(param: SupabaseSearchProductParam): Promise<SupabaseProduct[]>
 
     getByCategory(param: SupabaseProductCategoryParam): Promise<SupabaseProduct[]>
 
