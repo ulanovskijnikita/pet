@@ -1,4 +1,4 @@
-import pages from "../../../router/pages"
+import pages from "../../router/pages"
 import categoryArr from "./categoryArr"
 
 export default function Categories() {

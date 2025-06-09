@@ -7,7 +7,7 @@ import container from "../../di/container";
 import AppViewModel from "../../AppViewModel";
 import { DEFAULT_USER_ID } from "../../../domain/model/user/User";
 import { Link } from "react-router";
-import pages from "../../router/pages";
+import pages from "../router/pages";
 import FuncButton from "../ui/FuncButton";
 import { DEFAULT_QUANTITY } from "../../../domain/model/user/AddToUserCartParam";
 import FavouriteButton from "../ui/FavouriteButton";

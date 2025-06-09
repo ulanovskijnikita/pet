@@ -8,7 +8,7 @@ import FormSection from "../ui/FormSection"
 import Form from "../ui/Form"
 import FormInput from "../ui/FormInput"
 import Footer from "../ui/footer/Footer"
-import Location from "../../router/Location"
+import Location from "../router/Location"
 
 const Profile = observer(() => {
 

@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import { useNavigate } from "react-router"
 import container from "../../di/container"
 import AppViewModel from "../../AppViewModel"
-import pages from "../../router/pages"
+import pages from "../router/pages"
 
 type FuncButtonProps = {
 

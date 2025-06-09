@@ -11,7 +11,7 @@ import { DOUBLE_LIMIT_OVERVIEW } from "../../constants/defaultLimit";
 import { DEFAULT_OFFSET } from "../../constants/defaultOffset";
 import { DEFAULT_USER_ID } from "../../../../domain/model/user/User";
 import LinkButton from "../../ui/LinkButton";
-import pages from "../../../router/pages";
+import pages from "../../router/pages";
 
 const Foodies = observer(() => {
 

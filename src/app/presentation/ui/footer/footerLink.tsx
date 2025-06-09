@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router"
-import pages from "../../../router/pages"
+import pages from "../../router/pages"
 import container from "../../../di/container"
 import AppViewModel from "../../../AppViewModel"
 import { observer } from "mobx-react-lite"

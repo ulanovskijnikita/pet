@@ -1,4 +1,4 @@
-import { Enums } from "../../../../infrastructure/supabase/database.types"
+import { Enums } from "../supabase/database.types"
 import SupabaseUserCartPreview from "./SupabaseUserCartPreview"
 
 export type SupabaseUserId = number

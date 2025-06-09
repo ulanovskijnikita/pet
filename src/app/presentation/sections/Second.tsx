@@ -4,7 +4,7 @@ import Form from "../ui/Form";
 import FormButton from "../ui/FormButton";
 import { useRef } from "react";
 import FormTextarea from "../ui/FormTextarea";
-import pages from "../../router/pages";
+import pages from "../router/pages";
 import container from "../../di/container";
 import HomeViewModel from "../viewmodel/HomeViewModel";
 import AppViewModel from "../../AppViewModel";

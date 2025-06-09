@@ -1,7 +1,7 @@
 import Logo from "../Logo"
 import footerLink from "./footerLink"
 import footerSocial from "./footerSocial"
-import pages from "../../../router/pages"
+import pages from "../../router/pages"
 import support from "/icons/support.svg"
 
 const Footer = () => {

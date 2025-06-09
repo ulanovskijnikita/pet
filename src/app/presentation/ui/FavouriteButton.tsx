@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useNavigate } from "react-router"
-import pages from "../../router/pages"
+import pages from "../router/pages"
 import { ToggleFavouriteProductParam } from "../../AppViewModel"
 
 type FavouriteButtonProps = {

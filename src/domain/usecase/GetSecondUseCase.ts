@@ -1,4 +1,4 @@
-import EmailService from "../service/EmailService.ts";
+import EmailGateway from "../gateway/EmailGateway.ts";
 import GetSecondUseCaseParam from "../model/email/GetSecondUseCaseParam.ts";
 import GetSecondUseCaseRes from "../model/email/GetSecondUseCaseRes.ts";
 import UserRepository from "../repository/UserRepository.ts";
@@ -7,7 +7,7 @@ export default class GetSecondUseCase {
 
     constructor(
 
-        private readonly emailService: EmailService,
+        private readonly emailService: EmailGateway,
         private readonly userRepository: UserRepository,
     ) {}
 

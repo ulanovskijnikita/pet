@@ -6,7 +6,7 @@ import { SupabaseProductIsFavorites } from "../model/product/SupabaseProduct";
 import SupabaseToggleUserFavouriteParam from "../model/user/SupabaseToggleUserFafouriteParam";
 import SupabaseValidateUserParam from "../model/user/SupabaseValidateUserParam";
 import SupabaseValidateUserRes from "../model/user/SupabaseValidateUserRes";
-import { Database } from "../../../infrastructure/supabase/database.types";
+import { Database } from "../model/supabase/database.types";
 import SupabaseUserCartPreview, { SupabaseUserCartLength } from "../model/user/SupabaseUserCartPreview";
 import SupabaseRegisterUserParam from "../model/user/SupabaseRegisterUserParam";
 import AddToSupabaseUserCartParam from "../model/user/AddToUserCartParam";

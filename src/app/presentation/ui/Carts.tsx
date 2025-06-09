@@ -7,7 +7,7 @@ import AppViewModel, { ToggleFavouriteProductParam } from "../../AppViewModel"
 import { DEFAULT_USER_ID } from "../../../domain/model/user/User"
 import { DEFAULT_QUANTITY } from "../../../domain/model/user/AddToUserCartParam"
 import { Link } from "react-router"
-import pages from "../../router/pages"
+import pages from "../router/pages"
 
 type CartsProps = {
 

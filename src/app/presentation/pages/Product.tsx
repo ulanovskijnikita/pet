@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router";
 import Nav from "../ui/nav/Nav";
 import Footer from "../ui/footer/Footer";
-import Location from "../../router/Location";
+import Location from "../router/Location";
 import { useEffect, useLayoutEffect } from "react";
 import container from "../../di/container";
 import ProductViewModel from "../viewmodel/ProductViewModel";
@@ -13,7 +13,7 @@ import QuantityButton from "../ui/QuantityButton";
 import QuantityForm from "../ui/QuantityForm";
 import { runInAction } from "mobx";
 import FuncButton from "../ui/FuncButton";
-import pages from "../../router/pages";
+import pages from "../router/pages";
 
 const Product = observer(() => {
 

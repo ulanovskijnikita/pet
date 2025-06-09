@@ -1,6 +1,6 @@
 import ProductStorage from "./ProductStorage.ts";
 import {SupabaseClient} from "@supabase/supabase-js";
-import {Database} from "../../../infrastructure/supabase/database.types.ts";
+import {Database} from "../model/supabase/database.types.ts";
 import SupabaseProduct from "../model/product/SupabaseProduct.ts";
 import SupabaseProductCategoryParam from "../model/product/SupabaseProductCategoryParam.ts";
 import GetSupabaseProductByFilterParam from "../model/product/GetSupabaseProductByFilterParam.ts";

@@ -1,14 +1,14 @@
 import RegisterUserUseCaseParam from "../model/user/RegisterUserUseCaseParam";
 import RegisterUserUseCaseResult from "../model/user/RegisterUserUseCaseResult";
 import UserRepository from "../repository/UserRepository";
-import EmailService from "../service/EmailService";
+import EmailGateway from "../gateway/EmailGateway";
 
 export default class RegisterUserUseCase {
 
     constructor(
 
         private userReposiory: UserRepository,
-        private emailService: EmailService,
+        private emailService: EmailGateway,
     ) {}
 
     async execute(param: RegisterUserUseCaseParam): Promise<RegisterUserUseCaseResult> {

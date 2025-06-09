@@ -1,4 +1,4 @@
-import { Enums } from "../../../../infrastructure/supabase/database.types"
+import { Enums } from "../supabase/database.types"
 import { SupabaseProductId, SupabaseProductTag } from "../product/SupabaseProduct"
 import { SupabaseProductQuantity } from "./AddToUserCartParam"
 import { SupabaseUserCartId } from "./SupabaseUserCartPreview"

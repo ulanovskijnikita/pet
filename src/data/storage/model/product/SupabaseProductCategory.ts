@@ -1,4 +1,4 @@
-import {Enums} from "../../../../infrastructure/supabase/database.types.ts";
+import {Enums} from "../supabase/database.types.ts";
 
 export type SupabaseProductCategoryId = number
 export type SupabaseProductCategoryValue = Enums<"categories">

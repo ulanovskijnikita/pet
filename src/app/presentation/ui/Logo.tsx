@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import pages from "../../router/pages";
+import pages from "../router/pages";
 import logo from "/icons/logo.svg"
 
 export default function Logo() {

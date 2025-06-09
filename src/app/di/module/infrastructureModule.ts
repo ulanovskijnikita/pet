@@ -1,17 +1,17 @@
 import {ContainerModule} from "inversify";
-import EmailService from "../../../domain/service/EmailService.ts";
-import EmailServiceImpl from "../../../infrastructure/email/EmailServiceImpl.ts";
-import emailSend from "../../../infrastructure/email/emailSend.ts";
+import EmailGateway from "../../../domain/gateway/EmailGateway.ts";
+import EmailGatewayImpl from "../../../services/gateway/EmailGatewayImpl.ts";
+import emailSend from "../../../services/client/consts/email/emailjs.ts";
 
 const infrastructureModule = new ContainerModule(
 
     options => {
 
         options
-            .bind<EmailService>(EmailServiceImpl)
+            .bind<EmailGateway>(EmailGatewayImpl)
             .toDynamicValue(
 
-                () => new EmailServiceImpl( emailSend )
+                () => new EmailGatewayImpl( emailSend )
             )
             .inSingletonScope()
     }

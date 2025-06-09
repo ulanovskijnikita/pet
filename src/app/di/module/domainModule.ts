@@ -2,7 +2,7 @@ import {ContainerModule} from "inversify";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase.ts";
 import ProductRepositoryImpl from "../../../data/repository/ProductRepositoryImpl.ts";
 import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase.ts";
-import EmailServiceImpl from "../../../infrastructure/email/EmailServiceImpl.ts";
+import EmailGatewayImpl from "../../../services/gateway/EmailGatewayImpl.ts";
 import SignInUserUseCase from "../../../domain/usecase/SignInUserUseCase.ts";
 import UserRepositoryImpl from "../../../data/repository/UserRepositoryImpl.ts";
 import GetUserByIdUseCase from "../../../domain/usecase/GetUserByIdUseCase.ts";
@@ -41,7 +41,7 @@ const domainModule = new ContainerModule(
                 context =>
                     new GetSecondUseCase(
 
-                        context.get(EmailServiceImpl),
+                        context.get(EmailGatewayImpl),
                         context.get(UserRepositoryImpl)
                     )
             )
@@ -91,7 +91,7 @@ const domainModule = new ContainerModule(
                     new RegisterUserUseCase(
 
                         context.get(UserRepositoryImpl),
-                        context.get(EmailServiceImpl),
+                        context.get(EmailGatewayImpl),
                     )
             )
             .inTransientScope()

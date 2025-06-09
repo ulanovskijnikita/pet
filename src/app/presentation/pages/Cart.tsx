@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import Nav from "../ui/nav/Nav"
-import Location from "../../router/Location"
+import Location from "../router/Location"
 import Footer from "../ui/footer/Footer"
 import CartItems from "../ui/CartItems"
 import container from "../../di/container"
@@ -10,7 +10,7 @@ import AppViewModel from "../../AppViewModel"
 import { DEFAULT_USER_ID } from "../../../domain/model/user/User"
 import FuncButton from "../ui/FuncButton"
 import { useNavigate } from "react-router"
-import pages from "../../router/pages"
+import pages from "../router/pages"
 import { runInAction } from "mobx"
 
 const Cart = observer(() => {

@@ -29,7 +29,13 @@ export default class SignInViewModel {
                 .then(
 
                     res =>
-                        runInAction(() => this.result = res)
+                        runInAction(
+
+                            () => {
+                                
+                                this.result = res
+                            }
+                        )
                 ) 
         } else {
             

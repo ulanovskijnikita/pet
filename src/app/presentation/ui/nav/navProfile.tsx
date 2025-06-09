@@ -1,6 +1,6 @@
 import { NavLink } from "react-router"
 import { UserId } from "../../../../domain/model/user/User"
-import pages from "../../../router/pages"
+import pages from "../../router/pages"
 import { observer } from "mobx-react-lite"
 import container from "../../../di/container"
 import AppViewModel from "../../../AppViewModel"

@@ -4,7 +4,7 @@ import GetSecondRes from "../model/email/GetSecondRes.ts";
 import VerifyEmailRes from "../model/email/VerifyEmailRes.ts";
 import { UserEmail } from "../model/user/User.ts";
 
-export default interface EmailService {
+export default interface EmailGateway {
 
     getSecond(param: GetSecondParam): Promise<GetSecondRes>
 

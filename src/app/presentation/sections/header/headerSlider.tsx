@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import AppViewModel from "../../../AppViewModel"
 import container from "../../../di/container"
-import pages from "../../../router/pages"
+import pages from "../../router/pages"
 import LinkButton from "../../ui/LinkButton"
 import decorativeHeaderSlider1 from '/decorative/decorative-header-slider-1.png'
 import decorativeHeaderSlider2 from '/decorative/decorative-header-slider-2.png'

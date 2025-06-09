@@ -5,7 +5,7 @@ import container from "../../di/container"
 import SignInViewModel from "../viewmodel/SignInViewModel"
 import { observer } from "mobx-react-lite"
 import { Link, useNavigate } from "react-router"
-import pages from "../../router/pages"
+import pages from "../router/pages"
 import { useEffect, useRef } from "react"
 import FormButton from "../ui/FormButton"
 

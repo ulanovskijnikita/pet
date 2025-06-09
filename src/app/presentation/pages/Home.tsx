@@ -7,7 +7,7 @@ import Quotes from "../sections/quotes/Quotes";
 import Second from "../sections/Second";
 import Photo from "../sections/photo/Photo";
 import Footer from "../ui/footer/Footer";
-import Location from "../../router/Location";
+import Location from "../router/Location";
 import bannerImg1 from "/decorative/banner/banner-img-1.png"
 
 export default function Home() {

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import Location from "../../router/Location"
+import Location from "../router/Location"
 import Nav from "../ui/nav/Nav"
 import Footer from "../ui/footer/Footer"
 import Carts from "../ui/Carts"

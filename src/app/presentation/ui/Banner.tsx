@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import LinkButton from "../ui/LinkButton";
-import pages from "../../router/pages";
+import pages from "../router/pages";
 import container from "../../di/container";
 import AppViewModel from "../../AppViewModel";
 

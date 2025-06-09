@@ -8,7 +8,7 @@ import QuantityButton from "./QuantityButton";
 import CartViewModel from "../viewmodel/CartViewModel";
 import QuantityForm from "./QuantityForm";
 import { Link } from "react-router";
-import pages from "../../router/pages";
+import pages from "../router/pages";
 
 type CartItemsProps = {
 

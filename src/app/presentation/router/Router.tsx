@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router";
-import Home from "../presentation/pages/Home";
-import Shop from "../presentation/pages/Shop";
-import History from "../presentation/pages/History";
-import Profile from "../presentation/pages/Profile";
-import Favourite from "../presentation/pages/Favourite";
-import Cart from "../presentation/pages/Cart";
+import Home from "../pages/Home";
+import Shop from "../pages/Shop";
+import History from "../pages/History";
+import Profile from "../pages/Profile";
+import Favourite from "../pages/Favourite";
+import Cart from "../pages/Cart";
 import pages from "./pages";
-import Register from "../presentation/pages/Register";
-import SignIn from "../presentation/pages/SignIn";
-import Product from "../presentation/pages/Product";
+import Register from "../pages/Register";
+import SignIn from "../pages/SignIn";
+import Product from "../pages/Product";
 
 export default function Router() {
 

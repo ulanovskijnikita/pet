@@ -4,7 +4,7 @@ import SearchInput from "../SearchInput";
 import navPages from "./navPages";
 import navProfile from "./navProfile";
 import navServices from "./navServices";
-import pages from "../../../router/pages";
+import pages from "../../router/pages";
 import container from "../../../di/container";
 import AppViewModel from "../../../AppViewModel";
 import { observer } from "mobx-react-lite";

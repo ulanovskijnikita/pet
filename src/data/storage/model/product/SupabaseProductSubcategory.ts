@@ -1,4 +1,4 @@
-import { Enums } from "../../../../infrastructure/supabase/database.types"
+import { Enums } from "../supabase/database.types"
 
 export type SupabaseProductSubcategoryId = number
 export type SupabaseProductSubcategoryValue = Enums<"subcategories">

@@ -1,4 +1,4 @@
-import sessionUserConst from "../consts/sessionUserConst";
+import sessionUserConst from "../consts/cache/sessionUserConst";
 import SessionUser, { SessionUserCartId, SessionUserCartLength, SessionUserEmail, SessionUserId, SessionUserName, SessionUserStatus } from "../model/user/SessionUser";
 import SessionUserCartPreview from "../model/user/SessionUserCartPreview";
 import UserCashe from "./UserCashe";
