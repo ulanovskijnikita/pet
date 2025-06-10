@@ -33,6 +33,4 @@ export default class EmailGatewayImpl implements EmailGateway {
             action: sendEmailRes.status
         }
     }
-
-
 }
