@@ -2,12 +2,14 @@ import { makeAutoObservable, runInAction } from "mobx";
 import UserIdParam from "../../../domain/model/user/UserIdParam";
 import SignInUserUseCase from "../../../domain/usecase/SignInUserUseCase";
 import UserSignInResult from "../../../domain/model/user/UserSignInResult";
+import AppStater from "./appViewModel/AppStater";
 
 export default class SignInViewModel {
 
     constructor(
 
-        private signInUserUseCase: SignInUserUseCase
+        private appStater: AppStater,
+        private signInUserUseCase: SignInUserUseCase,
     ) {
 
         makeAutoObservable(this)
@@ -32,6 +34,8 @@ export default class SignInViewModel {
                         runInAction(
 
                             () => {
+                                
+                                this.appStater.setId()
                                 
                                 this.result = res
                             }

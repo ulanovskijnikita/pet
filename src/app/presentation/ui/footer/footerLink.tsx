@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router"
 import pages from "../../router/pages"
-import container from "../../../di/container"
-import AppViewModel from "../../../AppViewModel"
 import { observer } from "mobx-react-lite"
+import { useInjection } from "../../context/InversifyContext"
+import FooterViewModel from "../../viewmodel/FooterViewModel"
 
 type FooterLink = {
 
@@ -30,6 +30,7 @@ const footerLink: FooterLink[] = [
                     
                     to={pages.home}
                 >
+
                     Home
                 </NavLink>
             )
@@ -46,6 +47,7 @@ const footerLink: FooterLink[] = [
                     
                     to={pages.second.path + pages.second.hash}
                 >
+
                     Second
                 </Link>
             )
@@ -62,6 +64,7 @@ const footerLink: FooterLink[] = [
                     
                     to={pages.contact}
                 >
+
                     contact
                 </Link>
             )
@@ -72,7 +75,7 @@ const footerLink: FooterLink[] = [
         id: 4,
         page: observer(() => {
 
-            const appVm = container.get(AppViewModel)
+            const vm = useInjection(FooterViewModel)
 
             return (
 
@@ -86,8 +89,9 @@ const footerLink: FooterLink[] = [
                         }
                     }                                            
                     
-                    to={pages.shop + '/' + appVm.getSearchTag}
+                    to={pages.shop + '/' + vm.getSearchTag}
                 >
+
                     Shop
                 </NavLink>
             )
@@ -112,6 +116,7 @@ const footerLink: FooterLink[] = [
                     
                     to={pages.history}
                 >
+
                     History
                 </NavLink>
             )

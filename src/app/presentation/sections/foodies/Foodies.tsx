@@ -1,38 +1,21 @@
 import { observer } from "mobx-react-lite";
 import ProductMenu from "../../ui/ProductMenu";
-import container from "../../../di/container";
 import FoodiesViewModel from "../../viewmodel/FoodiesViewModel";
 import foodiesSubCategory from "./foodiesSubCategory";
 import Carts from "../../ui/Carts";
-import AppViewModel from "../../../AppViewModel";
-import { useEffect } from "react";
-import { FOODIES } from "../../../../domain/model/product/ProductCategory";
-import { DOUBLE_LIMIT_OVERVIEW } from "../../constants/defaultLimit";
-import { DEFAULT_OFFSET } from "../../constants/defaultOffset";
-import { DEFAULT_USER_ID } from "../../../../domain/model/user/User";
 import LinkButton from "../../ui/LinkButton";
 import pages from "../../router/pages";
+import { useInjection } from "../../context/InversifyContext";
+import { useEffect } from "react";
 
 const Foodies = observer(() => {
 
-    const vm = container.get(FoodiesViewModel)
+    const vm = useInjection(FoodiesViewModel)
 
-    const appVm = container.get(AppViewModel)
-
-    useEffect(
+    useEffect(() => {
     
-        () => {
-            
-            vm.setFoodies = {
-
-                categoryId: FOODIES.id,
-                limit: DOUBLE_LIMIT_OVERVIEW,
-                offset: DEFAULT_OFFSET,
-                subcategoryId: vm.getActiveSubCategoryId,
-                userId: appVm.getUser?.id ?? DEFAULT_USER_ID
-            }
-        }, [vm, vm.getActiveSubCategoryId, appVm, appVm.getUser, appVm.getSearchTag]
-    )
+        vm.setFoodies()
+    }, [vm, vm.getActiveSubCategoryId])
 
     return (
 
@@ -51,14 +34,18 @@ const Foodies = observer(() => {
 
                 <div className="tablet:justify-self-end">
 
-                    <LinkButton linkTo={pages.shop + '/' + appVm.getSearchTag} linkText="shop all" />
+                    <LinkButton linkTo={pages.shop + '/' + vm.getTag} linkText="shop all" />
                 </div>
             </menu>
 
             <Carts
 
-                products={vm.getFoodies}
-                toggleFavourite={(param) => appVm.toggleFavouriteProduct = param}
+                toggleFavourite={(id, index) => vm.toggleFavourite(id, index)}
+                product={vm.getFoodies}
+                hasMore={false}
+                addToCart={(id) => vm.addToUserCart = id}
+                setProduct={() => vm.setFoodies()}
+                altTitle={"No products found with parametrs"}
             />
         </section>
     )

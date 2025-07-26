@@ -7,7 +7,7 @@ import { SupabaseProductSubcategoryId } from "./SupabaseProductSubcategory"
 
 export default interface GetSupabaseProductByFilterParam extends SupabaseProductRange {
 
-    userId: SupabaseUserId
+    userId: SupabaseUserId | null
     categoryId: SupabaseProductCategoryId
     subcategoryId: SupabaseProductSubcategoryId
     order: SupabaseProductOrderId

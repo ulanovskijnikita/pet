@@ -1,5 +1,6 @@
 import { ProductIsFavorites } from "../model/product/Product.ts";
 import AddToUserCartParam from "../model/user/AddToUserCartParam.ts";
+import AuthenticationUserParam from "../model/user/AuthenticationUserParam.ts";
 import QuantityProductRes from "../model/user/QuantityProductRes.ts";
 import RegisterUserParam from "../model/user/RegisterUserParam.ts";
 import SendMessageParam from "../model/user/SendMessageParam.ts";
@@ -8,15 +9,16 @@ import User, { UserEmail, UserId, UserStatus } from "../model/user/User.ts";
 import UserCart from "../model/user/UserCart.ts";
 import UserCartPreview, { UserCartLength } from "../model/user/UserCartPreview.ts";
 import UserHistory from "../model/user/UserHistory.ts";
-import UserSignInResponse from "../model/user/UserSignInResponse.ts";
 import ValidateUserParam from "../model/user/ValidateUserParam.ts";
 import ValidateUserRes from "../model/user/ValidateUserRes.ts";
 
 export default interface UserRepository {
 
-    getSignInResponse(userEmail: UserEmail): Promise<UserSignInResponse>
+    identityUser(email: UserEmail): Promise<UserId | null>
+        
+    authenticationUser(param: AuthenticationUserParam): Promise<UserId | null>
 
-    getUserById(id: UserId): Promise<User>
+    authorizationUser(id: UserId): Promise<User | null>
 
     get(): User | null
 
@@ -30,13 +32,13 @@ export default interface UserRepository {
 
     sendMessage(param: SendMessageParam): Promise<UserStatus>
 
-    getCart(id: UserId): Promise<UserCart[]>
+    getCart(id: UserId | null): Promise<UserCart[]>
 
     setQuantityCartProduct(param: AddToUserCartParam): Promise<QuantityProductRes>
 
     changeQuantityCartProduct(param: AddToUserCartParam): Promise<QuantityProductRes>
 
-    getAnOrder(id: UserId): Promise<UserCartPreview>
+    getAnOrder(id: UserId | null): Promise<UserCartPreview>
 
-    getHistoryList(id: UserId): Promise<UserHistory[]>
+    getHistoryList(id: UserId | null): Promise<UserHistory[]>
 }

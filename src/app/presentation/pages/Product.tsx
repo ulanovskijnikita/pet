@@ -1,27 +1,21 @@
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router";
-import Nav from "../ui/nav/Nav";
-import Footer from "../ui/footer/Footer";
 import Location from "../router/Location";
 import { useEffect, useLayoutEffect } from "react";
-import container from "../../di/container";
 import ProductViewModel from "../viewmodel/ProductViewModel";
-import AppViewModel from "../../AppViewModel";
-import { DEFAULT_USER_ID } from "../../../domain/model/user/User";
 import FavouriteButton from "../ui/FavouriteButton";
 import QuantityButton from "../ui/QuantityButton";
 import QuantityForm from "../ui/QuantityForm";
 import { runInAction } from "mobx";
 import FuncButton from "../ui/FuncButton";
 import pages from "../router/pages";
+import { useInjection } from "../context/InversifyContext";
 
-const Product = observer(() => {
+const Product = () => {
 
     const { productId } = useParams()
 
-    const vm = container.get(ProductViewModel)
-
-    const appVm = container.get(AppViewModel)
+    const vm = useInjection(ProductViewModel)
 
     const navigate = useNavigate()
 
@@ -33,41 +27,33 @@ const Product = observer(() => {
 
                 () => {
 
-                    vm.setProductDetails = {
-
-                        productId: productId ? +productId : 1,
-                        userId: appVm.getUser?.id ?? DEFAULT_USER_ID
-                    }
+                    vm.setProductDetails = productId ? +productId : 0
                 }
             ) 
-        }, [productId, vm, appVm, appVm.getUser, vm.getProductQuantity, navigate]
+        }, [productId, vm, vm.getProductQuantity, navigate]
     )
 
     useLayoutEffect(
 
         () => {
 
-            vm.setProductDetails = null
-        }, [productId, vm, appVm, navigate]
+            vm.unsetProductDetails()
+        }, [productId, vm, navigate]
     )
 
     return (
 
         <Location>
 
-            <header>
-
-                <Nav />
-            </header>
-
-            <main className="grow px-container laptop:px-container-1024 my-[50px] laptop:my-[100px]">
+            <section className="grid px-container gap-[30px] laptop:gap-[50px] desktop:gap-[75px] laptop:px-container-1024">
 
                 {
+
                     vm.getProductDetails
 
                         ?
-
-                    <section className="grid gap-[15px] w-fit">
+                    
+                    <>
 
                         <h4 className="flex gap-[10px] capitalize">
 
@@ -81,7 +67,6 @@ const Product = observer(() => {
 
                             <span>{vm.getProductDetails.tag}</span>
                         </h4>
-
 
                         <div className="w-[310px] grid gap-[15px]">
 
@@ -102,21 +87,13 @@ const Product = observer(() => {
                                         )
                                     }
                                 </div>
-                                    
 
                                     <div className="absolute z-10 top-0 right-0 mx-[15px] mt-[15px] *:p-[8px] tablet:*:p-[8px]">
                                         
                                         <FavouriteButton
 
                                             isFavourite={vm.getProductDetails.isFavorites}
-                                            toggleFavourite={param => appVm.toggleFavouriteProduct = param}
-                                            toggleParam={{
-
-                                                list: [vm.getProductDetails],
-                                                productId: vm.getProductDetails.id,
-                                                productIndex: 0,
-                                                userId: appVm.getUser?.id ?? DEFAULT_USER_ID
-                                            }}
+                                            toggleFavourite={() => vm.toggleFavourite()}
                                         />
                                     </div>                           
                             </div>
@@ -171,7 +148,7 @@ const Product = observer(() => {
                                             index: 0,
                                             productId: vm.getProductDetails.id,
                                             quantity: -1,
-                                            userId: appVm.getUser?.id ?? DEFAULT_USER_ID
+                                            userId: vm.getId
                                         }}
                                     />
 
@@ -183,7 +160,7 @@ const Product = observer(() => {
                                             index: 0,
                                             productId: vm.getProductDetails.id,
                                             quantity: vm.getProductQuantity,
-                                            userId: appVm.getUser?.id ?? DEFAULT_USER_ID
+                                            userId: vm.getId
                                         }}
                                     />
 
@@ -198,7 +175,7 @@ const Product = observer(() => {
                                             index: 0,
                                             productId: vm.getProductDetails.id,
                                             quantity: 1,
-                                            userId: appVm.getUser?.id ?? DEFAULT_USER_ID
+                                            userId: vm.getId
                                         }}
                                     />
                                 </div> 
@@ -221,16 +198,11 @@ const Product = observer(() => {
 
                                     () => {
 
-                                        if (appVm.getUser) {
+                                        if (vm.getId) {
 
-                                            appVm.addToCart({
+                                            vm.addToCart()
 
-                                                productId: vm.getProductDetails!.id,
-                                                quantity: vm.getProductQuantity,
-                                                userId: appVm.getUser?.id ?? DEFAULT_USER_ID
-                                            })
-
-                                            navigate(`${pages.cart}/${appVm.getUser.id}`)
+                                            navigate(`${pages.cart}/${vm.getId}`)
                                         } else {
 
                                             navigate(`${pages.profile}/${pages.signIn}`)
@@ -242,20 +214,14 @@ const Product = observer(() => {
                                 <span>add to cart</span>
                             </FuncButton>
                         </div>
-                    </section>
-
+                    </>
                     :
 
-                    <section>
-
-                        <h4>We have no products with this id</h4>
-                    </section>
+                    <h4>We have no products with this id</h4>
                 }
-            </main>
-
-            <Footer />
+            </section>
         </Location>
     )
-})
+}
 
-export default Product
+export default observer(Product)

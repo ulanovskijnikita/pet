@@ -5,7 +5,7 @@ export type ProductQuantity = number
 
 export default interface AddToUserCartParam {
 
-    userId: UserId
+    userId: UserId | null
     productId: ProductId
     quantity: ProductQuantity
 }

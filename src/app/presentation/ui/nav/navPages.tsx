@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router"
 import pages from "../../router/pages"
-import container from "../../../di/container"
-import AppViewModel from "../../../AppViewModel"
 import { observer } from "mobx-react-lite"
+import { useInjection } from "../../context/InversifyContext"
+import NavViewModel from "../../viewmodel/navViewModel/NavViewModel"
 
 type NavPages = {
 
@@ -72,7 +72,7 @@ const navPages: NavPages[] = [
         id: 4,
         page: observer(() => {
 
-            const appVm = container.get(AppViewModel)
+            const vm = useInjection(NavViewModel)
 
             return (
 
@@ -86,7 +86,7 @@ const navPages: NavPages[] = [
                         }
                     }                                            
                     
-                    to={pages.shop + '/' + appVm.getSearchTag}
+                    to={pages.shop + '/' + (vm.getTag ?? '')}
                 >
                     Shop
                 </NavLink>

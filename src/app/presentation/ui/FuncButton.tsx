@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite"
 import { useNavigate } from "react-router"
-import container from "../../di/container"
-import AppViewModel from "../../AppViewModel"
+import AppViewModel from "../viewmodel/appViewModel/AppViewModel"
 import pages from "../router/pages"
+import { useInjection } from "../context/InversifyContext"
 
 type FuncButtonProps = {
 
@@ -10,11 +10,11 @@ type FuncButtonProps = {
     handleClick: () => void
 }
 
-const FuncButton = observer((props: FuncButtonProps) => {
+const FuncButton = (props: FuncButtonProps) => {
 
     const navigate = useNavigate()
 
-    const appVm = container.get(AppViewModel)
+    const appVm = useInjection(AppViewModel)
 
     return (
         
@@ -23,7 +23,7 @@ const FuncButton = observer((props: FuncButtonProps) => {
 
                 () => {
 
-                    if (appVm.getUser) {
+                    if (appVm.getId) {
 
                         props.handleClick()
                     } else {
@@ -38,6 +38,6 @@ const FuncButton = observer((props: FuncButtonProps) => {
             <span>{props.children}</span>
         </button>
     )
-})
+}
 
-export default FuncButton
+export default observer(FuncButton)

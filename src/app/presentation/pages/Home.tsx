@@ -1,24 +1,35 @@
 import Categories from "../sections/categories/Categories";
 import Clothing from "../sections/clothing/Clothing";
-import Header from "../sections/header/Header";
 import Foodies from "../sections/foodies/Foodies";
 import Banner from "../ui/Banner";
 import Quotes from "../sections/quotes/Quotes";
 import Second from "../sections/Second";
 import Photo from "../sections/photo/Photo";
-import Footer from "../ui/footer/Footer";
 import Location from "../router/Location";
 import bannerImg1 from "/decorative/banner/banner-img-1.png"
+import Hero from "../sections/hero/Hero";
+import { useEffect } from "react";
+import { useInjection } from "../context/InversifyContext";
+import HomeViewModel from "../viewmodel/HomeViewModel";
+import { observer } from "mobx-react-lite";
 
-export default function Home() {
+const Home = () => {
+
+  const vm = useInjection(HomeViewModel)
+
+  useEffect(
+
+    () => {
+
+      vm.setSecondId()
+    }
+  )
 
   return (
 
     <Location>
 
-      <Header />
-
-      <main className="grid my-[50px] tablet:my-[115px] laptop:my-[115px] gap-[50px] tablet:gap-[115px] laptop:gap-[125px]">
+        <Hero />
 
         <Categories />
 
@@ -33,9 +44,8 @@ export default function Home() {
         <Second />
 
         <Photo />
-      </main>
-
-      <Footer />
     </Location>
   )
 }
+
+export default observer(Home)

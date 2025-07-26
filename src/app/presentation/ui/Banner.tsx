@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import LinkButton from "../ui/LinkButton";
 import pages from "../router/pages";
-import container from "../../di/container";
-import AppViewModel from "../../AppViewModel";
+import { useInjection } from "../context/InversifyContext";
+import BannerViewModel from "../viewmodel/BannerViewModel";
 
 type BannerProps = {
 
@@ -13,7 +13,7 @@ type BannerProps = {
 
 const Banner = observer((props: BannerProps) => {
 
-    const appVm = container.get(AppViewModel)
+    const vm = useInjection(BannerViewModel)
 
     return (
 
@@ -25,7 +25,7 @@ const Banner = observer((props: BannerProps) => {
 
                 <h2 className="uppercase leading-[100%]">{props.title}</h2>
 
-                <LinkButton linkTo={pages.shop + '/' + appVm.getSearchTag} linkText="shop all" />
+                <LinkButton linkTo={pages.shop + '/' + vm.getTag} linkText="shop all" />
             </div>
 
             <img src={props.img} alt="banner-img" className="absolute w-[140px] tablet:w-[360px] laptop:min-w-[485px] z-10 top-container right-container tablet:top-[50px] tablet:right-[50px] laptop:static" />

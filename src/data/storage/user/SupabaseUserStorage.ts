@@ -1,6 +1,5 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import SupabaseUser, { SupabaseUserEmail, SupabaseUserId, SupabaseUserStatus } from "../model/user/SupabaseUser";
-import SupabaseUserSignInResponse from "../model/user/SupabaseUserSignInResponse";
 import UserStorage from "./UserStorage";
 import { SupabaseProductIsFavorites } from "../model/product/SupabaseProduct";
 import SupabaseToggleUserFavouriteParam from "../model/user/SupabaseToggleUserFafouriteParam";
@@ -14,6 +13,7 @@ import SendSupabaseMessageParam from "../model/user/SendSupabaseMessageParam";
 import SupabaseUserCart from "../model/user/SupabaseUserCart";
 import QuantitySupabaseProductRes from "../model/user/QuantitySupabaseProductRes";
 import SupabaseUserHistory from "../model/user/SupabaseUserHistory";
+import SupabaseAuthenticationUserParam from "../model/user/SupabaseAuthenticationUserParam";
 
 export default class SupabaseUserStorage implements UserStorage {
 
@@ -21,6 +21,43 @@ export default class SupabaseUserStorage implements UserStorage {
     
         private readonly supabaseClient: SupabaseClient<Database>
     ) {}
+
+    async authorizationUser(id: SupabaseUserId): Promise<SupabaseUser | null> {
+        
+        const {data} = await this.supabaseClient.rpc("authorization_user", {
+
+            u_id: id
+        })
+
+        if (!data) return null
+
+        return data[0] ?? null
+    }
+
+    async authenticationUser(param: SupabaseAuthenticationUserParam): Promise<SupabaseUserId | null> {
+        
+        const {data} = await this.supabaseClient.rpc("authentication_user", {
+
+            u_email: param.email,
+            u_pass: param.pass
+        })
+
+        if (!data) return null
+
+        return data[0].u_id ?? null
+    }
+
+    async identityUser(email: SupabaseUserEmail): Promise<SupabaseUserId | null> {
+       
+        const {data} = await this.supabaseClient.rpc("identity_user", {
+
+            u_email: email
+        })
+
+        if (!data) return null
+
+        return data[0].user_id ?? null
+    }
 
     async getHistoryList(id: SupabaseUserId): Promise<SupabaseUserHistory[]> {
         
@@ -32,7 +69,7 @@ export default class SupabaseUserStorage implements UserStorage {
         return data as SupabaseUserHistory[] ?? []
     }
 
-    async getAnOrder(id: SupabaseUserId): Promise<SupabaseUserCartPreview> {
+    async getAnOrder(id: SupabaseUserId | null): Promise<SupabaseUserCartPreview> {
         
         const {data} = await this.supabaseClient.rpc("get_an_order", {
 
@@ -66,7 +103,7 @@ export default class SupabaseUserStorage implements UserStorage {
         return data![0]
     }
 
-    async getCart(id: SupabaseUserId): Promise<SupabaseUserCart[]> {
+    async getCart(id: SupabaseUserId | null): Promise<SupabaseUserCart[]> {
         
         const {data} = await this.supabaseClient.rpc("get_user_cart", {
 
@@ -126,23 +163,5 @@ export default class SupabaseUserStorage implements UserStorage {
         })
         
         return data!
-    }
-
-    async getById(id: SupabaseUserId): Promise<SupabaseUser> {
-        
-        const {data} = await this.supabaseClient.rpc("get_user_by_id", {
-            u_id: id
-        })
-        
-        return data![0]
-    }
-
-    async getSignInResponse(userEmail: SupabaseUserEmail): Promise<SupabaseUserSignInResponse> {
-
-        const {data} = await this.supabaseClient.rpc("get_sign_in_response", {
-            u_email: userEmail,
-        })
-        
-        return (data?.length) ? data[0] : null
     }
 }

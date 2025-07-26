@@ -1,14 +1,12 @@
-import { makeAutoObservable, runInAction } from "mobx";
-import GetUserByIdUseCase from "../../../domain/usecase/GetUserByIdUseCase";
-import User, { UserId } from "../../../domain/model/user/User";
-import AppViewModel from "../../AppViewModel";
+import { makeAutoObservable } from "mobx";
+import User from "../../../domain/model/user/User";
+import GetUserUseCase from "../../../domain/usecase/GetUserUseCase";
 
 export default class ProfileViewModel {
 
     constructor(
 
-        private getUserByIdUseCase: GetUserByIdUseCase,
-        private appViemModel: AppViewModel,
+        private getUserUseCase: GetUserUseCase,
     ) {
 
         makeAutoObservable(this)
@@ -21,20 +19,10 @@ export default class ProfileViewModel {
         return this.user
     }
 
-    async setUser(id: UserId) {
+    setUser() {
 
-        await this.getUserByIdUseCase
-            .execute(id)
-            .then(
+        const user = this.getUserUseCase.execute()
 
-                (user) => 
-                    runInAction(
-
-                        () =>
-                            this.user = user
-                    )
-            )
-        
-        this.appViemModel.setUser()
+        this.user = user
     }
 }

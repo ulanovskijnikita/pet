@@ -6,7 +6,7 @@ import SupabaseProductRange from "./SupabaseProductRange.ts";
 
 export default interface SupabaseProductCategoryParam extends SupabaseProductRange{
 
-    userId: SupabaseUserId
+    userId: SupabaseUserId | null
     categoryId: SupabaseProductCategoryId
     subcategoryId: SupabaseProductSubcategoryId
 }

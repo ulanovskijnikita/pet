@@ -8,7 +8,7 @@ export default class GetUserCartUseCase {
         private userRepository: UserRepository
     ) {}
 
-    async execute(id: UserId) {
+    async execute(id: UserId | null) {
 
         return this.userRepository.getCart(id)
     }

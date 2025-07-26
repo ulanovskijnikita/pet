@@ -13,5 +13,3 @@ export default interface User extends UserCartPreview {
     email: UserEmail
     status: UserStatus
 }
-
-export const DEFAULT_USER_ID = 0

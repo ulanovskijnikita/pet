@@ -1,9 +1,10 @@
-import { UserId } from "./User";
+import User from "./User";
+import UserCartPreview from "./UserCartPreview";
 
 export type UserSignInResults = "nobody" | "incorrect" | "signIn"
 
 export default interface UserSignInResult {
 
-    userId: UserId
+    user: User & UserCartPreview | null
     result: UserSignInResults
 }

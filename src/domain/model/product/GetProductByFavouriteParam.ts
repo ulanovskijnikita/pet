@@ -3,5 +3,5 @@ import ProductRange from "./ProductRange";
 
 export default interface GetProductByFavouriteParam extends ProductRange {
 
-    id: UserId
+    id: UserId | null
 }

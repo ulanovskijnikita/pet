@@ -1,5 +1,6 @@
 import { ProductIsFavorites } from "../../domain/model/product/Product";
 import AddToUserCartParam from "../../domain/model/user/AddToUserCartParam";
+import AuthenticationUserParam from "../../domain/model/user/AuthenticationUserParam";
 import QuantityProductRes from "../../domain/model/user/QuantityProductRes";
 import RegisterUserParam from "../../domain/model/user/RegisterUserParam";
 import SendMessageParam from "../../domain/model/user/SendMessageParam";
@@ -8,7 +9,6 @@ import User, { UserEmail, UserId, UserStatus } from "../../domain/model/user/Use
 import UserCart from "../../domain/model/user/UserCart";
 import UserCartPreview, { UserCartLength } from "../../domain/model/user/UserCartPreview";
 import UserHistory, { CartProduct } from "../../domain/model/user/UserHistory";
-import UserSignInResponse from "../../domain/model/user/UserSignInResponse";
 import ValidateUserParam from "../../domain/model/user/ValidateUserParam";
 import ValidateUserRes from "../../domain/model/user/ValidateUserRes";
 import UserRepository from "../../domain/repository/UserRepository";
@@ -18,7 +18,6 @@ import SupabaseUser from "../storage/model/user/SupabaseUser";
 import SupabaseUserCart from "../storage/model/user/SupabaseUserCart";
 import SupabaseUserCartPreview from "../storage/model/user/SupabaseUserCartPreview";
 import SupabaseUserHistory from "../storage/model/user/SupabaseUserHistory";
-import SupabaseUserSignInResponse from "../storage/model/user/SupabaseUserSignInResponse";
 import SupabaseValidateUserRes from "../storage/model/user/SupabaseValidateUserRes";
 import UserCashe from "../storage/user/UserCashe";
 import UserStorage from "../storage/user/UserStorage";
@@ -31,6 +30,28 @@ export default class UserRepositoryImpl implements UserRepository {
         private userCashe: UserCashe,
     ) {}
 
+    async identityUser(email: UserEmail): Promise<UserId | null> {
+        
+        return this.userStorage.identityUser(email)
+    }
+
+    async authenticationUser(param: AuthenticationUserParam): Promise<UserId | null> {
+        
+        return this.userStorage.authenticationUser(param)
+    }
+
+    async authorizationUser(id: UserId): Promise<User | null> {
+        
+        const supabaseUser = await this.userStorage.authorizationUser(id)
+
+        if (!supabaseUser) return null
+
+        this.userCashe.setCartPreview( this.mapSupabaseUserCartPreviewToSessionUserCartPreview(supabaseUser) )
+        this.userCashe.setUser( this.mapSupabaseUserToSessionUser(supabaseUser) )
+
+        return this.mapSupabaseUserToUser( supabaseUser )
+    }
+
     async getHistoryList(id: UserId): Promise<UserHistory[]> {
         
         const supabaseUserHistory = await this.userStorage.getHistoryList(id)
@@ -38,7 +59,7 @@ export default class UserRepositoryImpl implements UserRepository {
         return this.mapSupabaseUserHistoryToUserHistory(supabaseUserHistory)
     }
 
-    async getAnOrder(id: UserId): Promise<UserCartPreview> {
+    async getAnOrder(id: UserId | null): Promise<UserCartPreview> {
 
         const cartPreview = await this.userStorage.getAnOrder(id)
 
@@ -57,7 +78,7 @@ export default class UserRepositoryImpl implements UserRepository {
         return this.userStorage.setQuantityCartSupabaseProduct(param)
     }
 
-    async getCart(id: UserId): Promise<UserCart[]> {
+    async getCart(id: UserId | null): Promise<UserCart[]> {
         
         return this.mapSupabaseUserCartToUserCart( await this.userStorage.getCart(id) )
     }
@@ -95,29 +116,13 @@ export default class UserRepositoryImpl implements UserRepository {
         return await this.userStorage.toggleFavourite(param)
     }
 
-    get(): User | null {
+    get(): (User & UserCartPreview) | null {
 
         const sessionUser = this.userCashe.getUser()
 
         if(sessionUser) return this.mapSessionUserToUser(sessionUser)
 
         return null
-    }
-
-    async getUserById(id: UserId): Promise<User> {
-
-        const supabaseUser = await this.userStorage.getById(id)
-
-        if(this.userCashe.getUser() == null || this.userCashe.getUser()?.id != supabaseUser.id.toString()) this.userCashe.setUser( this.mapSupabaseUserToSessionUser(supabaseUser) )
-
-        return this.mapSupabaseUserToUser( supabaseUser )  
-    }
-
-    async getSignInResponse(userEmail: UserEmail): Promise<UserSignInResponse> {
-        
-        const supabaseUserSignInResponse = await this.userStorage.getSignInResponse(userEmail)
-
-        return this.mapToUserSignInResponse(supabaseUserSignInResponse)
     }
 
     private mapSupabaseUserCartPreviewToSessionUserCartPreview(supabaseUserCartPreview: SupabaseUserCartPreview): SessionUserCartPreview {
@@ -232,15 +237,5 @@ export default class UserRepositoryImpl implements UserRepository {
             cartId: +sessionUser.cartId,
             cartLength: +sessionUser.cartLength,
         }
-    }
-
-    private mapToUserSignInResponse(supabaseUserSignInResponse: SupabaseUserSignInResponse): UserSignInResponse {
-
-        return supabaseUserSignInResponse ? {
-
-            email: supabaseUserSignInResponse.user_email,
-            id: supabaseUserSignInResponse.user_id,
-            password: supabaseUserSignInResponse.user_password,          
-        } : null
     }
 }

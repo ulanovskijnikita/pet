@@ -16,6 +16,7 @@ const pages = {
     },
     shop: '/shop',
     history: '/history',
+    historyList: 'history',
     profile: '/profile',
     favourite: '/favourite',
     cart: '/cart',

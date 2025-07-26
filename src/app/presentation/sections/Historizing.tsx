@@ -1,39 +1,35 @@
 import { observer } from "mobx-react-lite";
-import UserHistory from "../../../domain/model/user/UserHistory";
-import { UserId } from "../../../domain/model/user/User";
 import { useEffect } from "react";
 import { Link } from "react-router";
+import { useInjection } from "../context/InversifyContext";
+import HistorizingViewModel from "../viewmodel/HistorizingViewModel";
 
-type HistoryListProps = {
+const Historizing = () => {
 
-    list: () => UserHistory[]
-    getList: (id: UserId) => UserId
-    id: UserId
-}
-
-const HistoryList = observer((props: HistoryListProps) => {
+    const vm = useInjection(HistorizingViewModel)
 
     useEffect(
 
         () => {
 
-            props.getList(props.id)
-        }, [props]
+            vm.setHistory()
+        }, [vm]
     )
 
     return (
 
-        <section className="grid gap-[40px]">
+        <section className="grid gap-[40px] px-container laptop:px-container-1024">
 
             {
 
-                props.list().length
+                vm.getHistory
                     ?
-                props.list().map(
+                vm.getHistory.map(
 
                     (historyItem) => {
 
                         return (
+                            
                             <div className="grid gap-[40px]" key={`cart-${historyItem.id}`}>
 
                                 <Link
@@ -96,6 +92,6 @@ const HistoryList = observer((props: HistoryListProps) => {
             }
         </section>
     )
-})
+}
 
-export default HistoryList
+export default observer(Historizing)

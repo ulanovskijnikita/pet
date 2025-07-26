@@ -3,6 +3,6 @@ import { UserCartId } from "../user/UserCartPreview";
 
 export default interface GetProductsByCartParam {
 
-    userId: UserId
+    userId: UserId | null
     cartId: UserCartId
 }

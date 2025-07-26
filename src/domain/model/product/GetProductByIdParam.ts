@@ -4,5 +4,5 @@ import { ProductId } from "./Product";
 export default interface GetProductByIdParam {
 
     productId: ProductId
-    userId: UserId
+    userId: UserId | null
 }

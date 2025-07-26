@@ -7,7 +7,7 @@ import { ProductSubcategoryId } from "./ProductSubcategory";
 
 export default interface GetProductByFilterParam extends ProductRange {
 
-    userId: UserId
+    userId: UserId | null
     categoryId: ProductCategoryId
     subcategoryId: ProductSubcategoryId
     order: ProductOrderId

@@ -1,14 +1,12 @@
 import { observer } from "mobx-react-lite";
 import UserCart from "../../../domain/model/user/UserCart";
 import FavouriteButton from "./FavouriteButton";
-import container from "../../di/container";
-import AppViewModel from "../../AppViewModel";
-import { DEFAULT_USER_ID } from "../../../domain/model/user/User";
 import QuantityButton from "./QuantityButton";
 import CartViewModel from "../viewmodel/CartViewModel";
 import QuantityForm from "./QuantityForm";
 import { Link } from "react-router";
 import pages from "../router/pages";
+import { useInjection } from "../context/InversifyContext";
 
 type CartItemsProps = {
 
@@ -17,9 +15,7 @@ type CartItemsProps = {
 
 const CartItems = observer((props: CartItemsProps) => {
 
-    const appVm = container.get(AppViewModel)
-
-    const vm = container.get(CartViewModel)
+    const vm = useInjection(CartViewModel)
 
     return (
 
@@ -72,15 +68,9 @@ const CartItems = observer((props: CartItemsProps) => {
 
                                     <FavouriteButton
 
-                                        toggleParam={{
-
-                                            productIndex: index,
-                                            productId: product.id,
-                                            userId: appVm.getUser?.id ?? DEFAULT_USER_ID,
-                                            list: props.products
-                                        }}
+                                        id={vm.getId}
                                         isFavourite={product.isFavorites}
-                                        toggleFavourite={(param) => appVm.toggleFavouriteProduct = param}
+                                        toggleFavourite={() => vm.toggleFavourite(product.id, index)}
                                     />
                                 </div>
                                 
@@ -94,7 +84,7 @@ const CartItems = observer((props: CartItemsProps) => {
                                             index: index,
                                             productId: product.id,
                                             quantity: -1,
-                                            userId: appVm.getUser?.id ?? DEFAULT_USER_ID
+                                            userId: vm.getId
                                         }}
                                     />
 
@@ -106,7 +96,7 @@ const CartItems = observer((props: CartItemsProps) => {
                                             index: index,
                                             productId: product.id,
                                             quantity: product.quantity,
-                                            userId: appVm.getUser?.id ?? DEFAULT_USER_ID
+                                            userId: vm.getId
                                         }}
                                     />
 
@@ -118,7 +108,7 @@ const CartItems = observer((props: CartItemsProps) => {
                                             index: index,
                                             productId: product.id,
                                             quantity: 1,
-                                            userId: appVm.getUser?.id ?? DEFAULT_USER_ID
+                                            userId: vm.getId
                                         }}
                                     />
                                 </div>

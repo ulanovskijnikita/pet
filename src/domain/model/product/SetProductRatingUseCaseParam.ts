@@ -3,7 +3,7 @@ import { ProductId, ProductRating } from "./Product";
 
 export default interface SetProductRatingUseCaseParam {
 
-    userId: UserId
+    userId: UserId | null
     productId: ProductId
     rating: ProductRating
 }

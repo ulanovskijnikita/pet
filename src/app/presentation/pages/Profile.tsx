@@ -1,18 +1,16 @@
 import { Outlet, useParams } from "react-router"
-import Nav from "../ui/nav/Nav"
-import container from "../../di/container"
 import { observer } from "mobx-react-lite"
 import { useEffect, useRef } from "react"
 import ProfileViewModel from "../viewmodel/ProfileViewModel"
 import FormSection from "../ui/FormSection"
 import Form from "../ui/Form"
 import FormInput from "../ui/FormInput"
-import Footer from "../ui/footer/Footer"
 import Location from "../router/Location"
+import { useInjection } from "../context/InversifyContext"
 
-const Profile = observer(() => {
+const Profile = () => {
 
-    const vm = container.get(ProfileViewModel)
+    const vm = useInjection(ProfileViewModel)
 
     const { userId } = useParams()
 
@@ -24,7 +22,7 @@ const Profile = observer(() => {
 
         () => {
 
-            if (userId && !vm.getUser) vm.setUser(+userId)
+            vm.setUser()
 
             if (vm.getUser) {
                 
@@ -32,18 +30,15 @@ const Profile = observer(() => {
 
                 if (emailInput.current) emailInput.current.value = vm.getUser.email
             }            
-        }, [vm, userId, nameInput, emailInput, vm.getUser]
+        }, [vm, userId, nameInput, emailInput]
     )
 
     return (
+
         <Location>
 
-            <header>
+            <div className="-mt-[50px] laptop:-mt-[100px]">
 
-                <Nav />
-            </header>
-
-            <main className="mb-[25px] tablet:mb-[50px]">
                 {
                     userId
 
@@ -57,6 +52,7 @@ const Profile = observer(() => {
                         </h3>
 
                         <Form 
+
                             handleSubmit={
 
                                 () => {}
@@ -84,11 +80,10 @@ const Profile = observer(() => {
                     
                     <Outlet />
                 }
-            </main>
-
-            <Footer />     
+            </div>
+            
         </Location>
     )
-})
+}
 
-export default Profile
+export default observer(Profile)

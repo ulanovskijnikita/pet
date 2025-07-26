@@ -5,7 +5,6 @@ import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase.ts";
 import EmailGatewayImpl from "../../../services/gateway/EmailGatewayImpl.ts";
 import SignInUserUseCase from "../../../domain/usecase/SignInUserUseCase.ts";
 import UserRepositoryImpl from "../../../data/repository/UserRepositoryImpl.ts";
-import GetUserByIdUseCase from "../../../domain/usecase/GetUserByIdUseCase.ts";
 import GetUserUseCase from "../../../domain/usecase/GetUserUseCase.ts";
 import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase.ts";
 import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
@@ -53,15 +52,6 @@ const domainModule = new ContainerModule(
 
                 context =>
                     new SignInUserUseCase( context.get(UserRepositoryImpl) )
-            )
-            .inTransientScope()
-
-        options
-            .bind<GetUserByIdUseCase>(GetUserByIdUseCase)
-            .toDynamicValue(
-
-                context =>
-                    new GetUserByIdUseCase( context.get(UserRepositoryImpl) )
             )
             .inTransientScope()
 

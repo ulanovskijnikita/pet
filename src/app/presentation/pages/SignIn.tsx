@@ -1,17 +1,17 @@
 import FormSection from "../ui/FormSection"
 import FormInput from "../ui/FormInput"
 import Form from "../ui/Form"
-import container from "../../di/container"
 import SignInViewModel from "../viewmodel/SignInViewModel"
 import { observer } from "mobx-react-lite"
 import { Link, useNavigate } from "react-router"
 import pages from "../router/pages"
 import { useEffect, useRef } from "react"
 import FormButton from "../ui/FormButton"
+import { useInjection } from "../context/InversifyContext"
 
 const SignIn = observer(() => {
 
-    const vm = container.get(SignInViewModel)
+    const vm = useInjection(SignInViewModel)
 
     const navigate = useNavigate()
 
@@ -27,7 +27,7 @@ const SignIn = observer(() => {
                 setTimeout(
                     () => {
                         
-                        navigate(pages.profile + '/' + vm.getResult?.userId)
+                        navigate(pages.profile + '/' + vm.getResult?.user?.id)
 
                         vm.setResult = null
                     }, 1000

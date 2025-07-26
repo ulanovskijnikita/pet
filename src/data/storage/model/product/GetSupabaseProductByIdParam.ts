@@ -4,5 +4,5 @@ import { SupabaseProductId } from "./SupabaseProduct"
 export default interface GetSupabaseProductByIdParam {
 
     productId: SupabaseProductId
-    userId: SupabaseUserId
+    userId: SupabaseUserId | null
 }

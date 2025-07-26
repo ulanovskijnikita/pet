@@ -3,6 +3,6 @@ import { UserId } from "./User";
 
 export default interface ToggleUserFavouriteParam {
 
-    userId: UserId
+    userId: UserId | null
     productId: ProductId
 }

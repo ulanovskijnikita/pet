@@ -5,7 +5,7 @@ import ProductRange from "./ProductRange.ts";
 
 export default interface ProductCategoryParam extends ProductRange {
 
-    userId: UserId
+    userId: UserId | null
     categoryId: ProductCategoryId
     subcategoryId: ProductSubcategoryId
 }

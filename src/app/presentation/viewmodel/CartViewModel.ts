@@ -1,39 +1,44 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUseCase";
 import UserCart from "../../../domain/model/user/UserCart";
-import { UserId } from "../../../domain/model/user/User";
 import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase";
 import SetQuantityCartProductParam from "../../../data/storage/model/user/SetQuantityCartProductParam";
 import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase";
-import AppViewModel from "../../AppViewModel";
 import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase";
+import NavStater from "./navViewModel/NavStater";
+import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase";
+import { ProductId } from "../../../domain/model/product/Product";
+import AppStater from "./appViewModel/AppStater";
 
 export default class CartViewModel {
 
     constructor(
 
+        private navStater: NavStater,
+        private appStater: AppStater,
         private getUserCartUseCase: GetUserCartUseCase,
         private setQuantityCartProductUseCase: SetQuantityCartProductUseCase,
         private changeQuantityCartProductUseCase: ChangeQuantityCartProductUseCase,
-        private appViemModel: AppViewModel,
         private getAnOrderUseCase: GetAnOrderUseCase,
+        private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
     ) {
 
         makeAutoObservable(this)
     }
 
-    private userCart: UserCart[] = []
+    private userCart: UserCart[] | null = null
+
 
     get getCartPrice() {
 
-        const genetalObj = this.userCart.map((product) => {
+        const genetalObj = this.userCart?.map((product) => {
 
             const price = (product.priceCount * product.quantity)
 
             return price
         })
 
-        return genetalObj.reduce((prev, current) => {
+        return genetalObj?.reduce((prev, current) => {
 
             return prev + current
         })
@@ -44,10 +49,15 @@ export default class CartViewModel {
         return this.userCart
     }
 
-    set setAnOrder(id: UserId) {
+    get getId() {
+
+        return this.appStater.getId
+    }
+
+    setAnOrder() {
 
         this.getAnOrderUseCase
-            .execute(id)
+            .execute(this.getId)
             .then(
 
                 userCartPreview => {
@@ -56,19 +66,17 @@ export default class CartViewModel {
 
                         () => {
 
-                            this.appViemModel.setCartId = userCartPreview.cartId
-
-                            this.appViemModel.setCartLength = userCartPreview.cartLength
+                            this.navStater.changeCartLength( userCartPreview.cartLength )
                         }
                     )
                 }
             )
     }
 
-    set setUserCart(id: UserId) {
+    setUserCart() {
 
         this.getUserCartUseCase
-            .execute(id)
+            .execute(this.getId)
             .then(
 
                 userCart => {
@@ -96,14 +104,14 @@ export default class CartViewModel {
 
                         () => {
 
-                            this.appViemModel.setCartLength = quantityRes.length
+                            this.navStater.changeCartLength( quantityRes.length )
 
                             if (quantityRes.quantity > 0) {
 
-                                this.userCart[param.index].quantity = quantityRes.quantity
+                                if (this.userCart) this.userCart[param.index].quantity = quantityRes.quantity
                             } else {
 
-                                this.userCart.splice(param.index, 1)
+                                if(this.userCart) this.userCart.splice(param.index, 1)
                             }                            
                         }
                     )
@@ -123,15 +131,38 @@ export default class CartViewModel {
 
                         () => {
 
-                            this.appViemModel.setCartLength = quantityRes.length
+                            this.navStater.changeCartLength( quantityRes.length )
 
                             if (quantityRes.quantity > 0) {
 
-                                this.userCart[param.index].quantity = quantityRes.quantity
+                                if (this.userCart) this.userCart[param.index].quantity = quantityRes.quantity
                             } else {
 
-                                this.userCart.splice(param.index, 1)
+                                if (this.userCart) this.userCart.splice(param.index, 1)
                             }                            
+                        }
+                    )
+                }
+            )
+    }
+
+    toggleFavourite(id: ProductId, index: number) {
+    
+        this.toggleUserFavouriteUseCase
+            .execute({
+
+                productId: id,
+                userId: this.getId
+            })
+            .then(
+
+                bool => {
+
+                    runInAction(
+                        
+                        () => {
+
+                            if (this.userCart) this.userCart[index].isFavorites = bool
                         }
                     )
                 }

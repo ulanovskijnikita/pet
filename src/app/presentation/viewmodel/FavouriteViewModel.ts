@@ -1,39 +1,54 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase";
-import Product from "../../../domain/model/product/Product";
-import GetProductByFavouriteParam from "../../../domain/model/product/GetProductByFavouriteParam";
-import { ToggleFavouriteProductParam } from "../../AppViewModel";
+import { DEFAULT_LIMIT } from "../constants/defaultLimit";
+import AppStater from "./appViewModel/AppStater";
+import Product, { ProductId } from "../../../domain/model/product/Product";
+import { DEFAULT_OFFSET } from "../constants/defaultOffset";
+import { DEFAULT_QUANTITY } from "../constants/defaultQuantity";
+import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase";
 import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase";
+import NavStater from "./navViewModel/NavStater";
 
 export default class FavouriteViewModel {
 
     constructor(
 
+        private navStater: NavStater,
+        private appStater: AppStater,
         private getProductByFavouriteUseCase: GetProductByFavouriteUseCase,
+        private addToUserCartUseCase: AddToUserCartUseCase,
         private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
     ) {
 
         makeAutoObservable(this)
     }
 
-    private favouriteProduct: Product[] | null = null
+    private product: Product[] | null = null
 
     private hasMoreProduct = true
+
+    get getProduct() {
+
+        return this.product
+    }
 
     get getHasMoreProduct() {
 
         return this.hasMoreProduct
     }
 
-    get getFavouriteProduct() {
+    setProduct() {
 
-        return this.favouriteProduct
-    }
-
-    set setFavouriteProduct(param: GetProductByFavouriteParam) {
-
+        const offset = this.product?.length ?? DEFAULT_OFFSET
+        
         this.getProductByFavouriteUseCase
-            .execute(param)
+
+            .execute({
+                
+                id: this.appStater.getId,
+                limit: DEFAULT_LIMIT,
+                offset: offset,
+            })
             .then(
 
                 (product) => {
@@ -42,33 +57,71 @@ export default class FavouriteViewModel {
 
                         () => {
 
-                            this.hasMoreProduct = product.length < param.limit ? false : true
+                            this.hasMoreProduct = product.length < DEFAULT_LIMIT ? false : true
 
-                            this.favouriteProduct = product
+                            if (offset != DEFAULT_OFFSET && this.product) {
+
+                                this.product = [...this.product, ...product]
+
+                                return
+                            }
+
+                            this.product = product
                         }
                     )
                 }
             )
     }
 
-    set toggleFavouriteProduct(param: ToggleFavouriteProductParam) {
+    set addToUserCart(id: ProductId) {
+        
+        this.addToUserCartUseCase
+            .execute({
 
-        this.toggleUserFavouriteUseCase
-            .execute(param)
+                productId: id,
+                quantity: DEFAULT_QUANTITY,
+                userId: this.appStater.getId
+            })
             .then(
 
-                isFavourite => {
-                
+                (cartLength) => {
+
                     runInAction(
 
                         () => {
-                            
-                            param.list[param.productIndex].isFavorites = isFavourite
 
-                            param.list.splice(param.productIndex, 1)
+                            this.navStater.changeCartLength(cartLength)
                         }
                     )
                 }
             )
+    }
+
+    toggleFavourite(id: ProductId, index: number) {
+
+        this.toggleUserFavouriteUseCase
+            .execute({
+
+                productId: id,
+                userId: this.appStater.getId
+            })
+            .then(
+
+                () => {
+
+                    runInAction(
+
+                        () => {
+
+                            if( this.product ) this.product.splice(index, 1)
+                        }
+                    )
+                }
+            )
+    }
+
+    unsetProduct() {
+
+        this.product = null
     }
 }

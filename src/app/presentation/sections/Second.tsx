@@ -5,18 +5,15 @@ import FormButton from "../ui/FormButton";
 import { useRef } from "react";
 import FormTextarea from "../ui/FormTextarea";
 import pages from "../router/pages";
-import container from "../../di/container";
-import HomeViewModel from "../viewmodel/HomeViewModel";
-import AppViewModel from "../../AppViewModel";
 import { Link } from "react-router";
+import { useInjection } from "../context/InversifyContext";
+import SecondViewModel from "../viewmodel/secondViewModel/SecondViewModel";
 
 const Second = observer(() => {
 
     const messageInput = useRef<HTMLTextAreaElement>(null)
 
-    const vm = container.get(HomeViewModel)
-
-    const appVm = container.get(AppViewModel)
+    const vm = useInjection(SecondViewModel)
 
     return (
 
@@ -35,16 +32,9 @@ const Second = observer(() => {
 
                         () => {
 
-                            if (appVm.getUser) {
+                            if (vm.getId) {
 
-                                vm.setSecondRes = {
-
-                                    address: appVm.getUser.email,
-                                    id: appVm.getUser.id,
-                                    name: appVm.getUser.name,
-                                    status: appVm.getUser.status,
-                                    message: messageInput.current?.value ?? ''
-                                }
+                                vm.setSecondRes = messageInput.current?.value ?? ''
                             }
                         }
                     }
@@ -56,7 +46,7 @@ const Second = observer(() => {
 
                         {
 
-                            appVm.getUser
+                            vm.getId
 
                             ?
 

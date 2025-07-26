@@ -3,7 +3,7 @@ import { SupabaseProductId, SupabaseProductRating } from "./SupabaseProduct";
 
 export default interface SetSupabaseProductRatingParam {
 
-    userId: SupabaseUserId
+    userId: SupabaseUserId | null
     productId: SupabaseProductId
     rating: SupabaseProductRating
 }

@@ -1,26 +1,19 @@
 import { observer } from "mobx-react-lite";
-import container from "../../../di/container";
-import ShopViewModel from "../../viewmodel/ShopViewModel";
-import AppViewModel from "../../../AppViewModel";
-import { useEffect } from "react";
+import ShoppingViewModel from "../../viewmodel/ShoppingViewModel";
+import { useEffect, useLayoutEffect } from "react";
 import ProductMenu from "../../ui/ProductMenu";
 import Carts from "../../ui/Carts";
 import shoppingCategory from "./shoppingCategory";
 import shoppingSubcategory from "./shoppingSubcategory";
-import { DEFAULT_LIMIT } from "../../constants/defaultLimit";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { DEFAULT_OFFSET } from "../../constants/defaultOffset";
 import Filter from "../../ui/filter/Filter";
 import shoppingOrderArr from "./shoppingOrderArr";
 import { useParams } from "react-router";
-import { DEFAULT_USER_ID } from "../../../../domain/model/user/User";
 import { runInAction } from "mobx";
+import { useInjection } from "../../context/InversifyContext";
 
-const Shopping = observer(() => {
+const Shopping = () => {
 
-    const vm = container.get(ShopViewModel)
-
-    const appVm = container.get(AppViewModel)
+    const vm = useInjection(ShoppingViewModel)
 
     const { productTag } = useParams()
 
@@ -32,26 +25,27 @@ const Shopping = observer(() => {
 
                 () => {
 
-                    appVm.setSearchTag = productTag ?? ''
+                    vm.setTag = productTag ?? ''
 
-                    vm.setProduct = {
+                    vm.unsetProduct()
 
-                        categoryId: vm.getCategory,
-                        limit: DEFAULT_LIMIT,
-                        offset: DEFAULT_OFFSET,
-                        order: vm.getOrder,
-                        subcategoryId: vm.getSubcategory,
-                        tag: productTag ?? '',
-                        userId: appVm.getUser?.id ?? DEFAULT_USER_ID
-                    }
+                    vm.setProduct()
                 }
             )
-        }, [vm, appVm, appVm.getUser, appVm.getSearchTag, vm.getOrder, productTag, vm.getCategory, vm.getSubcategory]
+        }, [vm, vm.getOrder, productTag, vm.getCategory, vm.getSubcategory, vm.getTag]
+    )
+
+    useLayoutEffect(
+    
+        () => {
+
+            vm.unsetProduct()
+        }, [vm, vm.getOrder, productTag, vm.getCategory, vm.getSubcategory, vm.getTag]
     )
 
     return (
 
-        <section className="grid px-container gap-[30px] laptop:px-container-1024">
+        <section className="grid px-container gap-[30px] laptop:gap-[50px] desktop:gap-[75px] laptop:px-container-1024">
 
             <h3 className="capitalize">Pet shopping</h3>
 
@@ -88,39 +82,21 @@ const Shopping = observer(() => {
                 </div>
                 
             </menu>
+
+            <Carts
             
-            <InfiniteScroll
-
-                className="p-[.5px] tablet:p-[1px] grid gap-[30px] laptop:gap-[50px]"
-                dataLength={vm.getProduct?.length ?? 0}
+                setProduct={() => vm.setProduct()}
+                altTitle={"No products found with parametrs"}
+                addToCart={(id) => vm.addToUserCart = id}
                 hasMore={vm.getHasMoreProduct}
-                loader={<h4>A little more...</h4>}
-                next={
+                product={vm.getProduct}
+                toggleFavourite={(id, index) => {
 
-                    () => {
-
-                        vm.setProduct = {
-
-                            categoryId: vm.getCategory,
-                            limit: DEFAULT_LIMIT,
-                            offset: vm.getProduct?.length ?? DEFAULT_OFFSET,
-                            order: vm.getOrder,
-                            subcategoryId: vm.getSubcategory,
-                            tag: productTag ?? '',
-                            userId: appVm.getUser?.id ?? DEFAULT_USER_ID
-                        }
-                    }
-                }
-            >
-
-                <Carts
-
-                    products={vm.getProduct ?? []}
-                    toggleFavourite={(param) => appVm.toggleFavouriteProduct = param}
-                />
-            </InfiniteScroll>
+                    vm.toggleFavourite(id, index)
+                }}
+            />
         </section>
     )
-})
+}
 
-export default Shopping
+export default observer(Shopping)

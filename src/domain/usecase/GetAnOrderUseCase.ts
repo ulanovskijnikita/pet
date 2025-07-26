@@ -8,7 +8,7 @@ export default class GetAnOrderUseCase {
         private userRepository: UserRepository
     ) {}
 
-    async execute(id: UserId) {
+    async execute(id: UserId | null) {
 
         return this.userRepository.getAnOrder(id)
     }

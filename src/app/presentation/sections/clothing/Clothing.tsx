@@ -1,38 +1,21 @@
 import { observer } from "mobx-react-lite";
-import container from "../../../di/container";
 import ProductMenu from "../../ui/ProductMenu";
 import ClothingViewModel from "../../viewmodel/ClothingViewModel";
 import clothingSubCategory from "./clothingSubCategory";
 import Carts from "../../ui/Carts";
-import { useEffect } from "react";
-import { DEFAULT_LIMIT_OVERVIEW } from "../../constants/defaultLimit";
-import { CLOTHING } from "../../../../domain/model/product/ProductCategory";
-import { DEFAULT_OFFSET } from "../../constants/defaultOffset";
-import AppViewModel from "../../../AppViewModel";
-import { DEFAULT_USER_ID } from "../../../../domain/model/user/User";
 import LinkButton from "../../ui/LinkButton";
 import pages from "../../router/pages";
+import { useInjection } from "../../context/InversifyContext";
+import { useEffect } from "react";
 
-const Clothing = observer(() => {
+const Clothing = () => {
 
-    const vm = container.get(ClothingViewModel)
+    const vm = useInjection(ClothingViewModel)
 
-    const appVm = container.get(AppViewModel)
+    useEffect(() => {
 
-    useEffect(
-
-        () => {
-
-            vm.setClothing = {
-
-                categoryId: CLOTHING.id,
-                limit: DEFAULT_LIMIT_OVERVIEW,
-                offset: DEFAULT_OFFSET,
-                subcategoryId: vm.getActiveSubCategoryId,
-                userId: appVm.getUser?.id ?? DEFAULT_USER_ID
-            }
-        }, [vm, vm.getActiveSubCategoryId, appVm, appVm.getUser, appVm.getSearchTag]
-    )
+        vm.setClothing()
+    }, [vm, vm.getActiveSubCategoryId])
     
     return (
 
@@ -51,17 +34,25 @@ const Clothing = observer(() => {
 
                 <div className="tablet:justify-self-end">
 
-                    <LinkButton linkTo={pages.shop + '/' + appVm.getSearchTag} linkText="shop all" />
+                    <LinkButton linkTo={pages.shop + '/' + vm.getTag} linkText="shop all" />
                 </div>
             </menu>
 
             <Carts
-            
-                toggleFavourite={(param) => appVm.toggleFavouriteProduct = param}
-                products={vm.getClothing}
+
+                
+                setProduct={() => vm.setClothing()}
+                altTitle={"No products found with parametrs"}
+                addToCart={(id) => vm.addToUserCart = id}
+                hasMore={false}
+                product={vm.getClothing}
+                toggleFavourite={(id, index) => {
+
+                    vm.toggleFavourite(id, index)
+                }}
             />
         </section>
     )
-})
+}
 
-export default Clothing
+export default observer(Clothing)

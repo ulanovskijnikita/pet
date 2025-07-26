@@ -3,6 +3,6 @@ import { SupabaseUserCartId } from "../user/SupabaseUserCartPreview"
 
 export default interface GetSupabaseProductsByCartParam {
 
-    userId: SupabaseUserId
+    userId: SupabaseUserId | null
     cartId: SupabaseUserCartId
 }

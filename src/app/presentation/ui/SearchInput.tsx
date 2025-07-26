@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router"
 import pages from "../router/pages"
 import { observer } from "mobx-react-lite"
-import container from "../../di/container"
-import AppViewModel from "../../AppViewModel"
 import { useRef } from "react"
+import { ProductTag } from "../../../domain/model/product/Product"
 
-const SearchInput = observer(() => {
+type SearchInputProps = {
 
-    const appVm = container.get(AppViewModel)
+    setTag(tag: ProductTag): void
+}
+
+const SearchInput = (props: SearchInputProps) => {
 
     const searchInput = useRef<HTMLInputElement>(null)
 
@@ -23,16 +25,17 @@ const SearchInput = observer(() => {
 
                     event.preventDefault()
 
-                    appVm.setSearchTag = searchInput.current?.value ?? ''
+                    const tag = searchInput.current?.value ?? ''
 
-                    navigate(pages.shop + '/' + appVm.getSearchTag)
+                    props.setTag(tag)
+
+                    navigate(pages.shop + '/' + tag)
                 }
             }
         >
 
             <input
                 ref={searchInput}
-                defaultValue={appVm.getSearchTag}
                 className="active:border-none focus:border-none focus:outline-none active:outline-none font-functional text-main w-full laptop:pl-[10px]" 
                 placeholder="Search for more than 10,000 products"
                 type="search"/>
@@ -46,6 +49,6 @@ const SearchInput = observer(() => {
             </button>
         </form>
     )
-})
+}
 
-export default SearchInput
+export default observer(SearchInput)

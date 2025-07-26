@@ -379,6 +379,23 @@ export type Database = {
           cart_length: number
         }[]
       }
+      authentication_user: {
+        Args: { u_email: string; u_pass: string }
+        Returns: {
+          u_id: number
+        }[]
+      }
+      authorization_user: {
+        Args: { u_id: number }
+        Returns: {
+          id: number
+          name: string
+          email: string
+          status: Database["public"]["Enums"]["user_status"]
+          cart_id: number
+          cart_length: number
+        }[]
+      }
       change_quantity_cart_product: {
         Args: { u_id: number; p_id: number; q: number }
         Returns: {
@@ -437,7 +454,7 @@ export type Database = {
           user_auth_id: number
           category_id: number
           subcategory_id: number
-          off_set: number | null
+          off_set: number
           lim: number
         }
         Returns: {
@@ -452,7 +469,7 @@ export type Database = {
         }[]
       }
       get_products_by_favourite: {
-        Args: { user_auth_id: number; off_set: number | null; lim: number }
+        Args: { user_auth_id: number; off_set: number; lim: number }
         Returns: {
           id: number
           price_currency: Database["public"]["Enums"]["currencies"]
@@ -470,17 +487,6 @@ export type Database = {
           user_id: number
           user_email: string
           user_password: string
-        }[]
-      }
-      get_user_by_id: {
-        Args: { u_id: number }
-        Returns: {
-          id: number
-          name: string
-          email: string
-          status: Database["public"]["Enums"]["user_status"]
-          cart_id: number
-          cart_length: number
         }[]
       }
       get_user_cart: {
@@ -501,6 +507,12 @@ export type Database = {
         Args: { u_id: number }
         Returns: number
       }
+      identity_user: {
+        Args: { u_email: string }
+        Returns: {
+          user_id: number
+        }[]
+      }
       register_user: {
         Args: { u_email: string; u_name: string; u_pass: string }
         Returns: undefined
@@ -509,7 +521,7 @@ export type Database = {
         Args: {
           user_auth_id: number
           search_tag: string
-          off_set: number | null
+          off_set: number
           lim: number
         }
         Returns: {

@@ -1,23 +1,17 @@
 import { observer } from "mobx-react-lite"
-import Nav from "../ui/nav/Nav"
 import Location from "../router/Location"
-import Footer from "../ui/footer/Footer"
 import CartItems from "../ui/CartItems"
-import container from "../../di/container"
 import CartViewModel from "../viewmodel/CartViewModel"
 import { useEffect } from "react"
-import AppViewModel from "../../AppViewModel"
-import { DEFAULT_USER_ID } from "../../../domain/model/user/User"
 import FuncButton from "../ui/FuncButton"
 import { useNavigate } from "react-router"
 import pages from "../router/pages"
 import { runInAction } from "mobx"
+import { useInjection } from "../context/InversifyContext"
 
 const Cart = observer(() => {
 
-    const appVm = container.get(AppViewModel)
-
-    const vm = container.get(CartViewModel)
+    const vm = useInjection(CartViewModel)
 
     const navigate = useNavigate()
 
@@ -25,26 +19,21 @@ const Cart = observer(() => {
 
         () => {
 
-            vm.setUserCart = appVm.getUser?.id ?? DEFAULT_USER_ID
-        }, [vm, appVm, appVm.getUser, navigate]
+            vm.setUserCart()
+        }, [vm, navigate]
     )
 
     return (
 
         <Location>
 
-            <header>
-
-                <Nav />
-            </header>
-
-            <main className="grow flex-col flex my-[50px] gap-[30px] laptop:my-[100px] px-container laptop:px-container-1024">
-
+            <section className="grid gap-[30px] px-container laptop:px-container-1024">
+                
                 <h3 className="capitalize">your cart</h3>
 
                 {
 
-                    vm.getUserCart.length
+                    vm.getUserCart && vm.getUserCart.length
                         ?
                     <>
                 
@@ -64,9 +53,9 @@ const Cart = observer(() => {
 
                                             () => {
 
-                                                vm.setAnOrder = appVm.getUser?.id ?? DEFAULT_USER_ID
+                                                vm.setAnOrder()
 
-                                                vm.setUserCart = appVm.getUser?.id ?? DEFAULT_USER_ID
+                                                vm.setUserCart()
                                             }
                                         )
 
@@ -83,7 +72,7 @@ const Cart = observer(() => {
 
                                     vm.getUserCart[0] && vm.getUserCart[0].priceCurrency 
                                         +
-                                    vm.getCartPrice.toFixed(2)
+                                    vm.getCartPrice?.toFixed(2)
                                 }
                             </h4>
                         </div>
@@ -91,9 +80,7 @@ const Cart = observer(() => {
                         :
                     <h4>You have no products in the cart</h4>
                 }
-            </main>
-
-            <Footer />
+            </section>
         </Location>
     )
 })

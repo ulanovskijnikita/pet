@@ -2,19 +2,19 @@ import { NavLink } from "react-router"
 import { UserId } from "../../../../domain/model/user/User"
 import pages from "../../router/pages"
 import { observer } from "mobx-react-lite"
-import container from "../../../di/container"
-import AppViewModel from "../../../AppViewModel"
+import { useInjection } from "../../context/InversifyContext"
+import NavViewModel from "../../viewmodel/navViewModel/NavViewModel"
 
 type IconProps = {
 
-    id: UserId
+    id: UserId | null
     pathname: string
     link: string
 }
 
 type NavProfile = {
 
-    id: number
+    id: UserId
     icon: (props: IconProps) => JSX.Element
     link: string
 }
@@ -85,7 +85,7 @@ const navProfile: NavProfile[] = [
         id: 3,
         icon: observer((props) => {
 
-            const appVm = container.get(AppViewModel)
+            const vm = useInjection(NavViewModel)
 
             return (
 
@@ -111,14 +111,14 @@ const navProfile: NavProfile[] = [
                         <circle cx="21.1764" cy="10.8235" r="9.70588" fill="#DEAD6F" stroke="white" strokeWidth="1.76471" />
                         <text x="21.1764" y="10.8235" textAnchor="middle" dominantBaseline="middle" fill="white" className="font-functional text-[10px]">
                             {
-                                appVm.getUser
+                                vm.getLength
 
                                 ?
-                                    appVm.getUser.cartLength >= 10 
+                                    vm.getLength >= 10 
 
                                     ? 
 
-                                        appVm.getUser.cartLength >= 100
+                                        vm.getLength >= 100
                                         
                                         ?
 
@@ -126,11 +126,11 @@ const navProfile: NavProfile[] = [
 
                                         :
 
-                                        appVm.getUser.cartLength
+                                        vm.getLength
 
                                     : 
 
-                                    `0${appVm.getUser.cartLength}`
+                                    `0${vm.getLength}`
                                 
                                 :
 

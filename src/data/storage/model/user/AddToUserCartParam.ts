@@ -5,7 +5,7 @@ export type SupabaseProductQuantity = number
 
 export default interface AddToSupabaseUserCartParam {
 
-    userId: SupabaseUserId
+    userId: SupabaseUserId | null
     productId: SupabaseProductId
     quantity: SupabaseProductQuantity
 }

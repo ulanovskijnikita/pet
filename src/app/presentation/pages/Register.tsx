@@ -3,15 +3,15 @@ import FormSection from "../ui/FormSection"
 import FormInput from "../ui/FormInput"
 import Form from "../ui/Form"
 import pages from "../router/pages"
-import container from "../../di/container"
 import RegisterViewModel from "../viewmodel/RegisterViewModel"
 import { observer } from "mobx-react-lite"
 import { useEffect, useRef } from "react"
 import FormButton from "../ui/FormButton"
+import { useInjection } from "../context/InversifyContext"
 
 const Register = observer(() => {
 
-    const vm = container.get(RegisterViewModel)
+    const vm = useInjection(RegisterViewModel)
 
     const navigate = useNavigate()
 

@@ -1,4 +1,3 @@
-import { DEFAULT_USER_ID } from "../model/user/User";
 import UserIdParam from "../model/user/UserIdParam";
 import UserSignInResult from "../model/user/UserSignInResult";
 import UserRepository from "../repository/UserRepository";
@@ -12,33 +11,28 @@ export default class SignInUserUseCase {
 
     async execute(param: UserIdParam): Promise<UserSignInResult> {
 
-        const userSignInResponse = await this.userRepository.getSignInResponse(param.email)
+        const identity = await this.userRepository.identityUser(param.email)
 
-        switch (userSignInResponse) {
-            case null :
-                return {
+        if (!identity) return {
 
-                    result: "nobody",
-                    userId: DEFAULT_USER_ID
-                }
+            result: "nobody",
+            user: null
+        }
 
-            default :
-                if (userSignInResponse.password == param.password) {
+        const authentication = await this.userRepository.authenticationUser({email: param.email, pass: param.password})
 
-                    return {
-                        
-                        result: "signIn",
-                        userId: userSignInResponse.id
-                    }
-                } else {
+        if (!authentication) return {
 
-                    return {
+            result: "incorrect",
+            user: null
+        }
 
-                        result: "incorrect",
-                        userId: DEFAULT_USER_ID
-                    }
-                }
+        const authorization = await this.userRepository.authorizationUser(authentication)
 
-        } 
+        return {
+
+            result: "signIn",
+            user: authorization
+        }
     }
 }

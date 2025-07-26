@@ -1,18 +1,20 @@
 import { observer } from "mobx-react-lite"
 import { useNavigate } from "react-router"
 import pages from "../router/pages"
-import { ToggleFavouriteProductParam } from "../../AppViewModel"
+import { useInjection } from "../context/InversifyContext"
+import AppViewModel from "../viewmodel/appViewModel/AppViewModel"
 
 type FavouriteButtonProps = {
 
     isFavourite: boolean
-    toggleFavourite: (param: ToggleFavouriteProductParam) => ToggleFavouriteProductParam
-    toggleParam: ToggleFavouriteProductParam
+    toggleFavourite: () => void
 }
 
-const FavouriteButton = observer((props: FavouriteButtonProps) => {
+const FavouriteButton = (props: FavouriteButtonProps) => {
 
     const navigate = useNavigate()
+
+    const appVm = useInjection(AppViewModel)
 
     return (
 
@@ -22,9 +24,9 @@ const FavouriteButton = observer((props: FavouriteButtonProps) => {
             onClick={
                 () => {
 
-                    if(props.toggleParam.userId) {
+                    if(appVm.getId) {
                         
-                        props.toggleFavourite(props.toggleParam)
+                        props.toggleFavourite()
                     } else {
 
                         navigate(pages.profile + '/' + pages.signIn)
@@ -39,6 +41,6 @@ const FavouriteButton = observer((props: FavouriteButtonProps) => {
             </svg>
         </button>
     )
-})
+}
 
-export default FavouriteButton
+export default observer(FavouriteButton)

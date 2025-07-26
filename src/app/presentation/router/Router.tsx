@@ -9,6 +9,8 @@ import pages from "./pages";
 import Register from "../pages/Register";
 import SignIn from "../pages/SignIn";
 import Product from "../pages/Product";
+import Order from "../pages/Order";
+import Layout from "./Layout";
 
 export default function Router() {
 
@@ -18,24 +20,30 @@ export default function Router() {
 
             <Routes>
 
-                <Route index path={pages.home} element={<Home />} />
+                <Route path="/" element={<Layout />}>
 
-                <Route path={pages.shop + '/:productTag?'} element={<Shop />} />
+                    <Route index path={pages.home} element={<Home />} />
 
-                <Route path={pages.history + '/:cartId?'} element={<History />} />
+                    <Route path={pages.shop + '/:productTag?'} element={<Shop />} />
 
-                <Route path={pages.profile + '/:userId?'} element={<Profile />} >
+                    <Route path={pages.history} element={<History />} >
+                    
+                        <Route path=":orderId" element={<Order />} />
+                    </Route>
 
-                    <Route path={pages.register} element={<Register />} />
+                    <Route path={pages.profile + '/:userId?'} element={<Profile />} >
 
-                    <Route path={pages.signIn} element={<SignIn />} />
+                        <Route path={pages.register} element={<Register />} />
+
+                        <Route path={pages.signIn} element={<SignIn />} />
+                    </Route>
+
+                    <Route path={pages.favourite + '/:userId'} element={<Favourite />} />
+
+                    <Route path={pages.cart + '/:userId'} element={<Cart />} />
+
+                    <Route path={pages.product + '/:productId'} element={<Product />} />
                 </Route>
-
-                <Route path={pages.favourite + '/:userId'} element={<Favourite />} />
-
-                <Route path={pages.cart + '/:userId'} element={<Cart />} />
-
-                <Route path={pages.product + '/:productId'} element={<Product />} />
             </Routes>
         </BrowserRouter>
     )

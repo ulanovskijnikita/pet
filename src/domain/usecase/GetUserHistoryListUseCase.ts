@@ -8,7 +8,7 @@ export default class GetUserHistoryListUseCase {
         private userRepository: UserRepository
     ) {}
 
-    async execute(id: UserId) {
+    async execute(id: UserId | null) {
 
         return this.userRepository.getHistoryList(id)
     }

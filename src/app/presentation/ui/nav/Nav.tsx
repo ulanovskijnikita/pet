@@ -5,30 +5,51 @@ import navPages from "./navPages";
 import navProfile from "./navProfile";
 import navServices from "./navServices";
 import pages from "../../router/pages";
-import container from "../../../di/container";
-import AppViewModel from "../../../AppViewModel";
 import { observer } from "mobx-react-lite";
-import { DEFAULT_USER_ID } from "../../../../domain/model/user/User";
+import { useInjection } from "../../context/InversifyContext";
+import NavViewModel from "../../viewmodel/navViewModel/NavViewModel";
+import { useEffect } from "react";
+import { runInAction } from "mobx";
 
-const Nav = observer(() => {
+const Nav = () => {
 
-    const appVm = container.get(AppViewModel)
+    const vm = useInjection(NavViewModel)
 
     const location = useLocation()
 
+    useEffect(
+
+        () => {
+
+            runInAction(
+
+                () => {
+
+                    vm.setId()
+                    
+                    vm.setLength()
+                }
+            )
+        }, [vm, location]
+    )
+
     return (
 
-        <div className="desktop:sticky desktop:top-0 z-10 bg-bg" id={pages.contact.substring(1)}>
+        <header className="desktop:sticky desktop:top-0 z-100 bg-bg" id={pages.contact.substring(1)}>
 
             <nav className="p-container laptop:px-0 laptop:mx-auto laptop:w-[clamp(71.071rem,46.173rem+34.04vw,92.857rem)] desktop:w-[1300px] gap-[15px] flex flex-col items-center tablet:flex-row tablet:justify-between w-full laptop:items-center">
 
                 <Logo />
 
-                <SearchInput />
+                <SearchInput
+
+                    setTag={(tag) => vm.setTag = tag}
+                />
 
                 <ul className="flex gap-[35px] text-sub-title text-label order-1">
 
                     {
+
                         navServices.map(
 
                             value => (
@@ -100,7 +121,7 @@ const Nav = observer(() => {
                                         
                                         <value.icon
 
-                                            id={appVm.getUser?.id ?? DEFAULT_USER_ID} 
+                                            id={vm.getId}   
                                             link={value.link}
                                             pathname={location.pathname}
                                         />
@@ -110,8 +131,8 @@ const Nav = observer(() => {
                     }
                 </ul>
             </nav>
-        </div>
+        </header>
     )
-})
+}
 
-export default Nav
+export default observer(Nav)
