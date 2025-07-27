@@ -5,8 +5,8 @@ import foodiesSubCategory from "./foodiesSubCategory";
 import Carts from "../../ui/Carts";
 import LinkButton from "../../ui/LinkButton";
 import pages from "../../router/pages";
-import { useInjection } from "../../context/InversifyContext";
 import { useEffect } from "react";
+import useInjection from "../../context/inversify/useInjection";
 
 const Foodies = observer(() => {
 
@@ -19,7 +19,7 @@ const Foodies = observer(() => {
 
     return (
 
-        <section className="grid px-container gap-[30px] laptop:px-container-1024">
+        <section className="grid px-container gap-[30px] laptop:px-container-1024 relative">
 
             <h3 className="capitalize">Pet foodies</h3>
 

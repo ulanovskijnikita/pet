@@ -1,17 +1,17 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import SecondStater from "./SecondStater";
-import GetSecondUseCase from "../../../../domain/usecase/GetSecondUseCase";
-import GetSecondUseCaseRes from "../../../../domain/model/email/GetSecondUseCaseRes";
-import { UserMessage } from "../../../../domain/model/user/SendMessageParam";
-import GetUserUseCase from "../../../../domain/usecase/GetUserUseCase";
-import { UserId } from "../../../../domain/model/user/User";
+import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase";
+import GetSecondUseCaseRes from "../../../domain/model/email/GetSecondUseCaseRes";
+import { UserMessage } from "../../../domain/model/user/SendMessageParam";
+import GetUserUseCase from "../../../domain/usecase/GetUserUseCase";
+import AppStater from "./appViewModel/AppStater";
 
-export default class SecondViewModel implements SecondStater {
+export default class SecondViewModel {
 
     constructor(
 
         private getSecondUseCase: GetSecondUseCase,
         private getUserUseCase: GetUserUseCase,
+        private appStater: AppStater,
     ) {
 
         makeAutoObservable(this)
@@ -19,19 +19,21 @@ export default class SecondViewModel implements SecondStater {
 
     private secondRes: GetSecondUseCaseRes | null = null
 
-    private id: UserId | null = null
+    private loaded: boolean = true
+
+    get getLoaded() {
+
+        return this.loaded
+    }
 
     get getSecondRes() {
     
         return this.secondRes
     }
 
-    get getId() {
-
-        return this.id
-    }
-
     set setSecondRes(message: UserMessage) {
+
+        this.loaded = true
 
         const user = this.getUserUseCase.execute()
 
@@ -52,6 +54,8 @@ export default class SecondViewModel implements SecondStater {
 
                         () => {
 
+                            this.loaded = false
+
                             this.secondRes = res
                         }
                     )
@@ -71,14 +75,14 @@ export default class SecondViewModel implements SecondStater {
                                     this.secondRes = null
                                 }
                             )
-                        }, 1000
+                        }, 2000
                     )
                 }
             )
     }
 
-    set setId(id: UserId | null) {
+    get getId() {
 
-        this.id = id
+        return this.appStater.getId
     }
 }

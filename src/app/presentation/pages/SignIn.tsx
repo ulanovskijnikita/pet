@@ -7,9 +7,10 @@ import { Link, useNavigate } from "react-router"
 import pages from "../router/pages"
 import { useEffect, useRef } from "react"
 import FormButton from "../ui/FormButton"
-import { useInjection } from "../context/InversifyContext"
+import useInjection from "../context/inversify/useInjection"
+import Loader from "../ui/Loader"
 
-const SignIn = observer(() => {
+const SignIn = () => {
 
     const vm = useInjection(SignInViewModel)
 
@@ -25,12 +26,11 @@ const SignIn = observer(() => {
             if( vm.getResult?.result == "signIn" ) {
 
                 setTimeout(
+                    
                     () => {
                         
                         navigate(pages.profile + '/' + vm.getResult?.user?.id)
-
-                        vm.setResult = null
-                    }, 1000
+                    }, 2000
                 )
             }
         }, [vm, navigate, emailInput, passInput, vm.getResult]
@@ -75,19 +75,30 @@ const SignIn = observer(() => {
             <div className="text-center absolute bottom-[15px] tablet:bottom-[30px] laptop:bottom-[50px]">
 
                 {
+
+                    vm.getLoaded && <div className="*:w-[50px]! tablet:*:w-[65px]! laptop:*:w-[100px]!">
+
+                        <Loader />
+                    </div>
+                }
+
+                {
+
                     vm.getResult?.result == "nobody" && <p>It's unregistered email</p>
                 }
 
                 {
+
                     vm.getResult?.result == "incorrect" && <p>It's wrong password</p>
                 }
 
                 {
+
                     vm.getResult?.result == "signIn" && <p>this is success</p>
                 }
             </div>                
         </FormSection>
     )
-})
+}
 
-export default SignIn
+export default observer(SignIn)

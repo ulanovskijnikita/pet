@@ -9,7 +9,7 @@ import Filter from "../../ui/filter/Filter";
 import shoppingOrderArr from "./shoppingOrderArr";
 import { useParams } from "react-router";
 import { runInAction } from "mobx";
-import { useInjection } from "../../context/InversifyContext";
+import useInjection from "../../context/inversify/useInjection";
 
 const Shopping = () => {
 

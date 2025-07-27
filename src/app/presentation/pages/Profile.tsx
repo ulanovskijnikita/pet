@@ -6,7 +6,7 @@ import FormSection from "../ui/FormSection"
 import Form from "../ui/Form"
 import FormInput from "../ui/FormInput"
 import Location from "../router/Location"
-import { useInjection } from "../context/InversifyContext"
+import useInjection from "../context/inversify/useInjection"
 
 const Profile = () => {
 

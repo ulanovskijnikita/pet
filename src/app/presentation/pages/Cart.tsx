@@ -7,9 +7,10 @@ import FuncButton from "../ui/FuncButton"
 import { useNavigate } from "react-router"
 import pages from "../router/pages"
 import { runInAction } from "mobx"
-import { useInjection } from "../context/InversifyContext"
+import useInjection from "../context/inversify/useInjection"
+import Loader from "../ui/Loader"
 
-const Cart = observer(() => {
+const Cart = () => {
 
     const vm = useInjection(CartViewModel)
 
@@ -30,6 +31,11 @@ const Cart = observer(() => {
             <section className="grid gap-[30px] px-container laptop:px-container-1024">
                 
                 <h3 className="capitalize">your cart</h3>
+
+                {
+
+                    !vm.getUserCart && <Loader />
+                }
 
                 {
 
@@ -83,6 +89,6 @@ const Cart = observer(() => {
             </section>
         </Location>
     )
-})
+}
 
-export default Cart
+export default observer(Cart)

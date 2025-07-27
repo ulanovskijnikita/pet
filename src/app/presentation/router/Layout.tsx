@@ -1,10 +1,9 @@
-import { observer } from "mobx-react-lite";
 import Nav from "../ui/nav/Nav";
 import { Outlet } from "react-router";
 import Footer from "../ui/footer/Footer";
 import Cookie from "../ui/Cookie";
 
-const Layout = observer(() => {
+const Layout = () => {
 
   return (
 
@@ -22,6 +21,6 @@ const Layout = observer(() => {
       <Cookie />
     </>
   )
-})
+}
 
 export default Layout;

@@ -6,10 +6,10 @@ import navProfile from "./navProfile";
 import navServices from "./navServices";
 import pages from "../../router/pages";
 import { observer } from "mobx-react-lite";
-import { useInjection } from "../../context/InversifyContext";
 import NavViewModel from "../../viewmodel/navViewModel/NavViewModel";
 import { useEffect } from "react";
 import { runInAction } from "mobx";
+import useInjection from "../../context/inversify/useInjection";
 
 const Nav = () => {
 
@@ -35,7 +35,7 @@ const Nav = () => {
 
     return (
 
-        <header className="desktop:sticky desktop:top-0 z-100 bg-bg" id={pages.contact.substring(1)}>
+        <header className="desktop:sticky desktop:top-0 z-1000 bg-bg" id={pages.contact.substring(1)}>
 
             <nav className="p-container laptop:px-0 laptop:mx-auto laptop:w-[clamp(71.071rem,46.173rem+34.04vw,92.857rem)] desktop:w-[1300px] gap-[15px] flex flex-col items-center tablet:flex-row tablet:justify-between w-full laptop:items-center">
 

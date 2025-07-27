@@ -8,22 +8,9 @@ import Photo from "../sections/photo/Photo";
 import Location from "../router/Location";
 import bannerImg1 from "/decorative/banner/banner-img-1.png"
 import Hero from "../sections/hero/Hero";
-import { useEffect } from "react";
-import { useInjection } from "../context/InversifyContext";
-import HomeViewModel from "../viewmodel/HomeViewModel";
 import { observer } from "mobx-react-lite";
 
 const Home = () => {
-
-  const vm = useInjection(HomeViewModel)
-
-  useEffect(
-
-    () => {
-
-      vm.setSecondId()
-    }
-  )
 
   return (
 

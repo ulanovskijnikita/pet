@@ -3,8 +3,8 @@ import Location from "../router/Location"
 import Carts from "../ui/Carts"
 import FavouriteViewModel from "../viewmodel/FavouriteViewModel"
 import { useEffect, useLayoutEffect } from "react"
-import { useInjection } from "../context/InversifyContext"
 import { runInAction } from "mobx"
+import useInjection from "../context/inversify/useInjection"
 
 const Favourite = () => {
 

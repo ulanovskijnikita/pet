@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import { useNavigate } from "react-router"
 import AppViewModel from "../viewmodel/appViewModel/AppViewModel"
 import pages from "../router/pages"
-import { useInjection } from "../context/InversifyContext"
+import useInjection from "../context/inversify/useInjection"
 
 type FuncButtonProps = {
 

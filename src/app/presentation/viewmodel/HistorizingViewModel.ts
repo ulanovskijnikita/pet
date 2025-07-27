@@ -23,6 +23,8 @@ export default class HistorizingViewModel {
 
     setHistory() {
 
+        this.history = null
+
         this.getUserHistoryListUseCase
             .execute( this.appStater.getId )
             .then(

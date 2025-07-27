@@ -9,7 +9,8 @@ import QuantityForm from "../ui/QuantityForm";
 import { runInAction } from "mobx";
 import FuncButton from "../ui/FuncButton";
 import pages from "../router/pages";
-import { useInjection } from "../context/InversifyContext";
+import useInjection from "../context/inversify/useInjection";
+import Loader from "../ui/Loader";
 
 const Product = () => {
 
@@ -46,6 +47,11 @@ const Product = () => {
         <Location>
 
             <section className="grid px-container gap-[30px] laptop:gap-[50px] desktop:gap-[75px] laptop:px-container-1024">
+
+                {
+
+                    vm.getLoaded && <Loader />
+                }
 
                 {
 
@@ -215,9 +221,10 @@ const Product = () => {
                             </FuncButton>
                         </div>
                     </>
+
                     :
 
-                    <h4>We have no products with this id</h4>
+                    !vm.getLoaded && <h4>We have no products with this id</h4>
                 }
             </section>
         </Location>

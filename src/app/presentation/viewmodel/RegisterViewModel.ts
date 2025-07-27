@@ -15,28 +15,50 @@ export default class RegisterViewModel {
 
     private result: ValidateUserResult | null = null
 
+    private loaded: boolean = false
+
     get getResult() {
 
         return this.result
     }
 
-    set setResult(param: RegisterUserUseCaseParam | null) {
+    get getLoaded() {
 
-        if (param) {
+        return this.loaded
+    }
 
-            this.registerUserUseCase
+    set setResult(param: RegisterUserUseCaseParam) {
+
+        runInAction(() => {
+
+            this.result = null
+            
+            this.loaded = true
+        })
+
+        this.registerUserUseCase
             .execute(param)
             .then(
 
                 result =>
                     runInAction(
 
-                        () => this.result = result
-                    )
-            )
-        } else {
+                        () => {
 
-            this.result = param
-        }
+                            this.loaded = false
+
+                            this.result = result
+                        }
+                    )
+            ).then(() => {
+
+                setTimeout(() => {
+
+                    runInAction(() => {
+
+                        this.result = null
+                    })
+                }, 2000)
+            })
     }
 }

@@ -2,10 +2,10 @@ import { Pagination } from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 import heroSlider from "./heroSlider";
 import { observer } from "mobx-react-lite";
-import { useInjection } from "../../context/InversifyContext";
 import HeroViewModel from "../../viewmodel/HeroViewModel";
 import LinkButton from "../../ui/LinkButton";
 import pages from "../../router/pages";
+import useInjection from "../../context/inversify/useInjection";
 
 const Hero = () => {
 

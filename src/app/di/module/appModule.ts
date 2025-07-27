@@ -9,7 +9,6 @@ import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavour
 import RegisterViewModel from "../../presentation/viewmodel/RegisterViewModel.ts";
 import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
 import FoodiesViewModel from "../../presentation/viewmodel/FoodiesViewModel.ts";
-import HomeViewModel from "../../presentation/viewmodel/HomeViewModel.ts";
 import ShoppingViewModel from "../../presentation/viewmodel/ShoppingViewModel.ts";
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
 import CartViewModel from "../../presentation/viewmodel/CartViewModel.ts";
@@ -27,10 +26,9 @@ import NavViewModel from "../../presentation/viewmodel/navViewModel/NavViewModel
 import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
 import NavStater from "../../presentation/viewmodel/navViewModel/NavStater.ts";
 import AppStater from "../../presentation/viewmodel/appViewModel/AppStater.ts";
-import SecondViewModel from "../../presentation/viewmodel/secondViewModel/SecondViewModel.ts";
+import SecondViewModel from "../../presentation/viewmodel/SecondViewModel.ts";
 import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase.ts";
 import BannerViewModel from "../../presentation/viewmodel/BannerViewModel.ts";
-import SecondStater from "../../presentation/viewmodel/secondViewModel/SecondStater.ts";
 import GetUserHistoryListUseCase from "../../../domain/usecase/GetUserHistoryListUseCase.ts";
 import HeroViewModel from "../../presentation/viewmodel/HeroViewModel.ts";
 import FooterViewModel from "../../presentation/viewmodel/FooterViewModel.ts";
@@ -83,7 +81,7 @@ const appModule = new ContainerModule(
             .inSingletonScope()
 
         options
-            .bind<SecondStater>(SecondViewModel)
+            .bind<SecondViewModel>(SecondViewModel)
             .toDynamicValue(
 
                 context =>
@@ -91,6 +89,7 @@ const appModule = new ContainerModule(
 
                         context.get(GetSecondUseCase),
                         context.get(GetUserUseCase),
+                        context.get(AppViewModel)
                     )
             )
             .inSingletonScope()
@@ -162,19 +161,6 @@ const appModule = new ContainerModule(
                         context.get(GetProductByCategoryUseCase),
                         context.get(AddToUserCartUseCase),
                         context.get(ToggleUserFavouriteUseCase),
-                    )
-            )
-            .inSingletonScope()
-
-        options
-            .bind<HomeViewModel>(HomeViewModel)
-            .toDynamicValue(
-
-                context =>
-                    new HomeViewModel(
-
-                        context.get(AppViewModel),
-                        context.get(SecondViewModel)
                     )
             )
             .inSingletonScope()

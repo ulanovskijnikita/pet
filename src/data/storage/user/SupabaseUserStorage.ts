@@ -42,7 +42,7 @@ export default class SupabaseUserStorage implements UserStorage {
             u_pass: param.pass
         })
 
-        if (!data) return null
+        if (!data || !data.length) return null
 
         return data[0].u_id ?? null
     }
@@ -54,7 +54,7 @@ export default class SupabaseUserStorage implements UserStorage {
             u_email: email
         })
 
-        if (!data) return null
+        if (!data || !data.length) return null
 
         return data[0].user_id ?? null
     }

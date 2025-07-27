@@ -1,8 +1,9 @@
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { Link } from "react-router";
-import { useInjection } from "../context/InversifyContext";
 import HistorizingViewModel from "../viewmodel/HistorizingViewModel";
+import useInjection from "../context/inversify/useInjection";
+import Loader from "../ui/Loader";
 
 const Historizing = () => {
 
@@ -22,7 +23,12 @@ const Historizing = () => {
 
             {
 
-                vm.getHistory
+                !vm.getHistory && <Loader />
+            }
+
+            {
+
+                vm.getHistory?.length
                     ?
                 vm.getHistory.map(
 
@@ -88,7 +94,7 @@ const Historizing = () => {
                     }
                 )
                     :
-                <h4>You have no order's history</h4>
+                vm.getHistory && <h4>You have no order's history</h4>
             }
         </section>
     )

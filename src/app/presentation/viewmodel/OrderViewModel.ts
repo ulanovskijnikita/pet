@@ -46,6 +46,8 @@ export default class OrderViewModel {
 
     set setOrder(cartId: UserCartId | null) {
 
+        this.order = null
+
         if(cartId) {
 
             this.getProductsByCartUseCase
@@ -69,7 +71,7 @@ export default class OrderViewModel {
                 )
         } else {
 
-            this.order = null
+            this.order = []
         }
     }
 

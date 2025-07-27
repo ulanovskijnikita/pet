@@ -5,8 +5,8 @@ import clothingSubCategory from "./clothingSubCategory";
 import Carts from "../../ui/Carts";
 import LinkButton from "../../ui/LinkButton";
 import pages from "../../router/pages";
-import { useInjection } from "../../context/InversifyContext";
 import { useEffect } from "react";
+import useInjection from "../../context/inversify/useInjection";
 
 const Clothing = () => {
 
@@ -19,7 +19,7 @@ const Clothing = () => {
     
     return (
 
-        <section className="grid px-container gap-[30px] laptop:px-container-1024">
+        <section className="grid px-container gap-[30px] laptop:px-container-1024 relative">
 
             <h3 className="capitalize">Pet clothing</h3>
 
@@ -40,7 +40,6 @@ const Clothing = () => {
 
             <Carts
 
-                
                 setProduct={() => vm.setClothing()}
                 altTitle={"No products found with parametrs"}
                 addToCart={(id) => vm.addToUserCart = id}

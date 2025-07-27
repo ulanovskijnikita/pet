@@ -4,8 +4,9 @@ import { Link, useParams } from "react-router";
 import pages from "../router/pages";
 import FuncButton from "../ui/FuncButton";
 import FavouriteButton from "../ui/FavouriteButton";
-import { useInjection } from "../context/InversifyContext";
 import OrderViewModel from "../viewmodel/OrderViewModel";
+import useInjection from "../context/inversify/useInjection";
+import Loader from "../ui/Loader";
 
 const Order = () => {
 
@@ -29,7 +30,12 @@ const Order = () => {
 
             {
 
-                vm.getOrder
+                !vm.getOrder && <Loader />
+            }
+
+            {
+
+                vm.getOrder?.length
 
                     ?
 
@@ -166,7 +172,7 @@ const Order = () => {
 
                     :
                 
-                <h4>You have no order with this cart's id</h4>
+                vm.getOrder && <h4>You have no order with this cart's id</h4>
             }
             
             

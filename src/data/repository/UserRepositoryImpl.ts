@@ -12,11 +12,11 @@ import UserHistory, { CartProduct } from "../../domain/model/user/UserHistory";
 import ValidateUserParam from "../../domain/model/user/ValidateUserParam";
 import ValidateUserRes from "../../domain/model/user/ValidateUserRes";
 import UserRepository from "../../domain/repository/UserRepository";
-import SessionUser from "../storage/model/user/SessionUser";
+import SessionUser, { SessionUserCartLength } from "../storage/model/user/SessionUser";
 import SessionUserCartPreview from "../storage/model/user/SessionUserCartPreview";
 import SupabaseUser from "../storage/model/user/SupabaseUser";
 import SupabaseUserCart from "../storage/model/user/SupabaseUserCart";
-import SupabaseUserCartPreview from "../storage/model/user/SupabaseUserCartPreview";
+import SupabaseUserCartPreview, { SupabaseUserCartLength } from "../storage/model/user/SupabaseUserCartPreview";
 import SupabaseUserHistory from "../storage/model/user/SupabaseUserHistory";
 import SupabaseValidateUserRes from "../storage/model/user/SupabaseValidateUserRes";
 import UserCashe from "../storage/user/UserCashe";
@@ -70,12 +70,20 @@ export default class UserRepositoryImpl implements UserRepository {
 
     async changeQuantityCartProduct(param: AddToUserCartParam): Promise<QuantityProductRes> {
         
-        return this.userStorage.changeQuantityCartSupabaseProduct(param)
+        const res = await this.userStorage.changeQuantityCartSupabaseProduct(param)
+
+        this.userCashe.addToCart( this.mapSupabaseUserCartLengthToSessionUserCartlength(res.length) )
+
+        return res
     }
 
     async setQuantityCartProduct(param: AddToUserCartParam): Promise<QuantityProductRes> {
-        
-        return this.userStorage.setQuantityCartSupabaseProduct(param)
+
+        const res = await this.userStorage.setQuantityCartSupabaseProduct(param)
+
+        this.userCashe.addToCart( this.mapSupabaseUserCartLengthToSessionUserCartlength(res.length) )
+
+        return res
     }
 
     async getCart(id: UserId | null): Promise<UserCart[]> {
@@ -237,5 +245,10 @@ export default class UserRepositoryImpl implements UserRepository {
             cartId: +sessionUser.cartId,
             cartLength: +sessionUser.cartLength,
         }
+    }
+
+    private mapSupabaseUserCartLengthToSessionUserCartlength(supabaseUserCartLength: SupabaseUserCartLength): SessionUserCartLength {
+
+        return supabaseUserCartLength.toString()
     }
 }

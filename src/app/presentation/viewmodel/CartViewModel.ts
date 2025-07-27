@@ -28,7 +28,6 @@ export default class CartViewModel {
 
     private userCart: UserCart[] | null = null
 
-
     get getCartPrice() {
 
         const genetalObj = this.userCart?.map((product) => {
@@ -74,6 +73,8 @@ export default class CartViewModel {
     }
 
     setUserCart() {
+
+        this.userCart = null
 
         this.getUserCartUseCase
             .execute(this.getId)

@@ -7,9 +7,10 @@ import RegisterViewModel from "../viewmodel/RegisterViewModel"
 import { observer } from "mobx-react-lite"
 import { useEffect, useRef } from "react"
 import FormButton from "../ui/FormButton"
-import { useInjection } from "../context/InversifyContext"
+import useInjection from "../context/inversify/useInjection"
+import Loader from "../ui/Loader"
 
-const Register = observer(() => {
+const Register = () => {
 
     const vm = useInjection(RegisterViewModel)
 
@@ -30,8 +31,6 @@ const Register = observer(() => {
             if ( vm.getResult?.result ) {
 
                 setTimeout(() => {
-
-                    vm.setResult = null
                     
                     navigate(`${pages.profile}/${pages.signIn}`)
                 }, 1000)
@@ -85,6 +84,14 @@ const Register = observer(() => {
             <div className="text-center absolute bottom-[15px] tablet:bottom-[30px] laptop:bottom-[50px]">
 
                 {
+
+                    vm.getLoaded && <div className="*:w-[50px]! tablet:*:w-[65px]! laptop:*:w-[100px]!">
+
+                        <Loader />
+                    </div>
+                }
+
+                {
                     vm.getResult?.email.isUnique == false && <p>This email is already registered</p>
                 }
 
@@ -102,6 +109,6 @@ const Register = observer(() => {
             </div>                
         </FormSection>
     )
-})
+}
 
-export default Register
+export default observer(Register)

@@ -6,14 +6,14 @@ import CartViewModel from "../viewmodel/CartViewModel";
 import QuantityForm from "./QuantityForm";
 import { Link } from "react-router";
 import pages from "../router/pages";
-import { useInjection } from "../context/InversifyContext";
+import useInjection from "../context/inversify/useInjection";
 
 type CartItemsProps = {
 
     products: UserCart[]
 }
 
-const CartItems = observer((props: CartItemsProps) => {
+const CartItems = (props: CartItemsProps) => {
 
     const vm = useInjection(CartViewModel)
 
@@ -68,7 +68,6 @@ const CartItems = observer((props: CartItemsProps) => {
 
                                     <FavouriteButton
 
-                                        id={vm.getId}
                                         isFavourite={product.isFavorites}
                                         toggleFavourite={() => vm.toggleFavourite(product.id, index)}
                                     />
@@ -123,6 +122,6 @@ const CartItems = observer((props: CartItemsProps) => {
             }
         </ul>
     )
-})
+}
 
-export default CartItems
+export default observer(CartItems)

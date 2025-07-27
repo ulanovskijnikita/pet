@@ -46,6 +46,8 @@ export default class FoodiesViewModel {
 
     setFoodies() {
 
+        this.foodies = null
+
         this.getProductByCategoryUseCase
             .execute({
 

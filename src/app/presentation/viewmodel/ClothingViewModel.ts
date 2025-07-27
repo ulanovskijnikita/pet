@@ -46,6 +46,8 @@ export default class ClothingViewModel {
 
     setClothing() {
 
+        this.clothing = null
+
         this.getProductByCategoryUseCase
             .execute({
 

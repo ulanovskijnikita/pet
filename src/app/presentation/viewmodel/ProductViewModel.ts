@@ -25,11 +25,18 @@ export default class ProductViewModel {
 
     private productDetails: ProductDetails | null = null
 
+    private loaded: boolean = false
+
     private productQuantity: ProductQuantity = DEFAULT_QUANTITY
 
     get getProductQuantity() {
 
         return this.productQuantity
+    }
+
+    get getLoaded() {
+
+        return this.loaded
     }
 
     get getProductDetails() {
@@ -54,6 +61,8 @@ export default class ProductViewModel {
 
     set setProductDetails(id: ProductId | null) {
 
+        this.loaded = true
+
         if (id) {
 
             this.getProductByIdUseCase
@@ -70,6 +79,8 @@ export default class ProductViewModel {
 
                             () => {
 
+                                this.loaded = false
+                                
                                 this.productDetails = productDetails
                             }
                         )
@@ -77,7 +88,12 @@ export default class ProductViewModel {
                 )
         } else {
 
-            this.productDetails = null
+            runInAction(() => {
+
+                this.loaded = false
+
+                this.productDetails = null
+            })
         }        
     }
 

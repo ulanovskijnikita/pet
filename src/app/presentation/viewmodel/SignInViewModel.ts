@@ -17,33 +17,48 @@ export default class SignInViewModel {
 
     private result: UserSignInResult | null = null
 
+    private loaded: boolean = false
+
+    get getLoaded() {
+
+        return this.loaded
+    }
+
     get getResult() {
 
         return this.result
     }
 
-    set setResult(param: UserIdParam | null) {
+    set setResult(param: UserIdParam) {
 
-        if (param) {
+        this.loaded = true
 
-            this.signInUserUseCase
-                .execute(param)
-                .then(
+        this.signInUserUseCase
+            .execute(param)
+            .then(
 
-                    res =>
-                        runInAction(
+                res =>
+                    runInAction(
 
-                            () => {
-                                
-                                this.appStater.setId()
-                                
-                                this.result = res
-                            }
-                        )
-                ) 
-        } else {
-            
-            this.result = param
-        }            
+                        () => {
+
+                            this.loaded = false
+                            
+                            this.appStater.setId()
+                            
+                            this.result = res
+                        }
+                    )
+            )
+            .then(() => {
+
+                runInAction(() => {
+
+                    setTimeout(() => {
+
+                        this.result = null
+                    }, 2000)
+                })
+            })           
     }
 }

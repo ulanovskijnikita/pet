@@ -6,10 +6,11 @@ import { useRef } from "react";
 import FormTextarea from "../ui/FormTextarea";
 import pages from "../router/pages";
 import { Link } from "react-router";
-import { useInjection } from "../context/InversifyContext";
-import SecondViewModel from "../viewmodel/secondViewModel/SecondViewModel";
+import SecondViewModel from "../viewmodel/SecondViewModel";
+import useInjection from "../context/inversify/useInjection";
+import Loader from "../ui/Loader";
 
-const Second = observer(() => {
+const Second = () => {
 
     const messageInput = useRef<HTMLTextAreaElement>(null)
 
@@ -42,50 +43,41 @@ const Second = observer(() => {
 
                     <FormTextarea inputRef={messageInput} placeholder="Message" />
 
-                    <FormButton>
+                    {
 
-                        {
+                        vm.getId && <FormButton>Send Message</FormButton>
+                    }
 
-                            vm.getId
+                    {
 
-                            ?
-
-                            "Send Message"
-
-                            :
-
-                            <Link to={pages.profile + '/' + pages.signIn}>Send Message</Link>
-                        }
-                        
-                    </FormButton>
+                        !vm.getId && <Link className="bg-main text-bg rounded-btn py-[20px] w-full text-btn uppercase cursor-pointer duration-300 active:bg-main-light" to={pages.profile + '/' + pages.signIn}>Send Message</Link>
+                    }
                 </Form>
 
                 <div className="absolute bottom-[15px] tablet:bottom-[30px] laptop:bottom-[50px]">
 
                     {
-                        vm.getSecondRes != null
 
-                        ?
+                        vm.getLoaded && <div className="*:w-[50px]! tablet:*:w-[65px]! laptop:*:w-[100px]!">
 
-                            vm.getSecondRes.action
+                            <Loader />
+                        </div>
+                    }
 
-                            ?
+                    {
 
-                            <p>Check your email</p>
+                        vm.getSecondRes?.action && <p>Check your email</p>
+                    }
 
-                            :
+                    {
 
-                            <p>You have already left a review</p>
-
-                        :
-
-                        <></>
+                        vm.getSecondRes && !vm.getSecondRes.action && <p>You have already left a review</p>
                     }
                 </div>
                     
             </FormSection>
         </div>
     )
-})
+}
 
-export default Second
+export default observer(Second)

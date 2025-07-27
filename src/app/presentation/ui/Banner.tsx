@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import LinkButton from "../ui/LinkButton";
 import pages from "../router/pages";
-import { useInjection } from "../context/InversifyContext";
 import BannerViewModel from "../viewmodel/BannerViewModel";
+import useInjection from "../context/inversify/useInjection";
 
 type BannerProps = {
 
@@ -11,7 +11,7 @@ type BannerProps = {
     subtitle: string
 }
 
-const Banner = observer((props: BannerProps) => {
+const Banner = (props: BannerProps) => {
 
     const vm = useInjection(BannerViewModel)
 
@@ -31,6 +31,6 @@ const Banner = observer((props: BannerProps) => {
             <img src={props.img} alt="banner-img" className="absolute w-[140px] tablet:w-[360px] laptop:min-w-[485px] z-10 top-container right-container tablet:top-[50px] tablet:right-[50px] laptop:static" />
         </section>
     )
-})
+}
 
-export default Banner
+export default observer(Banner)
