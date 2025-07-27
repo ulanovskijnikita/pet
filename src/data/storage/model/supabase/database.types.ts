@@ -374,7 +374,7 @@ export type Database = {
     }
     Functions: {
       add_to_user_cart: {
-        Args: { u_id: number; p_id: number; q: number }
+        Args: { u_id: number | null; p_id: number; q: number }
         Returns: {
           cart_length: number
         }[]
@@ -397,14 +397,14 @@ export type Database = {
         }[]
       }
       change_quantity_cart_product: {
-        Args: { u_id: number; p_id: number; q: number }
+        Args: { u_id: number | null; p_id: number; q: number }
         Returns: {
           quantity: number
           length: number
         }[]
       }
       get_an_order: {
-        Args: { u_id: number }
+        Args: { u_id: number | null }
         Returns: {
           cart_id: number
           cart_length: number
@@ -420,7 +420,7 @@ export type Database = {
         }[]
       }
       get_product_by_id: {
-        Args: { u_id: number; p_id: number }
+        Args: { u_id: number | null; p_id: number }
         Returns: {
           id: number
           price_currency: Database["public"]["Enums"]["currencies"]
@@ -436,7 +436,7 @@ export type Database = {
         }[]
       }
       get_products_by_cart: {
-        Args: { u_id: number; c_id: number }
+        Args: { u_id: number | null; c_id: number }
         Returns: {
           id: number
           price_currency: Database["public"]["Enums"]["currencies"]
@@ -451,10 +451,10 @@ export type Database = {
       }
       get_products_by_category: {
         Args: {
-          user_auth_id: number
+          user_auth_id: number | null
           category_id: number
           subcategory_id: number
-          off_set: number
+          off_set: number | null
           lim: number
         }
         Returns: {
@@ -469,7 +469,7 @@ export type Database = {
         }[]
       }
       get_products_by_favourite: {
-        Args: { user_auth_id: number; off_set: number; lim: number }
+        Args: { user_auth_id: number | null; off_set: number | null; lim: number }
         Returns: {
           id: number
           price_currency: Database["public"]["Enums"]["currencies"]
@@ -490,7 +490,7 @@ export type Database = {
         }[]
       }
       get_user_cart: {
-        Args: { u_id: number }
+        Args: { u_id: number | null }
         Returns: {
           id: number
           price_currency: Database["public"]["Enums"]["currencies"]
@@ -542,21 +542,21 @@ export type Database = {
         }[]
       }
       set_product_rating: {
-        Args: { u_id: number; p_id: number; p_r: number }
+        Args: { u_id: number | null; p_id: number; p_r: number }
         Returns: {
           user_rating: number
           product_rating: number
         }[]
       }
       set_quantity_cart_product: {
-        Args: { u_id: number; p_id: number; q: number }
+        Args: { u_id: number | null; p_id: number; q: number }
         Returns: {
           quantity: number
           length: number
         }[]
       }
       toggle_user_favourite: {
-        Args: { u_id: number; p_id: number }
+        Args: { u_id: number | null; p_id: number }
         Returns: boolean
       }
       validate_user: {
