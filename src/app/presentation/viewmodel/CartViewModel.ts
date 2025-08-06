@@ -72,25 +72,13 @@ export default class CartViewModel {
             )
     }
 
-    setUserCart() {
+    *setUserCart() {
 
         this.userCart = null
 
-        this.getUserCartUseCase
-            .execute(this.getId)
-            .then(
-
-                userCart => {
-
-                    runInAction(
-
-                        () => {
-
-                            this.userCart = userCart
-                        }
-                    )
-                }
-            )
+        const userCart: UserCart[] = yield this.getUserCartUseCase.execute( this.getId )
+        
+        this.userCart = userCart
     }
 
     set setQuantityCartProduct(param: SetQuantityCartProductParam) {

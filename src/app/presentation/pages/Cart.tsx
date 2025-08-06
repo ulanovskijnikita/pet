@@ -39,8 +39,7 @@ const Cart = () => {
 
                 {
 
-                    vm.getUserCart && vm.getUserCart.length
-                        ?
+                    vm.getUserCart && !!vm.getUserCart.length &&
                     <>
                 
                         <CartItems products={vm.getUserCart} />
@@ -83,8 +82,11 @@ const Cart = () => {
                             </h4>
                         </div>
                     </>
-                        :
-                    <h4>You have no products in the cart</h4>
+                }
+
+                {
+
+                    vm.getUserCart && !vm.getUserCart.length && <h4>You have no products in the cart</h4>
                 }
             </section>
         </Location>
