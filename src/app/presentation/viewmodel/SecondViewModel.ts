@@ -19,7 +19,7 @@ export default class SecondViewModel {
 
     private secondRes: GetSecondUseCaseRes | null = null
 
-    private loaded: boolean = true
+    private loaded: boolean = false
 
     get getLoaded() {
 
