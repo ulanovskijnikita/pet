@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import ProductMenu from "../../ui/ProductMenu";
 import FoodiesViewModel from "../../viewmodel/FoodiesViewModel";
 import foodiesSubCategory from "./foodiesSubCategory";
-import Carts from "../../ui/Carts";
+import Cards from "../../ui/Cards";
 import LinkButton from "../../ui/LinkButton";
 import pages from "../../router/pages";
 import { useEffect } from "react";
@@ -38,10 +38,10 @@ const Foodies = observer(() => {
                 </div>
             </menu>
 
-            <Carts
+            <Cards
 
                 toggleFavourite={(id, index) => vm.toggleFavourite(id, index)}
-                product={vm.getFoodies}
+                products={vm.getFoodies}
                 hasMore={false}
                 addToCart={(id) => vm.addToUserCart = id}
                 setProduct={() => vm.setFoodies()}

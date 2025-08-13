@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import Location from "../router/Location"
-import Carts from "../ui/Carts"
+import Cards from "../ui/Cards"
 import FavouriteViewModel from "../viewmodel/FavouriteViewModel"
 import { useEffect, useLayoutEffect } from "react"
 import { runInAction } from "mobx"
@@ -31,9 +31,9 @@ const Favourite = () => {
 
                 <h3 className="capitalize">your favourite</h3>
 
-                <Carts
+                <Cards
 
-                    product={vm.getProduct}
+                    products={vm.getProduct}
                     toggleFavourite={(id, index) => {
 
                         vm.toggleFavourite(id, index)
@@ -42,7 +42,7 @@ const Favourite = () => {
                     addToCart={(id) => vm.addToUserCart = id}
                     setProduct={() => vm.setProduct()}
                     altTitle="You have no favourite products"
-                />            
+                />
             </section>
         </Location>
     )

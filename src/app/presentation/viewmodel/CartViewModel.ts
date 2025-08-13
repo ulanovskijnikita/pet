@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUseCase";
 import UserCart from "../../../domain/model/user/UserCart";
 import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase";
-import SetQuantityCartProductParam from "../../../data/storage/model/user/SetQuantityCartProductParam";
+import SetQuantityCartProductParam from "../../../domain/model/user/SetQuantityCartProductParam";
 import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase";
 import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase";
 import NavStater from "./navViewModel/NavStater";

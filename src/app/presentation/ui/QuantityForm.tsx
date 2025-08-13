@@ -1,14 +1,22 @@
 import { observer } from "mobx-react-lite";
-import SetQuantityCartProductParam from "../../../data/storage/model/user/SetQuantityCartProductParam";
+import SetQuantityCartProductParam from "../../../domain/model/user/SetQuantityCartProductParam";
 import { useEffect, useRef } from "react";
+import useInjection from "../context/inversify/useInjection";
+import AppViewModel from "../viewmodel/appViewModel/AppViewModel";
+import { ProductId } from "../../../domain/model/product/Product";
+import { ProductQuantity } from "../../../domain/model/user/AddToUserCartParam";
 
 type QuantityFormProps = {
 
-    addQuantity: (quantity: SetQuantityCartProductParam) => SetQuantityCartProductParam
-    quantityParam: SetQuantityCartProductParam
+    addQuantity: (quantity: SetQuantityCartProductParam) => void
+    productIndex: number
+    productId: ProductId
+    productQuantity: ProductQuantity
 }
 
-const QuantityForm = observer((props: QuantityFormProps) => {
+const QuantityForm = (props: QuantityFormProps) => {
+
+    const appVm = useInjection(AppViewModel)
 
     const quantityInput = useRef<HTMLInputElement>(null)
 
@@ -16,8 +24,8 @@ const QuantityForm = observer((props: QuantityFormProps) => {
 
         () => {
 
-            if( quantityInput.current ) quantityInput.current.value = props.quantityParam.quantity.toString()
-        }, [quantityInput, props, props.quantityParam.quantity]
+            if( quantityInput.current ) quantityInput.current.value = props.productQuantity.toString()
+        }, [quantityInput, props, props.productQuantity, appVm]
     )
 
     return (
@@ -32,10 +40,10 @@ const QuantityForm = observer((props: QuantityFormProps) => {
                 
                     props.addQuantity({
 
-                        index: props.quantityParam.index,
-                        productId: props.quantityParam.productId,
+                        index: props.productIndex,
+                        productId: props.productId,
                         quantity: quantityInput.current?.value ? +quantityInput.current?.value : 0,
-                        userId: props.quantityParam.userId
+                        userId: appVm.getId
                     })
                 }
             }
@@ -47,22 +55,22 @@ const QuantityForm = observer((props: QuantityFormProps) => {
                 className="w-[40px] aspect-square p-[9px] focus:outline-none text-center"
                 ref={quantityInput}
                 type="number"
-                placeholder={props.quantityParam.quantity.toString()}
+                placeholder={props.productQuantity.toString()}
                 onBlur={
                     () => {
 
                         props.addQuantity({
 
-                            index: props.quantityParam.index,
-                            productId: props.quantityParam.productId,
+                            index: props.productIndex,
+                            productId: props.productId,
                             quantity: quantityInput.current?.value ? +quantityInput.current?.value : 0,
-                            userId: props.quantityParam.userId
+                            userId: appVm.getId
                         })
                     }
                 }
             />
         </form>
     )
-})
+}
 
-export default QuantityForm
+export default observer(QuantityForm)

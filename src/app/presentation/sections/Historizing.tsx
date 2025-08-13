@@ -74,11 +74,7 @@ const Historizing = () => {
 
                                         {
 
-                                            historyItem.productList.length > 2
-                                                ?
-                                            <li>...</li>
-                                                :
-                                            <></>
+                                            historyItem.productList.length > 2 && <li>...</li>
                                         }
                                     </ul>
 

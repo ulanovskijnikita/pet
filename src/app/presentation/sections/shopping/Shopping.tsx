@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import ShoppingViewModel from "../../viewmodel/ShoppingViewModel";
 import { useEffect, useLayoutEffect } from "react";
 import ProductMenu from "../../ui/ProductMenu";
-import Carts from "../../ui/Carts";
+import Cards from "../../ui/Cards";
 import shoppingCategory from "./shoppingCategory";
 import shoppingSubcategory from "./shoppingSubcategory";
 import Filter from "../../ui/filter/Filter";
@@ -80,16 +80,15 @@ const Shopping = () => {
                         setActiveOrder={(id) => vm.setOrder = id}
                     />
                 </div>
-                
             </menu>
 
-            <Carts
+            <Cards
             
                 setProduct={() => vm.setProduct()}
                 altTitle={"No products found with parametrs"}
                 addToCart={(id) => vm.addToUserCart = id}
                 hasMore={vm.getHasMoreProduct}
-                product={vm.getProduct}
+                products={vm.getProduct}
                 toggleFavourite={(id, index) => {
 
                     vm.toggleFavourite(id, index)

@@ -1,4 +1,4 @@
-import AddToUserCartParam from "../../../../domain/model/user/AddToUserCartParam";
+import AddToUserCartParam from "./AddToUserCartParam";
 
 export type CartProductIndex = number
 

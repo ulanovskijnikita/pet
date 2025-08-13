@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import GetProductByIdUseCase from "../../../domain/usecase/GetProductByIdUseCase";
 import ProductDetails from "../../../domain/model/product/ProductDetails";
 import { DEFAULT_QUANTITY, ProductQuantity } from "../../../domain/model/user/AddToUserCartParam";
-import SetQuantityCartProductParam from "../../../data/storage/model/user/SetQuantityCartProductParam";
+import SetQuantityCartProductParam from "../../../domain/model/user/SetQuantityCartProductParam";
 import { ProductId } from "../../../domain/model/product/Product";
 import AppStater from "./appViewModel/AppStater";
 import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase";

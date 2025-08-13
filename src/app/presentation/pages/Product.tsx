@@ -149,13 +149,9 @@ const Product = () => {
 
                                             return vm.setProductQuantity = q                                    
                                         }}
-                                        quantityParam={{
-
-                                            index: 0,
-                                            productId: vm.getProductDetails.id,
-                                            quantity: -1,
-                                            userId: vm.getId
-                                        }}
+                                        productId={vm.getProductDetails.id}
+                                        productIndex={0}
+                                        productQuantity={-1}
                                     />
 
                                     <QuantityForm
@@ -176,13 +172,9 @@ const Product = () => {
 
                                             return vm.setProductQuantity = q                                    
                                         }}
-                                        quantityParam={{
-
-                                            index: 0,
-                                            productId: vm.getProductDetails.id,
-                                            quantity: 1,
-                                            userId: vm.getId
-                                        }}
+                                        productId={vm.getProductDetails.id}
+                                        productIndex={0}
+                                        productQuantity={1}
                                     />
                                 </div> 
 

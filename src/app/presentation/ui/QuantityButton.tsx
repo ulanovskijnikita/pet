@@ -1,13 +1,21 @@
 import { observer } from "mobx-react-lite"
-import SetQuantityCartProductParam from "../../../data/storage/model/user/SetQuantityCartProductParam"
+import SetQuantityCartProductParam from "../../../domain/model/user/SetQuantityCartProductParam"
+import useInjection from "../context/inversify/useInjection"
+import AppViewModel from "../viewmodel/appViewModel/AppViewModel"
+import { ProductId } from "../../../domain/model/product/Product"
+import { ProductQuantity } from "../../../domain/model/user/AddToUserCartParam"
 
 type QuantityButtonProps = {
 
-    addQuantity: (quantity: SetQuantityCartProductParam) => SetQuantityCartProductParam
-    quantityParam: SetQuantityCartProductParam
+    addQuantity: (quantity: SetQuantityCartProductParam) => void
+    productIndex: number
+    productId: ProductId
+    productQuantity: ProductQuantity
 }
 
-const QuantityButton = observer((props: QuantityButtonProps) => {
+const QuantityButton = (props: QuantityButtonProps) => {
+
+    const appVm = useInjection(AppViewModel)
 
     return (
 
@@ -17,14 +25,20 @@ const QuantityButton = observer((props: QuantityButtonProps) => {
             onClick={
                 () => {
 
-                    props.addQuantity(props.quantityParam)
+                    props.addQuantity({
+
+                        index: props.productIndex,
+                        productId: props.productId,
+                        quantity: props.productQuantity,
+                        userId: appVm.getId
+                    })
                 }
             }
         >
             
             {
 
-                props.quantityParam.quantity > 0
+                props.productQuantity > 0
                     ?
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-[16px] aspect-square">
 
@@ -41,6 +55,6 @@ const QuantityButton = observer((props: QuantityButtonProps) => {
             
         </button>
     )
-})
+}
 
-export default QuantityButton
+export default observer(QuantityButton)

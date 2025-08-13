@@ -1,8 +1,8 @@
 import Product from "./Product";
 
-export type ProducUsertRating = number
+export type ProductUserRating = number
 
 export default interface GetProductsByCartRes extends Product {
 
-    userRating: ProducUsertRating | null
+    userRating: ProductUserRating | null
 }

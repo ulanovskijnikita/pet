@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import Location from "../router/Location"
-import CartItems from "../ui/CartItems"
+import CartItems from "../ui/CartItem"
 import CartViewModel from "../viewmodel/CartViewModel"
 import { useEffect } from "react"
 import FuncButton from "../ui/FuncButton"
@@ -39,10 +39,27 @@ const Cart = () => {
 
                 {
 
-                    vm.getUserCart && !!vm.getUserCart.length &&
-                    <>
-                
-                        <CartItems products={vm.getUserCart} />
+                    vm.getUserCart && !!vm.getUserCart.length && <>
+
+                        <ul className="grid gap-[20px]">
+            
+                            {
+
+                                vm.getUserCart.map(
+
+                                    (product, index) =>
+                                        <CartItems
+
+                                            key={product.id}
+                                            product={product}
+                                            productIndex={index}
+                                            changeQuantityCartProduct={(quantity) => vm.changeQuantityCartProduct = quantity}
+                                            setQuantityCartProduct={(quantity) => vm.setQuantityCartProduct = quantity}
+                                            toggleFavourite={(productId) => vm.toggleFavourite(productId, index)}
+                                        />
+                                )
+                            }
+                        </ul>
 
                         <div className="w-full h-[1px] mx-auto laptop:mx-0 bg-[#D9D9D8]"></div>
 

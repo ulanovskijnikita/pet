@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import ProductMenu from "../../ui/ProductMenu";
 import ClothingViewModel from "../../viewmodel/ClothingViewModel";
 import clothingSubCategory from "./clothingSubCategory";
-import Carts from "../../ui/Carts";
+import Cards from "../../ui/Cards";
 import LinkButton from "../../ui/LinkButton";
 import pages from "../../router/pages";
 import { useEffect } from "react";
@@ -38,13 +38,13 @@ const Clothing = () => {
                 </div>
             </menu>
 
-            <Carts
+            <Cards
 
                 setProduct={() => vm.setClothing()}
                 altTitle={"No products found with parametrs"}
                 addToCart={(id) => vm.addToUserCart = id}
                 hasMore={false}
-                product={vm.getClothing}
+                products={vm.getClothing}
                 toggleFavourite={(id, index) => {
 
                     vm.toggleFavourite(id, index)
