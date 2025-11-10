@@ -157,13 +157,9 @@ const Product = () => {
                                     <QuantityForm
 
                                         addQuantity={q => vm.changeProductQuantity = q}
-                                        quantityParam={{
-
-                                            index: 0,
-                                            productId: vm.getProductDetails.id,
-                                            quantity: vm.getProductQuantity,
-                                            userId: vm.getId
-                                        }}
+                                        productId={vm.getProductDetails.id}
+                                        productIndex={0}
+                                        productQuantity={vm.getProductQuantity}
                                     />
 
                                     <QuantityButton
