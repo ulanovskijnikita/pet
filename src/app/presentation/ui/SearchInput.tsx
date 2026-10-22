@@ -2,7 +2,7 @@ import { useNavigate } from "react-router"
 import pages from "../router/pages"
 import { observer } from "mobx-react-lite"
 import { useRef } from "react"
-import { ProductTag } from "../../../domain/model/product/Product"
+import { ProductTag } from "../../../entites/product/model/Product"
 
 type SearchInputProps = {
 

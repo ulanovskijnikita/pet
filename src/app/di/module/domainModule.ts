@@ -1,22 +1,22 @@
 import {ContainerModule} from "inversify";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase.ts";
-import ProductRepositoryImpl from "../../../data/repository/ProductRepositoryImpl.ts";
-import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase.ts";
-import EmailGatewayImpl from "../../../services/gateway/EmailGatewayImpl.ts";
-import SignInUserUseCase from "../../../domain/usecase/SignInUserUseCase.ts";
-import UserRepositoryImpl from "../../../data/repository/UserRepositoryImpl.ts";
-import GetUserUseCase from "../../../domain/usecase/GetUserUseCase.ts";
-import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase.ts";
-import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
-import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
+import ProductRepositoryImpl from "../../../features/product/repository/ProductRepositoryImpl.ts";
+import GetNewUserSecondUseCase from "../../../entites/user/usecase/GetNewUserSecondUseCase.ts";
+import UserGatewayImpl from "../../../services/gateway/UserGatewayImpl.ts";
+import SignInUserUseCase from "../../../entites/user/usecase/SignInUserUseCase.ts";
+import UserRepositoryImpl from "../../../features/repository/UserRepositoryImpl.ts";
+import GetUserUseCase from "../../../entites/user/usecase/GetUserUseCase.ts";
+import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase.ts";
+import RegisterUserUseCase from "../../../entites/user/usecase/RegisterUserUseCase.ts";
+import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase.ts";
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
-import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUseCase.ts";
-import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase.ts";
-import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase.ts";
-import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase.ts";
+import GetUserCartUseCase from "../../../entites/cart/usecase/GetUserCartUseCase.ts";
+import SetCartLengthUseCase from "../../../entites/cart/usecase/SetCartLengthUseCase.ts";
+import ChangeQuantityCartProductUseCase from "../../../entites/cart/usecase/ChangeQuantityCartProductUseCase.ts";
+import GetAnOrderUseCase from "../../../entites/cart/usecase/GetAnOrderUseCase.ts";
 import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase.ts";
 import GetProductByIdUseCase from "../../../domain/usecase/GetProductByIdUseCase.ts";
-import GetUserHistoryListUseCase from "../../../domain/usecase/GetUserHistoryListUseCase.ts";
+import GetUserHistoryListUseCase from "../../../entites/cart/usecase/GetUserHistoryListUseCase.ts";
 import GetProductsByCartUseCase from "../../../domain/usecase/GetProductsByCartUseCase.ts";
 import SetProductRatingUseCase from "../../../domain/usecase/SetProductRatingUseCase.ts";
 
@@ -34,13 +34,13 @@ const domainModule = new ContainerModule(
             .inTransientScope()
 
         options
-            .bind<GetSecondUseCase>(GetSecondUseCase)
+            .bind<GetNewUserSecondUseCase>(GetNewUserSecondUseCase)
             .toDynamicValue(
 
                 context =>
-                    new GetSecondUseCase(
+                    new GetNewUserSecondUseCase(
 
-                        context.get(EmailGatewayImpl),
+                        context.get(UserGatewayImpl),
                         context.get(UserRepositoryImpl)
                     )
             )
@@ -65,11 +65,11 @@ const domainModule = new ContainerModule(
             .inTransientScope()
 
         options
-            .bind<ToggleUserFavouriteUseCase>(ToggleUserFavouriteUseCase)
+            .bind<ToggleFavouriteProductUseCase>(ToggleFavouriteProductUseCase)
             .toDynamicValue(
 
                 context =>
-                    new ToggleUserFavouriteUseCase( context.get(UserRepositoryImpl) )
+                    new ToggleFavouriteProductUseCase( context.get(UserRepositoryImpl) )
             )
             .inTransientScope()
 
@@ -81,17 +81,17 @@ const domainModule = new ContainerModule(
                     new RegisterUserUseCase(
 
                         context.get(UserRepositoryImpl),
-                        context.get(EmailGatewayImpl),
+                        context.get(UserGatewayImpl),
                     )
             )
             .inTransientScope()
 
         options
-            .bind<AddToUserCartUseCase>(AddToUserCartUseCase)
+            .bind<AddToProgressCartUseCase>(AddToProgressCartUseCase)
             .toDynamicValue(
 
                 context =>
-                    new AddToUserCartUseCase( context.get(UserRepositoryImpl) )
+                    new AddToProgressCartUseCase( context.get(UserRepositoryImpl) )
             )
             .inTransientScope()
         
@@ -114,11 +114,11 @@ const domainModule = new ContainerModule(
             .inTransientScope()
 
         options
-            .bind<SetQuantityCartProductUseCase>(SetQuantityCartProductUseCase)
+            .bind<SetCartLengthUseCase>(SetCartLengthUseCase)
             .toDynamicValue(
 
                 context =>
-                    new SetQuantityCartProductUseCase( context.get(UserRepositoryImpl) )
+                    new SetCartLengthUseCase( context.get(UserRepositoryImpl) )
             )
             .inTransientScope()
 

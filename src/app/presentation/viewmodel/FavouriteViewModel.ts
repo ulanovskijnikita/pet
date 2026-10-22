@@ -2,11 +2,11 @@ import { makeAutoObservable, runInAction } from "mobx";
 import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase";
 import { DEFAULT_LIMIT } from "../constants/defaultLimit";
 import AppStater from "./appViewModel/AppStater";
-import Product, { ProductId } from "../../../domain/model/product/Product";
+import Product, { ProductId } from "../../../entites/product/model/Product";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset";
 import { DEFAULT_QUANTITY } from "../constants/defaultQuantity";
-import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase";
-import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase";
+import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase";
+import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase";
 import NavStater from "./navViewModel/NavStater";
 
 export default class FavouriteViewModel {
@@ -16,8 +16,8 @@ export default class FavouriteViewModel {
         private navStater: NavStater,
         private appStater: AppStater,
         private getProductByFavouriteUseCase: GetProductByFavouriteUseCase,
-        private addToUserCartUseCase: AddToUserCartUseCase,
-        private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
+        private addToUserCartUseCase: AddToProgressCartUseCase,
+        private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
     ) {
 
         makeAutoObservable(this)
@@ -80,7 +80,7 @@ export default class FavouriteViewModel {
 
                 productId: id,
                 quantity: DEFAULT_QUANTITY,
-                userId: this.appStater.getId
+                cartId: this.appStater.getId
             })
             .then(
 

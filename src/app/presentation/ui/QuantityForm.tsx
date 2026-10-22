@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite";
-import SetQuantityCartProductParam from "../../../domain/model/user/SetQuantityCartProductParam";
+import SetQuantityCartProductParam from "../../../entites/user/model/param/SetQuantityCartProductParam";
 import { useEffect, useRef } from "react";
 import useInjection from "../context/inversify/useInjection";
 import AppViewModel from "../viewmodel/appViewModel/AppViewModel";
-import { ProductId } from "../../../domain/model/product/Product";
-import { ProductQuantity } from "../../../domain/model/user/AddToUserCartParam";
+import { ProductId } from "../../../entites/product/model/Product";
+import { ProductQuantity } from "../../../entites/cart/model/param/AddToProgressCartUseCaseParam";
 
 type QuantityFormProps = {
 
@@ -43,7 +43,7 @@ const QuantityForm = (props: QuantityFormProps) => {
                         index: props.productIndex,
                         productId: props.productId,
                         quantity: quantityInput.current?.value ? +quantityInput.current?.value : 0,
-                        userId: appVm.getId
+                        cartId: appVm.getId
                     })
                 }
             }
@@ -64,7 +64,7 @@ const QuantityForm = (props: QuantityFormProps) => {
                             index: props.productIndex,
                             productId: props.productId,
                             quantity: quantityInput.current?.value ? +quantityInput.current?.value : 0,
-                            userId: appVm.getId
+                            cartId: appVm.getId
                         })
                     }
                 }

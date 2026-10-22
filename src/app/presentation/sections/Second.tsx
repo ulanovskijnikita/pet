@@ -66,12 +66,12 @@ const Second = () => {
 
                     {
 
-                        vm.getSecondRes?.action && <p>Check your email</p>
+                        vm.getSecondRes?.secondStatus && <p>Check your email</p>
                     }
 
                     {
 
-                        vm.getSecondRes && !vm.getSecondRes.action && <p>You have already left a review</p>
+                        vm.getSecondRes && !vm.getSecondRes.secondStatus && <p>You have already left a review</p>
                     }
                 </div>
                     

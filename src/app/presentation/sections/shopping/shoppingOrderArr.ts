@@ -1,4 +1,4 @@
-import ProductOrder from "../../../../domain/model/product/ProductOrder";
+import ProductOrder from "../../../../entites/product/model/ProductOrder";
 
 const shoppingOrderArr: ProductOrder[] = [
 

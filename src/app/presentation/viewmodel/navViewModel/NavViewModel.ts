@@ -1,10 +1,10 @@
 import { makeAutoObservable } from "mobx";
 import NavStater from "./NavStater";
-import { ProductTag } from "../../../../domain/model/product/Product";
-import { UserCartLength } from "../../../../domain/model/user/UserCartPreview";
-import GetUserUseCase from "../../../../domain/usecase/GetUserUseCase";
-import { ProductQuantity } from "../../../../domain/model/user/AddToUserCartParam";
-import { UserId } from "../../../../domain/model/user/User";
+import { ProductTag } from "../../../../entites/product/model/Product";
+import { CartLength } from "../../../../entites/cart/model/CartPreview";
+import GetUserUseCase from "../../../../entites/user/usecase/GetUserUseCase";
+import { ProductQuantity } from "../../../../entites/cart/model/param/AddToProgressCartUseCaseParam";
+import { UserId } from "../../../../entites/user/model/User";
 
 export default class NavViewModel implements NavStater {
 
@@ -18,7 +18,7 @@ export default class NavViewModel implements NavStater {
 
     private tag: ProductTag | null = null
 
-    private length: UserCartLength | null = null
+    private length: CartLength | null = null
 
     private id: UserId | null = null
 

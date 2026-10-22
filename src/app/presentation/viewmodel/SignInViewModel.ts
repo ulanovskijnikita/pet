@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import UserIdParam from "../../../domain/model/user/UserIdParam";
-import SignInUserUseCase from "../../../domain/usecase/SignInUserUseCase";
-import UserSignInResult from "../../../domain/model/user/UserSignInResult";
+import SignInUserUseCaseParam from "../../../entites/user/model/param/SignInUserUseCaseParam";
+import SignInUserUseCase from "../../../entites/user/usecase/SignInUserUseCase";
+import UserSignInRes from "../../../entites/user/model/res/UserSignInRes";
 import AppStater from "./appViewModel/AppStater";
 
 export default class SignInViewModel {
@@ -15,7 +15,7 @@ export default class SignInViewModel {
         makeAutoObservable(this)
     }
 
-    private result: UserSignInResult | null = null
+    private result: UserSignInRes | null = null
 
     private loaded: boolean = false
 
@@ -29,7 +29,7 @@ export default class SignInViewModel {
         return this.result
     }
 
-    set setResult(param: UserIdParam) {
+    set setResult(param: SignInUserUseCaseParam) {
 
         this.loaded = true
 

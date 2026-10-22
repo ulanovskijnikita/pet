@@ -1,14 +1,14 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import GetProductsByCartRes from "../../../domain/model/product/GetProductsByCartRes";
+import GetProductsByCartUseCaseRes from "../../../entites/product/model/res/GetProductsByCartUseCaseRes";
 import GetProductsByCartUseCase from "../../../domain/usecase/GetProductsByCartUseCase";
 import SetProductRatingUseCase from "../../../domain/usecase/SetProductRatingUseCase";
-import { UserCartId } from "../../../domain/model/user/UserCartPreview";
+import { CartId } from "../../../entites/cart/model/CartPreview";
 import AppStater from "./appViewModel/AppStater";
-import { ProductId, ProductRating } from "../../../domain/model/product/Product";
-import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase";
-import { DEFAULT_QUANTITY } from "../../../domain/model/user/AddToUserCartParam";
+import { ProductId, ProductRating } from "../../../entites/product/model/Product";
+import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase";
+import { DEFAULT_QUANTITY } from "../../../entites/cart/model/param/AddToProgressCartUseCaseParam";
 import NavStater from "./navViewModel/NavStater";
-import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase";
+import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase";
 
 type SetProductRatingParam = {
 
@@ -25,14 +25,14 @@ export default class OrderViewModel {
         private navStater: NavStater,
         private getProductsByCartUseCase: GetProductsByCartUseCase,
         private setProductRatingUseCase: SetProductRatingUseCase,
-        private addToUserCartUseCase: AddToUserCartUseCase,
-        private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
+        private addToUserCartUseCase: AddToProgressCartUseCase,
+        private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
     ) {
 
         makeAutoObservable(this)
     }
 
-    private order: GetProductsByCartRes[] | null = null
+    private order: GetProductsByCartUseCaseRes[] | null = null
 
     get getOrder() {
 
@@ -44,7 +44,7 @@ export default class OrderViewModel {
         return this.appStater.getId
     }
 
-    set setOrder(cartId: UserCartId | null) {
+    set setOrder(cartId: CartId | null) {
 
         this.order = null
 
@@ -115,7 +115,7 @@ export default class OrderViewModel {
 
                 productId: id,
                 quantity: DEFAULT_QUANTITY,
-                userId: this.appStater.getId
+                cartId: this.appStater.getId
             })
             .then(
 

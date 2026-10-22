@@ -1,12 +1,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import GetProductByIdUseCase from "../../../domain/usecase/GetProductByIdUseCase";
-import ProductDetails from "../../../domain/model/product/ProductDetails";
-import { DEFAULT_QUANTITY, ProductQuantity } from "../../../domain/model/user/AddToUserCartParam";
-import SetQuantityCartProductParam from "../../../domain/model/user/SetQuantityCartProductParam";
-import { ProductId } from "../../../domain/model/product/Product";
+import ProductDetails from "../../../entites/product/model/ProductDetails";
+import { DEFAULT_QUANTITY, ProductQuantity } from "../../../entites/cart/model/param/AddToProgressCartUseCaseParam";
+import SetQuantityCartProductParam from "../../../entites/user/model/param/SetQuantityCartProductParam";
+import { ProductId } from "../../../entites/product/model/Product";
 import AppStater from "./appViewModel/AppStater";
-import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase";
-import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase";
+import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase";
+import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase";
 import NavStater from "./navViewModel/NavStater";
 
 export default class ProductViewModel {
@@ -16,8 +16,8 @@ export default class ProductViewModel {
         private appStater: AppStater,
         private navStater: NavStater,
         private getProductByIdUseCase: GetProductByIdUseCase,
-        private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
-        private addToUserCartUseCase: AddToUserCartUseCase,
+        private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
+        private addToUserCartUseCase: AddToProgressCartUseCase,
     ) {
 
         makeAutoObservable(this)
@@ -106,7 +106,7 @@ export default class ProductViewModel {
 
                 productId: this.productDetails?.id,
                 quantity: this.productQuantity,
-                userId: this.appStater.getId
+                cartId: this.appStater.getId
             })
             .then(
 

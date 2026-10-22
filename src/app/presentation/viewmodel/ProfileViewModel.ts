@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import User from "../../../domain/model/user/User";
-import GetUserUseCase from "../../../domain/usecase/GetUserUseCase";
+import User from "../../../entites/user/model/User";
+import GetUserUseCase from "../../../entites/user/usecase/GetUserUseCase";
 
 export default class ProfileViewModel {
 

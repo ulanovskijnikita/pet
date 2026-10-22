@@ -1,14 +1,14 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase";
-import { ProductSubcategoryId } from "../../../domain/model/product/ProductSubcategory";
-import Product, { ProductId } from "../../../domain/model/product/Product";
-import { FOODIES } from "../../../domain/model/product/ProductCategory";
+import { ProductSubcategoryId } from "../../../entites/product/model/ProductSubcategory";
+import Product, { ProductId } from "../../../entites/product/model/Product";
+import { FOODIES } from "../../../entites/product/model/ProductCategory";
 import { DEFAULT_LIMIT } from "../constants/defaultLimit";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset";
 import AppStater from "./appViewModel/AppStater";
 import NavStater from "./navViewModel/NavStater";
-import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase";
-import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase";
+import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase";
+import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase";
 import { DEFAULT_QUANTITY } from "../constants/defaultQuantity";
 
 export default class FoodiesViewModel {
@@ -18,8 +18,8 @@ export default class FoodiesViewModel {
         private appStater: AppStater,
         private navStater: NavStater,
         private getProductByCategoryUseCase: GetProductByCategoryUseCase,
-        private addToUserCartUseCase: AddToUserCartUseCase,
-        private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
+        private addToUserCartUseCase: AddToProgressCartUseCase,
+        private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
     ) {
 
         makeAutoObservable(this)
@@ -78,7 +78,7 @@ export default class FoodiesViewModel {
 
                 productId: id,
                 quantity: DEFAULT_QUANTITY,
-                userId: this.appStater.getId
+                cartId: this.appStater.getId
             })
             .then(
 

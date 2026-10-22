@@ -1,15 +1,15 @@
 import {ContainerModule} from "inversify";
 import ProductRepository from "../../../domain/repository/ProductRepository.ts";
-import ProductRepositoryImpl from "../../../data/repository/ProductRepositoryImpl.ts";
-import SupabaseProductStorage from "../../../data/storage/product/SupabaseProductStorage.ts";
-import ProductStorage from "../../../data/storage/product/ProductStorage.ts";
-import supabaseClient from "../../../data/storage/consts/supabase/supabaseClient.ts";
-import UserRepository from "../../../domain/repository/UserRepository.ts";
-import UserRepositoryImpl from "../../../data/repository/UserRepositoryImpl.ts";
-import SupabaseUserStorage from "../../../data/storage/user/SupabaseUserStorage.ts";
-import UserStorage from "../../../data/storage/user/UserStorage.ts";
-import SessionUserCashe from "../../../data/storage/user/SessionUserCashe.ts";
-import UserCashe from "../../../data/storage/user/UserCashe.ts";
+import ProductRepositoryImpl from "../../../features/product/repository/ProductRepositoryImpl.ts";
+import SupabaseProductStorage from "../../../features/product/storage/SupabaseProductStorage.ts";
+import ProductStorage from "../../../features/storage/product/ProductStorage.ts";
+import supabaseClient from "../../../features/storage/consts/supabase/supabaseClient.ts";
+import UserRepository from "../../../entites/user/repository/UserRepository.ts";
+import UserRepositoryImpl from "../../../features/repository/UserRepositoryImpl.ts";
+import SupabaseUserStorage from "../../../features/storage/user/SupabaseUserStorage.ts";
+import UserStorage from "../../../features/storage/user/UserStorage.ts";
+import SessionUserCashe from "../../../features/storage/user/SessionUserCashe.ts";
+import UserCashe from "../../../features/storage/user/UserCashe.ts";
 
 const dataModule = new ContainerModule(
 

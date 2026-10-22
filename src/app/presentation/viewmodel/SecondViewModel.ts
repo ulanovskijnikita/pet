@@ -1,15 +1,15 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase";
-import GetSecondUseCaseRes from "../../../domain/model/email/GetSecondUseCaseRes";
-import { UserMessage } from "../../../domain/model/user/SendMessageParam";
-import GetUserUseCase from "../../../domain/usecase/GetUserUseCase";
+import GetNewUserSecondUseCase from "../../../entites/user/usecase/GetNewUserSecondUseCase";
+import GetNewUserSecondUseCaseRes from "../../../entites/user/model/res/GetNewUserSecondUseCaseRes";
+import { UserMessage } from "../../../entites/user/model/param/SendMessageParam";
+import GetUserUseCase from "../../../entites/user/usecase/GetUserUseCase";
 import AppStater from "./appViewModel/AppStater";
 
 export default class SecondViewModel {
 
     constructor(
 
-        private getSecondUseCase: GetSecondUseCase,
+        private getSecondUseCase: GetNewUserSecondUseCase,
         private getUserUseCase: GetUserUseCase,
         private appStater: AppStater,
     ) {
@@ -17,7 +17,7 @@ export default class SecondViewModel {
         makeAutoObservable(this)
     }
 
-    private secondRes: GetSecondUseCaseRes | null = null
+    private secondRes: GetNewUserSecondUseCaseRes | null = null
 
     private loaded: boolean = false
 

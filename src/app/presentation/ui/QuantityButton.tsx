@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite"
-import SetQuantityCartProductParam from "../../../domain/model/user/SetQuantityCartProductParam"
+import SetQuantityCartProductParam from "../../../entites/user/model/param/SetQuantityCartProductParam"
 import useInjection from "../context/inversify/useInjection"
 import AppViewModel from "../viewmodel/appViewModel/AppViewModel"
-import { ProductId } from "../../../domain/model/product/Product"
-import { ProductQuantity } from "../../../domain/model/user/AddToUserCartParam"
+import { ProductId } from "../../../entites/product/model/Product"
+import { ProductQuantity } from "../../../entites/cart/model/param/AddToProgressCartUseCaseParam"
 
 type QuantityButtonProps = {
 
@@ -30,7 +30,7 @@ const QuantityButton = (props: QuantityButtonProps) => {
                         index: props.productIndex,
                         productId: props.productId,
                         quantity: props.productQuantity,
-                        userId: appVm.getId
+                        cartId: appVm.getId
                     })
                 }
             }

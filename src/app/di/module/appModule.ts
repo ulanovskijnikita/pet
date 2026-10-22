@@ -2,20 +2,20 @@ import {ContainerModule} from "inversify";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase.ts";
 import ClothingViewModel from "../../presentation/viewmodel/ClothingViewModel.ts";
 import SignInViewModel from "../../presentation/viewmodel/SignInViewModel.ts";
-import SignInUserUseCase from "../../../domain/usecase/SignInUserUseCase.ts";
-import GetUserUseCase from "../../../domain/usecase/GetUserUseCase.ts";
+import SignInUserUseCase from "../../../entites/user/usecase/SignInUserUseCase.ts";
+import GetUserUseCase from "../../../entites/user/usecase/GetUserUseCase.ts";
 import ProfileViewModel from "../../presentation/viewmodel/ProfileViewModel.ts";
-import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase.ts";
+import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase.ts";
 import RegisterViewModel from "../../presentation/viewmodel/RegisterViewModel.ts";
-import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase.ts";
+import RegisterUserUseCase from "../../../entites/user/usecase/RegisterUserUseCase.ts";
 import FoodiesViewModel from "../../presentation/viewmodel/FoodiesViewModel.ts";
 import ShoppingViewModel from "../../presentation/viewmodel/ShoppingViewModel.ts";
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
 import CartViewModel from "../../presentation/viewmodel/CartViewModel.ts";
-import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUseCase.ts";
-import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase.ts";
-import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase.ts";
-import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase.ts";
+import GetUserCartUseCase from "../../../entites/cart/usecase/GetUserCartUseCase.ts";
+import SetCartLengthUseCase from "../../../entites/cart/usecase/SetCartLengthUseCase.ts";
+import ChangeQuantityCartProductUseCase from "../../../entites/cart/usecase/ChangeQuantityCartProductUseCase.ts";
+import GetAnOrderUseCase from "../../../entites/cart/usecase/GetAnOrderUseCase.ts";
 import FavouriteViewModel from "../../presentation/viewmodel/FavouriteViewModel.ts";
 import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase.ts";
 import ProductViewModel from "../../presentation/viewmodel/ProductViewModel.ts";
@@ -23,13 +23,13 @@ import GetProductByIdUseCase from "../../../domain/usecase/GetProductByIdUseCase
 import HistorizingViewModel from "../../presentation/viewmodel/HistorizingViewModel.ts";
 import AppViewModel from "../../presentation/viewmodel/appViewModel/AppViewModel.ts";
 import NavViewModel from "../../presentation/viewmodel/navViewModel/NavViewModel.ts";
-import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
+import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase.ts";
 import NavStater from "../../presentation/viewmodel/navViewModel/NavStater.ts";
 import AppStater from "../../presentation/viewmodel/appViewModel/AppStater.ts";
 import SecondViewModel from "../../presentation/viewmodel/SecondViewModel.ts";
-import GetSecondUseCase from "../../../domain/usecase/GetSecondUseCase.ts";
+import GetNewUserSecondUseCase from "../../../entites/user/usecase/GetNewUserSecondUseCase.ts";
 import BannerViewModel from "../../presentation/viewmodel/BannerViewModel.ts";
-import GetUserHistoryListUseCase from "../../../domain/usecase/GetUserHistoryListUseCase.ts";
+import GetUserHistoryListUseCase from "../../../entites/cart/usecase/GetUserHistoryListUseCase.ts";
 import HeroViewModel from "../../presentation/viewmodel/HeroViewModel.ts";
 import FooterViewModel from "../../presentation/viewmodel/FooterViewModel.ts";
 import OrderViewModel from "../../presentation/viewmodel/OrderViewModel.ts";
@@ -50,8 +50,8 @@ const appModule = new ContainerModule(
                         context.get(AppViewModel),
                         context.get(NavViewModel),
                         context.get(GetProductByCategoryUseCase),
-                        context.get(AddToUserCartUseCase),
-                        context.get(ToggleUserFavouriteUseCase)
+                        context.get(AddToProgressCartUseCase),
+                        context.get(ToggleFavouriteProductUseCase)
                     )
             )
             .inSingletonScope()
@@ -87,7 +87,7 @@ const appModule = new ContainerModule(
                 context =>
                     new SecondViewModel(
 
-                        context.get(GetSecondUseCase),
+                        context.get(GetNewUserSecondUseCase),
                         context.get(GetUserUseCase),
                         context.get(AppViewModel)
                     )
@@ -129,10 +129,10 @@ const appModule = new ContainerModule(
                         context.get(NavViewModel),
                         context.get(AppViewModel),
                         context.get(GetUserCartUseCase),
-                        context.get(SetQuantityCartProductUseCase),
+                        context.get(SetCartLengthUseCase),
                         context.get(ChangeQuantityCartProductUseCase),
                         context.get(GetAnOrderUseCase),
-                        context.get(ToggleUserFavouriteUseCase),
+                        context.get(ToggleFavouriteProductUseCase),
                     )
             )
             .inSingletonScope()
@@ -159,8 +159,8 @@ const appModule = new ContainerModule(
                         context.get(AppViewModel),
                         context.get(NavViewModel),
                         context.get(GetProductByCategoryUseCase),
-                        context.get(AddToUserCartUseCase),
-                        context.get(ToggleUserFavouriteUseCase),
+                        context.get(AddToProgressCartUseCase),
+                        context.get(ToggleFavouriteProductUseCase),
                     )
             )
             .inSingletonScope()
@@ -175,8 +175,8 @@ const appModule = new ContainerModule(
                         context.get(NavViewModel),
                         context.get(AppViewModel),
                         context.get(GetProductByFilterUseCase),
-                        context.get(AddToUserCartUseCase),
-                        context.get(ToggleUserFavouriteUseCase),
+                        context.get(AddToProgressCartUseCase),
+                        context.get(ToggleFavouriteProductUseCase),
                     )
             )
             .inSingletonScope()
@@ -228,8 +228,8 @@ const appModule = new ContainerModule(
                         context.get(NavViewModel),
                         context.get(GetProductsByCartUseCase),
                         context.get(SetProductRatingUseCase),
-                        context.get(AddToUserCartUseCase),
-                        context.get(ToggleUserFavouriteUseCase),
+                        context.get(AddToProgressCartUseCase),
+                        context.get(ToggleFavouriteProductUseCase),
                     )
             )
             .inSingletonScope()
@@ -244,8 +244,8 @@ const appModule = new ContainerModule(
                         context.get(NavViewModel),
                         context.get(AppViewModel),
                         context.get(GetProductByFavouriteUseCase),
-                        context.get(AddToUserCartUseCase),
-                        context.get(ToggleUserFavouriteUseCase),
+                        context.get(AddToProgressCartUseCase),
+                        context.get(ToggleFavouriteProductUseCase),
                     )
             )
             .inSingletonScope()
@@ -260,8 +260,8 @@ const appModule = new ContainerModule(
                         context.get(AppViewModel),
                         context.get(NavViewModel),
                         context.get(GetProductByIdUseCase),
-                        context.get(ToggleUserFavouriteUseCase),
-                        context.get(AddToUserCartUseCase),
+                        context.get(ToggleFavouriteProductUseCase),
+                        context.get(AddToProgressCartUseCase),
                     )
             )
             .inSingletonScope()

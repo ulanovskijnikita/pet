@@ -1,16 +1,16 @@
 import { makeAutoObservable, runInAction } from "mobx"
-import { ProductCategoryId } from "../../../domain/model/product/ProductCategory"
-import { ProductSubcategoryId } from "../../../domain/model/product/ProductSubcategory"
+import { ProductCategoryId } from "../../../entites/product/model/ProductCategory"
+import { ProductSubcategoryId } from "../../../entites/product/model/ProductSubcategory"
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase"
-import { ProductOrderId } from "../../../domain/model/product/ProductOrder"
-import Product, { ProductId } from "../../../domain/model/product/Product"
+import { ProductOrderId } from "../../../entites/product/model/ProductOrder"
+import Product, { ProductId } from "../../../entites/product/model/Product"
 import { DEFAULT_OFFSET } from "../constants/defaultOffset"
 import NavStater from "./navViewModel/NavStater"
 import { DEFAULT_LIMIT } from "../constants/defaultLimit"
 import AppStater from "./appViewModel/AppStater"
-import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase"
+import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase"
 import { DEFAULT_QUANTITY } from "../constants/defaultQuantity"
-import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase"
+import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase"
 
 export default class ShoppingViewModel {
 
@@ -19,8 +19,8 @@ export default class ShoppingViewModel {
         private navStater: NavStater,
         private appStater: AppStater,
         private getProductByFilterUseCase: GetProductByFilterUseCase,
-        private addToUserCartUseCase: AddToUserCartUseCase,
-        private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
+        private addToUserCartUseCase: AddToProgressCartUseCase,
+        private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
     ) {
 
         makeAutoObservable(this)
@@ -137,7 +137,7 @@ export default class ShoppingViewModel {
 
                 productId: id,
                 quantity: DEFAULT_QUANTITY,
-                userId: this.appStater.getId
+                cartId: this.appStater.getId
             })
             .then(
 

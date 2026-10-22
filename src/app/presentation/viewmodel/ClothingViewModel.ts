@@ -1,15 +1,15 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase.ts";
-import Product, { ProductId } from "../../../domain/model/product/Product.ts";
-import { ProductSubcategoryId } from "../../../domain/model/product/ProductSubcategory.ts";
+import Product, { ProductId } from "../../../entites/product/model/Product.ts";
+import { ProductSubcategoryId } from "../../../entites/product/model/ProductSubcategory.ts";
 import AppStater from "./appViewModel/AppStater.ts";
-import { CLOTHING } from "../../../domain/model/product/ProductCategory.ts";
+import { CLOTHING } from "../../../entites/product/model/ProductCategory.ts";
 import { DEFAULT_LIMIT_OVERVIEW } from "../constants/defaultLimit.ts";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset.ts";
 import NavStater from "./navViewModel/NavStater.ts";
-import AddToUserCartUseCase from "../../../domain/usecase/AddToUserCartUseCase.ts";
+import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase.ts";
 import { DEFAULT_QUANTITY } from "../constants/defaultQuantity.ts";
-import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase.ts";
+import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase.ts";
 
 export default class ClothingViewModel {
 
@@ -18,8 +18,8 @@ export default class ClothingViewModel {
         private appStater: AppStater,
         private navStater: NavStater,
         private getProductByCategoryUseCase: GetProductByCategoryUseCase,
-        private addToUserCartUseCase: AddToUserCartUseCase,
-        private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
+        private addToUserCartUseCase: AddToProgressCartUseCase,
+        private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
     ) {
         
         makeAutoObservable(this)
@@ -75,7 +75,7 @@ export default class ClothingViewModel {
 
                 productId: id,
                 quantity: DEFAULT_QUANTITY,
-                userId: this.appStater.getId
+                cartId: this.appStater.getId
             })
             .then(
 

@@ -1,13 +1,13 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import GetUserCartUseCase from "../../../domain/usecase/GetUserCartUseCase";
-import UserCart from "../../../domain/model/user/UserCart";
-import SetQuantityCartProductUseCase from "../../../domain/usecase/SetQuantityCartProductUseCase";
-import SetQuantityCartProductParam from "../../../domain/model/user/SetQuantityCartProductParam";
-import ChangeQuantityCartProductUseCase from "../../../domain/usecase/ChangeQuantityCartProductUseCase";
-import GetAnOrderUseCase from "../../../domain/usecase/GetAnOrderUseCase";
+import GetUserCartUseCase from "../../../entites/cart/usecase/GetUserCartUseCase";
+import Cart from "../../../entites/cart/model/Cart";
+import SetCartLengthUseCase from "../../../entites/cart/usecase/SetCartLengthUseCase";
+import SetQuantityCartProductParam from "../../../entites/user/model/param/SetQuantityCartProductParam";
+import ChangeQuantityCartProductUseCase from "../../../entites/cart/usecase/ChangeQuantityCartProductUseCase";
+import GetAnOrderUseCase from "../../../entites/cart/usecase/GetAnOrderUseCase";
 import NavStater from "./navViewModel/NavStater";
-import ToggleUserFavouriteUseCase from "../../../domain/usecase/ToggleUserFavouriteUseCase";
-import { ProductId } from "../../../domain/model/product/Product";
+import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase";
+import { ProductId } from "../../../entites/product/model/Product";
 import AppStater from "./appViewModel/AppStater";
 
 export default class CartViewModel {
@@ -17,16 +17,16 @@ export default class CartViewModel {
         private navStater: NavStater,
         private appStater: AppStater,
         private getUserCartUseCase: GetUserCartUseCase,
-        private setQuantityCartProductUseCase: SetQuantityCartProductUseCase,
+        private setQuantityCartProductUseCase: SetCartLengthUseCase,
         private changeQuantityCartProductUseCase: ChangeQuantityCartProductUseCase,
         private getAnOrderUseCase: GetAnOrderUseCase,
-        private toggleUserFavouriteUseCase: ToggleUserFavouriteUseCase,
+        private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
     ) {
 
         makeAutoObservable(this)
     }
 
-    private userCart: UserCart[] | null = null
+    private userCart: Cart[] | null = null
 
     get getCartPrice() {
 
@@ -76,7 +76,7 @@ export default class CartViewModel {
 
         this.userCart = null
 
-        const userCart: UserCart[] = yield this.getUserCartUseCase.execute( this.getId )
+        const userCart: Cart[] = yield this.getUserCartUseCase.execute( this.getId )
         
         this.userCart = userCart
     }

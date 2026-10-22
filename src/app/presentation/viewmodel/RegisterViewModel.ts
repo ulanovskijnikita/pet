@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import RegisterUserUseCase from "../../../domain/usecase/RegisterUserUseCase";
-import ValidateUserResult from "../../../domain/model/user/RegisterUserUseCaseResult";
-import RegisterUserUseCaseParam from "../../../domain/model/user/RegisterUserUseCaseParam";
+import RegisterUserUseCase from "../../../entites/user/usecase/RegisterUserUseCase";
+import ValidateUserResult from "../../../entites/user/model/res/RegisterUserUseCaseRes";
+import RegisterUserUseCaseParam from "../../../entites/user/model/param/RegisterUserUseCaseParam";
 
 export default class RegisterViewModel {
 

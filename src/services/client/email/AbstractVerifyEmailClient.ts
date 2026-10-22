@@ -10,7 +10,7 @@ export default class AbstractVerifyEmailClient implements VerifyEmailClient {
         
         const url = `https://emailvalidation.abstractapi.com/v1/?api_key=${import.meta.env.VITE_ABSTRACT_KEY}&email=${email}`
         
-        const response = await fetch(url)
+        const response = await fetch( url )
 
         const data = await response.json()
 

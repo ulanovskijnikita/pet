@@ -2,14 +2,14 @@ import { observer } from "mobx-react-lite"
 import { memo } from "react"
 import { Link } from "react-router"
 import pages from "../router/pages"
-import GetProductsByCartRes, { ProductUserRating } from "../../../domain/model/product/GetProductsByCartRes"
+import GetProductsByCartUseCaseRes, { ProductUserRating } from "../../../entites/product/model/res/GetProductsByCartUseCaseRes"
 import FavouriteButton from "./FavouriteButton"
 import FuncButton from "./FuncButton"
-import { ProductId } from "../../../domain/model/product/Product"
+import { ProductId } from "../../../entites/product/model/Product"
 
 type OrderCardProps = {
 
-    product: GetProductsByCartRes
+    product: GetProductsByCartUseCaseRes
     toggleFavourite(productId: ProductId): void
     addToCart(productId: ProductId): void
     setProductRating(productId: ProductId, productRating: ProductUserRating): void

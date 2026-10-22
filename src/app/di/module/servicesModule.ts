@@ -1,6 +1,6 @@
 import {ContainerModule} from "inversify";
-import EmailGateway from "../../../domain/gateway/EmailGateway.ts";
-import EmailGatewayImpl from "../../../services/gateway/EmailGatewayImpl.ts";
+import UserGateway from "../../../entites/user/gateway/UserGateway.ts";
+import UserGatewayImpl from "../../../services/gateway/UserGatewayImpl.ts";
 import EmailjsSendEmailClient from "../../../services/client/email/EmailjsSendEmailClient.ts";
 import AbstractVerifyEmailClient from "../../../services/client/email/AbstractVerifyEmailClient.ts";
 import SendEmailClient from "../../../services/client/email/SendEmailClient.ts";
@@ -11,10 +11,10 @@ const servicesModule = new ContainerModule(
     options => {
 
         options
-            .bind<EmailGateway>(EmailGatewayImpl)
+            .bind<UserGateway>(UserGatewayImpl)
             .toDynamicValue(
 
-                (context) => new EmailGatewayImpl( 
+                (context) => new UserGatewayImpl( 
 
                     context.get(EmailjsSendEmailClient),
                     context.get(AbstractVerifyEmailClient),
