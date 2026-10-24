@@ -1,27 +1,27 @@
-import { SupabaseProductIsFavorites } from "../../product/storage/model/SupabaseProduct"
-import AuthenticationSupabaseUserParam from "./model/param/AuthenticationSupabaseUserParam"
-import RegisterSupabaseUserParam from "./model/param/RegisterSupabaseUserParam"
-import ValidateSupabaseUserParam from "./model/param/ValidateSupabaseUserParam"
-import IdentitySupabaseUserRes from "./model/res/IdentitySupabaseUserRes"
-import ValidateSupabaseUserRes from "./model/res/ValidateSupabaseUserRes"
-import { SupabaseUserEmail, SupabaseUserId, SupabaseUserRateMessage, SupabaseUserStatus } from "./model/SupabaseUser"
-import AuthenticationSupabaseUserRes from "./model/res/AuthenticationSupabaseUserRes"
-import AuthorizationSupabaseUserRes from "./model/res/AuthorizationSupabaseUserRes"
-import ToggleFavouriteSupabaseProduct from "./model/param/ToggleFavouriteSupabaseProduct"
+import { StorageProductIsFavorites } from "../../product/storage/model/StorageProduct"
+import AuthenticationStorageUserParam from "./model/param/AuthenticationStorageUserParam"
+import RegisterStorageUserParam from "./model/param/RegisterStorageUserParam"
+import ValidateStorageUserParam from "./model/param/ValidateStorageUserParam"
+import IdentityStorageUserRes from "./model/res/IdentityStorageUserRes"
+import ValidateStorageUserRes from "./model/res/ValidateStorageUserRes"
+import { StorageUserEmail, StorageUserId, StorageUserRateMessage, StorageUserStatus } from "./model/StorageUser"
+import AuthenticationStorageUserRes from "./model/res/AuthenticationStorageUserRes"
+import AuthorizationStorageUserRes from "./model/res/AuthorizationStorageUserRes"
+import ToggleFavouriteStorageProduct from "./model/param/ToggleFavouriteStorageProduct"
 
 export default interface UserStorage {
 
-    validate(param: ValidateSupabaseUserParam): Promise<ValidateSupabaseUserRes>
+    validate(param: ValidateStorageUserParam): Promise<ValidateStorageUserRes>
 
-    identity(email: SupabaseUserEmail): Promise<IdentitySupabaseUserRes>
+    identity(email: StorageUserEmail): Promise<IdentityStorageUserRes>
     
-    authentication(param: AuthenticationSupabaseUserParam): Promise<AuthenticationSupabaseUserRes>
+    authentication(param: AuthenticationStorageUserParam): Promise<AuthenticationStorageUserRes>
 
-    authorization(id: SupabaseUserId): Promise<AuthorizationSupabaseUserRes>
+    authorization(id: StorageUserId): Promise<AuthorizationStorageUserRes>
 
-    toggleFavouriteProduct(param: ToggleFavouriteSupabaseProduct): Promise<SupabaseProductIsFavorites>
+    toggleFavouriteStorageProduct(param: ToggleFavouriteStorageProduct): Promise<StorageProductIsFavorites>
 
-    register(param: RegisterSupabaseUserParam): Promise<void>
+    register(param: RegisterStorageUserParam): Promise<void>
 
-    setRateMessage(id: SupabaseUserId, message: SupabaseUserRateMessage): Promise<SupabaseUserStatus>
+    setRateMessage(id: StorageUserId, message: StorageUserRateMessage): Promise<StorageUserStatus>
 }

@@ -1,14 +1,14 @@
 import { Database } from "../../../shared/model/database.types.ts";
-import GetSupabaseProductByCategoryParam from "./model/param/GetSupabaseProductByCategoryParam.ts";
-import GetSupabaseProductByFavouriteParam from "./model/param/GetSupabaseProductByFavouriteParam.ts";
-import GetSupabaseProductByFilterParam from "./model/param/GetSupabaseProductByFilterParam.ts";
-import GetSupabaseProductByIdParam from "./model/param/GetSupabaseProductByIdParam.ts";
-import GetSupabaseProductsByCartParam from "./model/param/GetSupabaseProductsByCartParam.ts";
-import SetSupabaseProductRatingParam from "./model/param/SetSupabaseProductRatingParam.ts";
-import GetSupabaseProductsByCartRes from "./model/res/GetSupabaseProductsByCartRes.ts";
-import SetSupabaseProductRatingRes from "./model/res/SetSupabaseProductRatingRes.ts";
-import SupabaseProduct from "./model/SupabaseProduct.ts";
-import SupabaseProductDetails from "./model/SupabaseProductDetails.ts";
+import GetStorageProductByCategoryParam from "./model/param/GetStorageProductByCategoryParam.ts";
+import GetStorageProductByFavouriteParam from "./model/param/GetStorageProductByFavouriteParam.ts";
+import GetStorageProductByFilterParam from "./model/param/GetStorageProductByFilterParam.ts";
+import GetStorageProductByIdParam from "./model/param/GetStorageProductByIdParam.ts";
+import GetStorageProductsByCartParam from "./model/param/GetStorageProductsByCartParam.ts";
+import SetStorageProductRatingParam from "./model/param/SetStorageProductRatingParam.ts";
+import GetStorageProductsByCartRes from "./model/res/GetStorageProductsByCartRes.ts";
+import SetStorageProductRatingRes from "./model/res/SetStorageProductRatingRes.ts";
+import StorageProduct from "./model/StorageProduct.ts";
+import StorageProductDetails from "./model/StorageProductDetails.ts";
 import ProductStorage from "./ProductStorage.ts";
 import {SupabaseClient} from "@supabase/supabase-js";
 
@@ -19,7 +19,7 @@ export default class SupabaseProductStorage implements ProductStorage {
         private supabaseClient: SupabaseClient<Database>
     ) {}
 
-    async getRating(param: SetSupabaseProductRatingParam): Promise<SetSupabaseProductRatingRes> {
+    async getRating(param: SetStorageProductRatingParam): Promise<SetStorageProductRatingRes> {
         
         const {data} = await this.supabaseClient.rpc("set_product_rating", {
 
@@ -31,7 +31,7 @@ export default class SupabaseProductStorage implements ProductStorage {
         return data![0]
     }
 
-    async getByCart(param: GetSupabaseProductsByCartParam): Promise<GetSupabaseProductsByCartRes[]> {
+    async getByCart(param: GetStorageProductsByCartParam): Promise<GetStorageProductsByCartRes[]> {
         
         const {data} = await this.supabaseClient.rpc("get_products_by_cart", {
 
@@ -42,7 +42,7 @@ export default class SupabaseProductStorage implements ProductStorage {
         return data!
     }
 
-    async getById(param: GetSupabaseProductByIdParam): Promise<SupabaseProductDetails | null> {
+    async getById(param: GetStorageProductByIdParam): Promise<StorageProductDetails | null> {
         
         const {data} = await this.supabaseClient.rpc("get_product_by_id", {
 
@@ -59,7 +59,7 @@ export default class SupabaseProductStorage implements ProductStorage {
         }
     }
 
-    async getByFavourite(param: GetSupabaseProductByFavouriteParam): Promise<SupabaseProduct[]> {
+    async getByFavourite(param: GetStorageProductByFavouriteParam): Promise<StorageProduct[]> {
         
         const { data } = await this.supabaseClient.rpc("get_products_by_favourite", {
 
@@ -71,7 +71,7 @@ export default class SupabaseProductStorage implements ProductStorage {
         return data ? data : []
     }
 
-    async getByFilter(param: GetSupabaseProductByFilterParam): Promise<SupabaseProduct[]> {
+    async getByFilter(param: GetStorageProductByFilterParam): Promise<StorageProduct[]> {
 
         const [col, ascending] = param.order.split(' ');
 
@@ -96,7 +96,7 @@ export default class SupabaseProductStorage implements ProductStorage {
         return data ? data : []
     }
 
-    async getByCategory(param: GetSupabaseProductByCategoryParam): Promise<SupabaseProduct[]> {
+    async getByCategory(param: GetStorageProductByCategoryParam): Promise<StorageProduct[]> {
 
         const { data } = await this.supabaseClient
             .rpc('get_products_by_category', {

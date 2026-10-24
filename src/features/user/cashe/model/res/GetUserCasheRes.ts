@@ -1,5 +1,5 @@
-import SessionUser from "../SessionUser";
+import CasheUser from "../CasheUser";
 
-type GetUserCasheRes = SessionUser | null
+type GetUserCasheRes = CasheUser | null
 
 export default GetUserCasheRes

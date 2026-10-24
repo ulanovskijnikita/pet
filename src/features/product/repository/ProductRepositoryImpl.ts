@@ -1,16 +1,16 @@
 import Product from "../../../entities/product/model/Product.ts";
-import SupabaseProduct from "../model/SupabaseProduct.ts";
+import StorageProduct from "../model/StorageProduct.ts";
 import GetProductByCategoryUseCaseParam from "../../../entities/product/model/param/GetProductByCategoryUseCaseParam.ts";
 import GetProductByFilterUseCaseParam from "../../../entities/product/model/param/GetProductByFilterUseCaseParam.ts";
 import GetProductByFavouriteUseCaseParam from "../../../entities/product/model/param/GetProductByFavouriteUseCaseParam.ts";
 import GetProductByIdUseCaseParam from "../../../entities/product/model/param/GetProductByIdUseCaseParam.ts";
 import ProductDetails from "../../../entities/product/model/ProductDetails.ts";
-import SupabaseProductDetails from "../model/SupabaseProductDetails.ts";
+import StorageProductDetails from "../model/StorageProductDetails.ts";
 import GetProductsByCartUseCaseParam from "../../../entities/product/model/param/GetProductsByCartUseCaseParam.ts";
 import GetProductsByCartUseCaseRes from "../../../entities/product/model/res/GetProductsByCartUseCaseRes.ts";
-import GetSupabaseProductsByCartRes from "../model/res/GetSupabaseProductsByCartRes.ts";
+import GetStorageProductsByCartRes from "../model/res/GetStorageProductsByCartRes.ts";
 import SetProductRatingUseCaseParam from "../../../entities/product/model/param/SetProductRatingUseCaseParam.ts";
-import SetSupabaseProductRatingRes from "../model/res/SetSupabaseProductRatingRes.ts";
+import SetStorageProductRatingRes from "../model/res/SetStorageProductRatingRes.ts";
 import ProductRepository from "../../../entities/product/repository/ProductRepository.ts";
 import SetProductRatingUseCaseRes from "../../../entities/product/model/res/SetProductRatingUseCaseRes.ts";
 import ProductStorage from "../storage/ProductStorage.ts";
@@ -26,42 +26,42 @@ export default class ProductRepositoryImpl implements ProductRepository {
         
         const setSupabaseProductRatingRes = await this.supabaseProductStorage.getRating(param)
 
-        return this.mapSetSupabaseProductRatingResToSetProductRatingRes( setSupabaseProductRatingRes )
+        return this.mapSetStorageProductRatingResToSetProductRatingRes( setSupabaseProductRatingRes )
     }
 
     async getByCart(param: GetProductsByCartUseCaseParam): Promise<GetProductsByCartUseCaseRes[]> {
         
         const getSupabaseProductByCartRes = await this.supabaseProductStorage.getByCart(param)
 
-        return this.mapGetSupabaseProductByCartResToGetProductByCartRes( getSupabaseProductByCartRes )
+        return this.mapGetStorageProductByCartResToGetProductByCartRes( getSupabaseProductByCartRes )
     }
 
     async getById(param: GetProductByIdUseCaseParam): Promise<ProductDetails | null> {
         
-        return this.mapSupabaseProductDetailsToProductDetails( await this.supabaseProductStorage.getById(param) )
+        return this.mapStorageProductDetailsToProductDetails( await this.supabaseProductStorage.getById(param) )
     }
 
     async getByFavourite(param: GetProductByFavouriteUseCaseParam): Promise<Product[]> {
         
         const supabaseProduct = await this.supabaseProductStorage.getByFavourite(param)
 
-        return this.mapSupabaseProductToProduct( supabaseProduct )
+        return this.mapStorageProductToProduct( supabaseProduct )
     }
 
     async getByFilter(param: GetProductByFilterUseCaseParam): Promise<Product[]> {
         
         const supabaseProduct = await this.supabaseProductStorage.getByFilter(param)
 
-        return this.mapSupabaseProductToProduct( supabaseProduct )
+        return this.mapStorageProductToProduct( supabaseProduct )
     }
 
     async getByCategory(param: GetProductByCategoryUseCaseParam): Promise<Product[]> {
         const supabaseProduct = await this.supabaseProductStorage.getByCategory(param)
 
-        return this.mapSupabaseProductToProduct(supabaseProduct)
+        return this.mapStorageProductToProduct(supabaseProduct)
     }
 
-    private mapSetSupabaseProductRatingResToSetProductRatingRes(setSupabaseProductRatingRes: SetSupabaseProductRatingRes): SetProductRatingUseCaseRes {
+    private mapSetStorageProductRatingResToSetProductRatingRes(setSupabaseProductRatingRes: SetStorageProductRatingRes): SetProductRatingUseCaseRes {
 
         return {
 
@@ -70,7 +70,7 @@ export default class ProductRepositoryImpl implements ProductRepository {
         }
     }
 
-    private mapGetSupabaseProductByCartResToGetProductByCartRes(getSupabaseProductByCartRes: GetSupabaseProductsByCartRes[]): GetProductsByCartUseCaseRes[] {
+    private mapGetStorageProductByCartResToGetProductByCartRes(getSupabaseProductByCartRes: GetStorageProductsByCartRes[]): GetProductsByCartUseCaseRes[] {
 
         return getSupabaseProductByCartRes.map(
 
@@ -92,7 +92,7 @@ export default class ProductRepositoryImpl implements ProductRepository {
         )
     }
 
-    private mapSupabaseProductDetailsToProductDetails(supabaseProductDetails: SupabaseProductDetails | null): ProductDetails | null {
+    private mapStorageProductDetailsToProductDetails(supabaseProductDetails: StorageProductDetails | null): ProductDetails | null {
 
         if (supabaseProductDetails) {
             return {
@@ -115,7 +115,7 @@ export default class ProductRepositoryImpl implements ProductRepository {
         }
     }
 
-    private mapSupabaseProductToProduct(supabaseProducts: SupabaseProduct[]): Product[] {
+    private mapStorageProductToProduct(supabaseProducts: StorageProduct[]): Product[] {
 
         return supabaseProducts.map(it => {
 

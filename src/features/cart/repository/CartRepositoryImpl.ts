@@ -6,8 +6,8 @@ import { UserId } from "../../../entities/user/model/User";
 import CartCashe from "../cashe/CartCashe";
 import CasheCart from "../cashe/model/CasheCart";
 import CartStorage from "../storage/CartStorage";
-import SupabaseCart from "../storage/model/SupabaseCart";
-import SupabaseCartHistory from "../storage/model/SupabaseCartHistory";
+import StorageCart from "../storage/model/StorageCart";
+import StorageCartHistory from "../storage/model/StorageCartHistory";
 
 export default class CartRepositoryImpl implements CartRepository {
 
@@ -27,23 +27,23 @@ export default class CartRepositoryImpl implements CartRepository {
         
         const supabaseCart = await this.cartStorage.getProgressCart( id )
 
-        this.cartCashe.setProgressCart(casheCartId, this.mapSupabaseCartToCasheCart( supabaseCart ))
+        this.cartCashe.setProgressCart(casheCartId, this.mapStorageCartToCasheCart( supabaseCart ))
 
-        return this.mapSupabaseCartToCart( supabaseCart )
+        return this.mapStorageCartToCart( supabaseCart )
     }
 
     async makeOrder(id: CartId): Promise<Cart> {
 
         const supabaseCart = await this.cartStorage.makeOrder( id )
 
-        return this.mapSupabaseCartToCart( supabaseCart )
+        return this.mapStorageCartToCart( supabaseCart )
     }
 
     async getHistory(id: UserId): Promise<CartHistory> {
         
         const supabaseCartHistory = await this.cartStorage.getHistory( id )
 
-        return this.mapSupabaseCartHistoryToCartHistory( supabaseCartHistory )
+        return this.mapStorageCartHistoryToCartHistory( supabaseCartHistory )
     }
 
     async setProductQuantity(param: SetProductQuantityParam): Promise<CartLength> {
@@ -80,7 +80,7 @@ export default class CartRepositoryImpl implements CartRepository {
         }
     }
 
-    private mapSupabaseCartHistoryToCartHistory(supabaseCartHistory: SupabaseCartHistory): CartHistory {
+    private mapStorageCartHistoryToCartHistory(supabaseCartHistory: StorageCartHistory): CartHistory {
 
         return supabaseCartHistory.map(supabaseCartHistoryItem =>
 
@@ -94,7 +94,7 @@ export default class CartRepositoryImpl implements CartRepository {
         )
     }
 
-    private mapSupabaseCartToCasheCart(supabaseCart: SupabaseCart): CasheCart {
+    private mapStorageCartToCasheCart(supabaseCart: StorageCart): CasheCart {
 
         return {
 
@@ -123,7 +123,7 @@ export default class CartRepositoryImpl implements CartRepository {
         }
     }
 
-    private mapSupabaseCartToCart(supabaseCart: SupabaseCart): Cart {
+    private mapStorageCartToCart(supabaseCart: StorageCart): Cart {
 
         return {
 

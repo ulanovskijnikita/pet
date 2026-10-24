@@ -1,10 +1,10 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import CartStorage from "./CartStorage";
 import { Database } from "../../../shared/model/database.types";
-import { SupabaseUserId } from "../../user/storage/model/SupabaseUser";
-import SetSupabaseProductQuantityParam from "./model/param/SetSupabaseProductQuantityParam";
-import SupabaseCart, { SupabaseCartId, SupabaseCartLength } from "./model/SupabaseCart";
-import SupabaseCartHistory from "./model/SupabaseCartHistory";
+import { StorageUserId } from "../../user/storage/model/StorageUser";
+import SetStorageProductQuantityParam from "./model/param/SetStorageProductQuantityParam";
+import StorageCart, { StorageCartId, StorageCartLength } from "./model/StorageCart";
+import StorageCartHistory from "./model/StorageCartHistory";
 
 export default class SupabaseCartStorage implements CartStorage {
 
@@ -13,7 +13,7 @@ export default class SupabaseCartStorage implements CartStorage {
         private supabaseClient: SupabaseClient<Database>
     ) {}
 
-    async setProductQuantity(param: SetSupabaseProductQuantityParam): Promise<SupabaseCartLength> {
+    async setProductQuantity(param: SetStorageProductQuantityParam): Promise<StorageCartLength> {
         
         const {data} = await this.supabaseClient.rpc("set_progress_cart_product_quantity", {
 
@@ -25,33 +25,33 @@ export default class SupabaseCartStorage implements CartStorage {
         return data![0].cart_length
     }
 
-    async getProgressCart(id: SupabaseUserId): Promise<SupabaseCart> {
+    async getProgressCart(id: StorageUserId): Promise<StorageCart> {
         
         const {data} = await this.supabaseClient.rpc("get_user_progress_cart", {
 
             u_id: id
         })
 
-        return data![0] as unknown as SupabaseCart
+        return data![0] as unknown as StorageCart
     }
 
-    async makeOrder(id: SupabaseCartId): Promise<SupabaseCart> {
+    async makeOrder(id: StorageCartId): Promise<StorageCart> {
         
         const {data} = await this.supabaseClient.rpc("make_user_order", {
 
             p_cart_id: id
         })
 
-        return data![0] as unknown as SupabaseCart
+        return data![0] as unknown as StorageCart
     }
 
-    async getHistory(id: SupabaseUserId): Promise<SupabaseCartHistory> {
+    async getHistory(id: StorageUserId): Promise<StorageCartHistory> {
         
         const {data} = await this.supabaseClient.rpc("get_history_list", {
 
             u_id: id
         })
 
-        return data as SupabaseCartHistory ?? []
+        return data as StorageCartHistory ?? []
     }
 }

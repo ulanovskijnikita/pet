@@ -1,15 +1,15 @@
-import { SupabaseUserId } from "../../user/storage/model/SupabaseUser"
-import SetSupabaseProductQuantityParam from "./model/param/SetSupabaseProductQuantityParam"
-import SupabaseCart, { SupabaseCartId, SupabaseCartLength } from "./model/SupabaseCart"
-import SupabaseCartHistory from "./model/SupabaseCartHistory"
+import { StorageUserId } from "../../user/storage/model/StorageUser"
+import SetStorageProductQuantityParam from "./model/param/SetStorageProductQuantityParam"
+import StorageCart, { StorageCartId, StorageCartLength } from "./model/StorageCart"
+import StorageCartHistory from "./model/StorageCartHistory"
 
 export default interface CartStorage {
 
-    getProgressCart(id: SupabaseUserId): Promise<SupabaseCart>
+    getProgressCart(id: StorageUserId): Promise<StorageCart>
 
-    makeOrder(id: SupabaseCartId): Promise<SupabaseCart>
+    makeOrder(id: StorageCartId): Promise<StorageCart>
 
-    getHistory(id: SupabaseUserId): Promise<SupabaseCartHistory>
+    getHistory(id: StorageUserId): Promise<StorageCartHistory>
 
-    setProductQuantity(param: SetSupabaseProductQuantityParam): Promise<SupabaseCartLength>
+    setProductQuantity(param: SetStorageProductQuantityParam): Promise<StorageCartLength>
 }

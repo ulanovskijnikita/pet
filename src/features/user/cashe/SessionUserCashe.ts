@@ -1,4 +1,4 @@
-import SessionUser, { SessionUserStatus, SessionUserId, SessionUserEmail, SessionUserName } from "./model/SessionUser";
+import CasheUser, { CasheUserStatus, CasheUserId, CasheUserEmail, CasheUserName } from "./model/CasheUser";
 import SESSION_USER_EMAIL from "./const/sessionUserEmail";
 import SESSION_USER_ID from "./const/sessionUserId";
 import SESSION_USER_NAME from "./const/sessionUserName";
@@ -7,12 +7,12 @@ import UserCashe from "./UserCashe";
 
 export default class SessionUserCashe implements UserCashe {
 
-    setStatus(status: SessionUserStatus): void {
+    setStatus(status: CasheUserStatus): void {
         
         sessionStorage.setItem(SESSION_USER_STATUS, status)
     }
 
-    setUser(user: SessionUser): void {
+    setUser(user: CasheUser): void {
 
         sessionStorage.setItem(SESSION_USER_ID, user.id)
         sessionStorage.setItem(SESSION_USER_EMAIL, user.email)
@@ -20,12 +20,12 @@ export default class SessionUserCashe implements UserCashe {
         sessionStorage.setItem(SESSION_USER_STATUS, user.status)
     }
 
-    getUser(): SessionUser | null {
+    getUser(): CasheUser | null {
 
-        const id: SessionUserId | null = sessionStorage.getItem( SESSION_USER_ID )
-        const email: SessionUserEmail | null = sessionStorage.getItem( SESSION_USER_EMAIL )
-        const name: SessionUserName | null = sessionStorage.getItem( SESSION_USER_NAME )
-        const status: SessionUserStatus | null = sessionStorage.getItem( SESSION_USER_STATUS ) as SessionUserStatus
+        const id: CasheUserId | null = sessionStorage.getItem( SESSION_USER_ID )
+        const email: CasheUserEmail | null = sessionStorage.getItem( SESSION_USER_EMAIL )
+        const name: CasheUserName | null = sessionStorage.getItem( SESSION_USER_NAME )
+        const status: CasheUserStatus | null = sessionStorage.getItem( SESSION_USER_STATUS ) as CasheUserStatus
 
         if (id && email && name && status) {
 

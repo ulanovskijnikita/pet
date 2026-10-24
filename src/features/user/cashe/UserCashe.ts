@@ -1,11 +1,11 @@
 import GetUserCasheRes from "./model/res/GetUserCasheRes"
-import SessionUser, { SessionUserStatus } from "./model/SessionUser"
+import CasheUser, { CasheUserStatus } from "./model/CasheUser"
 
 export default interface UserCashe {
 
     getUser(): GetUserCasheRes
 
-    setUser(user: SessionUser): void
+    setUser(user: CasheUser): void
 
-    setStatus(status: SessionUserStatus): void
+    setStatus(status: CasheUserStatus): void
 }

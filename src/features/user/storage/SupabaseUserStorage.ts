@@ -1,16 +1,16 @@
 import { SupabaseClient } from "@supabase/supabase-js"
 import { Database } from "../../../shared/model/database.types"
-import { SupabaseProductIsFavorites } from "../../product/storage/model/SupabaseProduct"
-import AuthenticationSupabaseUserParam from "./model/param/AuthenticationSupabaseUserParam"
-import RegisterSupabaseUserParam from "./model/param/RegisterSupabaseUserParam"
-import ToggleFavouriteSupabaseProduct from "./model/param/ToggleFavouriteSupabaseProduct"
-import ValidateSupabaseUserParam from "./model/param/ValidateSupabaseUserParam"
-import ValidateSupabaseUserRes from "./model/res/ValidateSupabaseUserRes"
-import { SupabaseUserId, SupabaseUserEmail, SupabaseUserStatus, SupabaseUserRateMessage } from "./model/SupabaseUser"
+import { StorageProductIsFavorites } from "../../product/storage/model/StorageProduct"
+import AuthenticationStorageUserParam from "./model/param/AuthenticationStorageUserParam"
+import RegisterStorageUserParam from "./model/param/RegisterStorageUserParam"
+import ToggleFavouriteStorageProduct from "./model/param/ToggleFavouriteStorageProduct"
+import ValidateStorageUserParam from "./model/param/ValidateStorageUserParam"
+import ValidateStorageUserRes from "./model/res/ValidateStorageUserRes"
+import { StorageUserId, StorageUserEmail, StorageUserStatus, StorageUserRateMessage } from "./model/StorageUser"
 import UserStorage from "./UserStorage"
-import AuthenticationSupabaseUserRes from "./model/res/AuthenticationSupabaseUserRes"
-import AuthorizationSupabaseUserRes from "./model/res/AuthorizationSupabaseUserRes"
-import IdentitySupabaseUserRes from "./model/res/IdentitySupabaseUserRes"
+import AuthenticationStorageUserRes from "./model/res/AuthenticationStorageUserRes"
+import AuthorizationStorageUserRes from "./model/res/AuthorizationStorageUserRes"
+import IdentityStorageUserRes from "./model/res/IdentityStorageUserRes"
 
 export default class SupabaseUserStorage implements UserStorage {
 
@@ -19,7 +19,7 @@ export default class SupabaseUserStorage implements UserStorage {
         private supabaseClient: SupabaseClient<Database>
     ) {}
     
-    async validate(param: ValidateSupabaseUserParam): Promise<ValidateSupabaseUserRes> {
+    async validate(param: ValidateStorageUserParam): Promise<ValidateStorageUserRes> {
 
         const { data } = await this.supabaseClient.rpc("validate_user", {
 
@@ -29,7 +29,7 @@ export default class SupabaseUserStorage implements UserStorage {
         return data![0].email_res
     }
 
-    async identity(email: SupabaseUserEmail): Promise<IdentitySupabaseUserRes> {
+    async identity(email: StorageUserEmail): Promise<IdentityStorageUserRes> {
         
         const {data} = await this.supabaseClient.rpc("identity_user", {
 
@@ -41,7 +41,7 @@ export default class SupabaseUserStorage implements UserStorage {
         return data[0].user_id ?? null
     }
 
-    async authentication(param: AuthenticationSupabaseUserParam): Promise<AuthenticationSupabaseUserRes> {
+    async authentication(param: AuthenticationStorageUserParam): Promise<AuthenticationStorageUserRes> {
         
         const {data} = await this.supabaseClient.rpc("authentication_user", {
 
@@ -54,7 +54,7 @@ export default class SupabaseUserStorage implements UserStorage {
         return data[0].u_id ?? null
     }
 
-    async authorization(id: SupabaseUserId): Promise<AuthorizationSupabaseUserRes> {
+    async authorization(id: StorageUserId): Promise<AuthorizationStorageUserRes> {
         
         const {data} = await this.supabaseClient.rpc("authorization_user", {
 
@@ -65,7 +65,7 @@ export default class SupabaseUserStorage implements UserStorage {
 
         return data[0] ?? null
     }
-    async toggleFavouriteProduct(param: ToggleFavouriteSupabaseProduct): Promise<SupabaseProductIsFavorites> {
+    async toggleFavouriteStorageProduct(param: ToggleFavouriteStorageProduct): Promise<StorageProductIsFavorites> {
         
         const {data} = await this.supabaseClient.rpc("toggle_user_favourite", {
             u_id: param.userId,
@@ -74,7 +74,7 @@ export default class SupabaseUserStorage implements UserStorage {
         
         return data!
     }
-    async register(param: RegisterSupabaseUserParam): Promise<void> {
+    async register(param: RegisterStorageUserParam): Promise<void> {
         
         await this.supabaseClient.rpc("register_user", {
 
@@ -83,7 +83,7 @@ export default class SupabaseUserStorage implements UserStorage {
             u_pass: param.pass
         })
     }
-    async setRateMessage(id: SupabaseUserId, message: SupabaseUserRateMessage): Promise<SupabaseUserStatus> {
+    async setRateMessage(id: StorageUserId, message: StorageUserRateMessage): Promise<StorageUserStatus> {
         
         const {data} = await this.supabaseClient.rpc("send_user_message", {
 

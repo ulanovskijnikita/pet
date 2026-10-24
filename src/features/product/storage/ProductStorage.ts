@@ -1,25 +1,25 @@
-import GetSupabaseProductByCategoryParam from "./model/param/GetSupabaseProductByCategoryParam"
-import GetSupabaseProductByFavouriteParam from "./model/param/GetSupabaseProductByFavouriteParam"
-import GetSupabaseProductByFilterParam from "./model/param/GetSupabaseProductByFilterParam"
-import GetSupabaseProductByIdParam from "./model/param/GetSupabaseProductByIdParam"
-import GetSupabaseProductsByCartParam from "./model/param/GetSupabaseProductsByCartParam"
-import SetSupabaseProductRatingParam from "./model/param/SetSupabaseProductRatingParam"
-import GetSupabaseProductsByCartRes from "./model/res/GetSupabaseProductsByCartRes"
-import SetSupabaseProductRatingRes from "./model/res/SetSupabaseProductRatingRes"
-import SupabaseProduct from "./model/SupabaseProduct"
-import SupabaseProductDetails from "./model/SupabaseProductDetails"
+import GetStorageProductByCategoryParam from "./model/param/GetStorageProductByCategoryParam"
+import GetStorageProductByFavouriteParam from "./model/param/GetStorageProductByFavouriteParam"
+import GetStorageProductByFilterParam from "./model/param/GetStorageProductByFilterParam"
+import GetStorageProductByIdParam from "./model/param/GetStorageProductByIdParam"
+import GetStorageProductsByCartParam from "./model/param/GetStorageProductsByCartParam"
+import SetStorageProductRatingParam from "./model/param/SetStorageProductRatingParam"
+import GetStorageProductsByCartRes from "./model/res/GetStorageProductsByCartRes"
+import SetStorageProductRatingRes from "./model/res/SetStorageProductRatingRes"
+import StorageProduct from "./model/StorageProduct"
+import StorageProductDetails from "./model/StorageProductDetails"
 
 export default interface ProductStorage {
 
-    getByCategory(param: GetSupabaseProductByCategoryParam): Promise<SupabaseProduct[]>
+    getByCategory(param: GetStorageProductByCategoryParam): Promise<StorageProduct[]>
 
-    getByFilter(param: GetSupabaseProductByFilterParam): Promise<SupabaseProduct[]>
+    getByFilter(param: GetStorageProductByFilterParam): Promise<StorageProduct[]>
 
-    getByFavourite(param: GetSupabaseProductByFavouriteParam): Promise<SupabaseProduct[]>
+    getByFavourite(param: GetStorageProductByFavouriteParam): Promise<StorageProduct[]>
 
-    getById(param: GetSupabaseProductByIdParam): Promise<SupabaseProductDetails | null>
+    getById(param: GetStorageProductByIdParam): Promise<StorageProductDetails | null>
 
-    getByCart(param: GetSupabaseProductsByCartParam): Promise<GetSupabaseProductsByCartRes[]>
+    getByCart(param: GetStorageProductsByCartParam): Promise<GetStorageProductsByCartRes[]>
 
-    getRating(param: SetSupabaseProductRatingParam): Promise<SetSupabaseProductRatingRes>
+    getRating(param: SetStorageProductRatingParam): Promise<SetStorageProductRatingRes>
 }

@@ -1,5 +1,5 @@
 import { ContainerModule } from "inversify";
-import SessionUser from "../cashe/model/SessionUser";
+import CasheUser from "../cashe/model/CasheUser";
 import SessionUserCashe from "../cashe/SessionUserCashe";
 import SendEmailClient from "../client/sender/SendEmailClient";
 import EmailjsSendEmailClient from "../client/sender/EmailjsSendEmailClient";
@@ -12,7 +12,7 @@ import supabaseClient from "../../../shared/lib/supabaseClient";
 
 const featureUserModule = new ContainerModule(({ bind }) => {
 
-    bind<SessionUser>( SessionUserCashe ).toSelf().inSingletonScope()
+    bind<CasheUser>( SessionUserCashe ).toSelf().inSingletonScope()
 
     bind<SendEmailClient>( EmailjsSendEmailClient ).toSelf().inSingletonScope()
 

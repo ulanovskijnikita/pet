@@ -10,8 +10,8 @@ import ToggleFavouriteProductParam from "../../../entities/user/model/param/Togg
 import ValidateUserParam from "../../../entities/user/model/param/ValidateUserParam.ts";
 import ValidateUserRes from "../../../entities/user/model/res/ValidateUserRes.ts";
 import { ProductIsFavorites } from "../../../entities/product/model/Product.ts";
-import SessionUser from "../cashe/model/SessionUser.ts";
-import SupabaseUser from "../storage/model/SupabaseUser.ts";
+import CasheUser from "../cashe/model/CasheUser.ts";
+import StorageUser from "../storage/model/StorageUser.ts";
 import UserCashe from "../cashe/UserCashe.ts";
 import UserStorage from "../storage/UserStorage.ts";
 
@@ -39,21 +39,21 @@ export default class UserRepositoryImpl implements UserRepository {
 
         if (!supabaseUser) return null
 
-        this.userCashe.setUser( this.mapSupabaseUserToSessionUser( supabaseUser ) )
+        this.userCashe.setUser( this.mapStorageUserToCasheUser( supabaseUser ) )
 
-        return this.mapSupabaseUserToUser( supabaseUser )
+        return this.mapStorageUserToUser( supabaseUser )
     }
 
     get(): GetUserUseCaseRes {
 
-        const sessionUser = this.userCashe.getUser()
+        const casheUser = this.userCashe.getUser()
 
-        return sessionUser ? this.mapSessionUserToUser( sessionUser ) : null
+        return casheUser ? this.mapCasheUserToUser( casheUser ) : null
     }
 
     async toggleFavouriteProduct(param: ToggleFavouriteProductParam): Promise<ProductIsFavorites> {
 
-        return this.userStorage.toggleFavouriteProduct( param )
+        return this.userStorage.toggleFavouriteStorageProduct( param )
     }
 
     async validate(param: ValidateUserParam): Promise<ValidateUserRes> {
@@ -79,7 +79,7 @@ export default class UserRepositoryImpl implements UserRepository {
         return status
     }
 
-    private mapSupabaseUserToSessionUser(supabaseUser: SupabaseUser): SessionUser {
+    private mapStorageUserToCasheUser(supabaseUser: StorageUser): CasheUser {
 
         return {
 
@@ -90,7 +90,7 @@ export default class UserRepositoryImpl implements UserRepository {
         }
     }
 
-    private mapSupabaseUserToUser(supabaseUser: SupabaseUser): User {
+    private mapStorageUserToUser(supabaseUser: StorageUser): User {
 
         return {
             email: supabaseUser.email,
@@ -100,13 +100,13 @@ export default class UserRepositoryImpl implements UserRepository {
         }
     }
 
-    private mapSessionUserToUser(sessionUser: SessionUser): User {
+    private mapCasheUserToUser(casheUser: CasheUser): User {
 
         return {
-            email: sessionUser.email,
-            id: Number(sessionUser.id),
-            name: sessionUser.name,
-            status: sessionUser.status,
+            email: casheUser.email,
+            id: Number(casheUser.id),
+            name: casheUser.name,
+            status: casheUser.status,
         }
     }
 }
