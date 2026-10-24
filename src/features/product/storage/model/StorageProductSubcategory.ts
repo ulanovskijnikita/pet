@@ -1,4 +1,4 @@
-import { Enums } from "../../../../shared/model/database.types"
+import { Enums } from "../../../../shared/lib/supabase/database.types"
 
 export type StorageProductSubcategoryId = number
 export type StorageProductSubcategoryValue = Enums<"subcategories">

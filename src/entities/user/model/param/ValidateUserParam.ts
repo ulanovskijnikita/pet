@@ -1,4 +1,4 @@
-import { UserEmail } from "../User";
+import { UserEmail } from "../../../../shared/model/entities/User";
 
 export default interface ValidateUserParam {
 

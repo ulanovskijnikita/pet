@@ -1,4 +1,4 @@
-import Product from "./Product.ts";
+import Product from "../../../shared/model/entities/Product.ts";
 import { ProductCategoryValue } from "./ProductCategory.ts";
 import { ProductSubcategoryValue } from "./ProductSubcategory.ts";
 

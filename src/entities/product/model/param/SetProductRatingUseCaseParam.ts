@@ -1,5 +1,5 @@
-import { UserId } from "../../../user/model/User";
-import { ProductId, ProductRating } from "../Product";
+import { UserId } from "../../../../shared/model/entities/User";
+import { ProductId, ProductRating } from "../../../../shared/model/entities/Product";
 
 export default interface SetProductRatingUseCaseParam {
 

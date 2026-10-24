@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import SetQuantityCartProductParam from "../../../entities/user/model/param/SetQuantityCartProductParam"
 import useInjection from "../context/inversify/useInjection"
 import AppViewModel from "../viewmodel/appViewModel/AppViewModel"
-import { ProductId } from "../../../entities/product/model/Product"
+import { ProductId } from "../../../shared/model/entities/Product"
 import { ProductQuantity } from "../../../entities/cart/model/param/SetProductQuantityParam"
 
 type QuantityButtonProps = {

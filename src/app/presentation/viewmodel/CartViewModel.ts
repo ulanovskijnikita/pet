@@ -1,13 +1,13 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import GetProgressCartUseCase from "../../../entities/cart/usecase/GetProgressCartUseCase";
-import Cart from "../../../entities/cart/model/Cart";
+import Cart from "../../../shared/model/entities/Cart";
 import SetCartLengthUseCase from "../../../entities/cart/usecase/SetCartLengthUseCase";
 import SetQuantityCartProductParam from "../../../entities/user/model/param/SetQuantityCartProductParam";
 import ChangeQuantityCartProductUseCase from "../../../entities/cart/usecase/ChangeQuantityCartProductUseCase";
 import MakeOrderUseCase from "../../../entities/cart/usecase/MakeOrderUseCase";
 import NavStater from "./navViewModel/NavStater";
 import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase";
-import { ProductId } from "../../../entities/product/model/Product";
+import { ProductId } from "../../../shared/model/entities/Product";
 import AppStater from "./appViewModel/AppStater";
 
 export default class CartViewModel {

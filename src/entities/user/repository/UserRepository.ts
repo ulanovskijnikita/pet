@@ -1,6 +1,6 @@
-import { ProductIsFavorites } from "../../product/model/Product.ts";
+import { ProductIsFavorites } from "../../../shared/model/entities/Product.ts";
 import ToggleFavouriteProductParam from "../model/param/ToggleUserFafouriteParam.ts";
-import { UserEmail, UserId, UserRateMessage, UserStatus } from "../model/User.ts";
+import { UserEmail, UserId, UserRateMessage, UserStatus } from "../../../shared/model/entities/User.ts";
 import ValidateUserParam from "../model/param/ValidateUserParam.ts";
 import ValidateUserRes from "../model/res/ValidateUserRes.ts";
 import GetUserUseCaseRes from "../model/res/GetUserUseCaseRes.ts";

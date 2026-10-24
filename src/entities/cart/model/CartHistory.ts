@@ -1,5 +1,5 @@
-import { ProductId, ProductTag } from "../../product/model/Product";
-import { CartId, CartPrice, CartProductQuantity, CartStatus } from "./Cart";
+import { ProductId, ProductTag } from "../../../shared/model/entities/Product";
+import { CartId, CartPrice, CartProductQuantity, CartStatus } from "../../../shared/model/entities/Cart";
 
 type CartHistory = {
 

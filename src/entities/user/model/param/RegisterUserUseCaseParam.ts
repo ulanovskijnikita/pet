@@ -1,5 +1,5 @@
 import { UserPassword } from "../UserDetails";
-import { UserEmail, UserName } from "../User";
+import { UserEmail, UserName } from "../../../../shared/model/entities/User";
 
 export default interface RegisterUserUseCaseParam {
 

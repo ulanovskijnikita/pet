@@ -8,7 +8,7 @@ import AbstractVerifyEmailClient from "../client/verifier/AbstractVerifyEmailCli
 import UserGatewayImpl from "../gateway/UserGatewayImpl";
 import UserRepositoryImpl from "../repository/UserRepositoryImpl";
 import SupabaseUserStorage from "../storage/SupabaseUserStorage";
-import supabaseClient from "../../../shared/lib/supabaseClient";
+import supabaseClient from "../../../shared/lib/supabase/supabaseClient";
 
 const featureUserModule = new ContainerModule(({ bind }) => {
 

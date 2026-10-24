@@ -3,7 +3,7 @@ import ProductRepository from "../../../domain/repository/ProductRepository.ts";
 import ProductRepositoryImpl from "../../../features/product/repository/ProductRepositoryImpl.ts";
 import SupabaseProductStorage from "../../../features/product/storage/SupabaseProductStorage.ts";
 import ProductStorage from "../../../features/storage/product/ProductStorage.ts";
-import supabaseClient from "../../../shared/lib/supabaseClient.ts";
+import supabaseClient from "../../../shared/lib/supabase/supabaseClient.ts";
 import UserRepository from "../../../entities/user/repository/UserRepository.ts";
 import UserRepositoryImpl from "../../../features/user/repository/UserRepositoryImpl.ts";
 import SupabaseUserStorage from "../../../features/storage/user/SupabaseUserStorage.ts";

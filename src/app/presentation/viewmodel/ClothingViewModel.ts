@@ -1,6 +1,6 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase.ts";
-import Product, { ProductId } from "../../../entities/product/model/Product.ts";
+import Product, { ProductId } from "../../../shared/model/entities/Product.ts";
 import { ProductSubcategoryId } from "../../../entities/product/model/ProductSubcategory.ts";
 import AppStater from "./appViewModel/AppStater.ts";
 import { CLOTHING } from "../../../entities/product/model/ProductCategory.ts";

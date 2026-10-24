@@ -1,4 +1,4 @@
-import { StorageUserId } from "../StorageUser"
+import { StorageUserId } from "../../../../../shared/model/storage/StorageUser"
 
 type IdentityStorageUserRes = StorageUserId | null
 

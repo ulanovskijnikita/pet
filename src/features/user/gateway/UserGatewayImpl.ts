@@ -1,5 +1,5 @@
 import VerifyEmailRes from "../../../entities/user/model/res/VerifyUserEmailRes.ts";
-import { UserEmail } from "../../../entities/user/model/User.ts";
+import { UserEmail } from "../../../shared/model/entities/User.ts";
 import UserGateway from "../../../entities/user/gateway/UserGateway.ts";
 import SendEmailClient from "../client/sender/SendEmailClient.ts";
 import VerifyEmailClient from "../client/verifier/VerifyEmailClient.ts";

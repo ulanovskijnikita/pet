@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase";
 import { ProductSubcategoryId } from "../../../entities/product/model/ProductSubcategory";
-import Product, { ProductId } from "../../../entities/product/model/Product";
+import Product, { ProductId } from "../../../shared/model/entities/Product";
 import { FOODIES } from "../../../entities/product/model/ProductCategory";
 import { DEFAULT_LIMIT } from "../constants/defaultLimit";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset";

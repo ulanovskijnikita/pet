@@ -1,4 +1,4 @@
-import { StorageUserEmail, StorageUserPassword } from "../StorageUser"
+import { StorageUserEmail, StorageUserPassword } from "../../../../../shared/model/storage/StorageUser"
 
 export default interface AuthenticationStorageUserParam {
 

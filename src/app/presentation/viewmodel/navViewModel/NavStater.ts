@@ -1,4 +1,4 @@
-import { ProductTag } from "../../../../entities/product/model/Product";
+import { ProductTag } from "../../../../shared/model/entities/Product";
 import { ProductQuantity } from "../../../../entities/cart/model/param/SetProductQuantityParam";
 
 export default interface NavStater {

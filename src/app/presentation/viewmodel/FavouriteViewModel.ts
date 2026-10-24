@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase";
 import { DEFAULT_LIMIT } from "../constants/defaultLimit";
 import AppStater from "./appViewModel/AppStater";
-import Product, { ProductId } from "../../../entities/product/model/Product";
+import Product, { ProductId } from "../../../shared/model/entities/Product";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset";
 import { DEFAULT_QUANTITY } from "../constants/defaultQuantity";
 import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";

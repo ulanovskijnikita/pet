@@ -1,4 +1,4 @@
-import Product from "../Product";
+import Product from "../../../../shared/model/entities/Product";
 
 export type ProductUserRating = number
 

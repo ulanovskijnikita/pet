@@ -1,4 +1,4 @@
-import { UserId, UserRateMessage } from "../../../../../entities/user/model/User"
+import { UserId, UserRateMessage } from "../../../../../shared/model/entities/User"
 
 export type StorageUserMessage = UserRateMessage
 

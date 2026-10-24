@@ -1,4 +1,4 @@
-import { UserId } from "../User"
+import { UserId } from "../../../../shared/model/entities/User"
 
 type IdentityUserRes = UserId | null
 

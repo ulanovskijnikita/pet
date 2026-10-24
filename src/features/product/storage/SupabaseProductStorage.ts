@@ -1,4 +1,4 @@
-import { Database } from "../../../shared/model/database.types.ts";
+import { Database } from "../../../shared/lib/supabase/database.types.ts";
 import GetStorageProductByCategoryParam from "./model/param/GetStorageProductByCategoryParam.ts";
 import GetStorageProductByFavouriteParam from "./model/param/GetStorageProductByFavouriteParam.ts";
 import GetStorageProductByFilterParam from "./model/param/GetStorageProductByFilterParam.ts";

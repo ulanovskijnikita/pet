@@ -1,4 +1,4 @@
-import {UserEmail, UserId, UserName, UserRateMessage, UserStatus} from "../User.ts";
+import {UserEmail, UserId, UserName, UserRateMessage, UserStatus} from "../../../../shared/model/entities/User.ts";
 
 export default interface GetNewUserSecondUseCaseParam {
 

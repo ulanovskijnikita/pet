@@ -1,4 +1,4 @@
-import { UserStatus } from "../User";
+import { UserStatus } from "../../../../shared/model/entities/User";
 
 export type SecondStatus = boolean
 

@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import { memo } from "react"
 import { Link } from "react-router"
 import pages from "../router/pages"
-import Product from "../../../entities/product/model/Product"
+import Product from "../../../shared/model/entities/Product"
 import FuncButton from "./FuncButton"
 import FavouriteButton from "./FavouriteButton"
 

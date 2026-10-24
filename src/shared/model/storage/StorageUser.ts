@@ -1,4 +1,4 @@
-import { Enums } from "../../../../shared/model/database.types"
+import { Enums } from "../../lib/supabase/database.types"
 
 export type StorageUserId = number
 export type StorageUserName = string

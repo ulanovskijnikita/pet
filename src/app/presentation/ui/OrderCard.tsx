@@ -5,7 +5,7 @@ import pages from "../router/pages"
 import GetProductsByCartUseCaseRes, { ProductUserRating } from "../../../entities/product/model/res/GetProductsByCartUseCaseRes"
 import FavouriteButton from "./FavouriteButton"
 import FuncButton from "./FuncButton"
-import { ProductId } from "../../../entities/product/model/Product"
+import { ProductId } from "../../../shared/model/entities/Product"
 
 type OrderCardProps = {
 

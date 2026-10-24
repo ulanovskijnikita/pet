@@ -1,4 +1,4 @@
-import Product from "../../product/model/Product"
+import Product from "./Product"
 
 export type CartId = number
 export type CartPrice = number

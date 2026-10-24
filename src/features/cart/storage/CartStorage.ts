@@ -1,6 +1,6 @@
-import { StorageUserId } from "../../user/storage/model/StorageUser"
+import { StorageUserId } from "../../../shared/model/storage/StorageUser"
 import SetStorageProductQuantityParam from "./model/param/SetStorageProductQuantityParam"
-import StorageCart, { StorageCartId, StorageCartLength } from "./model/StorageCart"
+import StorageCart, { StorageCartId, StorageCartLength } from "../../../shared/model/storage/StorageCart"
 import StorageCartHistory from "./model/StorageCartHistory"
 
 export default interface CartStorage {

@@ -1,5 +1,5 @@
 import UserRepository from "../../../entities/user/repository/UserRepository.ts";
-import User, { UserEmail, UserId, UserRateMessage, UserStatus } from "../../../entities/user/model/User.ts";
+import User, { UserEmail, UserId, UserRateMessage, UserStatus } from "../../../shared/model/entities/User.ts";
 import AuthenticationUserParam from "../../../entities/user/model/param/AuthenticationUserParam.ts";
 import AuthenticationUserRes from "../../../entities/user/model/res/AuthenticationUserRes.ts";
 import AuthorizationUserRes from "../../../entities/user/model/res/AuthorizationUserRes.ts";
@@ -9,9 +9,9 @@ import RegisterUserUseCaseParam from "../../../entities/user/model/param/Registe
 import ToggleFavouriteProductParam from "../../../entities/user/model/param/ToggleUserFafouriteParam.ts";
 import ValidateUserParam from "../../../entities/user/model/param/ValidateUserParam.ts";
 import ValidateUserRes from "../../../entities/user/model/res/ValidateUserRes.ts";
-import { ProductIsFavorites } from "../../../entities/product/model/Product.ts";
+import { ProductIsFavorites } from "../../../shared/model/entities/Product.ts";
 import CasheUser from "../cashe/model/CasheUser.ts";
-import StorageUser from "../storage/model/StorageUser.ts";
+import StorageUser from "../../../shared/model/storage/StorageUser.ts";
 import UserCashe from "../cashe/UserCashe.ts";
 import UserStorage from "../storage/UserStorage.ts";
 

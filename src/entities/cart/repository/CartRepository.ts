@@ -1,5 +1,5 @@
-import { UserId } from "../../user/model/User";
-import Cart, { CartId, CartLength } from "../model/Cart";
+import { UserId } from "../../../shared/model/entities/User";
+import Cart, { CartId, CartLength } from "../../../shared/model/entities/Cart";
 import CartHistory from "../model/CartHistory";
 import SetProductQuantityParam from "../model/param/SetProductQuantityParam";
 

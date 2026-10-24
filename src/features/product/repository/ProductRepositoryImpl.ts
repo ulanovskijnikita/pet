@@ -1,4 +1,4 @@
-import Product from "../../../entities/product/model/Product.ts";
+import Product from "../../../shared/model/entities/Product.ts";
 import StorageProduct from "../model/StorageProduct.ts";
 import GetProductByCategoryUseCaseParam from "../../../entities/product/model/param/GetProductByCategoryUseCaseParam.ts";
 import GetProductByFilterUseCaseParam from "../../../entities/product/model/param/GetProductByFilterUseCaseParam.ts";

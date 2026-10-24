@@ -1,12 +1,12 @@
-import Cart, { CartId, CartLength } from "../../../entities/cart/model/Cart";
+import Cart, { CartId, CartLength } from "../../../shared/model/entities/Cart";
 import CartHistory from "../../../entities/cart/model/CartHistory";
 import SetProductQuantityParam from "../../../entities/cart/model/param/SetProductQuantityParam";
 import CartRepository from "../../../entities/cart/repository/CartRepository";
-import { UserId } from "../../../entities/user/model/User";
+import { UserId } from "../../../shared/model/entities/User";
 import CartCashe from "../cashe/CartCashe";
 import CasheCart from "../cashe/model/CasheCart";
 import CartStorage from "../storage/CartStorage";
-import StorageCart from "../storage/model/StorageCart";
+import StorageCart from "../../../shared/model/storage/StorageCart";
 import StorageCartHistory from "../storage/model/StorageCartHistory";
 
 export default class CartRepositoryImpl implements CartRepository {

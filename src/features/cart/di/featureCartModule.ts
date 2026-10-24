@@ -4,7 +4,7 @@ import SupabaseCartStorage from "../storage/SupabaseCartStorage";
 import SessionCartCashe from "../cashe/SessionCartCashe";
 import CartCashe from "../cashe/CartCashe";
 import CartStorage from "../storage/CartStorage";
-import supabaseClient from "../../../shared/lib/supabaseClient";
+import supabaseClient from "../../../shared/lib/supabase/supabaseClient";
 
 const featureCartModule = new ContainerModule(({ bind }) => {
 

@@ -1,5 +1,5 @@
 import GetProductsByCartUseCaseRes from "../model/res/GetProductsByCartUseCaseRes"
-import Product from "../model/Product"
+import Product from "../../../shared/model/entities/Product"
 import ProductDetails from "../model/ProductDetails"
 import GetProductByFavouriteUseCaseParam from "../model/param/GetProductByFavouriteUseCaseParam"
 import GetProductByFilterUseCaseParam from "../model/param/GetProductByFilterUseCaseParam"

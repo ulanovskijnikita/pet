@@ -4,7 +4,7 @@ import GetProductsByCartUseCase from "../../../domain/usecase/GetProductsByCartU
 import SetProductRatingUseCase from "../../../domain/usecase/SetProductRatingUseCase";
 import { CartId } from "../../../entities/cart/model/CartPreview";
 import AppStater from "./appViewModel/AppStater";
-import { ProductId, ProductRating } from "../../../entities/product/model/Product";
+import { ProductId, ProductRating } from "../../../shared/model/entities/Product";
 import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
 import { DEFAULT_QUANTITY } from "../../../entities/cart/model/param/SetProductQuantityParam";
 import NavStater from "./navViewModel/NavStater";

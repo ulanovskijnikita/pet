@@ -1,9 +1,9 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import CartStorage from "./CartStorage";
-import { Database } from "../../../shared/model/database.types";
-import { StorageUserId } from "../../user/storage/model/StorageUser";
+import { Database } from "../../../shared/lib/supabase/database.types";
+import { StorageUserId } from "../../../shared/model/storage/StorageUser";
 import SetStorageProductQuantityParam from "./model/param/SetStorageProductQuantityParam";
-import StorageCart, { StorageCartId, StorageCartLength } from "./model/StorageCart";
+import StorageCart, { StorageCartId, StorageCartLength } from "../../../shared/model/storage/StorageCart";
 import StorageCartHistory from "./model/StorageCartHistory";
 
 export default class SupabaseCartStorage implements CartStorage {

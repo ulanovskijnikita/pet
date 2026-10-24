@@ -1,7 +1,7 @@
 import { ContainerModule } from "inversify";
 import ProductRepositoryImpl from "../repository/ProductRepositoryImpl";
 import SupabaseProductStorage from "../storage/SupabaseProductStorage";
-import supabaseClient from "../../../shared/lib/supabaseClient";
+import supabaseClient from "../../../shared/lib/supabase/supabaseClient";
 
 const featureProductModule = new ContainerModule(({ bind }) => {
 

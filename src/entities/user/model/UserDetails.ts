@@ -1,4 +1,4 @@
-import User from "./User";
+import User from "../../../shared/model/entities/User";
 
 export type UserPassword = string
 

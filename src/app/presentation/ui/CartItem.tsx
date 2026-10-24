@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite";
-import Cart from "../../../entities/cart/model/Cart";
+import Cart from "../../../shared/model/entities/Cart";
 import FavouriteButton from "./FavouriteButton";
 import QuantityButton from "./QuantityButton";
 import QuantityForm from "./QuantityForm";
 import { Link } from "react-router";
 import pages from "../router/pages";
 import { memo } from "react";
-import { ProductId } from "../../../entities/product/model/Product";
+import { ProductId } from "../../../shared/model/entities/Product";
 import SetQuantityCartProductParam from "../../../entities/user/model/param/SetQuantityCartProductParam";
 
 type CartItemsProps = {

@@ -1,5 +1,5 @@
-import { ProductId } from "../../../product/model/Product";
-import { UserId } from "../User";
+import { ProductId } from "../../../../shared/model/entities/Product";
+import { UserId } from "../../../../shared/model/entities/User";
 
 export default interface ToggleFavouriteProductParam {
 

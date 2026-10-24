@@ -1,7 +1,7 @@
 import GetNewUserSecondUseCaseParam from "../model/param/GetNewUserSecondUseCaseParam.ts";
 import { SecondStatus } from "../model/res/GetNewUserSecondUseCaseRes.ts";
 import VerifyUserEmailRes from "../model/res/VerifyUserEmailRes.ts";
-import { UserEmail } from "../model/User.ts";
+import { UserEmail } from "../../../shared/model/entities/User.ts";
 
 export default interface UserGateway {
 

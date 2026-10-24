@@ -1,5 +1,5 @@
 import { StorageProductId } from "../../../../product/storage/model/StorageProduct"
-import { StorageUserId } from "../StorageUser"
+import { StorageUserId } from "../../../../../shared/model/storage/StorageUser"
 
 export default interface ToggleFavouriteStorageProduct {
 

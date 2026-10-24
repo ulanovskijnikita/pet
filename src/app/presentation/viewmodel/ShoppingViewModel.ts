@@ -3,7 +3,7 @@ import { ProductCategoryId } from "../../../entities/product/model/ProductCatego
 import { ProductSubcategoryId } from "../../../entities/product/model/ProductSubcategory"
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase"
 import { ProductOrderId } from "../../../entities/product/model/ProductOrder"
-import Product, { ProductId } from "../../../entities/product/model/Product"
+import Product, { ProductId } from "../../../shared/model/entities/Product"
 import { DEFAULT_OFFSET } from "../constants/defaultOffset"
 import NavStater from "./navViewModel/NavStater"
 import { DEFAULT_LIMIT } from "../constants/defaultLimit"
