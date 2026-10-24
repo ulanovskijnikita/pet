@@ -1,16 +1,16 @@
+import { Database } from "../../../shared/model/database.types.ts";
+import GetSupabaseProductByCategoryParam from "./model/param/GetSupabaseProductByCategoryParam.ts";
+import GetSupabaseProductByFavouriteParam from "./model/param/GetSupabaseProductByFavouriteParam.ts";
+import GetSupabaseProductByFilterParam from "./model/param/GetSupabaseProductByFilterParam.ts";
+import GetSupabaseProductByIdParam from "./model/param/GetSupabaseProductByIdParam.ts";
+import GetSupabaseProductsByCartParam from "./model/param/GetSupabaseProductsByCartParam.ts";
+import SetSupabaseProductRatingParam from "./model/param/SetSupabaseProductRatingParam.ts";
+import GetSupabaseProductsByCartRes from "./model/res/GetSupabaseProductsByCartRes.ts";
+import SetSupabaseProductRatingRes from "./model/res/SetSupabaseProductRatingRes.ts";
+import SupabaseProduct from "./model/SupabaseProduct.ts";
+import SupabaseProductDetails from "./model/SupabaseProductDetails.ts";
 import ProductStorage from "./ProductStorage.ts";
 import {SupabaseClient} from "@supabase/supabase-js";
-import {Database} from "../../storage/model/supabase/database.types.ts";
-import SupabaseProduct from "../model/SupabaseProduct.ts";
-import SupabaseProductCategoryParam from "../model/SupabaseProductCategoryParam.ts";
-import GetSupabaseProductByFilterParam from "../model/GetSupabaseProductByFilterParam.ts";
-import GetSupabaseProductByIdParam from "../model/GetSupabaseProductByIdParam.ts";
-import SupabaseProductDetails from "../model/SupabaseProductDetails.ts";
-import GetSupabaseProductsByCartParam from "../model/GetSupabaseProductsByCartParam.ts";
-import GetSupabaseProductsByCartRes from "../model/GetSupabaseProductsByCartRes.ts";
-import SetSupabaseProductRatingParam from "../model/SetSupabaseProductRatingParam.ts";
-import SetSupabaseProductRatingRes from "../model/SetSupabaseProductRatingRes.ts";
-import GetSupabaseProductByFavouriteParam from "../model/GetSupabaseProductByFavouriteParam.ts";
 
 export default class SupabaseProductStorage implements ProductStorage {
 
@@ -63,8 +63,8 @@ export default class SupabaseProductStorage implements ProductStorage {
         
         const { data } = await this.supabaseClient.rpc("get_products_by_favourite", {
 
-            lim: param.limit,
-            off_set: param.offset,
+            lim: param.lim,
+            off_set: param.off_set,
             user_auth_id: param.id
         })
 
@@ -79,8 +79,8 @@ export default class SupabaseProductStorage implements ProductStorage {
             .rpc("get_products_by_category", {
 
                 category_id: param.categoryId,
-                lim: param.limit,
-                off_set: param.offset,
+                lim: param.lim,
+                off_set: param.off_set,
                 subcategory_id: param.subcategoryId,
                 user_auth_id: param.userId
             })
@@ -96,14 +96,14 @@ export default class SupabaseProductStorage implements ProductStorage {
         return data ? data : []
     }
 
-    async getByCategory(param: SupabaseProductCategoryParam): Promise<SupabaseProduct[]> {
+    async getByCategory(param: GetSupabaseProductByCategoryParam): Promise<SupabaseProduct[]> {
 
         const { data } = await this.supabaseClient
             .rpc('get_products_by_category', {
 
                 category_id: param.categoryId,
-                lim: param.limit,
-                off_set: param.offset,
+                lim: param.lim,
+                off_set: param.off_set,
                 subcategory_id: param.subcategoryId,
                 user_auth_id: param.userId
             })

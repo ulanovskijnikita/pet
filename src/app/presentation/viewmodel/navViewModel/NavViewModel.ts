@@ -1,10 +1,10 @@
 import { makeAutoObservable } from "mobx";
 import NavStater from "./NavStater";
-import { ProductTag } from "../../../../entites/product/model/Product";
-import { CartLength } from "../../../../entites/cart/model/CartPreview";
-import GetUserUseCase from "../../../../entites/user/usecase/GetUserUseCase";
-import { ProductQuantity } from "../../../../entites/cart/model/param/AddToProgressCartUseCaseParam";
-import { UserId } from "../../../../entites/user/model/User";
+import { ProductTag } from "../../../../entities/product/model/Product";
+import { CartLength } from "../../../../entities/cart/model/CartPreview";
+import GetUserUseCase from "../../../../entities/user/usecase/GetUserUseCase";
+import { ProductQuantity } from "../../../../entities/cart/model/param/SetProductQuantityParam";
+import { UserId } from "../../../../entities/user/model/User";
 
 export default class NavViewModel implements NavStater {
 

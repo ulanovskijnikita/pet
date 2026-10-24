@@ -1,5 +1,5 @@
 import { NavLink } from "react-router"
-import { UserId } from "../../../../entites/user/model/User"
+import { UserId } from "../../../../entities/user/model/User"
 import pages from "../../router/pages"
 import { observer } from "mobx-react-lite"
 import NavViewModel from "../../viewmodel/navViewModel/NavViewModel"

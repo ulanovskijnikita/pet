@@ -1,18 +1,17 @@
-import GetSupabaseProductByFavouriteParam from "../model/GetSupabaseProductByFavouriteParam"
-import GetSupabaseProductByFilterParam from "../model/GetSupabaseProductByFilterParam"
-import GetSupabaseProductByIdParam from "../model/GetSupabaseProductByIdParam"
-import GetSupabaseProductsByCartParam from "../model/GetSupabaseProductsByCartParam"
-import GetSupabaseProductsByCartRes from "../model/GetSupabaseProductsByCartRes"
-import SetSupabaseProductRatingParam from "../model/SetSupabaseProductRatingParam"
-import SetSupabaseProductRatingRes from "../model/SetSupabaseProductRatingRes"
-import SupabaseProduct from "../model/SupabaseProduct"
-import SupabaseProductCategoryParam from "../model/SupabaseProductCategoryParam"
-import SupabaseProductDetails from "../model/SupabaseProductDetails"
-
+import GetSupabaseProductByCategoryParam from "./model/param/GetSupabaseProductByCategoryParam"
+import GetSupabaseProductByFavouriteParam from "./model/param/GetSupabaseProductByFavouriteParam"
+import GetSupabaseProductByFilterParam from "./model/param/GetSupabaseProductByFilterParam"
+import GetSupabaseProductByIdParam from "./model/param/GetSupabaseProductByIdParam"
+import GetSupabaseProductsByCartParam from "./model/param/GetSupabaseProductsByCartParam"
+import SetSupabaseProductRatingParam from "./model/param/SetSupabaseProductRatingParam"
+import GetSupabaseProductsByCartRes from "./model/res/GetSupabaseProductsByCartRes"
+import SetSupabaseProductRatingRes from "./model/res/SetSupabaseProductRatingRes"
+import SupabaseProduct from "./model/SupabaseProduct"
+import SupabaseProductDetails from "./model/SupabaseProductDetails"
 
 export default interface ProductStorage {
 
-    getByCategory(param: SupabaseProductCategoryParam): Promise<SupabaseProduct[]>
+    getByCategory(param: GetSupabaseProductByCategoryParam): Promise<SupabaseProduct[]>
 
     getByFilter(param: GetSupabaseProductByFilterParam): Promise<SupabaseProduct[]>
 

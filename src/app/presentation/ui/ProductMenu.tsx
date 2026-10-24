@@ -1,4 +1,4 @@
-import { ProductCategoryId } from "../../../entites/product/model/ProductCategory"
+import { ProductCategoryId } from "../../../entities/product/model/ProductCategory"
 import { observer } from "mobx-react-lite"
 
 type ProductMenuProps = {

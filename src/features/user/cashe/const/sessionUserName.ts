@@ -1,0 +1,3 @@
+const SESSION_USER_NAME = "SESSION_USER_NAME"
+
+export default SESSION_USER_NAME

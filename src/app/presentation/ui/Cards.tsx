@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite"
 import { ReactNode } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
-import Product, { ProductId } from "../../../entites/product/model/Product"
-import { ProductOffset } from "../../../entites/product/model/ProductRange"
+import Product, { ProductId } from "../../../entities/product/model/Product"
+import { ProductOffset } from "../../../entities/product/model/ProductRange"
 import Loader from "./Loader"
 import Card from "./Card"
 

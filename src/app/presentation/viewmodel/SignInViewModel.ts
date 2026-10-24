@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import SignInUserUseCaseParam from "../../../entites/user/model/param/SignInUserUseCaseParam";
-import SignInUserUseCase from "../../../entites/user/usecase/SignInUserUseCase";
-import UserSignInRes from "../../../entites/user/model/res/UserSignInRes";
+import SignInUserUseCaseParam from "../../../entities/user/model/param/SignInUserUseCaseParam";
+import SignInUserUseCase from "../../../entities/user/usecase/SignInUserUseCase";
+import UserSignInRes from "../../../entities/user/model/res/UserSignInRes";
 import AppStater from "./appViewModel/AppStater";
 
 export default class SignInViewModel {

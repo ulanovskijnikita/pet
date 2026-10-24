@@ -1,22 +1,22 @@
 import {ContainerModule} from "inversify";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase.ts";
 import ProductRepositoryImpl from "../../../features/product/repository/ProductRepositoryImpl.ts";
-import GetNewUserSecondUseCase from "../../../entites/user/usecase/GetNewUserSecondUseCase.ts";
-import UserGatewayImpl from "../../../services/gateway/UserGatewayImpl.ts";
-import SignInUserUseCase from "../../../entites/user/usecase/SignInUserUseCase.ts";
-import UserRepositoryImpl from "../../../features/repository/UserRepositoryImpl.ts";
-import GetUserUseCase from "../../../entites/user/usecase/GetUserUseCase.ts";
-import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase.ts";
-import RegisterUserUseCase from "../../../entites/user/usecase/RegisterUserUseCase.ts";
-import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase.ts";
+import GetNewUserSecondUseCase from "../../../entities/user/usecase/GetNewUserSecondUseCase.ts";
+import UserGatewayImpl from "../../../features/user/gateway/UserGatewayImpl.ts";
+import SignInUserUseCase from "../../../entities/user/usecase/SignInUserUseCase.ts";
+import UserRepositoryImpl from "../../../features/user/repository/UserRepositoryImpl.ts";
+import GetUserUseCase from "../../../entities/user/usecase/GetUserUseCase.ts";
+import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase.ts";
+import RegisterUserUseCase from "../../../entities/user/usecase/RegisterUserUseCase.ts";
+import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase.ts";
 import GetProductByFilterUseCase from "../../../domain/usecase/GetProductByFilterUseCase.ts";
-import GetUserCartUseCase from "../../../entites/cart/usecase/GetUserCartUseCase.ts";
-import SetCartLengthUseCase from "../../../entites/cart/usecase/SetCartLengthUseCase.ts";
-import ChangeQuantityCartProductUseCase from "../../../entites/cart/usecase/ChangeQuantityCartProductUseCase.ts";
-import GetAnOrderUseCase from "../../../entites/cart/usecase/GetAnOrderUseCase.ts";
+import GetProgressCartUseCase from "../../../entities/cart/usecase/GetProgressCartUseCase.ts";
+import SetCartLengthUseCase from "../../../entities/cart/usecase/SetCartLengthUseCase.ts";
+import ChangeQuantityCartProductUseCase from "../../../entities/cart/usecase/ChangeQuantityCartProductUseCase.ts";
+import MakeOrderUseCase from "../../../entities/cart/usecase/MakeOrderUseCase.ts";
 import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase.ts";
 import GetProductByIdUseCase from "../../../domain/usecase/GetProductByIdUseCase.ts";
-import GetUserHistoryListUseCase from "../../../entites/cart/usecase/GetUserHistoryListUseCase.ts";
+import GetUserHistoryListUseCase from "../../../entities/cart/usecase/GetCartHistoryUseCase.ts";
 import GetProductsByCartUseCase from "../../../domain/usecase/GetProductsByCartUseCase.ts";
 import SetProductRatingUseCase from "../../../domain/usecase/SetProductRatingUseCase.ts";
 
@@ -105,11 +105,11 @@ const domainModule = new ContainerModule(
             .inTransientScope()
 
         options
-            .bind<GetUserCartUseCase>(GetUserCartUseCase)
+            .bind<GetProgressCartUseCase>(GetProgressCartUseCase)
             .toDynamicValue(
 
                 context =>
-                    new GetUserCartUseCase( context.get(UserRepositoryImpl) )
+                    new GetProgressCartUseCase( context.get(UserRepositoryImpl) )
             )
             .inTransientScope()
 
@@ -132,11 +132,11 @@ const domainModule = new ContainerModule(
             .inTransientScope()
 
         options
-            .bind<GetAnOrderUseCase>(GetAnOrderUseCase)
+            .bind<MakeOrderUseCase>(MakeOrderUseCase)
             .toDynamicValue(
 
                 context =>
-                    new GetAnOrderUseCase( context.get(UserRepositoryImpl) )
+                    new MakeOrderUseCase( context.get(UserRepositoryImpl) )
             )
             .inTransientScope()
 

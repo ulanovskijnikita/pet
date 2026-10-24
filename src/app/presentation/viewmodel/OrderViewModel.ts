@@ -1,14 +1,14 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import GetProductsByCartUseCaseRes from "../../../entites/product/model/res/GetProductsByCartUseCaseRes";
+import GetProductsByCartUseCaseRes from "../../../entities/product/model/res/GetProductsByCartUseCaseRes";
 import GetProductsByCartUseCase from "../../../domain/usecase/GetProductsByCartUseCase";
 import SetProductRatingUseCase from "../../../domain/usecase/SetProductRatingUseCase";
-import { CartId } from "../../../entites/cart/model/CartPreview";
+import { CartId } from "../../../entities/cart/model/CartPreview";
 import AppStater from "./appViewModel/AppStater";
-import { ProductId, ProductRating } from "../../../entites/product/model/Product";
-import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase";
-import { DEFAULT_QUANTITY } from "../../../entites/cart/model/param/AddToProgressCartUseCaseParam";
+import { ProductId, ProductRating } from "../../../entities/product/model/Product";
+import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
+import { DEFAULT_QUANTITY } from "../../../entities/cart/model/param/SetProductQuantityParam";
 import NavStater from "./navViewModel/NavStater";
-import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase";
+import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase";
 
 type SetProductRatingParam = {
 

@@ -1,13 +1,13 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import GetUserCartUseCase from "../../../entites/cart/usecase/GetUserCartUseCase";
-import Cart from "../../../entites/cart/model/Cart";
-import SetCartLengthUseCase from "../../../entites/cart/usecase/SetCartLengthUseCase";
-import SetQuantityCartProductParam from "../../../entites/user/model/param/SetQuantityCartProductParam";
-import ChangeQuantityCartProductUseCase from "../../../entites/cart/usecase/ChangeQuantityCartProductUseCase";
-import GetAnOrderUseCase from "../../../entites/cart/usecase/GetAnOrderUseCase";
+import GetProgressCartUseCase from "../../../entities/cart/usecase/GetProgressCartUseCase";
+import Cart from "../../../entities/cart/model/Cart";
+import SetCartLengthUseCase from "../../../entities/cart/usecase/SetCartLengthUseCase";
+import SetQuantityCartProductParam from "../../../entities/user/model/param/SetQuantityCartProductParam";
+import ChangeQuantityCartProductUseCase from "../../../entities/cart/usecase/ChangeQuantityCartProductUseCase";
+import MakeOrderUseCase from "../../../entities/cart/usecase/MakeOrderUseCase";
 import NavStater from "./navViewModel/NavStater";
-import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase";
-import { ProductId } from "../../../entites/product/model/Product";
+import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase";
+import { ProductId } from "../../../entities/product/model/Product";
 import AppStater from "./appViewModel/AppStater";
 
 export default class CartViewModel {
@@ -16,10 +16,10 @@ export default class CartViewModel {
 
         private navStater: NavStater,
         private appStater: AppStater,
-        private getUserCartUseCase: GetUserCartUseCase,
+        private getUserCartUseCase: GetProgressCartUseCase,
         private setQuantityCartProductUseCase: SetCartLengthUseCase,
         private changeQuantityCartProductUseCase: ChangeQuantityCartProductUseCase,
-        private getAnOrderUseCase: GetAnOrderUseCase,
+        private getAnOrderUseCase: MakeOrderUseCase,
         private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
     ) {
 

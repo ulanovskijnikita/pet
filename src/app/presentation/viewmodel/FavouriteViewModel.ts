@@ -2,11 +2,11 @@ import { makeAutoObservable, runInAction } from "mobx";
 import GetProductByFavouriteUseCase from "../../../domain/usecase/GetProductByFavouriteUseCase";
 import { DEFAULT_LIMIT } from "../constants/defaultLimit";
 import AppStater from "./appViewModel/AppStater";
-import Product, { ProductId } from "../../../entites/product/model/Product";
+import Product, { ProductId } from "../../../entities/product/model/Product";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset";
 import { DEFAULT_QUANTITY } from "../constants/defaultQuantity";
-import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase";
-import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase";
+import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
+import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase";
 import NavStater from "./navViewModel/NavStater";
 
 export default class FavouriteViewModel {

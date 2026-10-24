@@ -1,15 +1,15 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase.ts";
-import Product, { ProductId } from "../../../entites/product/model/Product.ts";
-import { ProductSubcategoryId } from "../../../entites/product/model/ProductSubcategory.ts";
+import Product, { ProductId } from "../../../entities/product/model/Product.ts";
+import { ProductSubcategoryId } from "../../../entities/product/model/ProductSubcategory.ts";
 import AppStater from "./appViewModel/AppStater.ts";
-import { CLOTHING } from "../../../entites/product/model/ProductCategory.ts";
+import { CLOTHING } from "../../../entities/product/model/ProductCategory.ts";
 import { DEFAULT_LIMIT_OVERVIEW } from "../constants/defaultLimit.ts";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset.ts";
 import NavStater from "./navViewModel/NavStater.ts";
-import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase.ts";
+import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase.ts";
 import { DEFAULT_QUANTITY } from "../constants/defaultQuantity.ts";
-import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase.ts";
+import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase.ts";
 
 export default class ClothingViewModel {
 

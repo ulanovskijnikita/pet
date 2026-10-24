@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/domain/model"]
+  "include": ["src", "src/domain/model", "src/shared/model/database.types.ts"]
 }

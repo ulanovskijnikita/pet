@@ -1,4 +1,4 @@
-import { UserId } from "../../../../entites/user/model/User";
+import { UserId } from "../../../../entities/user/model/User";
 
 export default interface AppStater {
 

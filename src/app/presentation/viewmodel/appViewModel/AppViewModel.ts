@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import GetUserUseCase from "../../../../entites/user/usecase/GetUserUseCase";
-import { UserId } from "../../../../entites/user/model/User";
+import GetUserUseCase from "../../../../entities/user/usecase/GetUserUseCase";
+import { UserId } from "../../../../entities/user/model/User";
 import AppStater from "./AppStater";
 
 export default class AppViewModel implements AppStater {

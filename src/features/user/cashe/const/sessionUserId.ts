@@ -1,0 +1,3 @@
+const SESSION_USER_ID = "SESSION_USER_ID"
+
+export default SESSION_USER_ID

@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite";
-import SetQuantityCartProductParam from "../../../entites/user/model/param/SetQuantityCartProductParam";
+import SetQuantityCartProductParam from "../../../entities/user/model/param/SetQuantityCartProductParam";
 import { useEffect, useRef } from "react";
 import useInjection from "../context/inversify/useInjection";
 import AppViewModel from "../viewmodel/appViewModel/AppViewModel";
-import { ProductId } from "../../../entites/product/model/Product";
-import { ProductQuantity } from "../../../entites/cart/model/param/AddToProgressCartUseCaseParam";
+import { ProductId } from "../../../entities/product/model/Product";
+import { ProductQuantity } from "../../../entities/cart/model/param/SetProductQuantityParam";
 
 type QuantityFormProps = {
 

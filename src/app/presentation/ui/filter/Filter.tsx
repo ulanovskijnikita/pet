@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import ProductOrder, { ProductOrderId } from "../../../../entites/product/model/ProductOrder"
+import ProductOrder, { ProductOrderId } from "../../../../entities/product/model/ProductOrder"
 
 type FilterProps = {
 

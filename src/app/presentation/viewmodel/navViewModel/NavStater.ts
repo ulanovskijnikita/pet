@@ -1,5 +1,5 @@
-import { ProductTag } from "../../../../entites/product/model/Product";
-import { ProductQuantity } from "../../../../entites/cart/model/param/AddToProgressCartUseCaseParam";
+import { ProductTag } from "../../../../entities/product/model/Product";
+import { ProductQuantity } from "../../../../entities/cart/model/param/SetProductQuantityParam";
 
 export default interface NavStater {
 

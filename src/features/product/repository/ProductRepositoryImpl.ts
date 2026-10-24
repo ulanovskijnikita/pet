@@ -1,18 +1,18 @@
-import Product from "../../../entites/product/model/Product.ts";
+import Product from "../../../entities/product/model/Product.ts";
 import SupabaseProduct from "../model/SupabaseProduct.ts";
-import ProductCategoryUseCaseParam from "../../../entites/product/model/param/ProductCategoryUseCaseParam.ts";
-import GetProductByFilterUseCaseParam from "../../../entites/product/model/param/GetProductByFilterUseCaseParam.ts";
-import GetProductByFavouriteUseCaseParam from "../../../entites/product/model/param/GetProductByFavouriteUseCaseParam.ts";
-import GetProductByIdUseCaseParam from "../../../entites/product/model/param/GetProductByIdUseCaseParam.ts";
-import ProductDetails from "../../../entites/product/model/ProductDetails.ts";
+import GetProductByCategoryUseCaseParam from "../../../entities/product/model/param/GetProductByCategoryUseCaseParam.ts";
+import GetProductByFilterUseCaseParam from "../../../entities/product/model/param/GetProductByFilterUseCaseParam.ts";
+import GetProductByFavouriteUseCaseParam from "../../../entities/product/model/param/GetProductByFavouriteUseCaseParam.ts";
+import GetProductByIdUseCaseParam from "../../../entities/product/model/param/GetProductByIdUseCaseParam.ts";
+import ProductDetails from "../../../entities/product/model/ProductDetails.ts";
 import SupabaseProductDetails from "../model/SupabaseProductDetails.ts";
-import GetProductsByCartUseCaseParam from "../../../entites/product/model/param/GetProductsByCartUseCaseParam.ts";
-import GetProductsByCartUseCaseRes from "../../../entites/product/model/res/GetProductsByCartUseCaseRes.ts";
-import GetSupabaseProductsByCartRes from "../model/GetSupabaseProductsByCartRes.ts";
-import SetProductRatingUseCaseParam from "../../../entites/product/model/param/SetProductRatingUseCaseParam.ts";
-import SetSupabaseProductRatingRes from "../model/SetSupabaseProductRatingRes.ts";
-import ProductRepository from "../../../entites/product/repository/ProductRepository.ts";
-import SetProductRatingUseCaseRes from "../../../entites/product/model/res/SetProductRatingUseCaseRes.ts";
+import GetProductsByCartUseCaseParam from "../../../entities/product/model/param/GetProductsByCartUseCaseParam.ts";
+import GetProductsByCartUseCaseRes from "../../../entities/product/model/res/GetProductsByCartUseCaseRes.ts";
+import GetSupabaseProductsByCartRes from "../model/res/GetSupabaseProductsByCartRes.ts";
+import SetProductRatingUseCaseParam from "../../../entities/product/model/param/SetProductRatingUseCaseParam.ts";
+import SetSupabaseProductRatingRes from "../model/res/SetSupabaseProductRatingRes.ts";
+import ProductRepository from "../../../entities/product/repository/ProductRepository.ts";
+import SetProductRatingUseCaseRes from "../../../entities/product/model/res/SetProductRatingUseCaseRes.ts";
 import ProductStorage from "../storage/ProductStorage.ts";
 
 export default class ProductRepositoryImpl implements ProductRepository {
@@ -55,7 +55,7 @@ export default class ProductRepositoryImpl implements ProductRepository {
         return this.mapSupabaseProductToProduct( supabaseProduct )
     }
 
-    async getByCategory(param: ProductCategoryUseCaseParam): Promise<Product[]> {
+    async getByCategory(param: GetProductByCategoryUseCaseParam): Promise<Product[]> {
         const supabaseProduct = await this.supabaseProductStorage.getByCategory(param)
 
         return this.mapSupabaseProductToProduct(supabaseProduct)

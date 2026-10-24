@@ -1,14 +1,14 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase";
-import { ProductSubcategoryId } from "../../../entites/product/model/ProductSubcategory";
-import Product, { ProductId } from "../../../entites/product/model/Product";
-import { FOODIES } from "../../../entites/product/model/ProductCategory";
+import { ProductSubcategoryId } from "../../../entities/product/model/ProductSubcategory";
+import Product, { ProductId } from "../../../entities/product/model/Product";
+import { FOODIES } from "../../../entities/product/model/ProductCategory";
 import { DEFAULT_LIMIT } from "../constants/defaultLimit";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset";
 import AppStater from "./appViewModel/AppStater";
 import NavStater from "./navViewModel/NavStater";
-import AddToProgressCartUseCase from "../../../entites/cart/usecase/AddToProgressCartUseCase";
-import ToggleFavouriteProductUseCase from "../../../entites/user/usecase/ToggleFavouriteProductUseCase";
+import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
+import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase";
 import { DEFAULT_QUANTITY } from "../constants/defaultQuantity";
 
 export default class FoodiesViewModel {

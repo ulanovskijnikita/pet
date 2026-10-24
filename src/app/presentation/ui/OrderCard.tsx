@@ -2,10 +2,10 @@ import { observer } from "mobx-react-lite"
 import { memo } from "react"
 import { Link } from "react-router"
 import pages from "../router/pages"
-import GetProductsByCartUseCaseRes, { ProductUserRating } from "../../../entites/product/model/res/GetProductsByCartUseCaseRes"
+import GetProductsByCartUseCaseRes, { ProductUserRating } from "../../../entities/product/model/res/GetProductsByCartUseCaseRes"
 import FavouriteButton from "./FavouriteButton"
 import FuncButton from "./FuncButton"
-import { ProductId } from "../../../entites/product/model/Product"
+import { ProductId } from "../../../entities/product/model/Product"
 
 type OrderCardProps = {
 

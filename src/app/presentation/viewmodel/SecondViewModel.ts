@@ -1,8 +1,8 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import GetNewUserSecondUseCase from "../../../entites/user/usecase/GetNewUserSecondUseCase";
-import GetNewUserSecondUseCaseRes from "../../../entites/user/model/res/GetNewUserSecondUseCaseRes";
-import { UserMessage } from "../../../entites/user/model/param/SendMessageParam";
-import GetUserUseCase from "../../../entites/user/usecase/GetUserUseCase";
+import GetNewUserSecondUseCase from "../../../entities/user/usecase/GetNewUserSecondUseCase";
+import GetNewUserSecondUseCaseRes from "../../../entities/user/model/res/GetNewUserSecondUseCaseRes";
+import { UserMessage } from "../../../entities/user/model/param/SendMessageParam";
+import GetUserUseCase from "../../../entities/user/usecase/GetUserUseCase";
 import AppStater from "./appViewModel/AppStater";
 
 export default class SecondViewModel {

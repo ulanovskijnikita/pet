@@ -1,0 +1,3 @@
+const PREFIX_CASHE_CART_KEY = "CASHE_CART_"
+
+export default PREFIX_CASHE_CART_KEY

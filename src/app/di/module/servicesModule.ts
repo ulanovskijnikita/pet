@@ -1,10 +1,10 @@
 import {ContainerModule} from "inversify";
-import UserGateway from "../../../entites/user/gateway/UserGateway.ts";
-import UserGatewayImpl from "../../../services/gateway/UserGatewayImpl.ts";
-import EmailjsSendEmailClient from "../../../services/client/email/EmailjsSendEmailClient.ts";
-import AbstractVerifyEmailClient from "../../../services/client/email/AbstractVerifyEmailClient.ts";
-import SendEmailClient from "../../../services/client/email/SendEmailClient.ts";
-import VerifyEmailClient from "../../../services/client/email/VerifyEmailClient.ts";
+import UserGateway from "../../../entities/user/gateway/UserGateway.ts";
+import UserGatewayImpl from "../../../features/user/gateway/UserGatewayImpl.ts";
+import EmailjsSendEmailClient from "../../../features/user/client/sender/EmailjsSendEmailClient.ts";
+import AbstractVerifyEmailClient from "../../../features/user/client/verifier/AbstractVerifyEmailClient.ts";
+import SendEmailClient from "../../../features/user/client/sender/SendEmailClient.ts";
+import VerifyEmailClient from "../../../features/user/client/verifier/VerifyEmailClient.ts";
 
 const servicesModule = new ContainerModule(
 
