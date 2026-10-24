@@ -1,7 +1,7 @@
-import Nav from "../ui/nav/Nav";
+import Nav from "../presentation/ui/nav/Nav";
 import { Outlet } from "react-router";
-import Footer from "../ui/footer/Footer";
-import Cookie from "../ui/Cookie";
+import Footer from "../presentation/ui/footer/Footer";
+import Cookie from "../presentation/ui/Cookie";
 
 const Layout = () => {
 

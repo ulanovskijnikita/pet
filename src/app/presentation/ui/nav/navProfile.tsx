@@ -1,9 +1,9 @@
 import { NavLink } from "react-router"
 import { UserId } from "../../../../shared/model/entities/User"
-import pages from "../../router/pages"
+import pages from "../../../router/pages"
 import { observer } from "mobx-react-lite"
 import NavViewModel from "../../viewmodel/navViewModel/NavViewModel"
-import useInjection from "../../context/inversify/useInjection"
+import useInjection from "../../../../shared/context/inversify/useInjection"
 
 type IconProps = {
 

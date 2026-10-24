@@ -1,4 +1,4 @@
-import { StorageProductId, StorageProductTag } from "../../../product/storage/model/StorageProduct";
+import { StorageProductId, StorageProductTag } from "../../../../shared/model/storage/StorageProduct";
 import { StorageCartId, StorageCartPrice, StorageCartProductQuantity, StorageCartStatus } from "../../../../shared/model/storage/StorageCart";
 
 type StorageCartHistory = {

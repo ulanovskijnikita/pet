@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { useEffect, useLayoutEffect } from "react";
 import { useParams } from "react-router";
 import OrderViewModel from "../viewmodel/OrderViewModel";
-import useInjection from "../context/inversify/useInjection";
+import useInjection from "../../../shared/context/inversify/useInjection";
 import Loader from "../ui/Loader";
 import OrderCard from "../ui/OrderCard";
 

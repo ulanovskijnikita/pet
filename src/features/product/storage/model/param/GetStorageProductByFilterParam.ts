@@ -1,5 +1,5 @@
-import { StorageUserId } from "../../../user/model/StorageUser"
-import { StorageProductTag } from "../StorageProduct"
+import { StorageUserId } from "../../../../../shared/model/storage/StorageUser"
+import { StorageProductTag } from "../../../../../shared/model/storage/StorageProduct"
 import { StorageProductCategoryId } from "../StorageProductCategory"
 import { StorageProductSubcategoryId } from "../StorageProductSubcategory"
 

@@ -1,5 +1,5 @@
-import { StorageUserId } from "../../../user/model/StorageUser";
-import { StorageProductId, StorageProductRating } from "../StorageProduct";
+import { StorageUserId } from "../../../../../shared/model/storage/StorageUser";
+import { StorageProductId, StorageProductRating } from "../../../../../shared/model/storage/StorageProduct";
 
 export default interface SetStorageProductRatingParam {
 

@@ -1,4 +1,4 @@
-import {StorageUserId} from "../../../user/model/StorageUser.ts";
+import { StorageUserId } from "../../../../../shared/model/storage/StorageUser";
 import {StorageProductCategoryId} from "../StorageProductCategory.ts";
 import {StorageProductSubcategoryId} from "../StorageProductSubcategory.ts";
 

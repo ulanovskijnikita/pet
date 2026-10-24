@@ -3,7 +3,7 @@ import GetNewUserSecondUseCase from "../../../entities/user/usecase/GetNewUserSe
 import GetNewUserSecondUseCaseRes from "../../../entities/user/model/res/GetNewUserSecondUseCaseRes";
 import { UserMessage } from "../../../entities/user/model/param/SendMessageParam";
 import GetUserUseCase from "../../../entities/user/usecase/GetUserUseCase";
-import AppStater from "./appViewModel/AppStater";
+import AppStater from "../../model/AppStater";
 
 export default class SecondViewModel {
 

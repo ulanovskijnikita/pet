@@ -5,7 +5,7 @@ import Product, { ProductId } from "../../../shared/model/entities/Product";
 import { FOODIES } from "../../../entities/product/model/ProductCategory";
 import { DEFAULT_LIMIT } from "../constants/defaultLimit";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset";
-import AppStater from "./appViewModel/AppStater";
+import AppStater from "../../model/AppStater";
 import NavStater from "./navViewModel/NavStater";
 import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
 import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase";

@@ -1,13 +1,13 @@
 import { observer } from "mobx-react-lite"
-import Location from "../router/Location"
+import Location from "../../router/Location"
 import CartItems from "../ui/CartItem"
 import CartViewModel from "../viewmodel/CartViewModel"
 import { useEffect } from "react"
 import FuncButton from "../ui/FuncButton"
 import { useNavigate } from "react-router"
-import pages from "../router/pages"
+import pages from "../../router/pages"
 import { runInAction } from "mobx"
-import useInjection from "../context/inversify/useInjection"
+import useInjection from "../../../shared/context/inversify/useInjection"
 import Loader from "../ui/Loader"
 
 const Cart = () => {

@@ -8,7 +8,7 @@ import MakeOrderUseCase from "../../../entities/cart/usecase/MakeOrderUseCase";
 import NavStater from "./navViewModel/NavStater";
 import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase";
 import { ProductId } from "../../../shared/model/entities/Product";
-import AppStater from "./appViewModel/AppStater";
+import AppStater from "../../model/AppStater";
 
 export default class CartViewModel {
 

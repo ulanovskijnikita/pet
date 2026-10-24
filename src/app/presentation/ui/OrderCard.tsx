@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { memo } from "react"
 import { Link } from "react-router"
-import pages from "../router/pages"
+import pages from "../../router/pages"
 import GetProductsByCartUseCaseRes, { ProductUserRating } from "../../../entities/product/model/res/GetProductsByCartUseCaseRes"
 import FavouriteButton from "./FavouriteButton"
 import FuncButton from "./FuncButton"

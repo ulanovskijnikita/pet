@@ -1,4 +1,4 @@
-import StorageProduct from "./StorageProduct.ts";
+import StorageProduct from "../../../../shared/model/storage/StorageProduct"
 import { StorageProductCategoryValue } from "./StorageProductCategory.ts";
 import { StorageProductSubcategoryValue } from "./StorageProductSubcategory.ts";
 

@@ -7,7 +7,7 @@ import GetStorageProductsByCartParam from "./model/param/GetStorageProductsByCar
 import SetStorageProductRatingParam from "./model/param/SetStorageProductRatingParam.ts";
 import GetStorageProductsByCartRes from "./model/res/GetStorageProductsByCartRes.ts";
 import SetStorageProductRatingRes from "./model/res/SetStorageProductRatingRes.ts";
-import StorageProduct from "./model/StorageProduct.ts";
+import StorageProduct from "../../../shared/model/storage/StorageProduct.ts";
 import StorageProductDetails from "./model/StorageProductDetails.ts";
 import ProductStorage from "./ProductStorage.ts";
 import {SupabaseClient} from "@supabase/supabase-js";

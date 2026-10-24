@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router";
-import Location from "../router/Location";
+import Location from "../../router/Location";
 import { useEffect, useLayoutEffect } from "react";
 import ProductViewModel from "../viewmodel/ProductViewModel";
 import FavouriteButton from "../ui/FavouriteButton";
@@ -8,8 +8,8 @@ import QuantityButton from "../ui/QuantityButton";
 import QuantityForm from "../ui/QuantityForm";
 import { runInAction } from "mobx";
 import FuncButton from "../ui/FuncButton";
-import pages from "../router/pages";
-import useInjection from "../context/inversify/useInjection";
+import pages from "../../router/pages";
+import useInjection from "../../../shared/context/inversify/useInjection";
 import Loader from "../ui/Loader";
 
 const Product = () => {

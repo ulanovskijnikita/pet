@@ -2,7 +2,7 @@ import {makeAutoObservable, runInAction} from "mobx";
 import GetProductByCategoryUseCase from "../../../domain/usecase/GetProductByCategoryUseCase.ts";
 import Product, { ProductId } from "../../../shared/model/entities/Product.ts";
 import { ProductSubcategoryId } from "../../../entities/product/model/ProductSubcategory.ts";
-import AppStater from "./appViewModel/AppStater.ts";
+import AppStater from "../../model/AppStater.ts";
 import { CLOTHING } from "../../../entities/product/model/ProductCategory.ts";
 import { DEFAULT_LIMIT_OVERVIEW } from "../constants/defaultLimit.ts";
 import { DEFAULT_OFFSET } from "../constants/defaultOffset.ts";

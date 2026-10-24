@@ -4,8 +4,8 @@ import heroSlider from "./heroSlider";
 import { observer } from "mobx-react-lite";
 import HeroViewModel from "../../viewmodel/HeroViewModel";
 import LinkButton from "../../ui/LinkButton";
-import pages from "../../router/pages";
-import useInjection from "../../context/inversify/useInjection";
+import pages from "../../../router/pages";
+import useInjection from "../../../../shared/context/inversify/useInjection";
 
 const Hero = () => {
 

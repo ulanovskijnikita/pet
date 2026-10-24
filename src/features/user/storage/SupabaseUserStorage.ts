@@ -1,6 +1,6 @@
 import { SupabaseClient } from "@supabase/supabase-js"
 import { Database } from "../../../shared/lib/supabase/database.types"
-import { StorageProductIsFavorites } from "../../product/storage/model/StorageProduct"
+import { StorageProductIsFavorites } from "../../../shared/model/storage/StorageProduct"
 import AuthenticationStorageUserParam from "./model/param/AuthenticationStorageUserParam"
 import RegisterStorageUserParam from "./model/param/RegisterStorageUserParam"
 import ToggleFavouriteStorageProduct from "./model/param/ToggleFavouriteStorageProduct"

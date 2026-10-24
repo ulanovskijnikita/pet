@@ -1,5 +1,5 @@
 import { Enums } from "../../lib/supabase/database.types"
-import StorageProduct from "../../../features/product/storage/model/StorageProduct"
+import StorageProduct from "./StorageProduct"
 
 export type StorageCartId = number
 export type StorageCartPrice = number

@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite"
 import { useNavigate } from "react-router"
-import pages from "../router/pages"
-import AppViewModel from "../viewmodel/appViewModel/AppViewModel"
-import useInjection from "../context/inversify/useInjection"
+import pages from "../../router/pages"
+import AppViewModel from "../../model/AppViewModel"
+import useInjection from "../../../shared/context/inversify/useInjection"
 
 type FavouriteButtonProps = {
 

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import Location from "../router/Location";
+import Location from "../../router/Location";
 import { Outlet, useParams } from "react-router";
 import Historizing from "../sections/Historizing";
 

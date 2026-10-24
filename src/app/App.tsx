@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite"
-import Router from "./presentation/router/Router"
-import AppViewModel from "./presentation/viewmodel/appViewModel/AppViewModel"
+import Router from "./router/Router"
+import AppViewModel from "./model/AppViewModel"
 import { useEffect } from "react"
-import useInjection from "./presentation/context/inversify/useInjection"
+import useInjection from "../shared/context/inversify/useInjection"
 
 const App = () => {
 

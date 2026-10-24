@@ -1,4 +1,4 @@
-import { VerifyUserEmailRes } from "./VerifyUserEmailRes"
+import VerifyUserEmailRes from "./VerifyUserEmailRes"
 import { ValidateIsUnique } from "./ValidateUserRes"
 
 export type ValidatePass = boolean

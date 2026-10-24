@@ -1,4 +1,4 @@
-import { StorageUserId } from "../../../user/model/StorageUser";
+import { StorageUserId } from "../../../../../shared/model/storage/StorageUser";
 
 export default interface GetStorageProductByFavouriteParam {
 

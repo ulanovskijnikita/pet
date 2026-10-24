@@ -5,7 +5,7 @@ import Banner from "../ui/Banner";
 import Quotes from "../sections/quotes/Quotes";
 import Second from "../sections/Second";
 import Photo from "../sections/photo/Photo";
-import Location from "../router/Location";
+import Location from "../../router/Location";
 import bannerImg1 from "/decorative/banner/banner-img-1.png"
 import Hero from "../sections/hero/Hero";
 import { observer } from "mobx-react-lite";

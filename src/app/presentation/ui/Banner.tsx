@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import LinkButton from "../ui/LinkButton";
-import pages from "../router/pages";
+import pages from "../../router/pages";
 import BannerViewModel from "../viewmodel/BannerViewModel";
-import useInjection from "../context/inversify/useInjection";
+import useInjection from "../../../shared/context/inversify/useInjection";
 
 type BannerProps = {
 

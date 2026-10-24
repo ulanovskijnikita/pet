@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite"
-import Location from "../router/Location"
+import Location from "../../router/Location"
 import Cards from "../ui/Cards"
 import FavouriteViewModel from "../viewmodel/FavouriteViewModel"
 import { useEffect, useLayoutEffect } from "react"
 import { runInAction } from "mobx"
-import useInjection from "../context/inversify/useInjection"
+import useInjection from "../../../shared/context/inversify/useInjection"
 
 const Favourite = () => {
 

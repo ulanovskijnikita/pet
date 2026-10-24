@@ -1,4 +1,4 @@
-import { StorageProductRating } from "../StorageProduct"
+import { StorageProductRating } from "../../../../../shared/model/storage/StorageProduct"
 
 export default interface SetStorageProductRatingRes {
 

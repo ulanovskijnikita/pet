@@ -4,12 +4,12 @@ import SearchInput from "../SearchInput";
 import navPages from "./navPages";
 import navProfile from "./navProfile";
 import navServices from "./navServices";
-import pages from "../../router/pages";
+import pages from "../../../router/pages";
 import { observer } from "mobx-react-lite";
 import NavViewModel from "../../viewmodel/navViewModel/NavViewModel";
 import { useEffect } from "react";
 import { runInAction } from "mobx";
-import useInjection from "../../context/inversify/useInjection";
+import useInjection from "../../../../shared/context/inversify/useInjection";
 
 const Nav = () => {
 

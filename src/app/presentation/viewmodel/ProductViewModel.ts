@@ -4,7 +4,7 @@ import ProductDetails from "../../../entities/product/model/ProductDetails";
 import { DEFAULT_QUANTITY, ProductQuantity } from "../../../entities/cart/model/param/SetProductQuantityParam";
 import SetQuantityCartProductParam from "../../../entities/user/model/param/SetQuantityCartProductParam";
 import { ProductId } from "../../../shared/model/entities/Product";
-import AppStater from "./appViewModel/AppStater";
+import AppStater from "../../model/AppStater";
 import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase";
 import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
 import NavStater from "./navViewModel/NavStater";

@@ -4,10 +4,10 @@ import Form from "../ui/Form"
 import SignInViewModel from "../viewmodel/SignInViewModel"
 import { observer } from "mobx-react-lite"
 import { Link, useNavigate } from "react-router"
-import pages from "../router/pages"
+import pages from "../../router/pages"
 import { useEffect, useRef } from "react"
 import FormButton from "../ui/FormButton"
-import useInjection from "../context/inversify/useInjection"
+import useInjection from "../../../shared/context/inversify/useInjection"
 import Loader from "../ui/Loader"
 
 const SignIn = () => {

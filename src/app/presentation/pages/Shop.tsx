@@ -1,6 +1,6 @@
 
 import { observer } from "mobx-react-lite";
-import Location from "../router/Location";
+import Location from "../../router/Location";
 import Shopping from "../sections/shopping/Shopping";
 
 const Shop = () => {

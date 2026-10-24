@@ -1,4 +1,4 @@
-import StorageProduct from "../StorageProduct"
+import StorageProduct from "../../../../../shared/model/storage/StorageProduct"
 
 export type StorageProducUsertRating = number
 

@@ -1,4 +1,4 @@
-import { StorageProductId } from "../../../../product/storage/model/StorageProduct"
+import { StorageProductId } from "../../../../../shared/model/storage/StorageProduct"
 import { StorageCartId, StorageCartProductQuantity } from "../../../../../shared/model/storage/StorageCart"
 
 export default interface SetStorageProductQuantityParam {

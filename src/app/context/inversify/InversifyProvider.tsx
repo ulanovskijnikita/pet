@@ -1,6 +1,6 @@
 import { Container } from "inversify"
 import { ReactNode } from "react"
-import InversifyContext from "./InversifyContext"
+import InversifyContext from "../../../shared/context/inversify/InversifyContext"
 
 type InversifyProviderProps = {
 

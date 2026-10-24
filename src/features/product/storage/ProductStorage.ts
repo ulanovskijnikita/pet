@@ -6,7 +6,7 @@ import GetStorageProductsByCartParam from "./model/param/GetStorageProductsByCar
 import SetStorageProductRatingParam from "./model/param/SetStorageProductRatingParam"
 import GetStorageProductsByCartRes from "./model/res/GetStorageProductsByCartRes"
 import SetStorageProductRatingRes from "./model/res/SetStorageProductRatingRes"
-import StorageProduct from "./model/StorageProduct"
+import StorageProduct from "../../../shared/model/storage/StorageProduct"
 import StorageProductDetails from "./model/StorageProductDetails"
 
 export default interface ProductStorage {

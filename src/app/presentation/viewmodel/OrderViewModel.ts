@@ -3,7 +3,7 @@ import GetProductsByCartUseCaseRes from "../../../entities/product/model/res/Get
 import GetProductsByCartUseCase from "../../../domain/usecase/GetProductsByCartUseCase";
 import SetProductRatingUseCase from "../../../domain/usecase/SetProductRatingUseCase";
 import { CartId } from "../../../entities/cart/model/CartPreview";
-import AppStater from "./appViewModel/AppStater";
+import AppStater from "../../model/AppStater";
 import { ProductId, ProductRating } from "../../../shared/model/entities/Product";
 import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
 import { DEFAULT_QUANTITY } from "../../../entities/cart/model/param/SetProductQuantityParam";

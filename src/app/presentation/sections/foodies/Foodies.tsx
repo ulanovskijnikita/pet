@@ -4,9 +4,9 @@ import FoodiesViewModel from "../../viewmodel/FoodiesViewModel";
 import foodiesSubCategory from "./foodiesSubCategory";
 import Cards from "../../ui/Cards";
 import LinkButton from "../../ui/LinkButton";
-import pages from "../../router/pages";
+import pages from "../../../router/pages";
 import { useEffect } from "react";
-import useInjection from "../../context/inversify/useInjection";
+import useInjection from "../../../../shared/context/inversify/useInjection";
 
 const Foodies = observer(() => {
 

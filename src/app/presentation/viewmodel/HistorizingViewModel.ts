@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import GetUserHistoryListUseCase from "../../../entities/cart/usecase/GetCartHistoryUseCase";
 import CartsHistory from "../../../entities/cart/model/CartsHistory";
-import AppStater from "./appViewModel/AppStater";
+import AppStater from "../../model/AppStater";
 
 export default class HistorizingViewModel {
 

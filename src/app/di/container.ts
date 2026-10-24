@@ -1,17 +1,23 @@
 import {Container} from "inversify";
-import appModule from "./module/appModule.ts";
-import dataModule from "./module/dataModule.ts";
-import servicesModule from "./module/servicesModule.ts";
-import domainModule from "./module/domainModule.ts";
+import appModule from "./appModule";
+import entityCartModule from "../../entities/cart/di/entityCartModule";
+import entityProductModule from "../../entities/product/di/entityProductModule";
+import entityUserModule from "../../entities/user/di/entityUserModule";
+import featureCartModule from "../../features/cart/di/featureCartModule";
+import featureProductModule from "../../features/product/di/featureProductModule";
+import featureUserModule from "../../features/user/di/featureUserModule";
 
 const container = new Container()
 
 await container.load(
-
+    
     appModule,
-    dataModule,
-    domainModule,
-    servicesModule,
+    entityCartModule,
+    entityProductModule,
+    entityUserModule,
+    featureCartModule,
+    featureProductModule,
+    featureUserModule,
 )
 
 export default container

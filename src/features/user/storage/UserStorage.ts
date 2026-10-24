@@ -1,4 +1,4 @@
-import { StorageProductIsFavorites } from "../../product/storage/model/StorageProduct"
+import { StorageProductIsFavorites } from "../../../shared/model/storage/StorageProduct"
 import AuthenticationStorageUserParam from "./model/param/AuthenticationStorageUserParam"
 import RegisterStorageUserParam from "./model/param/RegisterStorageUserParam"
 import ValidateStorageUserParam from "./model/param/ValidateStorageUserParam"

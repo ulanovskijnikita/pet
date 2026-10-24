@@ -4,10 +4,10 @@ import Form from "../ui/Form";
 import FormButton from "../ui/FormButton";
 import { useRef } from "react";
 import FormTextarea from "../ui/FormTextarea";
-import pages from "../router/pages";
+import pages from "../../router/pages";
 import { Link } from "react-router";
 import SecondViewModel from "../viewmodel/SecondViewModel";
-import useInjection from "../context/inversify/useInjection";
+import useInjection from "../../../shared/context/inversify/useInjection";
 import Loader from "../ui/Loader";
 
 const Second = () => {

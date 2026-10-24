@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { Link } from "react-router";
 import HistorizingViewModel from "../viewmodel/HistorizingViewModel";
-import useInjection from "../context/inversify/useInjection";
+import useInjection from "../../../shared/context/inversify/useInjection";
 import Loader from "../ui/Loader";
 
 const Historizing = () => {

@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import SetQuantityCartProductParam from "../../../entities/user/model/param/SetQuantityCartProductParam";
 import { useEffect, useRef } from "react";
-import useInjection from "../context/inversify/useInjection";
-import AppViewModel from "../viewmodel/appViewModel/AppViewModel";
+import useInjection from "../../../shared/context/inversify/useInjection";
+import AppViewModel from "../../model/AppViewModel";
 import { ProductId } from "../../../shared/model/entities/Product";
 import { ProductQuantity } from "../../../entities/cart/model/param/SetProductQuantityParam";
 

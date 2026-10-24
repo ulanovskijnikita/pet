@@ -4,7 +4,7 @@ import FavouriteButton from "./FavouriteButton";
 import QuantityButton from "./QuantityButton";
 import QuantityForm from "./QuantityForm";
 import { Link } from "react-router";
-import pages from "../router/pages";
+import pages from "../../router/pages";
 import { memo } from "react";
 import { ProductId } from "../../../shared/model/entities/Product";
 import SetQuantityCartProductParam from "../../../entities/user/model/param/SetQuantityCartProductParam";
