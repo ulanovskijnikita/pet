@@ -1,4 +1,4 @@
-import CasheUser, { CasheUserStatus, CasheUserId, CasheUserEmail, CasheUserName } from "./model/CasheUser";
+import CasheUser, { CasheUserStatus, CasheUserId, CasheUserEmail, CasheUserName } from "../../../shared/model/cashe/CasheUser";
 import SESSION_USER_EMAIL from "./const/sessionUserEmail";
 import SESSION_USER_ID from "./const/sessionUserId";
 import SESSION_USER_NAME from "./const/sessionUserName";

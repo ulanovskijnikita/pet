@@ -1,4 +1,4 @@
-import CasheUser from "../CasheUser";
+import CasheUser from "../../../../../shared/model/cashe/CasheUser";
 
 type GetUserCasheRes = CasheUser | null
 

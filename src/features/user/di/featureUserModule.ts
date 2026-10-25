@@ -1,5 +1,5 @@
 import { ContainerModule } from "inversify";
-import CasheUser from "../cashe/model/CasheUser";
+import CasheUser from "../../../shared/model/cashe/CasheUser";
 import SessionUserCashe from "../cashe/SessionUserCashe";
 import SendEmailClient from "../client/sender/SendEmailClient";
 import EmailjsSendEmailClient from "../client/sender/EmailjsSendEmailClient";

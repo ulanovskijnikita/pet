@@ -1,5 +1,5 @@
 import GetUserCasheRes from "./model/res/GetUserCasheRes"
-import CasheUser, { CasheUserStatus } from "./model/CasheUser"
+import CasheUser, { CasheUserStatus } from "../../../shared/model/cashe/CasheUser"
 
 export default interface UserCashe {
 

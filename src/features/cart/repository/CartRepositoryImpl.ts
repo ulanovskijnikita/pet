@@ -3,7 +3,7 @@ import CartHistory from "../../../entities/cart/model/CartHistory";
 import SetProductQuantityParam from "../../../entities/cart/model/param/SetProductQuantityParam";
 import CartRepository from "../../../entities/cart/repository/CartRepository";
 import { UserId } from "../../../shared/model/entities/User";
-import CartCashe from "../cashe/CartCashe";
+import CartCashe from "../../../shared/cashe/CartCashe";
 import CasheCart from "../cashe/model/CasheCart";
 import CartStorage from "../storage/CartStorage";
 import StorageCart from "../../../shared/model/storage/StorageCart";

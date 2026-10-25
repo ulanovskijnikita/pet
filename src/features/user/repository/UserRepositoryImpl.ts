@@ -10,10 +10,11 @@ import ToggleFavouriteProductParam from "../../../entities/user/model/param/Togg
 import ValidateUserParam from "../../../entities/user/model/param/ValidateUserParam.ts";
 import ValidateUserRes from "../../../entities/user/model/res/ValidateUserRes.ts";
 import { ProductIsFavorites } from "../../../shared/model/entities/Product.ts";
-import CasheUser from "../cashe/model/CasheUser.ts";
+import CasheUser from "../../../shared/model/cashe/CasheUser.ts";
 import StorageUser from "../../../shared/model/storage/StorageUser.ts";
 import UserCashe from "../cashe/UserCashe.ts";
 import UserStorage from "../storage/UserStorage.ts";
+import CartCashe from "../../../shared/cashe/CartCashe.ts";
 
 export default class UserRepositoryImpl implements UserRepository {
 
@@ -21,6 +22,7 @@ export default class UserRepositoryImpl implements UserRepository {
 
         private userStorage: UserStorage,
         private userCashe: UserCashe,
+        private cartCashe: CartCashe,
     ) {}
 
     async identity(email: UserEmail): Promise<IdentityUserRes> {

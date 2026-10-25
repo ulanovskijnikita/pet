@@ -1,5 +1,5 @@
 import {Container} from "inversify";
-import appModule from "./appModule";
+import viewModule from "./viewModule";
 import entityCartModule from "../../entities/cart/di/entityCartModule";
 import entityProductModule from "../../entities/product/di/entityProductModule";
 import entityUserModule from "../../entities/user/di/entityUserModule";
@@ -11,7 +11,7 @@ const container = new Container()
 
 await container.load(
     
-    appModule,
+    viewModule,
     entityCartModule,
     entityProductModule,
     entityUserModule,

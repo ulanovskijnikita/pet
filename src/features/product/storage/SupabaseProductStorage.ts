@@ -39,7 +39,7 @@ export default class SupabaseProductStorage implements ProductStorage {
             u_id: param.userId
         })
 
-        return data!
+        return data ?? []
     }
 
     async getById(param: GetStorageProductByIdParam): Promise<StorageProductDetails | null> {
@@ -105,7 +105,7 @@ export default class SupabaseProductStorage implements ProductStorage {
                 lim: param.lim,
                 off_set: param.off_set,
                 subcategory_id: param.subcategoryId,
-                user_auth_id: param.userId
+                user_auth_id: param.userId,
             })
 
         return data ? data : []

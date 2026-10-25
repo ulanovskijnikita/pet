@@ -2,7 +2,7 @@ import { ContainerModule } from "inversify";
 import CartRepositoryImpl from "../repository/CartRepositoryImpl";
 import SupabaseCartStorage from "../storage/SupabaseCartStorage";
 import SessionCartCashe from "../cashe/SessionCartCashe";
-import CartCashe from "../cashe/CartCashe";
+import CartCashe from "../../../shared/cashe/CartCashe";
 import CartStorage from "../storage/CartStorage";
 import supabaseClient from "../../../shared/lib/supabase/supabaseClient";
 

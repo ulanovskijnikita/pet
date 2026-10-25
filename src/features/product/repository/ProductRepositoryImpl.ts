@@ -43,20 +43,36 @@ export default class ProductRepositoryImpl implements ProductRepository {
 
     async getByFavourite(param: GetProductByFavouriteUseCaseParam): Promise<Product[]> {
         
-        const supabaseProduct = await this.supabaseProductStorage.getByFavourite(param)
+        const supabaseProduct = await this.supabaseProductStorage.getByFavourite({
+
+            id: param.id,
+            lim: param.limit,
+            off_set: param.offset,
+        })
 
         return this.mapStorageProductToProduct( supabaseProduct )
     }
 
     async getByFilter(param: GetProductByFilterUseCaseParam): Promise<Product[]> {
         
-        const supabaseProduct = await this.supabaseProductStorage.getByFilter(param)
+        const supabaseProduct = await this.supabaseProductStorage.getByFilter({
+
+            ...param,
+            lim: param.limit,
+            off_set: param.offset,
+        })
 
         return this.mapStorageProductToProduct( supabaseProduct )
     }
 
     async getByCategory(param: GetProductByCategoryUseCaseParam): Promise<Product[]> {
-        const supabaseProduct = await this.supabaseProductStorage.getByCategory(param)
+
+        const supabaseProduct = await this.supabaseProductStorage.getByCategory({
+
+            ...param,
+            lim: param.limit,
+            off_set: param.offset,
+        })
 
         return this.mapStorageProductToProduct(supabaseProduct)
     }

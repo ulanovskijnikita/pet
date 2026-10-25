@@ -1,7 +1,8 @@
-import CartCashe from "./CartCashe";
+import { CasheUserId } from "../../../shared/model/cashe/CasheUser";
+import CartCashe from "../../../shared/cashe/CartCashe";
 import PREFIX_CASHE_CART_KEY from "./const/prefixCasheCartKey";
 import CasheCart from "./model/CasheCart";
-import CasheUserId from "./model/CasheUserId";
+import GetCasheProgressCartRes from "./model/res/GetCasheProgressCartRes";
 
 export default class SessionCartCashe implements CartCashe {
 
@@ -14,12 +15,14 @@ export default class SessionCartCashe implements CartCashe {
         sessionStorage.setItem(key, value)
     }
 
-    getProgressCart(id: CasheUserId): CasheCart {
+    getProgressCart(id: CasheUserId): GetCasheProgressCartRes {
         
         const key = PREFIX_CASHE_CART_KEY + id
 
-        const casheCart = JSON.parse( sessionStorage.getItem( key ) ?? '' )
+        const sessionRes = sessionStorage.getItem( key )
 
-        return casheCart
+        if ( sessionRes ) return JSON.parse( sessionRes )
+
+        return null
     }
 }

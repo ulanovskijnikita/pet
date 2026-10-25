@@ -10,7 +10,7 @@ const App = () => {
 
   useEffect(() => {
 
-    vm.setId()
+    vm.setProfile()
   }, [vm])
 
   return (
