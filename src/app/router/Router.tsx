@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import Home from "../../pages/home/ui/Home";
 import Shop from "../../pages/shop/ui/Shop";
 import History from "../../pages/history/ui/History";
@@ -16,35 +16,32 @@ export default function Router() {
 
     return (
 
-        <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <Routes>
 
-            <Routes>
+            <Route path="/" element={<Layout />}>
 
-                <Route path="/" element={<Layout />}>
+                <Route index path={pages.home} element={<Home />} />
 
-                    <Route index path={pages.home} element={<Home />} />
+                <Route path={pages.shop + '/:productTag?'} element={<Shop />} />
 
-                    <Route path={pages.shop + '/:productTag?'} element={<Shop />} />
-
-                    <Route path={pages.history + '/:userId'} element={<History />} >
-                    
-                        <Route path=":orderId" element={<Order />} />
-                    </Route>
-
-                    <Route path={pages.profile + '/:userId?'} element={<Profile />} >
-
-                        <Route path={pages.register} element={<Register />} />
-
-                        <Route path={pages.signIn} element={<SignIn />} />
-                    </Route>
-
-                    <Route path={pages.favourite + '/:userId'} element={<Favourite />} />
-
-                    <Route path={pages.cart + '/:userId'} element={<Cart />} />
-
-                    <Route path={pages.product + '/:productId'} element={<Product />} />
+                <Route path={pages.history + '/:userId'} element={<History />} >
+                
+                    <Route path=":orderId" element={<Order />} />
                 </Route>
-            </Routes>
-        </BrowserRouter>
+
+                <Route path={pages.profile + '/:userId?'} element={<Profile />} >
+
+                    <Route path={pages.register} element={<Register />} />
+
+                    <Route path={pages.signIn} element={<SignIn />} />
+                </Route>
+
+                <Route path={pages.favourite + '/:userId'} element={<Favourite />} />
+
+                <Route path={pages.cart + '/:userId'} element={<Cart />} />
+
+                <Route path={pages.product + '/:productId'} element={<Product />} />
+            </Route>
+        </Routes>
     )
 }
