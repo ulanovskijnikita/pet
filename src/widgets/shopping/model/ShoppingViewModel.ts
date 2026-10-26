@@ -19,7 +19,7 @@ export default class ShoppingViewModel {
         private navStater: NavStater,
         private appStater: AppStater,
         private getProductByFilterUseCase: GetProductByFilterUseCase,
-        private addToUserCartUseCase: AddToProgressCartUseCase,
+        private addToProgressCartUseCase: AddToProgressCartUseCase,
         private toggleFavouriteProductUseCase: ToggleFavouriteProductUseCase,
     ) {
 
@@ -132,7 +132,7 @@ export default class ShoppingViewModel {
 
     set addToUserCart(id: ProductId) {
     
-        this.addToUserCartUseCase
+        this.addToProgressCartUseCase
             .execute({
 
                 productId: id,
@@ -141,13 +141,15 @@ export default class ShoppingViewModel {
             })
             .then(
 
-                (cartLength) => {
+                (res) => {
 
                     runInAction(
 
                         () => {
 
-                            this.navStater.changeCartLength(cartLength)
+                            this.navStater.changeCartLength( res.length )
+
+                            this.appStater.setProductQuantity(res.product, res.currentQuantity, res.price)
                         }
                     )
                 }

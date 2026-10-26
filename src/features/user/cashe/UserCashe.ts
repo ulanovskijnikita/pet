@@ -8,4 +8,6 @@ export default interface UserCashe {
     setUser(user: CasheUser): void
 
     setStatus(status: CasheUserStatus): void
+
+    signOut(): void
 }

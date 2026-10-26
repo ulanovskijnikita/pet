@@ -44,7 +44,10 @@ const navPages: NavPages[] = [
 
                 <Link                                        
                     
-                    to={pages.second.path + pages.second.hash}
+                    to={{
+                        pathname: pages.second.path,
+                        hash: pages.second.hash
+                    }}
                 >
                     Second
                 </Link>
@@ -60,7 +63,11 @@ const navPages: NavPages[] = [
 
                 <Link                                        
                     
-                    to={pages.aboutUs.path + pages.aboutUs.hash}
+                    to={{
+
+                        pathname: pages.aboutUs.path,
+                        hash: pages.aboutUs.hash,
+                    }}
                 >
                     About us
                 </Link>
@@ -98,6 +105,8 @@ const navPages: NavPages[] = [
         id: 5,
         page: observer(() => {
 
+            const vm = useInjection(NavViewModel)
+
             return (
 
                 <NavLink
@@ -108,9 +117,8 @@ const navPages: NavPages[] = [
 
                             return (isActive) ? "text-accent" : "text-main"
                         }
-                    }                                            
-                    
-                    to={pages.history}
+                    }
+                    to={vm.getId ? `${pages.history}/${vm.getId}` : `${pages.profile}/${pages.signIn}`}
                 >
                     History
                 </NavLink>

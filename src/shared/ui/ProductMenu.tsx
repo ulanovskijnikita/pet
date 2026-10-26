@@ -1,17 +1,15 @@
-import { ProductCategoryId } from "../../entities/product/model/ProductCategory"
 import { observer } from "mobx-react-lite"
+import { ProductSubcategoryId } from "../../entities/product/model/ProductSubcategory"
+
+type ProductMenuItem =
+    | { id: ProductSubcategoryId; name: string; value?: never }
+    | { id: ProductSubcategoryId; value: string; name?: never }
 
 type ProductMenuProps = {
 
-    category: Array<{
-
-        id: number
-        name: string
-    }>
-
-    activeId: ProductCategoryId
-
-    setActiveId: (id: ProductCategoryId) => void
+    activeId: ProductSubcategoryId
+    setActiveSubCategory: (id: ProductSubcategoryId) => void
+    subCategories: ProductMenuItem[]
 }
 
 const ProductMenu = observer((props: ProductMenuProps) => {
@@ -22,23 +20,26 @@ const ProductMenu = observer((props: ProductMenuProps) => {
 
             {
 
-                props.category.map(
+                props.subCategories.map(
 
-                    (value) =>
+                    (subCategory) =>
                         <li 
-                            key={value.id}
+                            key={subCategory.id}
                             className={
 
-                                `tablet:self-center h-fit duration-300 pb-[10px] cursor-pointer border-b-2 ${props.activeId == value.id ? "border-[#DEAD6F]" : "border-[#D9D9D8]"}`
+                                `tablet:self-center h-fit duration-300 pb-[10px] cursor-pointer border-b-2 ${subCategory.id === props.activeId ? "border-[#DEAD6F]" : "border-[#D9D9D8]"}`
                             }
 
                             onClick={
                                 
-                                () => props.setActiveId(value.id)
+                                () => {
+
+                                    props.setActiveSubCategory(subCategory.id)
+                                }
                             }
                         >
 
-                            <span className="text-btn uppercase">{value.name}</span>
+                            <span className="text-btn uppercase">{"value" in subCategory ? subCategory.value : subCategory.name}</span>
                         </li>
                 )
             }

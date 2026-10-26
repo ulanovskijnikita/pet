@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite"
 import Location from "../../../app/router/Location"
-import CartItems from "../../../shared/ui/CartItem"
 import CartViewModel from "../model/CartViewModel"
 import FuncButton from "../../../shared/ui/FuncButton"
 import { useNavigate } from "react-router"
@@ -8,11 +7,11 @@ import pages from "../../../app/router/pages"
 import { runInAction } from "mobx"
 import useInjection from "../../../shared/context/inversify/useInjection"
 import Loader from "../../../shared/ui/Loader"
+import CartItem from "./CartItem"
 
 const Cart = () => {
 
     const vm = useInjection(CartViewModel)
-    console.log(vm.getCart)
 
     const navigate = useNavigate()
 
@@ -31,68 +30,71 @@ const Cart = () => {
 
                 {
 
-                    vm.getCart && !!vm.getCart.cartLength && <>
+                    vm.getCart && <>
+                    
+                        {
 
-                        <ul className="grid gap-[20px]">
-            
-                            {
+                            vm.getCart.cartLength ? <>
 
-                                vm.getCart.products.map( 
+                                <ul className="grid gap-[20px]">
+                    
+                                    {
 
-                                    (item, index) =>
-                                        <CartItems
+                                        vm.getCart.products.map( 
 
-                                            q={item.q}
-                                            key={item.product.id}
-                                            product={item.product}
-                                            productIndex={index}
-                                            changeQuantityCartProduct={(quantity) => vm.setProductQuantity = quantity}
-                                            setQuantityCartProduct={(quantity) => vm.setProductQuantity = quantity}
-                                            toggleFavourite={(productId) => vm.toggleFavourite(productId, index)}
-                                        />
-                                )
-                            }
-                        </ul>
+                                            (item, index) =>
+                                                <CartItem
 
-                        <div className="w-full h-[1px] mx-auto laptop:mx-0 bg-[#D9D9D8]"></div>
+                                                    q={item.q}
+                                                    key={item.product.id}
+                                                    product={item.product}
+                                                    productIndex={index}
+                                                    changeQuantityCartProduct={(quantity) => vm.setProductQuantity = quantity}
+                                                    setQuantityCartProduct={(quantity) => vm.setProductQuantity = quantity}
+                                                    toggleFavourite={(productId) => vm.toggleFavourite(productId, index)}
+                                                />
+                                        )
+                                    }
+                                </ul>
 
-                        <div className="flex justify-between items-end tablet:flex-col-reverse tablet:gap-[5px] laptop:gap-[15px]">
+                                <div className="w-full h-[1px] mx-auto laptop:mx-0 bg-[#D9D9D8]"></div>
 
-                            <FuncButton
+                                <div className="flex justify-between items-end tablet:flex-col-reverse tablet:gap-[5px] laptop:gap-[15px]">
 
-                                handleClick={
+                                    <FuncButton
 
-                                    () => {
-
-                                        runInAction(
+                                        handleClick={
 
                                             () => {
 
-                                                vm.makeOrder()
+                                                runInAction(
+
+                                                    () => {
+
+                                                        vm.makeOrder()
+                                                    }
+                                                )
+                                                
+                                                navigate(`${pages.history}/${vm.getUserId}`)
                                             }
-                                        )
+                                        }>
 
-                                        navigate(pages.history)
-                                    }
-                                }>
+                                            <span>get an order</span>
+                                    </FuncButton>
 
-                                    <span>get an order</span>
-                            </FuncButton>
+                                    <h4 className="text-accent font-functional font-light">
 
-                            <h4 className="text-accent font-functional font-light">
+                                        $
 
-                                {
+                                        {
 
-                                    vm.getCart.price
-                                }
-                            </h4>
-                        </div>
-                    </>
-                }
-
-                {
-
-                    vm.getCart && !vm.getCart.cartLength && <h4>You have no products in the cart</h4>
+                                            vm.getCart.price
+                                        }
+                                    </h4>
+                                </div>
+                            </> : <h4>You have no products in the cart</h4>
+                        }
+                    </> 
                 }
             </section>
         </Location>

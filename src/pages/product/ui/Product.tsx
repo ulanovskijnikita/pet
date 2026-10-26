@@ -31,7 +31,7 @@ const Product = () => {
                     vm.setProductDetails = productId ? +productId : 0
                 }
             ) 
-        }, [productId, vm, vm.getProductQuantity, navigate]
+        }, [productId, vm, vm.getProductQuantity, navigate, vm.getCart, vm.getCart?.cartProductIds]
     )
 
     useLayoutEffect(
@@ -139,40 +139,45 @@ const Product = () => {
 
                             <div className="flex items-center justify-between">
 
-                                <div className="flex w-fit gap-[5px] items-center">
+                                {
 
-                                    <QuantityButton
-                                        
-                                        addQuantity={(q) => {
+                                    !vm.getIsCartInclude && <div className="flex w-fit gap-[5px] items-center">
+
+                                        <QuantityButton
                                             
-                                            if (vm.getProductQuantity == 1) return q
+                                            addQuantity={(q) => {
+                                                
+                                                if (vm.getProductQuantity == 1) return q
 
-                                            return vm.setProductQuantity = q                                    
-                                        }}
-                                        productId={vm.getProductDetails.id}
-                                        productIndex={0}
-                                        productQuantity={-1}
-                                    />
+                                                return vm.setProductQuantity = q                                    
+                                            }}
+                                            productId={vm.getProductDetails.id}
+                                            productIndex={0}
+                                            productQuantity={-1}
+                                            action="-"
+                                        />
 
-                                    <QuantityForm
+                                        <QuantityForm
 
-                                        addQuantity={q => vm.changeProductQuantity = q}
-                                        productId={vm.getProductDetails.id}
-                                        productIndex={0}
-                                        productQuantity={vm.getProductQuantity}
-                                    />
+                                            addQuantity={q => vm.changeProductQuantity = q}
+                                            productId={vm.getProductDetails.id}
+                                            productIndex={0}
+                                            productQuantity={vm.getProductQuantity}
+                                        />
 
-                                    <QuantityButton
-                                        
-                                        addQuantity={(q) => {
+                                        <QuantityButton
+                                            
+                                            addQuantity={(q) => {
 
-                                            return vm.setProductQuantity = q                                    
-                                        }}
-                                        productId={vm.getProductDetails.id}
-                                        productIndex={0}
-                                        productQuantity={1}
-                                    />
-                                </div> 
+                                                return vm.setProductQuantity = q                                    
+                                            }}
+                                            productId={vm.getProductDetails.id}
+                                            productIndex={0}
+                                            productQuantity={1}
+                                            action="+"
+                                        />
+                                    </div> 
+                                }
 
                                 <div>
 
@@ -186,27 +191,44 @@ const Product = () => {
                                 </div>
                             </div>
 
-                            <FuncButton
+                            {
+
+                                vm.getIsCartInclude
+
+                                    ?
+                                    
+                                <FuncButton
+
+                                    handleClick={() => navigate(`${pages.cart}/${vm.getId}`)}
+                                >
+                                    
+                                    <span>in the cart</span>
+                                </FuncButton>
+
+                                    :
+
+                                <FuncButton
                             
-                                handleClick={
+                                    handleClick={
 
-                                    () => {
+                                        () => {
 
-                                        if (vm.getId) {
+                                            if (vm.getId) {
 
-                                            vm.addToCart()
+                                                vm.addToCart()
 
-                                            navigate(`${pages.cart}/${vm.getId}`)
-                                        } else {
+                                                navigate(`${pages.cart}/${vm.getId}`)
+                                            } else {
 
-                                            navigate(`${pages.profile}/${pages.signIn}`)
+                                                navigate(`${pages.profile}/${pages.signIn}`)
+                                            }
                                         }
                                     }
-                                }
-                            >
+                                >
 
-                                <span>add to cart</span>
-                            </FuncButton>
+                                    <span>add to cart</span>
+                                </FuncButton>
+                            }
                         </div>
                     </>
 

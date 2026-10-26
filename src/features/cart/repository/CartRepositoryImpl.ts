@@ -1,13 +1,14 @@
-import Cart, { CartId, CartLength } from "../../../shared/model/entities/Cart";
+import Cart from "../../../shared/model/entities/Cart";
 import CartHistory from "../../../entities/cart/model/CartHistory";
 import SetProductQuantityParam from "../../../entities/cart/model/param/SetProductQuantityParam";
 import CartRepository from "../../../entities/cart/repository/CartRepository";
 import { UserId } from "../../../shared/model/entities/User";
 import CartCashe from "../../../shared/cashe/CartCashe";
-import CasheCart from "../cashe/model/CasheCart";
+import CasheCart from "../../../shared/cashe/model/CasheCart";
 import CartStorage from "../storage/CartStorage";
 import StorageCart from "../../../shared/model/storage/StorageCart";
 import StorageCartHistory from "../storage/model/StorageCartHistory";
+import SetProductQuantityRes from "../../../entities/cart/model/res/SetProductQuantityRes";
 
 export default class CartRepositoryImpl implements CartRepository {
 
@@ -32,9 +33,11 @@ export default class CartRepositoryImpl implements CartRepository {
         return this.mapStorageCartToCart( supabaseCart )
     }
 
-    async makeOrder(id: CartId): Promise<Cart> {
+    async makeOrder(id: UserId, cart: Cart): Promise<Cart> {
 
-        const supabaseCart = await this.cartStorage.makeOrder( id )
+        const supabaseCart = await this.cartStorage.makeOrder( cart.id )
+
+        this.cartCashe.setProgressCart(id.toString(), this.mapStorageCartToCasheCart( supabaseCart ))
 
         return this.mapStorageCartToCart( supabaseCart )
     }
@@ -46,9 +49,25 @@ export default class CartRepositoryImpl implements CartRepository {
         return this.mapStorageCartHistoryToCartHistory( supabaseCartHistory )
     }
 
-    async setProductQuantity(param: SetProductQuantityParam): Promise<CartLength> {
+    async setProductQuantity(param: SetProductQuantityParam): Promise<SetProductQuantityRes> {
         
-        return this.cartStorage.setProductQuantity( param )
+        const res = await this.cartStorage.setProductQuantity( param )
+
+        this.cartCashe.setProductQuantity(res.user_id.toString(), res.product, res.quantity, res.cart_total_price, res.cart_length)
+
+        return {
+
+            currentQuantity: res.quantity,
+            length: res.cart_length,
+            price: res.cart_total_price,
+            product: {
+                
+                ...res.product,
+                isFavorites: res.product.is_favorites,
+                priceCount: res.product.price_count,
+                priceCurrency: res.product.price_currency,
+            },
+        }
     }
 
     private mapCasheCartToCart(casheCart: CasheCart): Cart {
@@ -88,7 +107,15 @@ export default class CartRepositoryImpl implements CartRepository {
 
                 id: supabaseCartHistoryItem.cart_id,
                 price: supabaseCartHistoryItem.cart_price,
-                products: supabaseCartHistoryItem.cart_products,
+                products: supabaseCartHistoryItem.cart_products.map(product => ({
+
+                    product: {
+
+                        tag: product.tag,
+                        id: product.id
+                    },
+                    q: product.q
+                })),
                 status: supabaseCartHistoryItem.cart_status
             })
         )

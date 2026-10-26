@@ -9,6 +9,7 @@ import UserGatewayImpl from "../gateway/UserGatewayImpl";
 import UserRepositoryImpl from "../repository/UserRepositoryImpl";
 import SupabaseUserStorage from "../storage/SupabaseUserStorage";
 import supabaseClient from "../../../shared/lib/supabase/supabaseClient";
+import SessionCartCashe from "../../cart/cashe/SessionCartCashe";
 
 const featureUserModule = new ContainerModule(({ bind }) => {
 
@@ -33,6 +34,7 @@ const featureUserModule = new ContainerModule(({ bind }) => {
 
             context.get( SupabaseUserStorage ),
             context.get( SessionUserCashe ),
+            context.get( SessionCartCashe ),
         )
     ).inSingletonScope()
 

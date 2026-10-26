@@ -8,10 +8,13 @@ type CartHistory = {
     price: CartPrice
     products: {
 
-        id: ProductId
-        tag: ProductTag
+        product: {
+
+            id: ProductId
+            tag: ProductTag
+        }
         q: CartProductQuantity
-    }
+    }[]
 }[]
 
 export default CartHistory

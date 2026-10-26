@@ -6,6 +6,7 @@ import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/Toggle
 import { ProductId } from "../../../shared/model/entities/Product";
 import AppStater from "../../../app/model/AppStater";
 import SetProductQuantityUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
+import HistorizingStater from "../../../widgets/history/model/HistorizingStater";
 
 export default class CartViewModel {
 
@@ -16,6 +17,7 @@ export default class CartViewModel {
         private setProductQuantityUseCase: SetProductQuantityUseCase,
         private makeOrderUseCase: MakeOrderUseCase,
         private toggleFavouriteProductUseCase: ToggleFavouriteProductUseCase,
+        private historizingStater: HistorizingStater,
     ) {
 
         makeAutoObservable(this)
@@ -34,16 +36,26 @@ export default class CartViewModel {
     makeOrder() {
 
         this.makeOrderUseCase
-            .execute(this.getUserId!)
+            .execute(this.appStater.getUserId!, this.appStater.getCart!)
             .then(
 
                 cart => {
+
+                    const cartProductIds = cart.products.map(({ product }) => product.id)
 
                     runInAction(
 
                         () => {
 
+                            this.historizingStater.addCart( this.appStater.getCart! )
+
                             this.navStater.changeCartLength( cart.cartLength )
+
+                            this.appStater.setCart({ 
+
+                                ...cart,
+                                cartProductIds,
+                            })
                         }
                     )
                 }
@@ -62,15 +74,17 @@ export default class CartViewModel {
 
                         () => {
 
-                            this.navStater.changeCartLength( quantityRes )
+                            this.navStater.changeCartLength( quantityRes.length )
 
-                            if (quantityRes > 0) {
+                            if (quantityRes.currentQuantity > 0) {
 
-                                if ( this.appStater.getCart ) this.appStater.getCart.products[param.index].q = quantityRes
+                                if ( this.appStater.getCart ) this.appStater.getCart.products[param.index].q = quantityRes.currentQuantity
                             } else {
 
                                 if ( this.appStater.getCart ) this.appStater.getCart.products.splice(param.index, 1)
-                            }                            
+                            }
+                        
+                            this.appStater.setProductQuantity(quantityRes.product, quantityRes.currentQuantity, quantityRes.price)
                         }
                     )
                 }
@@ -87,13 +101,15 @@ export default class CartViewModel {
             })
             .then(
 
-                bool => {
+                isFavourite => {
 
                     runInAction(
                         
                         () => {
 
-                            if ( this.appStater.getCart ) this.appStater.getCart.products[index].product.isFavorites = bool
+                            if ( this.appStater.getCart ) this.appStater.getCart.products[index].product.isFavorites = isFavourite
+
+                            this.appStater.setFavoutiteCartProduct(id, isFavourite)
                         }
                     )
                 }

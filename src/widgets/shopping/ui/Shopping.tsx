@@ -32,7 +32,7 @@ const Shopping = () => {
                     vm.setProduct()
                 }
             )
-        }, [vm, vm.getOrder, productTag, vm.getCategory, vm.getSubcategory, vm.getTag]
+        }, [vm, vm.getOrder, productTag, vm.getCategory, vm.getSubcategory, vm.getTag,]
     )
 
     useLayoutEffect(
@@ -56,8 +56,8 @@ const Shopping = () => {
                     <ProductMenu
 
                         activeId={vm.getCategory}
-                        setActiveId={(id) => vm.setCategory = id}
-                        category={shoppingCategory}
+                        setActiveSubCategory={(id) => vm.setCategory = id}
+                        subCategories={shoppingCategory}
                     />
                 </div>
 
@@ -66,8 +66,8 @@ const Shopping = () => {
                     <ProductMenu
                     
                         activeId={vm.getSubcategory}
-                        setActiveId={(id) => vm.setSubcategory = id}
-                        category={shoppingSubcategory}
+                        setActiveSubCategory={(id) => vm.setSubcategory = id}
+                        subCategories={shoppingSubcategory}
                     />
                 </div>
                 

@@ -17,8 +17,8 @@ export default class ProductViewModel {
         private appStater: AppStater,
         private navStater: NavStater,
         private getProductByIdUseCase: GetProductByIdUseCase,
-        private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
-        private addToUserCartUseCase: AddToProgressCartUseCase,
+        private toggleFavouriteProductUseCase: ToggleFavouriteProductUseCase,
+        private addToProgressCartUseCase: AddToProgressCartUseCase,
     ) {
 
         makeAutoObservable(this)
@@ -29,6 +29,13 @@ export default class ProductViewModel {
     private loaded: boolean = false
 
     private productQuantity: CartProductQuantity = DEFAULT_PRODUCT_QUANTITY
+
+    private isCartInclude: boolean = false
+
+    get getIsCartInclude() {
+
+        return this.isCartInclude
+    }
 
     get getProductQuantity() {
 
@@ -48,6 +55,11 @@ export default class ProductViewModel {
     get getId() {
 
         return this.appStater.getUserId
+    }
+
+    get getCart() {
+
+        return this.appStater.getCart
     }
 
     set setProductQuantity(param: SetQuantityCartProductParam) {
@@ -80,9 +92,17 @@ export default class ProductViewModel {
 
                             () => {
 
+                                this.productDetails = null
+
                                 this.loaded = false
+
+                                this.isCartInclude = false
                                 
                                 this.productDetails = productDetails
+
+                                console.log(this.appStater.getCart!.cartProductIds)
+
+                                if ( this.appStater.getCart!.cartProductIds.includes( productDetails!.id ) ) this.isCartInclude = true
                             }
                         )
                     }
@@ -102,22 +122,24 @@ export default class ProductViewModel {
 
         if (!this.productDetails) return
 
-        this.addToUserCartUseCase
+        this.addToProgressCartUseCase
             .execute({
 
-                productId: this.productDetails?.id,
+                productId: this.productDetails.id,
                 quantity: this.productQuantity,
                 cartId: this.appStater.getCart!.id
             })
             .then(
 
-                (q) => {
+                res => {
 
                     runInAction(
 
                         () => {
 
-                            this.navStater.changeCartLength(q)
+                            this.navStater.changeCartLength(res.length)
+
+                            this.appStater.setProductQuantity(res.product, res.currentQuantity, res.price)
                         }
                     )
                 }
@@ -129,7 +151,7 @@ export default class ProductViewModel {
 
         if (!this.productDetails) return
 
-        this.toggleUserFavouriteUseCase
+        this.toggleFavouriteProductUseCase
             .execute({
 
                 productId: this.productDetails.id,

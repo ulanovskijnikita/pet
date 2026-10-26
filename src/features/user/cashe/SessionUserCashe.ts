@@ -7,6 +7,11 @@ import UserCashe from "./UserCashe";
 
 export default class SessionUserCashe implements UserCashe {
 
+    signOut(): void {
+    
+        sessionStorage.clear()
+    }
+
     setStatus(status: CasheUserStatus): void {
         
         sessionStorage.setItem(SESSION_USER_STATUS, status)

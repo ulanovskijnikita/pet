@@ -588,7 +588,10 @@ export type Database = {
         Args: { p_cart_id: number; p_product_id: number; p_quantity: number }
         Returns: {
           cart_length: number
+          cart_total_price: number
+          product: Json
           quantity: number
+          user_id: number
         }[]
       }
       set_quantity_cart_product: {

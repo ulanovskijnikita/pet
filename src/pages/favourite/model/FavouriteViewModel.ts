@@ -3,11 +3,11 @@ import { DEFAULT_LIMIT } from "../../../shared/config/defaultLimit";
 import AppStater from "../../../app/model/AppStater";
 import Product, { ProductId } from "../../../shared/model/entities/Product";
 import { DEFAULT_OFFSET } from "../../../shared/config/defaultOffset";
-import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
 import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/ToggleFavouriteProductUseCase";
 import NavStater from "../../../widgets/nav/model/NavStater";
 import GetProductByFavouriteUseCase from "../../../entities/product/usecase/GetProductByFavouriteUseCase";
 import DEFAULT_PRODUCT_QUANTITY from "../../../entities/product/const/defaultProductQuantity";
+import SetProductQuantityUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase";
 
 export default class FavouriteViewModel {
 
@@ -16,7 +16,7 @@ export default class FavouriteViewModel {
         private navStater: NavStater,
         private appStater: AppStater,
         private getProductByFavouriteUseCase: GetProductByFavouriteUseCase,
-        private addToProgressCartUseCase: AddToProgressCartUseCase,
+        private setProductQuantityUseCase: SetProductQuantityUseCase,
         private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
     ) {
 
@@ -74,7 +74,7 @@ export default class FavouriteViewModel {
 
     set addToUserCart(id: ProductId) {
         
-        this.addToProgressCartUseCase
+        this.setProductQuantityUseCase
             .execute({
 
                 productId: id,
@@ -83,13 +83,13 @@ export default class FavouriteViewModel {
             })
             .then(
 
-                (cartLength) => {
+                res => {
 
                     runInAction(
 
                         () => {
 
-                            this.navStater.changeCartLength(cartLength)
+                            this.navStater.changeCartLength(res.length)
                         }
                     )
                 }

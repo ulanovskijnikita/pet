@@ -3,14 +3,15 @@ import SetQuantityCartProductParam from "../../entities/user/model/param/SetQuan
 import useInjection from "../context/inversify/useInjection"
 import AppViewModel from "../../app/model/AppViewModel"
 import { ProductId } from "../model/entities/Product"
-import { ProductQuantity } from "../../entities/cart/model/param/SetProductQuantityParam"
+import { CartProductQuantity } from "../model/entities/Cart"
 
 type QuantityButtonProps = {
 
     addQuantity: (quantity: SetQuantityCartProductParam) => void
     productIndex: number
     productId: ProductId
-    productQuantity: ProductQuantity
+    productQuantity: CartProductQuantity
+    action: "+" | "-"
 }
 
 const QuantityButton = (props: QuantityButtonProps) => {
@@ -30,7 +31,7 @@ const QuantityButton = (props: QuantityButtonProps) => {
                         index: props.productIndex,
                         productId: props.productId,
                         quantity: props.productQuantity,
-                        cartId: appVm.getId
+                        cartId: appVm.getCart!.id
                     })
                 }
             }
@@ -38,7 +39,7 @@ const QuantityButton = (props: QuantityButtonProps) => {
             
             {
 
-                props.productQuantity > 0
+                props.action == "+"
                     ?
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-[16px] aspect-square">
 

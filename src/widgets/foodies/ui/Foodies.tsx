@@ -1,19 +1,19 @@
 import { observer } from "mobx-react-lite";
-import ProductMenu from "../../../shared/ui/ProductMenu";
 import FoodiesViewModel from "../model/FoodiesViewModel";
-import foodiesSubCategory from "../const/foodiesSubCategory";
 import Cards from "../../../shared/ui/Cards";
 import LinkButton from "../../../shared/ui/LinkButton";
 import pages from "../../../app/router/pages";
 import { useEffect } from "react";
 import useInjection from "../../../shared/context/inversify/useInjection";
+import ProductMenu from "../../../shared/ui/ProductMenu";
+import foodiesSubcategory from "../../../entities/product/const/foodiesSubcategory";
 
 const Foodies = observer(() => {
 
     const vm = useInjection(FoodiesViewModel)
 
     useEffect(() => {
-    
+
         vm.setFoodies()
     }, [vm, vm.getActiveSubCategoryId])
 
@@ -28,8 +28,8 @@ const Foodies = observer(() => {
                 <ProductMenu
 
                     activeId={vm.getActiveSubCategoryId}
-                    setActiveId={(id) => vm.setActiveSubCategoryId = id}
-                    category={foodiesSubCategory}
+                    setActiveSubCategory={(id) => vm.setActiveSubCategoryId = id}
+                    subCategories={foodiesSubcategory}
                 />
 
                 <div className="tablet:justify-self-end">

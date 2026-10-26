@@ -78,7 +78,15 @@ const Nav = () => {
 
             <nav className="p-container laptop:w-[clamp(71.071rem,46.173rem+34.04vw,92.857rem)] laptop:px-0 desktop:w-[1312px] laptop:mx-auto flex items-center flex-col gap-[15px] tablet:flex-row tablet:justify-between tablet:items-end">
 
-                <Link to={pages.category.path + pages.category.hash} className="flex gap-[5px] laptop:gap-[14px] items-center duration-300 hover:text-accent active:text-main">
+                <Link 
+                
+                    to={{
+                    
+                        pathname: pages.category.path,
+                        hash: pages.category.hash
+                        }}
+                    className="flex gap-[5px] laptop:gap-[14px] items-center duration-300 hover:text-accent active:text-main"
+                >
 
                     <span className="text-btn">Shop By Categories</span>
 

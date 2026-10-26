@@ -90,7 +90,7 @@ export default class SupabaseProductStorage implements ProductStorage {
             )
             .order(
 
-                col, {ascending: ascending.includes('ascending')}
+                col == "price" ? `${col}_count` : col, {ascending: ascending.includes('ascending')}
             )
 
         return data ? data : []

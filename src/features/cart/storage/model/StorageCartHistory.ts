@@ -11,7 +11,7 @@ type StorageCartHistory = {
         id: StorageProductId
         tag: StorageProductTag
         q: StorageCartProductQuantity
-    }
+    }[]
 }[]
 
 export default StorageCartHistory

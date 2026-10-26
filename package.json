@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "supabase-types": "npx supabase gen types typescript --project-id aijzpjhlrcvgspcidyfh --schema public > ./src/shared/model/database.types.ts"
+    "supabase-types": "npx supabase gen types typescript --project-id aijzpjhlrcvgspcidyfh --schema public > ./src/shared/lib/supabase/database.types.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

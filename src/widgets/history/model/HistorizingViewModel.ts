@@ -1,13 +1,14 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import AppStater from "../../../app/model/AppStater";
 import CartHistory from "../../../entities/cart/model/CartHistory";
 import GetCartHistoryUseCase from "../../../entities/cart/usecase/GetCartHistoryUseCase";
+import HistorizingStater from "./HistorizingStater";
+import Cart from "../../../shared/model/entities/Cart";
+import { UserId } from "../../../shared/model/entities/User";
 
-export default class HistorizingViewModel {
+export default class HistorizingViewModel implements HistorizingStater {
 
     constructor(
 
-        private appStater: AppStater,
         private getCartHistoryUseCase: GetCartHistoryUseCase,
     ) {
 
@@ -21,12 +22,10 @@ export default class HistorizingViewModel {
         return this.history
     }
 
-    setHistory() {
-
-        this.history = null
+    setHistory(id: UserId) {
 
         this.getCartHistoryUseCase
-            .execute( this.appStater.getUserId! )
+            .execute( id )
             .then(
 
                 (history) => {
@@ -40,5 +39,14 @@ export default class HistorizingViewModel {
                     )
                 }
             )
+    }
+
+    
+    addCart(cart: Cart): void {
+        
+        this.history?.push({
+
+            ...cart,
+        })
     }
 }

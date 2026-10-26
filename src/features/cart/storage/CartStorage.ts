@@ -1,7 +1,8 @@
 import { StorageUserId } from "../../../shared/model/storage/StorageUser"
 import SetStorageProductQuantityParam from "./model/param/SetStorageProductQuantityParam"
-import StorageCart, { StorageCartId, StorageCartLength } from "../../../shared/model/storage/StorageCart"
+import StorageCart, { StorageCartId } from "../../../shared/model/storage/StorageCart"
 import StorageCartHistory from "./model/StorageCartHistory"
+import SetStorageProductQuantityRes from "./model/res/SetStorageProductQuantityRes"
 
 export default interface CartStorage {
 
@@ -11,5 +12,5 @@ export default interface CartStorage {
 
     getHistory(id: StorageUserId): Promise<StorageCartHistory>
 
-    setProductQuantity(param: SetStorageProductQuantityParam): Promise<StorageCartLength>
+    setProductQuantity(param: SetStorageProductQuantityParam): Promise<SetStorageProductQuantityRes>
 }

@@ -6,6 +6,7 @@ import GetUserUseCase from "../usecase/GetUserUseCase";
 import RegisterUserUseCase from "../usecase/RegisterUserUseCase";
 import SignInUserUseCase from "../usecase/SignInUserUseCase";
 import ToggleFavouriteProductUseCase from "../usecase/ToggleFavouriteProductUseCase";
+import SignOutUserUseCase from "../usecase/SignOutUserUseCase";
 
 const entityUserModule = new ContainerModule(({ bind }) => {
 
@@ -50,6 +51,13 @@ const entityUserModule = new ContainerModule(({ bind }) => {
             context =>
                 new ToggleFavouriteProductUseCase( context.get( UserRepositoryImpl ))
         )
+        .inTransientScope()
+
+    bind<SignOutUserUseCase>( SignOutUserUseCase )
+        .toDynamicValue(
+                context =>
+                    new SignOutUserUseCase( context.get( UserRepositoryImpl ))
+            )
         .inTransientScope()
 })
 

@@ -5,6 +5,7 @@ import GetProductByFavouriteUseCase from "../usecase/GetProductByFavouriteUseCas
 import GetProductByFilterUseCase from "../usecase/GetProductByFilterUseCase";
 import GetProductByIdUseCase from "../usecase/GetProductByIdUseCase";
 import SetProductRatingUseCase from "../usecase/SetProductRatingUseCase";
+import GetProductsByCartUseCase from "../usecase/GetProductsByCartUseCase";
 
 const entityProductModule = new ContainerModule(({bind}) => {
 
@@ -40,6 +41,13 @@ const entityProductModule = new ContainerModule(({bind}) => {
         .toDynamicValue(
             context =>
                 new SetProductRatingUseCase( context.get( ProductRepositoryImpl ) )
+        )
+        .inTransientScope()
+
+    bind<GetProductsByCartUseCase>( GetProductsByCartUseCase )
+        .toDynamicValue(
+            context =>
+                new GetProductsByCartUseCase( context.get( ProductRepositoryImpl ) )
         )
         .inTransientScope()
 })

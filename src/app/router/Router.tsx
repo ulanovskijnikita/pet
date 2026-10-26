@@ -26,7 +26,7 @@ export default function Router() {
 
                     <Route path={pages.shop + '/:productTag?'} element={<Shop />} />
 
-                    <Route path={pages.history} element={<History />} >
+                    <Route path={pages.history + '/:userId'} element={<History />} >
                     
                         <Route path=":orderId" element={<Order />} />
                     </Route>

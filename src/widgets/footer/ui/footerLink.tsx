@@ -45,7 +45,10 @@ const footerLink: FooterLink[] = [
 
                 <Link                                        
                     
-                    to={pages.second.path + pages.second.hash}
+                    to={{
+                        pathname: pages.second.path,
+                        hash: pages.second.hash
+                    }}
                 >
 
                     Second
@@ -102,6 +105,8 @@ const footerLink: FooterLink[] = [
         id: 5,
         page: observer(() => {
 
+            const vm = useInjection(FooterViewModel)
+
             return (
 
                 <NavLink
@@ -112,9 +117,8 @@ const footerLink: FooterLink[] = [
 
                             return (isActive) ? "text-accent" : "text-main"
                         }
-                    }                                            
-                    
-                    to={pages.history}
+                    }
+                    to={vm.getUserId ? `${pages.history}/${vm.getUserId}` : `${pages.profile}/${pages.signIn}`}
                 >
 
                     History

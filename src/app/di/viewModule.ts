@@ -33,6 +33,7 @@ import FooterViewModel from "../../widgets/footer/model/FooterViewModel.ts";
 import OrderViewModel from "../../pages/order/model/OrderViewModel.ts";
 import GetProductsByCartUseCase from "../../entities/product/usecase/GetProductsByCartUseCase.ts";
 import SetProductRatingUseCase from "../../entities/product/usecase/SetProductRatingUseCase.ts";
+import SignOutUserUseCase from "../../entities/user/usecase/SignOutUserUseCase.ts";
 
 const viewModule = new ContainerModule(
 
@@ -115,6 +116,9 @@ const viewModule = new ContainerModule(
                     new ProfileViewModel(
 
                         context.get(GetUserUseCase),
+                        context.get(SignOutUserUseCase),
+                        context.get(AppViewModel),
+                        context.get(NavViewModel),
                     )
             )
             .inSingletonScope()
@@ -131,6 +135,7 @@ const viewModule = new ContainerModule(
                         context.get(SetProductQuantityUseCase),
                         context.get(MakeOrderUseCase),
                         context.get(ToggleFavouriteProductUseCase),
+                        context.get(HistorizingViewModel),
                     )
             )
             .inSingletonScope()
@@ -199,6 +204,7 @@ const viewModule = new ContainerModule(
                     new FooterViewModel(
 
                         context.get(NavViewModel),
+                        context.get(AppViewModel),
                     )
             )
             .inSingletonScope()
@@ -270,8 +276,7 @@ const viewModule = new ContainerModule(
 
                 context =>
                     new HistorizingViewModel(
-
-                        context.get(AppViewModel),
+                        
                         context.get(GetUserHistoryListUseCase),
                     )
             )

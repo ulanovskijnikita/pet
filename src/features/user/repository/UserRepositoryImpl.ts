@@ -25,6 +25,11 @@ export default class UserRepositoryImpl implements UserRepository {
         private cartCashe: CartCashe,
     ) {}
 
+    signOut(): void {
+        
+        this.userCashe.signOut()
+    }
+
     async identity(email: UserEmail): Promise<IdentityUserRes> {
 
         return this.userStorage.identity( email )
@@ -55,7 +60,16 @@ export default class UserRepositoryImpl implements UserRepository {
 
     async toggleFavouriteProduct(param: ToggleFavouriteProductParam): Promise<ProductIsFavorites> {
 
-        return this.userStorage.toggleFavouriteStorageProduct( param )
+        const isFavourite = await this.userStorage.toggleFavouriteStorageProduct( param )
+
+        this.cartCashe.toggleFavouriteProductCart({
+
+            productId: param.productId,
+            isFavourite: isFavourite,
+            userId: param.userId!.toString(),
+        })
+
+        return isFavourite
     }
 
     async validate(param: ValidateUserParam): Promise<ValidateUserRes> {

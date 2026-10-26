@@ -3,8 +3,9 @@ import CartStorage from "./CartStorage";
 import { Database } from "../../../shared/lib/supabase/database.types";
 import { StorageUserId } from "../../../shared/model/storage/StorageUser";
 import SetStorageProductQuantityParam from "./model/param/SetStorageProductQuantityParam";
-import StorageCart, { StorageCartId, StorageCartLength } from "../../../shared/model/storage/StorageCart";
+import StorageCart, { StorageCartId } from "../../../shared/model/storage/StorageCart";
 import StorageCartHistory from "./model/StorageCartHistory";
+import SetStorageProductQuantityRes from "./model/res/SetStorageProductQuantityRes";
 
 export default class SupabaseCartStorage implements CartStorage {
 
@@ -13,7 +14,8 @@ export default class SupabaseCartStorage implements CartStorage {
         private supabaseClient: SupabaseClient<Database>
     ) {}
 
-    async setProductQuantity(param: SetStorageProductQuantityParam): Promise<StorageCartLength> {
+    async setProductQuantity(param: SetStorageProductQuantityParam): Promise<SetStorageProductQuantityRes> {
+        console.log(param)
         
         const {data} = await this.supabaseClient.rpc("set_progress_cart_product_quantity", {
 
@@ -22,7 +24,7 @@ export default class SupabaseCartStorage implements CartStorage {
             p_quantity: param.quantity,
         })
 
-        return data![0].cart_length
+        return data![0] as unknown as SetStorageProductQuantityRes
     }
 
     async getProgressCart(id: StorageUserId): Promise<StorageCart> {

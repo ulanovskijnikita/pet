@@ -1,13 +1,13 @@
 import { observer } from "mobx-react-lite";
-import { CartProductQuantity } from "../model/entities/Cart";
-import FavouriteButton from "./FavouriteButton";
-import QuantityButton from "./QuantityButton";
-import QuantityForm from "./QuantityForm";
+import { CartProductQuantity } from "../../../shared/model/entities/Cart";
+import FavouriteButton from "../../../shared/ui/FavouriteButton";
+import QuantityButton from "../../../shared/ui/QuantityButton";
+import QuantityForm from "../../../shared/ui/QuantityForm";
 import { Link } from "react-router";
-import pages from "../../app/router/pages";
+import pages from "../../../app/router/pages";
 import { memo } from "react";
-import Product, { ProductId } from "../model/entities/Product";
-import SetQuantityCartProductParam from "../../entities/user/model/param/SetQuantityCartProductParam";
+import Product, { ProductId } from "../../../shared/model/entities/Product";
+import SetQuantityCartProductParam from "../../../entities/user/model/param/SetQuantityCartProductParam";
 
 type CartItemsProps = {
 
@@ -27,11 +27,11 @@ const CartItem = (props: CartItemsProps) => {
 
             <Link to={'/' + pages.product + '/' + props.product.id} className="col-span-2 grid tablet:flex tablet:gap-[15px] tablet:w-fit gap-[5px] grid-cols-2">
 
-                <div className="w-[110px] aspect-square laptop:w-[150px] items-center justify-center bg-bg-cart grid rounded-cart">
+                <div className=" items-center justify-center bg-bg-cart grid rounded-cart">
 
                     <img
 
-                        className="laptop:w-[130px] text-center"
+                        className="laptop:w-[150px] laptop:h-[170px] w-[110px] h-[130px] text-center"
                         src={
                             
                             new URL( import.meta.env.BASE_URL.slice(0, -1) + props.product.img, import.meta.url ).href
@@ -85,7 +85,8 @@ const CartItem = (props: CartItemsProps) => {
                         addQuantity={(quantity) => props.setQuantityCartProduct(quantity)}
                         productId={props.product.id}
                         productIndex={props.productIndex}
-                        productQuantity={-1}
+                        productQuantity={props.q - 1}
+                        action="-"
                     />
 
                     <QuantityForm
@@ -101,7 +102,8 @@ const CartItem = (props: CartItemsProps) => {
                         addQuantity={(quantity) => props.setQuantityCartProduct(quantity)}
                         productId={props.product.id}
                         productIndex={props.productIndex}
-                        productQuantity={1}
+                        productQuantity={props.q + 1}
+                        action="+"
                     />
                 </div>
 

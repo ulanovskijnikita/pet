@@ -27,4 +27,6 @@ export default interface UserRepository {
     register(param: RegisterUserUseCaseParam): Promise<void>
 
     setRateMessage(id: UserId, message: UserRateMessage): Promise<UserStatus>
+
+    signOut(): void
 }

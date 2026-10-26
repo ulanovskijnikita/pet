@@ -1,4 +1,4 @@
-import { Outlet, useParams } from "react-router"
+import { Outlet, useNavigate, useParams } from "react-router"
 import { observer } from "mobx-react-lite"
 import { useEffect, useRef } from "react"
 import ProfileViewModel from "../model/ProfileViewModel"
@@ -7,6 +7,8 @@ import Form from "../../../shared/ui/Form"
 import FormInput from "../../../shared/ui/FormInput"
 import Location from "../../../app/router/Location"
 import useInjection from "../../../shared/context/inversify/useInjection"
+import FuncButton from "../../../shared/ui/FuncButton"
+import pages from "../../../app/router/pages"
 
 const Profile = () => {
 
@@ -17,6 +19,8 @@ const Profile = () => {
     const nameInput = useRef<HTMLInputElement>(null)
 
     const emailInput = useRef<HTMLInputElement>(null)
+
+    const navigate = useNavigate()
 
     useEffect(
 
@@ -66,14 +70,26 @@ const Profile = () => {
                                 <FormInput inputRef={nameInput} inputPlaceholder="your full name" inputType="text" />
                             </label>
                             
-
                             <label>
 
                                 <p className="text-sub-title text-label text-start">Email</p>
 
                                 <FormInput inputRef={emailInput} inputPlaceholder="your email address" inputType="email" />
                             </label>
-                        </Form>           
+
+                            <FuncButton
+                            
+                                handleClick={() => {
+
+                                    vm.signOut()
+                                    
+                                    navigate(pages.home)
+                                }}
+                            >
+
+                                <span>Sign out</span>
+                            </FuncButton>
+                        </Form>
                     </FormSection>
 
                         :

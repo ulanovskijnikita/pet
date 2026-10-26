@@ -82,13 +82,15 @@ export default class FoodiesViewModel {
             })
             .then(
 
-                (cartLength) => {
+                res => {
 
                     runInAction(
 
                         () => {
 
-                            this.navStater.changeCartLength(cartLength)
+                            this.navStater.changeCartLength( res.length )
+
+                            this.appStater.setProductQuantity(res.product, res.currentQuantity, res.price)
                         }
                     )
                 }

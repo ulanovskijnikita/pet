@@ -1,15 +1,15 @@
 import { observer } from "mobx-react-lite";
 import ProductMenu from "../../../shared/ui/ProductMenu";
 import ClothingViewModel from "../model/ClothingViewModel";
-import clothingSubCategory from "../const/clothingSubCategory";
 import Cards from "../../../shared/ui/Cards";
 import LinkButton from "../../../shared/ui/LinkButton";
 import pages from "../../../app/router/pages";
 import { useEffect } from "react";
 import useInjection from "../../../shared/context/inversify/useInjection";
+import clothingSubcategory from "../../../entities/product/const/clothingSubcategory";
 
 const Clothing = () => {
-
+    
     const vm = useInjection(ClothingViewModel)
 
     useEffect(() => {
@@ -27,9 +27,9 @@ const Clothing = () => {
 
                 <ProductMenu
 
-                    category={clothingSubCategory}
                     activeId={vm.getActiveSubCategoryId}
-                    setActiveId={(id) => vm.setActiveSubCategoryId = id}
+                    setActiveSubCategory={(id) => vm.setActiveSubCategoryId = id}
+                    subCategories={clothingSubcategory}
                 />
 
                 <div className="tablet:justify-self-end">

@@ -1,10 +1,12 @@
 import { observer } from "mobx-react-lite"
 import { memo } from "react"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import FuncButton from "./FuncButton"
 import FavouriteButton from "./FavouriteButton"
 import Product from "../model/entities/Product"
 import pages from "../../app/router/pages"
+import useInjection from "../context/inversify/useInjection"
+import AppViewModel from "../../app/model/AppViewModel"
 
 type CardProps = {
 
@@ -14,6 +16,10 @@ type CardProps = {
 }
 
 const Card = (props: CardProps) => {
+
+    const vm = useInjection(AppViewModel)
+
+    const navigate = useNavigate()
 
     return  (
 
@@ -78,19 +84,44 @@ const Card = (props: CardProps) => {
 
             <menu className="flex gap-[10px] items-center">
 
-                <FuncButton
+                {
 
-                    handleClick={
-                    
-                        () => {
+                   vm.getCart?.cartProductIds.includes( props.product.id )
 
-                            props.addToCart()
+                        ?
+                        
+                    <FuncButton
+
+                        handleClick={() => navigate(`${pages.cart}/${vm.getUserId}`)}
+                    >
+                        
+                        <span>in the cart</span>
+                    </FuncButton>
+
+                        :
+
+                    <FuncButton
+                
+                        handleClick={
+
+                            () => {
+
+                                if (vm.getUserId) {
+
+                                    props.addToCart()
+
+                                    navigate(`${pages.cart}/${vm.getUserId}`)
+                                } else {
+
+                                    navigate(`${pages.profile}/${pages.signIn}`)
+                                }
+                            }
                         }
-                    }
-                >
-                    
-                    <span>add to cart</span>
-                </FuncButton>
+                    >
+
+                        <span>add to cart</span>
+                    </FuncButton>
+                }
 
                 <FavouriteButton
 
