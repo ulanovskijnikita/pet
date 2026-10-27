@@ -428,7 +428,7 @@ export type Database = {
         }[]
       }
       get_product_by_id: {
-        Args: { p_id: number; u_id: number }
+        Args: { p_id: number; u_id: number | null }
         Returns: {
           category: Database["public"]["Enums"]["categories"]
           id: number
@@ -444,7 +444,7 @@ export type Database = {
         }[]
       }
       get_products_by_cart: {
-        Args: { c_id: number; u_id: number }
+        Args: { c_id: number; u_id: number | null }
         Returns: {
           id: number
           img: string
@@ -461,9 +461,9 @@ export type Database = {
         Args: {
           category_id: number
           lim: number
-          off_set: number
+          off_set: number | null
           subcategory_id: number
-          user_auth_id: number
+          user_auth_id: number | null
         }
         Returns: {
           id: number
@@ -477,7 +477,7 @@ export type Database = {
         }[]
       }
       get_products_by_favourite: {
-        Args: { lim: number; off_set: number; user_auth_id: number }
+        Args: { lim: number; off_set: number | null; user_auth_id: number | null }
         Returns: {
           id: number
           img: string
@@ -578,7 +578,7 @@ export type Database = {
         }[]
       }
       set_product_rating: {
-        Args: { p_id: number; p_r: number; u_id: number }
+        Args: { p_id: number; p_r: number; u_id: number | null }
         Returns: {
           product_rating: number
           user_rating: number
@@ -602,7 +602,7 @@ export type Database = {
         }[]
       }
       toggle_user_favourite: {
-        Args: { p_id: number; u_id: number }
+        Args: { p_id: number; u_id: number | null }
         Returns: boolean
       }
       validate_user: {

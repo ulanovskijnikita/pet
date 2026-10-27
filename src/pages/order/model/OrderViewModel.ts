@@ -119,13 +119,13 @@ export default class OrderViewModel {
             })
             .then(
 
-                (q) => {
+                res => {
 
                     runInAction(
 
                         () => {
 
-                            this.navStater.changeCartLength(q)
+                            this.navStater.changeCartLength( res.length )
                         }
                     )
                 }

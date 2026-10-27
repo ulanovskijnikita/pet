@@ -14,7 +14,7 @@ const Order = () => {
 
     useEffect(() => {
 
-        vm.setOrder = orderId ? +orderId : null
+        vm.setOrder = orderId ? +orderId : 0
     }, [vm, orderId])
 
     useLayoutEffect(() => {

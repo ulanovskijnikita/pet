@@ -13,7 +13,7 @@ export default class RegisterUserUseCase {
 
     async execute(param: RegisterUserUseCaseParam): Promise<RegisterUserUseCaseRes> {
 
-        const verifyEmail = await this.userGateway.verifyUserEmail( param.email )
+        const isVerify = await this.userGateway.verifyUserEmail( param.email )
 
         const validateEmail = await this.userReposiory.validate({
 
@@ -24,7 +24,7 @@ export default class RegisterUserUseCase {
 
         const resultObj = {
 
-            verifyEmail: verifyEmail.isVerify,
+            verifyEmail: isVerify,
             validateEmail: validateEmail.isUnique,
             matchPass: matchPass,
         }
