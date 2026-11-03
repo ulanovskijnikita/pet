@@ -105,7 +105,7 @@ export default class ShoppingViewModel implements ShoppingStater {
         this.product = null
     }
 
-    setProduct(category: ProductCategoryId, subCategory: ProductSubcategoryId, tag: ProductTag | null) {console.log()
+    setProduct(category: ProductCategoryId, subCategory: ProductSubcategoryId, tag: ProductTag | null) {
 
         const offset = this.product?.length ?? DEFAULT_OFFSET
 

@@ -15,7 +15,6 @@ export default class SupabaseCartStorage implements CartStorage {
     ) {}
 
     async setProductQuantity(param: SetStorageProductQuantityParam): Promise<SetStorageProductQuantityRes> {
-        console.log(param)
         
         const {data} = await this.supabaseClient.rpc("set_progress_cart_product_quantity", {
 

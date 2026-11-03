@@ -100,8 +100,6 @@ export default class ProductViewModel {
                                 
                                 this.productDetails = productDetails
 
-                                console.log(this.appStater.getCart!.cartProductIds)
-
                                 if ( this.appStater.getCart!.cartProductIds.includes( productDetails!.id ) ) this.isCartInclude = true
                             }
                         )
