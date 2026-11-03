@@ -1,47 +1,58 @@
 import { observer } from "mobx-react-lite";
 import ShoppingViewModel from "../model/ShoppingViewModel";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import ProductMenu from "../../../shared/ui/ProductMenu";
 import Cards from "../../../shared/ui/Cards";
-import shoppingCategory from "../const/shoppingCategory";
-import shoppingSubcategory from "../const/shoppingSubcategory";
 import Filter from "../../../shared/ui/Filter";
 import shoppingOrderArr from "../const/shoppingOrderArr";
-import { useParams } from "react-router";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { runInAction } from "mobx";
 import useInjection from "../../../shared/context/inversify/useInjection";
+import productCategory from "../../../entities/product/const/productCategory";
+import { ProductCategoryValue } from "../../../entities/product/model/ProductCategory";
+import productSubCategory from "../../../entities/product/const/productSubCategory";
+import categoryParamName from "../../../shared/const/categoryParamName";
+import subCategoryParamName from "../../../shared/const/subCategoryParamName";
 
 const Shopping = () => {
 
-    const vm = useInjection(ShoppingViewModel)
+    const vm = useInjection( ShoppingViewModel )
 
-    const { productTag } = useParams()
+    const [searchParams] = useSearchParams()
 
-    useEffect(
-    
-        () => {
+    const navigate = useNavigate()
 
-            runInAction(
+    const location = useLocation()
 
-                () => {
+    useEffect(() => {
 
-                    vm.setTag = productTag ?? ''
+        const categoryParam = searchParams.get( categoryParamName )
 
-                    vm.unsetProduct()
+        const subСategoryParam = searchParams.get( subCategoryParamName )
 
-                    vm.setProduct()
-                }
-            )
-        }, [vm, vm.getOrder, productTag, vm.getCategory, vm.getSubcategory, vm.getTag,]
-    )
+        if (categoryParam && subСategoryParam) {
 
-    useLayoutEffect(
-    
-        () => {
+            runInAction(() => {
 
-            vm.unsetProduct()
-        }, [vm, vm.getOrder, productTag, vm.getCategory, vm.getSubcategory, vm.getTag]
-    )
+                vm.setCategory(categoryParam as ProductCategoryValue)
+
+                vm.setSubcategory( subСategoryParam )
+            })
+        } else {
+
+            const param = new URLSearchParams( searchParams )
+
+            param.set(categoryParamName, Object.keys( productCategory )[vm.getCategory - 1])
+
+            param.set(subCategoryParamName, productSubCategory[ vm.getCategory ][vm.getSubCategory - 1].value)
+
+            navigate({
+
+                pathname: location.pathname,
+                search: param.toString(),
+            })
+        }
+    }, [vm, searchParams, navigate, location])
 
     return (
 
@@ -56,8 +67,27 @@ const Shopping = () => {
                     <ProductMenu
 
                         activeId={vm.getCategory}
-                        setActiveSubCategory={(id) => vm.setCategory = id}
-                        subCategories={shoppingCategory}
+                        setActiveCategory={name => {
+
+                            vm.unsetProduct()
+
+                            const activeId = vm.setCategory( name as ProductCategoryValue )
+
+                            vm.setProduct(activeId, vm.getSubCategory, vm.getTag)
+
+                            const param = new URLSearchParams( searchParams )
+
+                            param.set(categoryParamName, Object.keys( productCategory )[ activeId - 1 ])
+
+                            navigate({
+
+                                pathname: location.pathname,
+                                search: param.toString(),
+                            })
+
+                            
+                        }}
+                        subCategories={Object.values( productCategory )}
                     />
                 </div>
 
@@ -65,9 +95,26 @@ const Shopping = () => {
 
                     <ProductMenu
                     
-                        activeId={vm.getSubcategory}
-                        setActiveSubCategory={(id) => vm.setSubcategory = id}
-                        subCategories={shoppingSubcategory}
+                        activeId={vm.getSubCategory}
+                        setActiveCategory={name => {
+
+                            vm.unsetProduct()
+
+                            const activeId = vm.setSubcategory( name )
+
+                            vm.setProduct(vm.getCategory, activeId, vm.getTag)
+
+                            const param = new URLSearchParams( searchParams )
+
+                            param.set(subCategoryParamName, productSubCategory[ vm.getCategory ][ activeId - 1 ].value)
+
+                            navigate({
+
+                                pathname: location.pathname,
+                                search: param.toString(),
+                            })
+                        }}
+                        subCategories={productSubCategory[ vm.getCategory ]}
                     />
                 </div>
                 
@@ -84,7 +131,8 @@ const Shopping = () => {
 
             <Cards
             
-                setProduct={() => vm.setProduct()}
+                setProduct={() => vm.setProduct(vm.getCategory, vm.getSubCategory, vm.getTag)}
+                unsetProduct={() => vm.unsetProduct()}
                 altTitle={"No products found with parametrs"}
                 addToCart={(id) => vm.addToUserCart = id}
                 hasMore={vm.getHasMoreProduct}

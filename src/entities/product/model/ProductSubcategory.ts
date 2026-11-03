@@ -1,5 +1,5 @@
 export type ProductSubcategoryId = number
-export type ProductSubcategoryValue = "all" | "cat" | "dog" | "bird" | "fish"
+export type ProductSubcategoryValue = string
 
 export default interface ProductSubcategory {
     

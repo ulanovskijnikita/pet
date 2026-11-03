@@ -1,9 +1,8 @@
 import { makeAutoObservable, runInAction } from "mobx"
-import { ProductCategoryId } from "../../../entities/product/model/ProductCategory"
-import { ProductSubcategoryId } from "../../../entities/product/model/ProductSubcategory"
-import Product, { ProductId } from "../../../shared/model/entities/Product"
+import { ProductCategoryId, ProductCategoryValue } from "../../../entities/product/model/ProductCategory"
+import { ProductSubcategoryId, ProductSubcategoryValue } from "../../../entities/product/model/ProductSubcategory"
+import Product, { ProductId, ProductTag } from "../../../shared/model/entities/Product"
 import { DEFAULT_OFFSET } from "../../../shared/config/defaultOffset"
-import NavStater from "../../nav/model/NavStater"
 import { DEFAULT_LIMIT } from "../../../shared/config/defaultLimit"
 import AppStater from "../../../app/model/AppStater"
 import AddToProgressCartUseCase from "../../../entities/cart/usecase/SetProductQuantityUseCase"
@@ -11,16 +10,20 @@ import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/Toggle
 import GetProductByFilterUseCase from "../../../entities/product/usecase/GetProductByFilterUseCase"
 import shoppingOrderArr from "../const/shoppingOrderArr"
 import DEFAULT_PRODUCT_QUANTITY from "../../../entities/product/const/defaultProductQuantity"
+import productCategory from "../../../entities/product/const/productCategory"
+import productSubCategory from "../../../entities/product/const/productSubCategory"
+import ShoppingStater from "./ShoppingStater"
+import NavStater from "../../nav/model/NavStater"
 
-export default class ShoppingViewModel {
+export default class ShoppingViewModel implements ShoppingStater {
 
     constructor(
 
-        private navStater: NavStater,
         private appStater: AppStater,
         private getProductByFilterUseCase: GetProductByFilterUseCase,
         private addToProgressCartUseCase: AddToProgressCartUseCase,
         private toggleFavouriteProductUseCase: ToggleFavouriteProductUseCase,
+        private navStater: NavStater,
     ) {
 
         makeAutoObservable(this)
@@ -32,7 +35,7 @@ export default class ShoppingViewModel {
 
     private category: ProductCategoryId = 1
 
-    private subcategory: ProductSubcategoryId = 1
+    private subCategory: ProductSubcategoryId = 1
 
     private orderIndex: number = 0
 
@@ -51,9 +54,9 @@ export default class ShoppingViewModel {
         return this.category
     }
 
-    get getSubcategory() {
+    get getSubCategory() {
 
-        return this.subcategory
+        return this.subCategory
     }
 
     get getOrder() {
@@ -66,17 +69,33 @@ export default class ShoppingViewModel {
         return this.navStater.getTag
     }
 
-    set setCategory(id: ProductCategoryId) {
+    setCategory(name: ProductCategoryValue) {
 
-        this.category = id
+        this.product = null
+
+        for (const categoryName of Object.keys( productCategory )) {
+            
+            if (categoryName === name) this.category = productCategory[categoryName ].id
+        }
+
+        return this.category
     }
 
-    set setSubcategory(id: ProductSubcategoryId) {
+    setSubcategory(name: ProductSubcategoryValue) {
 
-        this.subcategory = id
+        this.product = null
+
+        for (const subCategoryObj of productSubCategory[ this.category ]) {
+            
+            if (subCategoryObj.value === name) this.subCategory = subCategoryObj.id
+        }
+
+        return this.subCategory
     }
 
     set setOrder(index: number) {
+
+        this.product = null
 
         this.orderIndex = index
     }
@@ -86,24 +105,24 @@ export default class ShoppingViewModel {
         this.product = null
     }
 
-    setProduct() {
+    setProduct(category: ProductCategoryId, subCategory: ProductSubcategoryId, tag: ProductTag | null) {console.log()
 
         const offset = this.product?.length ?? DEFAULT_OFFSET
 
         this.getProductByFilterUseCase
             .execute({
 
-                categoryId: this.category,
+                categoryId: category,
                 limit: DEFAULT_LIMIT,
                 offset: offset,
                 order: shoppingOrderArr[ this.orderIndex ].action,
-                subcategoryId: this.subcategory,
-                tag: this.getTag ?? '',
+                subcategoryId: subCategory,
+                tag: tag ?? '',
                 userId: this.appStater.getUserId
             })
             .then(
 
-                (product) => {
+                product => {
 
                     runInAction(
 
@@ -126,7 +145,7 @@ export default class ShoppingViewModel {
     }
 
     set setTag(tag: string) {
-        
+
         this.navStater.setTag = tag
     }
 

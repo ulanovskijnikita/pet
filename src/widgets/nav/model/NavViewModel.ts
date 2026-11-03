@@ -38,7 +38,7 @@ export default class NavViewModel implements NavStater {
         return this.id
     }
 
-    set setTag(tag: ProductTag) {
+    set setTag(tag: ProductTag | null) {
 
         this.tag = tag
     }

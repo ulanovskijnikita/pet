@@ -50,7 +50,8 @@ const viewModule = new ContainerModule(
                         context.get(NavViewModel),
                         context.get(GetProductByCategoryUseCase),
                         context.get(SetProductQuantityUseCase),
-                        context.get(ToggleFavouriteProductUseCase)
+                        context.get(ToggleFavouriteProductUseCase),
+                        context.get(ShoppingViewModel),
                     )
             )
             .inSingletonScope()
@@ -119,6 +120,8 @@ const viewModule = new ContainerModule(
                         context.get(SignOutUserUseCase),
                         context.get(AppViewModel),
                         context.get(NavViewModel),
+                        context.get(FoodiesViewModel),
+                        context.get(ClothingViewModel),
                     )
             )
             .inSingletonScope()
@@ -164,6 +167,7 @@ const viewModule = new ContainerModule(
                         context.get(GetProductByCategoryUseCase),
                         context.get(SetProductQuantityUseCase),
                         context.get(ToggleFavouriteProductUseCase),
+                        context.get(ShoppingViewModel),
                     )
             )
             .inSingletonScope()
@@ -175,11 +179,11 @@ const viewModule = new ContainerModule(
                 context =>
                     new ShoppingViewModel(
 
-                        context.get(NavViewModel),
                         context.get(AppViewModel),
                         context.get(GetProductByFilterUseCase),
                         context.get(SetProductQuantityUseCase),
                         context.get(ToggleFavouriteProductUseCase),
+                        context.get(NavViewModel),
                     )
             )
             .inSingletonScope()
@@ -192,6 +196,7 @@ const viewModule = new ContainerModule(
                     new BannerViewModel(
 
                         context.get(NavViewModel),
+                        context.get(ShoppingViewModel),
                     )
             )
             .inSingletonScope()
@@ -205,6 +210,9 @@ const viewModule = new ContainerModule(
 
                         context.get(NavViewModel),
                         context.get(AppViewModel),
+                        context.get(ShoppingViewModel),
+                        context.get(FoodiesViewModel),
+                        context.get(ClothingViewModel),
                     )
             )
             .inSingletonScope()
@@ -217,6 +225,7 @@ const viewModule = new ContainerModule(
                     new HeroViewModel(
 
                         context.get(NavViewModel),
+                        context.get(ShoppingViewModel),
                     )
             )
             .inSingletonScope()

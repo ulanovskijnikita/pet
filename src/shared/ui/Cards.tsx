@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { ReactNode } from "react"
+import { ReactNode, useEffect, useLayoutEffect } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import Loader from "./Loader"
 import Card from "./Card"
@@ -10,12 +10,23 @@ type CardsProps = {
     altTitle: ReactNode
     products: Product[] | null
     setProduct: (offset: number | null) => void
+    unsetProduct: () => void
     hasMore: boolean
     addToCart(id: ProductId): void
     toggleFavourite(id: ProductId, index: number): void
 }
 
 const Cards = (props: CardsProps) => {
+
+    useEffect(() => {
+
+        props.setProduct(null)
+    }, [])
+
+    useLayoutEffect(() => {
+
+        props.unsetProduct()
+    }, [])
 
     return (
 

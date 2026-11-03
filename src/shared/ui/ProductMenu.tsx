@@ -1,15 +1,11 @@
 import { observer } from "mobx-react-lite"
-import { ProductSubcategoryId } from "../../entities/product/model/ProductSubcategory"
-
-type ProductMenuItem =
-    | { id: ProductSubcategoryId; name: string; value?: never }
-    | { id: ProductSubcategoryId; value: string; name?: never }
+import ProductSubcategory, { ProductSubcategoryId } from "../../entities/product/model/ProductSubcategory"
 
 type ProductMenuProps = {
 
     activeId: ProductSubcategoryId
-    setActiveSubCategory: (id: ProductSubcategoryId) => void
-    subCategories: ProductMenuItem[]
+    setActiveCategory: (name: string) => void
+    subCategories: ProductSubcategory[]
 }
 
 const ProductMenu = observer((props: ProductMenuProps) => {
@@ -23,7 +19,7 @@ const ProductMenu = observer((props: ProductMenuProps) => {
                 props.subCategories.map(
 
                     (subCategory) =>
-                        <li 
+                        <li
                             key={subCategory.id}
                             className={
 
@@ -34,12 +30,14 @@ const ProductMenu = observer((props: ProductMenuProps) => {
                                 
                                 () => {
 
-                                    props.setActiveSubCategory(subCategory.id)
+                                    if (subCategory.id === props.activeId) return
+
+                                    props.setActiveCategory( subCategory.value )
                                 }
                             }
                         >
 
-                            <span className="text-btn uppercase">{"value" in subCategory ? subCategory.value : subCategory.name}</span>
+                            <span className="text-btn uppercase">{subCategory.value}</span>
                         </li>
                 )
             }

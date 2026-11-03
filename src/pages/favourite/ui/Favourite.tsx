@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import Location from "../../../app/router/Location"
 import Cards from "../../../shared/ui/Cards"
 import FavouriteViewModel from "../model/FavouriteViewModel"
-import { useEffect, useLayoutEffect } from "react"
+import { useEffect } from "react"
 import { runInAction } from "mobx"
 import useInjection from "../../../shared/context/inversify/useInjection"
 
@@ -18,11 +18,6 @@ const Favourite = () => {
         })
     }, [vm])
 
-    useLayoutEffect(() => {
-    
-        vm.unsetProduct()
-    }, [vm])
-
     return (
 
         <Location>
@@ -33,6 +28,7 @@ const Favourite = () => {
 
                 <Cards
 
+                    unsetProduct={() => vm.unsetProduct()}
                     products={vm.getProduct}
                     toggleFavourite={(id, index) => {
 

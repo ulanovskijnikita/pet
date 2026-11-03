@@ -7,5 +7,5 @@ export default interface NavStater {
 
     get getTag(): ProductTag | null
 
-    set setTag(tag: ProductTag)
+    set setTag(tag: ProductTag | null)
 }

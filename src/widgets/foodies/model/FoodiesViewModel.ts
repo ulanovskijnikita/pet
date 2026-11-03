@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { ProductSubcategoryId } from "../../../entities/product/model/ProductSubcategory";
+import { ProductSubcategoryId, ProductSubcategoryValue } from "../../../entities/product/model/ProductSubcategory";
 import Product, { ProductId } from "../../../shared/model/entities/Product";
 import { DEFAULT_LIMIT } from "../../../shared/config/defaultLimit";
 import { DEFAULT_OFFSET } from "../../../shared/config/defaultOffset";
@@ -10,16 +10,20 @@ import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/Toggle
 import GetProductByCategoryUseCase from "../../../entities/product/usecase/GetProductByCategoryUseCase";
 import productCategory from "../../../entities/product/const/productCategory";
 import DEFAULT_PRODUCT_QUANTITY from "../../../entities/product/const/defaultProductQuantity";
+import productSubCategory from "../../../entities/product/const/productSubCategory";
+import ShoppingStater from "../../shopping/model/ShoppingStater";
+import FoodiesStater from "./FoodiesStater";
 
-export default class FoodiesViewModel {
+export default class FoodiesViewModel implements FoodiesStater {
 
     constructor(
 
         private appStater: AppStater,
         private navStater: NavStater,
         private getProductByCategoryUseCase: GetProductByCategoryUseCase,
-        private addToUserCartUseCase: AddToProgressCartUseCase,
-        private toggleUserFavouriteUseCase: ToggleFavouriteProductUseCase,
+        private addToProgressCartUseCase: AddToProgressCartUseCase,
+        private toggleFavouriteProductUseCase: ToggleFavouriteProductUseCase,
+        private shoppingStater: ShoppingStater,
     ) {
 
         makeAutoObservable(this)
@@ -44,7 +48,7 @@ export default class FoodiesViewModel {
         return this.navStater.getTag
     }
 
-    setFoodies() {
+    setFoodies(id: ProductSubcategoryId) {
 
         this.foodies = null
 
@@ -54,7 +58,7 @@ export default class FoodiesViewModel {
                 categoryId: productCategory.foodies.id,
                 limit: DEFAULT_LIMIT,
                 offset: DEFAULT_OFFSET,
-                subcategoryId: this.activeSubCategoryId,
+                subcategoryId: id,
                 userId: this.appStater.getUserId
             })
             .then(
@@ -66,14 +70,29 @@ export default class FoodiesViewModel {
             )
     }
 
-    set setActiveSubCategoryId(id: ProductSubcategoryId) {
+    setActiveSubCategoryId(name: ProductSubcategoryValue) {
 
-        this.activeSubCategoryId = id
+        for (const subcategoryObj of productSubCategory[ productCategory.foodies.id ]) {
+
+            if (subcategoryObj.value == name) {
+
+                runInAction(() => {
+
+                    this.setFoodies( subcategoryObj.id )
+
+                    this.activeSubCategoryId = subcategoryObj.id
+                })
+
+                break
+            }
+        }
+
+        return this.activeSubCategoryId
     }
 
     set addToUserCart(id: ProductId) {
     
-        this.addToUserCartUseCase
+        this.addToProgressCartUseCase
             .execute({
 
                 productId: id,
@@ -99,7 +118,7 @@ export default class FoodiesViewModel {
 
     toggleFavourite(id: ProductId, index: number) {
 
-        this.toggleUserFavouriteUseCase
+        this.toggleFavouriteProductUseCase
             .execute({
 
                 productId: id,
@@ -120,5 +139,20 @@ export default class FoodiesViewModel {
                     )
                 }
             )
+    }
+    
+    get getCategory() {
+
+        return this.shoppingStater.getCategory
+    }
+
+    get getSubCategory() {
+
+        return this.shoppingStater.getSubCategory
+    }
+
+    unsetFoodies() {
+
+        this.foodies = null
     }
 }

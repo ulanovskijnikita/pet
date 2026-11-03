@@ -4,6 +4,8 @@ import GetUserUseCase from "../../../entities/user/usecase/GetUserUseCase";
 import SignOutUserUseCase from "../../../entities/user/usecase/SignOutUserUseCase";
 import AppStater from "../../../app/model/AppStater";
 import NavStater from "../../../widgets/nav/model/NavStater";
+import FoodiesStater from "../../../widgets/foodies/model/FoodiesStater";
+import ClothingStater from "../../../widgets/clothing/model/ClothingStater";
 
 export default class ProfileViewModel {
 
@@ -13,6 +15,8 @@ export default class ProfileViewModel {
         private signOutUserUseCase: SignOutUserUseCase,
         private appStater: AppStater,
         private navStater: NavStater,
+        private foodiesStater: FoodiesStater,
+        private clothingStater: ClothingStater,
     ) {
 
         makeAutoObservable(this)
@@ -47,5 +51,15 @@ export default class ProfileViewModel {
                 this.navStater.changeCartLength(0)
             }
         )
+    }
+
+    get getFoodiesSubCategory() {
+
+        return this.foodiesStater.getActiveSubCategoryId
+    }
+
+    get getClothingSubCategory() {
+
+        return this.clothingStater.getActiveSubCategoryId
     }
 }

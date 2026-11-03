@@ -9,7 +9,10 @@ const pages = {
         path: '/',
         hash: '#second'
     },
-    contact: '#contact',
+    contact: {
+        path: '/',
+        hash: '#contact'
+    },
     aboutUs: {
         path: '/',
         hash: '#about-us'

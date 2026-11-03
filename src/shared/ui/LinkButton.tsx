@@ -1,9 +1,9 @@
-import { Link } from "react-router"
+import { Link, To } from "react-router"
 import btnDecorative from "/icons/btn-decorative.svg"
 
-type LinkButtonParam = {
+type LinkButtonParam =  {
 
-    linkTo: string
+    linkTo: string | To
     linkText: string
 }
 

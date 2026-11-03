@@ -7,12 +7,16 @@ import Form from "../../../shared/ui/Form"
 import FormInput from "../../../shared/ui/FormInput"
 import Location from "../../../app/router/Location"
 import useInjection from "../../../shared/context/inversify/useInjection"
-import FuncButton from "../../../shared/ui/FuncButton"
 import pages from "../../../app/router/pages"
+import FormButton from "../../../shared/ui/FormButton"
+import foodiesSubcategoryParamName from "../../../shared/const/foodiesSubcategoryParamName"
+import clothingSubcategoryParamName from "../../../shared/const/clothingSubcategoryParamName"
+import productCategory from "../../../entities/product/const/productCategory"
+import productSubCategory from "../../../entities/product/const/productSubCategory"
 
 const Profile = () => {
 
-    const vm = useInjection(ProfileViewModel)
+    const vm = useInjection( ProfileViewModel )
 
     const { userId } = useParams()
 
@@ -55,7 +59,7 @@ const Profile = () => {
                             <span className="text-accent">your account</span>
                         </h3>
 
-                        <Form 
+                        <Form
 
                             handleSubmit={
 
@@ -63,32 +67,43 @@ const Profile = () => {
                             }
                         >
 
-                            <label>
+                            <fieldset disabled={true} className="grid gap-[10px] w-full">                            
 
-                                <p className="text-sub-title text-label text-start">Name</p>
+                                <label>
 
-                                <FormInput inputRef={nameInput} inputPlaceholder="your full name" inputType="text" />
-                            </label>
+                                    <p className="text-sub-title text-label text-start">Name</p>
+
+                                    <FormInput inputRef={nameInput} inputPlaceholder="your full name" inputType="text" />
+                                </label>
+                                
+                                <label>
+
+                                    <p className="text-sub-title text-label text-start">Email</p>
+
+                                    <FormInput inputRef={emailInput} inputPlaceholder="your email address" inputType="email" />
+                                </label>
+                            </fieldset>
+
+                            <div
                             
-                            <label>
-
-                                <p className="text-sub-title text-label text-start">Email</p>
-
-                                <FormInput inputRef={emailInput} inputPlaceholder="your email address" inputType="email" />
-                            </label>
-
-                            <FuncButton
-                            
-                                handleClick={() => {
+                                onClick={() => {
 
                                     vm.signOut()
                                     
-                                    navigate(pages.home)
-                                }}
-                            >
+                                    navigate({
 
-                                <span>Sign out</span>
-                            </FuncButton>
+                                        pathname: pages.home,
+                                        search: new URLSearchParams({
+
+                                            [ foodiesSubcategoryParamName ]: productSubCategory[ productCategory.foodies.id ][ vm.getFoodiesSubCategory - 1 ].value,
+                                            [ clothingSubcategoryParamName ]: productSubCategory[ productCategory.clothing.id ][ vm.getClothingSubCategory - 1 ].value,
+                                        }).toString()
+                                    })
+                                }}
+                            >                                
+
+                                <FormButton>Sign out</FormButton>
+                            </div>
                         </Form>
                     </FormSection>
 
@@ -97,7 +112,6 @@ const Profile = () => {
                     <Outlet />
                 }
             </div>
-            
         </Location>
     )
 }

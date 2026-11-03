@@ -1,4 +1,6 @@
-const productCategory = {
+import ProductCategory, { ProductCategoryValue } from "../model/ProductCategory"
+
+const productCategory: {[keys in ProductCategoryValue]: ProductCategory} = {
 
     accessories: {
 

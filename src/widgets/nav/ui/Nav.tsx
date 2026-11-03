@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useSearchParams } from "react-router";
 import Logo from "../../../shared/ui/Logo";
 import SearchInput from "../../../shared/ui/SearchInput";
 import navPages from "./navPages";
@@ -10,12 +10,22 @@ import NavViewModel from "../model/NavViewModel";
 import { useEffect } from "react";
 import { runInAction } from "mobx";
 import useInjection from "../../../shared/context/inversify/useInjection";
+import searchParamName from "../../../shared/const/searchParamName";
+import subCategoryParamName from "../../../shared/const/subCategoryParamName";
+import categoryParamName from "../../../shared/const/categoryParamName";
+import productSubCategory from "../../../entities/product/const/productSubCategory";
+import productCategory from "../../../entities/product/const/productCategory";
+import ShoppingViewModel from "../../shopping/model/ShoppingViewModel";
 
 const Nav = () => {
 
-    const vm = useInjection(NavViewModel)
+    const vm = useInjection( NavViewModel )
+
+    const shoppingVm = useInjection( ShoppingViewModel )
 
     const location = useLocation()
+
+    const [searchParam] = useSearchParams()
 
     useEffect(
 
@@ -32,10 +42,10 @@ const Nav = () => {
             )
         }, [vm, location]
     )
-
+    
     return (
 
-        <header className="desktop:sticky desktop:top-0 z-1000 bg-bg" id={pages.contact.substring(1)}>
+        <header className="desktop:sticky desktop:top-0 z-1000 bg-bg">
 
             <nav className="p-container laptop:px-0 laptop:mx-auto laptop:w-[clamp(71.071rem,46.173rem+34.04vw,92.857rem)] desktop:w-[1300px] gap-[15px] flex flex-col items-center tablet:flex-row tablet:justify-between w-full laptop:items-center">
 
@@ -43,7 +53,34 @@ const Nav = () => {
 
                 <SearchInput
 
-                    setTag={(tag) => vm.setTag = tag}
+                    setSearch={(tag) => {
+
+                        runInAction(() => {
+
+                            shoppingVm.unsetProduct()
+
+                            vm.setTag = tag
+
+                            shoppingVm.setProduct(shoppingVm.getCategory, shoppingVm.getSubCategory, tag)
+                        })
+
+                        return tag
+                            ? 
+                        new URLSearchParams({
+
+                            [ subCategoryParamName ]: productSubCategory[ shoppingVm.getCategory ][ shoppingVm.getSubCategory - 1 ].value,
+                            [ categoryParamName ]: Object.keys( productCategory )[shoppingVm.getCategory - 1],
+                            [ searchParamName ]: tag,
+                        })
+                            :
+                        new URLSearchParams({
+
+                            [ subCategoryParamName ]: productSubCategory[ shoppingVm.getCategory ][ shoppingVm.getSubCategory - 1 ].value,
+                            [ categoryParamName ]: Object.keys( productCategory )[shoppingVm.getCategory - 1],
+                        })
+                    }}
+                    searchParamName={searchParamName}
+                    searchParam={vm.getTag ?? ''}
                 />
 
                 <ul className="flex gap-[35px] text-sub-title text-label order-1">
@@ -83,8 +120,9 @@ const Nav = () => {
                     to={{
                     
                         pathname: pages.category.path,
-                        hash: pages.category.hash
-                        }}
+                        hash: pages.category.hash,
+                        search: searchParam.toString(),
+                    }}
                     className="flex gap-[5px] laptop:gap-[14px] items-center duration-300 hover:text-accent active:text-main"
                 >
 

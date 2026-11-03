@@ -45,8 +45,10 @@ const SignIn = () => {
                 Sign in to <span className="text-accent">your account</span>
             </h3>
 
-            <Form 
+            <Form
+
                 handleSubmit={
+                    
                     () => {
                     
                         vm.setResult = {

@@ -24,7 +24,7 @@ export default function Router() {
 
                     <Route index path={pages.home} element={<Home />} />
 
-                    <Route path={pages.shop + '/:productTag?'} element={<Shop />} />
+                    <Route path={pages.shop} element={<Shop />} />
 
                     <Route path={pages.history + '/:userId'} element={<History />} >
                     

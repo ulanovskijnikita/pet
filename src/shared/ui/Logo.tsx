@@ -1,19 +1,37 @@
 import { Link } from "react-router";
 import logo from "/icons/logo.svg"
 import pages from "../../app/router/pages";
+import foodiesSubcategoryParamName from "../const/foodiesSubcategoryParamName";
+import clothingSubcategoryParamName from "../const/clothingSubcategoryParamName";
+import productSubCategory from "../../entities/product/const/productSubCategory";
+import productCategory from "../../entities/product/const/productCategory";
+import useInjection from "../context/inversify/useInjection";
+import FoodiesViewModel from "../../widgets/foodies/model/FoodiesViewModel";
+import ClothingViewModel from "../../widgets/clothing/model/ClothingViewModel";
 
 export default function Logo() {
+
+    const foodiesVm = useInjection( FoodiesViewModel )
+            
+    const clothingVm = useInjection( ClothingViewModel )
 
     return (
 
         <Link
-            to={pages.home}
 
+            to={{
+
+                pathname: pages.home,
+                search: new URLSearchParams({
+
+                    [ foodiesSubcategoryParamName ]: productSubCategory[ productCategory.foodies.id ][ foodiesVm.getActiveSubCategoryId - 1 ].value,
+                    [ clothingSubcategoryParamName ]: productSubCategory[ productCategory.clothing.id ][ clothingVm.getActiveSubCategoryId - 1 ].value,
+                }).toString()
+            }}
             onClick={
 
                 () => window.scrollTo({top: 0})
             }
-            
             className="flex items-center gap-[8px] tablet:gap-[4px]"
         >
 

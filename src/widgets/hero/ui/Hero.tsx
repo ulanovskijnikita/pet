@@ -6,14 +6,19 @@ import HeroViewModel from "../model/HeroViewModel";
 import LinkButton from "../../../shared/ui/LinkButton";
 import pages from "../../../app/router/pages";
 import useInjection from "../../../shared/context/inversify/useInjection";
+import productCategory from "../../../entities/product/const/productCategory";
+import productSubCategory from "../../../entities/product/const/productSubCategory";
+import categoryParamName from "../../../shared/const/categoryParamName";
+import searchParamName from "../../../shared/const/searchParamName";
+import subCategoryParamName from "../../../shared/const/subCategoryParamName";
 
 const Hero = () => {
 
-    const vm = useInjection(HeroViewModel)
+    const vm = useInjection( HeroViewModel )
 
     return (
         
-        <section className="overflow-hidden -mt-[50px] laptop:-mt-[100px]">
+        <section className="overflow-hidden -mt-[50px] laptop:-mt-[100px]" id={pages.contact.hash.substring(1)}>
 
             <Swiper
                 className="bg-section tablet:gap-[180px] w-screen!"
@@ -44,7 +49,24 @@ const Hero = () => {
 
                                     <LinkButton
 
-                                        linkTo={pages.shop + '/' + vm.getSearchTag}
+                                        linkTo={{
+
+                                            pathname: pages.shop,
+                                            search: vm.getSearchTag
+                                                ? 
+                                            new URLSearchParams({
+
+                                                [ subCategoryParamName ]: productSubCategory[ vm.getCategory ][ vm.getSubCategory - 1 ].value,
+                                                [ categoryParamName ]: Object.keys( productCategory )[vm.getCategory - 1],
+                                                [ searchParamName ]: vm.getSearchTag,
+                                            }).toString()
+                                                :
+                                            new URLSearchParams({
+
+                                                [ subCategoryParamName ]: productSubCategory[ vm.getCategory ][ vm.getSubCategory - 1 ].value,
+                                                [ categoryParamName ]: Object.keys( productCategory )[vm.getCategory - 1],
+                                            }).toString()
+                                        }}
                                         linkText={slide.linkText}
                                     />
                                 </SwiperSlide>

@@ -1,6 +1,6 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import Product, { ProductId } from "../../../shared/model/entities/Product.ts";
-import { ProductSubcategoryId } from "../../../entities/product/model/ProductSubcategory.ts";
+import { ProductSubcategoryId, ProductSubcategoryValue } from "../../../entities/product/model/ProductSubcategory.ts";
 import AppStater from "../../../app/model/AppStater.ts";
 import { DEFAULT_LIMIT_OVERVIEW } from "../../../shared/config/defaultLimit.ts";
 import { DEFAULT_OFFSET } from "../../../shared/config/defaultOffset.ts";
@@ -10,8 +10,11 @@ import ToggleFavouriteProductUseCase from "../../../entities/user/usecase/Toggle
 import GetProductByCategoryUseCase from "../../../entities/product/usecase/GetProductByCategoryUseCase.ts";
 import productCategory from "../../../entities/product/const/productCategory.ts";
 import DEFAULT_PRODUCT_QUANTITY from "../../../entities/product/const/defaultProductQuantity.ts";
+import productSubCategory from "../../../entities/product/const/productSubCategory.ts";
+import ShoppingStater from "../../shopping/model/ShoppingStater.ts";
+import ClothingStater from "./ClothingStater.ts";
 
-export default class ClothingViewModel {
+export default class ClothingViewModel implements ClothingStater {
 
     constructor(
 
@@ -20,6 +23,7 @@ export default class ClothingViewModel {
         private getProductByCategoryUseCase: GetProductByCategoryUseCase,
         private addToProgressCartUseCase: AddToProgressCartUseCase,
         private toggleFavouriteProductUseCase: ToggleFavouriteProductUseCase,
+        private shoppingStater: ShoppingStater,
     ) {
         
         makeAutoObservable(this)
@@ -44,9 +48,7 @@ export default class ClothingViewModel {
         return this.navStater.getTag
     }
 
-    setClothing() {
-
-        this.clothing = null
+    setClothing(id: ProductSubcategoryId) {
 
         this.getProductByCategoryUseCase
             .execute({
@@ -54,7 +56,7 @@ export default class ClothingViewModel {
                 categoryId: productCategory.clothing.id,
                 limit: DEFAULT_LIMIT_OVERVIEW,
                 offset: DEFAULT_OFFSET,
-                subcategoryId: this.activeSubCategoryId,
+                subcategoryId: id,
                 userId: this.appStater.getUserId
             })
             .then(
@@ -63,9 +65,26 @@ export default class ClothingViewModel {
             )
     }
     
-    set setActiveSubCategoryId(id: ProductSubcategoryId) {
+    setActiveSubCategoryId(name: ProductSubcategoryValue) {
 
-        this.activeSubCategoryId = id
+        this.clothing = null
+
+        for (const subcategoryObj of productSubCategory[ productCategory.clothing.id ]) {
+
+            if (subcategoryObj.value == name) {
+
+                runInAction(() => {
+
+                    this.setClothing( subcategoryObj.id )
+
+                    this.activeSubCategoryId = subcategoryObj.id
+                })
+
+                break
+            }
+        }
+
+        return this.activeSubCategoryId
     }
 
     set addToUserCart(id: ProductId) {
@@ -117,5 +136,20 @@ export default class ClothingViewModel {
                     )
                 }
             )
+    }
+    
+    get getCategory() {
+
+        return this.shoppingStater.getCategory
+    }
+
+    get getSubCategory() {
+
+        return this.shoppingStater.getSubCategory
+    }
+
+    unsetClothing() {
+
+        this.clothing = null
     }
 }
