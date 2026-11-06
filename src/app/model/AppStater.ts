@@ -13,7 +13,7 @@ export default interface AppStater {
 
     setFavoutiteCartProduct(id: ProductId, isFavourites: ProductIsFavorites): void
 
-    setProductQuantity(product: Product, q: CartProductQuantity, price: CartPrice): void
+    setProductQuantity(product: Product, q: CartProductQuantity, price: CartPrice, index?: number): void
 
     setCart(cart: AppCart): void
 

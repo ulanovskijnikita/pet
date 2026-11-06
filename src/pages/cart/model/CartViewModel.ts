@@ -76,15 +76,7 @@ export default class CartViewModel {
 
                             this.navStater.changeCartLength( quantityRes.length )
 
-                            if (quantityRes.currentQuantity > 0) {
-
-                                if ( this.appStater.getCart ) this.appStater.getCart.products[param.index].q = quantityRes.currentQuantity
-                            } else {
-
-                                if ( this.appStater.getCart ) this.appStater.getCart.products.splice(param.index, 1)
-                            }
-                        
-                            this.appStater.setProductQuantity(quantityRes.product, quantityRes.currentQuantity, quantityRes.price)
+                            this.appStater.setProductQuantity(quantityRes.product, quantityRes.currentQuantity, quantityRes.price, param.index)
                         }
                     )
                 }

@@ -14,6 +14,10 @@ export default class SessionCartCashe implements CartCashe {
         
         const sessionCart: CasheCart = JSON.parse( sessionStorage.getItem( key )! )
 
+        sessionCart.cartLength = length
+
+        sessionCart.price = price
+
         const productIndex = sessionCart.products.findIndex(({product: prod}) => prod.id == product.id)
 
         if (productIndex === -1) {
@@ -23,14 +27,11 @@ export default class SessionCartCashe implements CartCashe {
                 product: product,
                 q: q,
             })
-        } else {
-
-            sessionCart.products[ productIndex ].q = q
         }
 
-        sessionCart.cartLength = length
+        if (productIndex !== -1 && q > 0) sessionCart.products[ productIndex ].q = q
 
-        sessionCart.price = price
+        if (productIndex !== -1 && q < 1) sessionCart.products.splice(productIndex, 1)
 
         const value = JSON.stringify( sessionCart )
             

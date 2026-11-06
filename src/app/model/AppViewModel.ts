@@ -80,15 +80,28 @@ export default class AppViewModel implements AppStater {
         ) 
     }
 
-    setProductQuantity(product: Product, q: CartProductQuantity, price: CartPrice): void {
-
-        const productIndex = this.cart!.products.findIndex(({ product: prod }) => prod.id === product.id)
+    setProductQuantity(product: Product, q: CartProductQuantity, price: CartPrice, productIndex?: number): void {
 
         runInAction(
 
             () => {
-
+                
                 this.cart!.price = price
+
+                if ( !productIndex ) productIndex = this.cart!.products.findIndex(({ product: prod }) => prod.id === product.id)
+
+                if ( q < 1 ) {
+
+                    const [ splicedProduct ] = this.getCart!.products.splice(productIndex, 1)
+
+                    this.cart!.cartLength -= splicedProduct.q
+
+                    this.cart!.cartProductIds.splice(productIndex, 1)
+
+                    console.log(this.cart)
+
+                    return
+                }
 
                 if ( productIndex == -1 ) {
 
