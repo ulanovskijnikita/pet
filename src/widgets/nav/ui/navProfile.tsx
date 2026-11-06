@@ -60,7 +60,7 @@ const navProfile: NavProfile[] = [
                 <NavLink
                     to={
 
-                        props.id ? `${props.link}/${props.id}` : `${pages.profile}/${pages.signIn}`                        
+                        props.id ? `${props.link}/${props.id}` : `${pages.profile}/${pages.signIn}`
                     }
                     className={
 

@@ -28,6 +28,13 @@ const Register = () => {
 
         () => {
 
+            if ( vm.getUserId ) {
+
+                navigate(`${pages.profile}/${vm.getUserId}`)
+
+                return
+            }
+
             if ( vm.getResult?.result ) {
 
                 setTimeout(() => {
@@ -36,7 +43,7 @@ const Register = () => {
                 }, 1000)
                 
             } 
-        }, [vm, vm.getResult, navigate, nameInput, emailInput, passInput, passAgainInput]
+        }, [vm, vm.getResult, navigate, nameInput, emailInput, passInput, passAgainInput, vm.getUserId]
     )
 
     return (

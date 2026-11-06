@@ -5,18 +5,28 @@ import FavouriteViewModel from "../model/FavouriteViewModel"
 import { useEffect } from "react"
 import { runInAction } from "mobx"
 import useInjection from "../../../shared/context/inversify/useInjection"
+import { useNavigate } from "react-router"
+import pages from "../../../app/router/pages"
 
 const Favourite = () => {
 
     const vm = useInjection(FavouriteViewModel)
 
+    const navigate = useNavigate()
+
     useEffect(() => {
 
         runInAction(() => {
 
+            if ( !vm.getUserId ) {
+                
+                navigate(`${pages.profile}/${pages.signIn}`)
+
+                return
+            }
             vm.setProduct()
         })
-    }, [vm])
+    }, [vm, vm.getUserId, navigate])
 
     return (
 

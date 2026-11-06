@@ -34,6 +34,7 @@ import OrderViewModel from "../../pages/order/model/OrderViewModel.ts";
 import GetProductsByCartUseCase from "../../entities/product/usecase/GetProductsByCartUseCase.ts";
 import SetProductRatingUseCase from "../../entities/product/usecase/SetProductRatingUseCase.ts";
 import SignOutUserUseCase from "../../entities/user/usecase/SignOutUserUseCase.ts";
+import HistoryViewModel from "../../pages/history/model/HistoryViewModel.ts";
 
 const viewModule = new ContainerModule(
 
@@ -151,6 +152,7 @@ const viewModule = new ContainerModule(
                     new RegisterViewModel(
 
                         context.get(RegisterUserUseCase),
+                        context.get(AppViewModel),
                     )
             )
             .inSingletonScope()
@@ -287,6 +289,18 @@ const viewModule = new ContainerModule(
                     new HistorizingViewModel(
                         
                         context.get(GetUserHistoryListUseCase),
+                    )
+            )
+            .inSingletonScope()
+
+        options
+            .bind<HistoryViewModel>(HistoryViewModel)
+            .toDynamicValue(
+
+                context =>
+                    new HistoryViewModel(
+                        
+                        context.get(AppViewModel),
                     )
             )
             .inSingletonScope()

@@ -2,12 +2,14 @@ import { makeAutoObservable, runInAction } from "mobx";
 import RegisterUserUseCase from "../../../entities/user/usecase/RegisterUserUseCase";
 import ValidateUserResult from "../../../entities/user/model/res/RegisterUserUseCaseRes";
 import RegisterUserUseCaseParam from "../../../entities/user/model/param/RegisterUserUseCaseParam";
+import AppStater from "../../../app/model/AppStater";
 
 export default class RegisterViewModel {
 
     constructor(
 
-        private registerUserUseCase: RegisterUserUseCase
+        private registerUserUseCase: RegisterUserUseCase,
+        private appStater: AppStater,
     ) {
 
         makeAutoObservable(this)
@@ -60,5 +62,10 @@ export default class RegisterViewModel {
                     })
                 }, 2000)
             })
+    }
+
+    get getUserId() {
+
+        return this.appStater.getUserId
     }
 }

@@ -30,6 +30,13 @@ const Profile = () => {
 
         () => {
 
+            if ( !vm.getUserId ) {
+
+                navigate(`${pages.profile}/${pages.signIn}`)
+
+                return
+            }
+
             vm.setUser()
 
             if (vm.getUser) {
@@ -38,7 +45,7 @@ const Profile = () => {
 
                 if (emailInput.current) emailInput.current.value = vm.getUser.email
             }            
-        }, [vm, userId, nameInput, emailInput]
+        }, [vm, userId, nameInput, emailInput, vm.getUserId]
     )
 
     return (

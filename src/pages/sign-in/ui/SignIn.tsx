@@ -23,6 +23,13 @@ const SignIn = () => {
 
         () => {
 
+            if ( vm.getUserId ) {
+
+                navigate(`${pages.profile}/${vm.getUserId}`)
+
+                return
+            }
+
             if( vm.getResult?.result == "signIn" ) {
 
                 setTimeout(
@@ -33,7 +40,7 @@ const SignIn = () => {
                     }, 2000
                 )
             }
-        }, [vm, navigate, emailInput, passInput, vm.getResult]
+        }, [vm, navigate, emailInput, passInput, vm.getResult, vm.getUserId]
     )
 
     return (

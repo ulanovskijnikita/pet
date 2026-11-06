@@ -62,4 +62,9 @@ export default class ProfileViewModel {
 
         return this.clothingStater.getActiveSubCategoryId
     }
+
+    get getUserId() {
+
+        return this.appStater.getUserId
+    }
 }

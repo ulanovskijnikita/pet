@@ -61,4 +61,9 @@ export default class SignInViewModel {
                 })
             })           
     }
+
+    get getUserId() {
+
+        return this.appStater.getUserId
+    }
 }

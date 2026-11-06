@@ -125,4 +125,9 @@ export default class FavouriteViewModel {
 
         this.product = null
     }
+
+    get getUserId() {
+
+        return this.appStater.getUserId
+    }
 }

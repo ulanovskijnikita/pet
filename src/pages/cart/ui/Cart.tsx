@@ -8,12 +8,18 @@ import { runInAction } from "mobx"
 import useInjection from "../../../shared/context/inversify/useInjection"
 import Loader from "../../../shared/ui/Loader"
 import CartItem from "./CartItem"
+import { useEffect } from "react"
 
 const Cart = () => {
 
     const vm = useInjection(CartViewModel)
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+
+        if ( !vm.getUserId ) navigate(`${pages.profile}/${pages.signIn}`)
+    }, [vm.getUserId, navigate, vm])
 
     return (
 
